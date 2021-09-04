@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "react-dev": "webpack -d --watch",
+    "react-dev": "webpack",
     "start": "nodemon server/server.js",
     "test": "jest"
   },
