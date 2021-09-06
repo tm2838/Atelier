@@ -1,5 +1,7 @@
 module.exports = {
   entry: __dirname + '/client/src/index.jsx',
+  mode: 'development',
+  watch: true,
   module: {
     rules: [
       {
@@ -14,21 +16,21 @@ module.exports = {
       }
     ]
   },
-   output: {
+  output: {
     filename: 'bundle.js',
     path: __dirname + '/client/dist'
   },
-  resolve: {
-    alias: {
-      config$: './configs/app-config.js',
-      react: './vendor/react-master',
-    },
-    extensions: ['', 'js', 'jsx'],
-    modules: [
-      'node_modules',
-      'bower_components',
-      'shared',
-      '/shared/vendor/modules',
-    ],
-  }
+  // resolve: {
+  //   alias: {
+  //     config$: './configs/app-config.js',
+  //     react: './vendor/react-master',
+  //   },
+  //   extensions: ['', 'js', 'jsx'],
+  //   modules: [
+  //     'node_modules',
+  //     'bower_components',
+  //     'shared',
+  //     '/shared/vendor/modules',
+  //   ],
+  // }
 };
