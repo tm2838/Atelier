@@ -8,5 +8,5 @@ ReactDOM.render(
   <Provider store={configureStore()}>
     <App />
   </Provider>,
-  document.getElementById('app')
+  document.getElementById('app'),
 );
