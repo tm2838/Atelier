@@ -1,7 +1,9 @@
 // example action
-export const exampleActionCreator = (example) => ({
+const exampleActionCreator = (example) => ({
 
   type: 'EXAMPLE_ACTION',
-  example
+  example,
 
-})
+});
+
+export default exampleActionCreator;

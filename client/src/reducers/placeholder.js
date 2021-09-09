@@ -4,7 +4,6 @@ import Redux from 'redux';
 export default (state = {}, action) => {
   if (action.type === 'EXAMPLE_ACTION') {
     return action.example;
-  } else {
-    return state;
   }
-}
+  return state;
+};
