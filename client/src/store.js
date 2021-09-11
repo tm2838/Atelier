@@ -2,11 +2,14 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers/rootReducer';
 
-// Defined an initial state just as an example and to test functionality
-export default function configureStore(initialState = { placeholder: 'redux' }) {
+// Allows dev to see state in real time in redux dev tools
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+export default function configureStore(initialState = {
+  placeholder: 'redux',
+}) {
   return createStore(
     rootReducer,
     initialState,
-    applyMiddleware(thunk),
+    composeEnhancers(applyMiddleware(thunk))
   );
 }

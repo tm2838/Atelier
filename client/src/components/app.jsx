@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { exampleActionCreator } from '../actions/placeholder'
-import ProductOverviewContainer from './ProductOverview/ProductOverviewContainer.jsx'
+import ProductOverviewContainer from './productOverview/ProductOverviewContainer.jsx'
 
 class App extends React.Component {
+
   render() {
     return (
       <div>
