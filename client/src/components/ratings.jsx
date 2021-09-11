@@ -3,7 +3,7 @@ import React from 'react';
 class Ratings extends React.Component {
   render() {
     return (
-      <div style={{border: '1px solid'}}>
+      <div>
         Here are ratings
       </div>
     )
