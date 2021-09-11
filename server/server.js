@@ -24,7 +24,7 @@ app.use((req, res, next) => {
 
 // --Product Overview Widget-- GET handler that builds a response object from product and styles api data to send to client
 app.get('/products', (req, res) => {
-  let id = req.query.product_id || 47425; // Unsure on route handling atm, so just using a single product for testing (id=47425)
+  let id = req.query.product_id || 47426; // --Product_id-- Unsure on route handling atm, so just using a single product for testing (id=47425)
   let response = {};
   getProduct(id, apiKey, (data) => {
     response.product = data;

@@ -2,12 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 // import { bindActionCreators } from 'redux';
 import ImageGallery from './ImageGallery.jsx';
-import fetchProduct from '../../actions/fetchProduct';
+import fetchProductAndStyles from '../../actions/fetchProduct';
 
 class ProductOverviewContainer extends React.Component {
 
   componentDidMount() {
-    this.props.handleFetch();
+    this.props.handleFetchProduct();
   }
 
   render() {
@@ -24,8 +24,8 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return { handleFetch: () => {
-    dispatch(fetchProduct());
+  return { handleFetchProduct: () => {
+    dispatch(fetchProductAndStyles());
   }};
 };
 

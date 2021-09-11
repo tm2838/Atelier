@@ -11,6 +11,13 @@
   object-fit: cover;
 }
 
+.gallery-thumb {
+  width: 50%;
+  height: 90%;
+  object-fit: cover;
+  border: solid 1px;
+}
+
 .gallery-main {
   grid-column-start: 1;
   grid-column-end: 6;
@@ -30,6 +37,7 @@
   grid-column-end: 2;
   grid-row-start: 2;
   grid-row-end: 3;
+
 }
 
 .gallery-thumb-3 {
@@ -37,6 +45,7 @@
   grid-column-end: 2;
   grid-row-start: 3;
   grid-row-end: 4;
+
 }
 
 .gallery-thumb-4 {
@@ -44,6 +53,7 @@
   grid-column-end: 2;
   grid-row-start: 4;
   grid-row-end: 5;
+
 }
 
 .gallery-thumb-5 {
@@ -51,4 +61,5 @@
   grid-column-end: 2;
   grid-row-start: 5;
   grid-row-end: 6;
+
 }
