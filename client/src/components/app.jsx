@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import './styles.css';
 import { exampleActionCreator } from '../actions/placeholder'
 import ProductOverviewContainer from './productOverview/ProductOverviewContainer.jsx'
 

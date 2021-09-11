@@ -6,12 +6,11 @@ const getStyles = require('./products').getStyles; //Atelier api call to get pro
 
 const apiKey = process.env.API_KEY;
 
-// commenting out apiKey for now because ESLint is marking an error for unused variables
 const app = express();
 
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
-// middleware that helps the client pass through CORS policy and request resources from server
+// middleware that helps the client pass CORS policy and request resources from server
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.header(
@@ -25,7 +24,7 @@ app.use((req, res, next) => {
 
 // --Product Overview Widget-- GET handler that builds a response object from product and styles api data to send to client
 app.get('/products', (req, res) => {
-  let id = req.query.product_id || 47425; // Unsure on route handling atm, so just using a single product for testing (47425)
+  let id = req.query.product_id || 47425; // Unsure on route handling atm, so just using a single product for testing (id=47425)
   let response = {};
   getProduct(id, apiKey, (data) => {
     response.product = data;

@@ -9,7 +9,6 @@ let fetchData = () => {
     })
     .then(res => res.json())
     .then(data => {
-      console.log(data);
       dispatch(changeProduct(data.product));
       dispatch(changeStyles(data.styles.results));
     })
