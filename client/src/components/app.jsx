@@ -8,7 +8,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <h1>Hello {this.props.placeholder}</h1>
+        <h1>Hello Atelier</h1>
         <ProductOverviewContainer />
         <ProductReviews />
       </div>
