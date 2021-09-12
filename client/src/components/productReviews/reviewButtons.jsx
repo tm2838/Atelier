@@ -1,7 +1,13 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 const buttonStyle = {
-  backgroundColor: '#dbe7f7ff'
+  backgroundColor: '#dbe7f7ff',
+  border: 'none',
+  padding: '10px 20px',
+  textAlign: 'center',
+  marginRight: '5px',
+  cursor: 'pointer'
 }
 class ReviewButtons extends React.Component {
   constructor(props) {
@@ -18,4 +24,10 @@ class ReviewButtons extends React.Component {
   }
 }
 
-export default ReviewButtons;
+const mapStateToProps = (state, reviews) => {
+  return {
+    reviews: state.reviews
+  }
+};
+
+export default connect(mapStateToProps)(ReviewButtons);

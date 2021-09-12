@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
 import Review from './review.jsx';
 
 class ReviewsList extends React.Component {
@@ -10,5 +12,10 @@ class ReviewsList extends React.Component {
     )
   }
 }
+const mapStateToProps = (state, reviews) => {
+  return {
+    reviews: state.reviews
+  }
+};
 
-export default ReviewsList;
+export default connect(mapStateToProps)(ReviewsList);
