@@ -4,8 +4,8 @@ const fetchReviews = () => {
   return (dispatch) => {
     fetch('/reviews')
     .then((response) => response.json())
-    .then((reviews) => {
-      dispatch(changeReviews(reviews))
+    .then((response) => {
+      dispatch(changeReviews(response.reviews))
     })
     .catch((err) => console.log(err));
   }

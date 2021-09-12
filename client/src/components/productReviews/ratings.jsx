@@ -4,7 +4,7 @@ class Ratings extends React.Component {
   render() {
     return (
       <div>
-        Here are ratings
+        Here are some ratings
       </div>
     )
   }

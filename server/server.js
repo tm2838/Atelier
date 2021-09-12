@@ -1,12 +1,8 @@
 const path = require('path');
 const express = require('express'); // npm installed
-const axios = require('axios');
 
-require('dotenv').config(); // allow server to read .env for environmental variables
-const getProduct = require('./products').getProduct; // Atelier api call to get product data
-const getStyles = require('./products').getStyles; //Atelier api call to get product styles data
-
-const apiKey = process.env.API_KEY;
+const { getProduct, getStyles } = require('./products'); // Atelier api call to get product/product styles data
+const { getReviews, getReviewMeta } = require('./reviews');
 
 const app = express();
 
@@ -38,15 +34,14 @@ app.get('/products', (req, res) => {
 })
 
 app.get('/reviews', (req, res) => {
-  axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews', {
-    headers: {
-      Authorization: apiKey,
-    },
-    params: { product_id: 47421 },
-  })
-    .then((data) => {
-      console.log(data.data.results);
-      res.status(200).send(data.data.results);
+  const id = req.query.product_id || 47421;
+  const response = {};
+  getReviews(id)
+    .then((data) => { response.reviews = data.data.results; })
+    .then(() => getReviewMeta(id))
+    .then((data) => { response.reviewMeta = data.data.results; })
+    .then(() => {
+      res.status(200).send(response);
     });
 });
 
