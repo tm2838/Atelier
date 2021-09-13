@@ -5,12 +5,9 @@ import rootReducer from './reducers/rootReducer';
 // Allows dev to see state in real time with redux dev tools
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-export default function configureStore(initialState = {
-  placeholder: 'redux',
-}) {
+export default function configureStore() {
   return createStore(
     rootReducer,
-    initialState,
     composeEnhancers(applyMiddleware(thunk))
   );
 }

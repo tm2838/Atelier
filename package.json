@@ -61,6 +61,9 @@
       "bower_components",
       "shared"
     ],
-    "testEnvironment": "jsdom"
+    "testEnvironment": "jsdom",
+    "moduleNameMapper": {
+      "\\.(css|jpg|png)$": "<rootDir>/css-stub-module.js"
+    }
   }
 }
