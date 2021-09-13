@@ -6,7 +6,8 @@
   "scripts": {
     "react-dev": "webpack",
     "start": "nodemon server/server.js",
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint '**/*.js' --ignore-pattern node_modules/"
   },
   "repository": {
     "type": "git",
@@ -19,8 +20,9 @@
   },
   "homepage": "https://github.com/The-Chonky-Panda/Atelier#readme",
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.15.4",
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
+    "@fortawesome/free-brands-svg-icons": "^5.15.4",
+    "@fortawesome/free-regular-svg-icons": "^5.15.4",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
     "@fortawesome/react-fontawesome": "^0.1.15",
     "axios": "^0.21.4",
@@ -65,6 +67,9 @@
       "bower_components",
       "shared"
     ],
-    "testEnvironment": "jsdom"
+    "testEnvironment": "jsdom",
+    "moduleNameMapper": {
+      "\\.(css|jpg|png)$": "<rootDir>/css-stub-module.js"
+    }
   }
 }

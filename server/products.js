@@ -1,36 +1,39 @@
 const axios = require('axios');
-// require('dotenv').config();
+require('dotenv').config();
 
-let url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products'
+const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products'
+
 // http://example.com/page?parameter=value&also=another
 // routes: /products /products/:product_id /products/:product_id/styles
+const apiKey = process.env.API_KEY;
 
-let getProduct = (id, key, callback) => {
+const getProduct = (id, callback) => {
   axios.get(url, {
-    headers: { 'Authorization': key },
+    headers: { Authorization: key },
     params: { product_id: id }
-  })
-  .then(res => {
-    callback(res.data);
-  })
-  .catch(err => {
-    throw err;
-  })
-}
 
-let getStyles = (id, key, callback) => {
+  })
+    .then((res) => {
+      callback(res.data);
+    })
+    .catch((err) => {
+      throw err;
+    });
+};
+
+const getStyles = (id, callback) => {
   axios.get(url + '/' + id + '/styles', {
-    headers: { 'Authorization': key }
+    headers: { Authorization: apiKey },
   })
-  .then(res => {
-    callback(res.data);
-  })
-  .catch(err => {
-    throw err;
-  })
-}
+    .then((res) => {
+      callback(res.data);
+    })
+    .catch((err) => {
+      throw err;
+    });
+};
 
 module.exports = {
   getProduct,
-  getStyles
+  getStyles,
 };

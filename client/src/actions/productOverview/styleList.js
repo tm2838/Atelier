@@ -1,8 +1,8 @@
 const changeStyles = (styles) => ({
 
   type: 'CHANGE_STYLES',
-  styles
+  styles,
 
-})
+});
 
 export default changeStyles;

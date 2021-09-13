@@ -1,8 +1,8 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { connect } from 'react-redux';
 
 import GalleryButton from './GalleryButton.jsx';
-
 
 class ImageGallery extends React.Component {
   constructor(props) {
