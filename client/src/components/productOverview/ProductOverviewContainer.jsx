@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 // import { bindActionCreators } from 'redux';
 import ImageGallery from './ImageGallery.jsx';
 import fetchProductAndStyles from '../../actions/fetchProduct';
+import './styles.css';
+
 
 class ProductOverviewContainer extends React.Component {
 
@@ -12,15 +14,8 @@ class ProductOverviewContainer extends React.Component {
 
   render() {
     return (
-      <ImageGallery id={this.props.id} currentStyle={this.props.currentStyle}/>
+      <ImageGallery />
     )
-  }
-};
-
-const mapStateToProps = (state, ownProps) => {
-  return {
-    currentStyle: state.styleList,
-    id: state.currentProduct.id
   }
 };
 
@@ -30,4 +25,4 @@ const mapDispatchToProps = (dispatch) => {
   }};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductOverviewContainer);
+export default connect(null, mapDispatchToProps)(ProductOverviewContainer);
