@@ -61,19 +61,19 @@ class ImageGallery extends React.Component {
                 <img src={this.props.styles[0].photos[this.state.main].url} className='gallery-img' alt='Main image'></img>
               </figure>
               <figure className='gallery-thumb-0' onClick={() => this.handleImageClick(0)}>
-                <img src={this.props.styles[0].photos[this.state.thumb].thumbnail_url} className='gallery-thumb' alt='Main image'></img>
+                <img src={this.props.styles[0].photos[this.state.thumb].thumbnail_url} className='gallery-thumb' alt='Thumbnail'></img>
               </figure>
               <figure className='gallery-thumb-1' onClick={() => this.handleImageClick(1)}>
-                <img src={this.props.styles[0].photos[this.state.thumb + 1].thumbnail_url} className='gallery-thumb' alt='Main image'></img>
+                <img src={this.props.styles[0].photos[this.state.thumb + 1].thumbnail_url} className='gallery-thumb' alt='Thumbnail'></img>
               </figure>
               <figure className='gallery-thumb-2' onClick={() => this.handleImageClick(2)}>
-                <img src={this.props.styles[0].photos[this.state.thumb + 2].thumbnail_url} className='gallery-thumb' alt='Main image'></img>
+                <img src={this.props.styles[0].photos[this.state.thumb + 2].thumbnail_url} className='gallery-thumb' alt='Thumbnail'></img>
               </figure>
               <figure className='gallery-thumb-3' onClick={() => this.handleImageClick(3)}>
-                <img src={this.props.styles[0].photos[this.state.thumb + 3].thumbnail_url} className='gallery-thumb' alt='Main image'></img>
+                <img src={this.props.styles[0].photos[this.state.thumb + 3].thumbnail_url} className='gallery-thumb' alt='Thumbnail'></img>
               </figure>
               <figure className='gallery-thumb-4' onClick={() => this.handleImageClick(4)}>
-                <img src={this.props.styles[0].photos[this.state.thumb + 4].thumbnail_url} className='gallery-thumb' alt='Main image'></img>
+                <img src={this.props.styles[0].photos[this.state.thumb + 4].thumbnail_url} className='gallery-thumb' alt='Thumbnail'></img>
               </figure>
             </div>
         }
@@ -81,7 +81,7 @@ class ImageGallery extends React.Component {
           {this.props.styles.length > 0 && this.state.main < this.props.styles[0].photos.length - 1 && <GalleryButton direction={'right'} onClick={this.handleNavClick}/>}
           {this.props.styles.length > 0 && this.state.main > 0 && <GalleryButton direction={'left'} onClick={this.handleNavClick}/>}
           {this.props.styles.length > 0 && this.state.thumb > 0 && <GalleryButton direction={'up'} onClick={this.handleNavClick}/>}
-          <GalleryButton direction={'down'} onClick={this.handleNavClick}/>
+          {this.props.styles.length > 0 && this.state.thumb + 4 < this.props.styles[0].photos.length - 1 && <GalleryButton direction={'down'} onClick={this.handleNavClick}/>}
         </div>
       </div>
     )
