@@ -2,7 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import './styles.css';
 import ProductReviews from './productReviews/productReviews.jsx';
-import ProductOverviewContainer from './productOverview/ProductOverviewContainer.jsx'
+import ProductOverviewContainer from './productOverview/ProductOverviewContainer.jsx';
+import './common/fontAwesomeIcons';
 
 class App extends React.Component {
   render() {
