@@ -3,9 +3,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const GalleryButton = (props) => {
   return (
-    <div className='gallery-nav'>
+    <div>
       <FontAwesomeIcon
+      className='gallery-nav'
       icon={['fas', props.icon]}
+      size='2x'
       onClick={() => props.onClick(props.direction)} />
     </div>
   )
