@@ -75,20 +75,29 @@ class ImageGallery extends React.Component {
               <figure className='gallery-thumb-4' onClick={() => this.handleImageClick(4)}>
                 <img src={this.props.styles[0].photos[this.state.thumb + 4].thumbnail_url} className='gallery-thumb' alt='Thumbnail'></img>
               </figure>
+
+              {this.props.styles.length > 0 && this.state.main < this.props.styles[0].photos.length - 1 &&
+              <figure className='gallery-nav-right'>
+                <GalleryButton direction='right' icon={'arrow-right'} onClick={this.handleNavClick} />
+              </figure>}
+
+              {this.props.styles.length > 0 && this.state.main > 0 &&
+              <figure className='gallery-nav-left'>
+                <GalleryButton direction={'left'} icon={'arrow-left'} onClick={this.handleNavClick} />
+              </figure>}
+
+              {this.props.styles.length > 0 && this.state.thumb > 0 &&
+              <figure className='gallery-nav-up'>
+                <GalleryButton direction={'up'} icon={'angle-up'} onClick={this.handleNavClick} />
+              </figure>}
+
+              {this.props.styles.length > 0 && this.state.thumb + 4 < this.props.styles[0].photos.length - 1 &&
+              <figure className='gallery-nav-down'>
+                <GalleryButton direction={'down'} icon={'angle-down'} onClick={this.handleNavClick} />
+              </figure>}
             </div>
         }
         <div>
-          {this.props.styles.length > 0 && this.state.main < this.props.styles[0].photos.length - 1 &&
-          <GalleryButton direction='right' icon={'arrow-right'} onClick={this.handleNavClick} />}
-
-          {this.props.styles.length > 0 && this.state.main > 0 &&
-          <GalleryButton direction={'left'} icon={'arrow-left'} onClick={this.handleNavClick} />}
-
-          {this.props.styles.length > 0 && this.state.thumb > 0 &&
-          <GalleryButton direction={'up'} icon={'angle-up'}onClick={this.handleNavClick} />}
-
-          {this.props.styles.length > 0 && this.state.thumb + 4 < this.props.styles[0].photos.length - 1 &&
-          <GalleryButton direction={'down'} icon={'angle-down'} onClick={this.handleNavClick} />}
         </div>
       </div>
     )
