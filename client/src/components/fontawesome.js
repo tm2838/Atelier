@@ -7,7 +7,6 @@ library.add(
   faArrowLeft,
   faAngleDown,
   faAngleUp,
-
 );
 
 // { faRightArrow, faLeftArrow, faUpArrow, faDownArrow }
