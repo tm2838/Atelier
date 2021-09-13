@@ -1,3 +1,5 @@
+/* eslint-disable class-methods-use-this */
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { connect } from 'react-redux';
 
@@ -27,15 +29,14 @@ class ProductReviews extends React.Component {
         <div>{''}</div>
       </div>
       </>
-    )
+    );
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return { handleFetchReviews: () => {
+const mapDispatchToProps = (dispatch) => ({
+  handleFetchReviews: () => {
     dispatch(fetchReviews());
-  }};
-};
+  },
+});
 
 export default connect(null, mapDispatchToProps)(ProductReviews);
-

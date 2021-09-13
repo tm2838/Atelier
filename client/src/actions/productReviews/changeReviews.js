@@ -1,8 +1,6 @@
-const changeReviews = (reviews) => {
-  return {
+const changeReviews = (reviews) => ({
   type: 'CHANGE_REVIEWS',
   reviews,
-  }
-};
+});
 
 export default changeReviews;

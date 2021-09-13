@@ -1,14 +1,12 @@
 import changeReviews from './productReviews/changeReviews';
 
-const fetchReviews = () => {
-  return (dispatch) => {
-    fetch('/reviews')
+const fetchReviews = () => (dispatch) => {
+  fetch('/reviews')
     .then((response) => response.json())
     .then((response) => {
-      dispatch(changeReviews(response.reviews))
+      dispatch(changeReviews(response.reviews));
     })
-    .catch((err) => console.log(err));
-  }
+    .catch((err) => console.log(err)); //eslint-disable-line
 };
 
 export default fetchReviews;
