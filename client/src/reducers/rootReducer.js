@@ -7,5 +7,5 @@ import styleList from './productOverview/styleList';
 export default combineReducers({
   currentProduct,
   styleList,
-  reviews: reviewsReducer
-})
+  reviews: reviewsReducer,
+});

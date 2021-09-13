@@ -1,7 +1,7 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 
-const ImageGallery = (props) => {
-  return (
+const ImageGallery = (props) => (
     <div>
       {
         (props.currentStyle.length === 0)
@@ -32,7 +32,6 @@ const ImageGallery = (props) => {
 
       }
     </div>
-  )
-}
+);
 
 export default ImageGallery;
