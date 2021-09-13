@@ -27,12 +27,6 @@ const getStyles = (id, callback) => {
     })
     .catch((err) => {
       throw err;
-    })
-    .then((res) => {
-      callback(res.data);
-    })
-    .catch((err) => {
-      throw err;
     });
 };
 
