@@ -78,20 +78,25 @@ class ImageGallery extends React.Component {
             </div>
         }
         <div>
-          {this.props.styles.length > 0 && this.state.main < this.props.styles[0].photos.length - 1 && <GalleryButton direction={'right'} onClick={this.handleNavClick}/>}
-          {this.props.styles.length > 0 && this.state.main > 0 && <GalleryButton direction={'left'} onClick={this.handleNavClick}/>}
-          {this.props.styles.length > 0 && this.state.thumb > 0 && <GalleryButton direction={'up'} onClick={this.handleNavClick}/>}
-          {this.props.styles.length > 0 && this.state.thumb + 4 < this.props.styles[0].photos.length - 1 && <GalleryButton direction={'down'} onClick={this.handleNavClick}/>}
+          {this.props.styles.length > 0 && this.state.main < this.props.styles[0].photos.length - 1 &&
+          <GalleryButton direction='right' icon={'arrow-right'} onClick={this.handleNavClick} />}
+
+          {this.props.styles.length > 0 && this.state.main > 0 &&
+          <GalleryButton direction={'left'} icon={'arrow-left'} onClick={this.handleNavClick} />}
+
+          {this.props.styles.length > 0 && this.state.thumb > 0 &&
+          <GalleryButton direction={'up'} icon={'angle-up'}onClick={this.handleNavClick} />}
+
+          {this.props.styles.length > 0 && this.state.thumb + 4 < this.props.styles[0].photos.length - 1 &&
+          <GalleryButton direction={'down'} icon={'angle-down'} onClick={this.handleNavClick} />}
         </div>
       </div>
     )
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    styles: state.styleList
-  }
-};
+const mapStateToProps = (state) => ({
+  styles: state.styleList
+});
 
 export default connect(mapStateToProps)(ImageGallery);

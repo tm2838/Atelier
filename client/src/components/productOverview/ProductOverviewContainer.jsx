@@ -19,10 +19,10 @@ class ProductOverviewContainer extends React.Component {
   }
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return { handleFetchProduct: () => {
+const mapDispatchToProps = (dispatch) => ({
+  handleFetchProduct: () => {
     dispatch(fetchProductAndStyles());
-  }};
-};
+  },
+});
 
 export default connect(null, mapDispatchToProps)(ProductOverviewContainer);
