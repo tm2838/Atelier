@@ -12,14 +12,15 @@ class ProductOverviewContainer extends React.Component {
 
   render() {
     return (
-      <ImageGallery currentStyle={this.props.currentStyle}/>
+      <ImageGallery id={this.props.id} currentStyle={this.props.currentStyle}/>
     )
   }
 };
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    currentStyle: state.styleList
+    currentStyle: state.styleList,
+    id: state.currentProduct.id
   }
 };
 
