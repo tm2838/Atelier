@@ -6,7 +6,7 @@ const GalleryButton = (props) => {
     <div>
       <FontAwesomeIcon
       className='gallery-nav'
-      icon={['fas', props.icon]}
+      icon={props.icon}
       size='2x'
       onClick={() => props.onClick(props.direction)} />
     </div>
