@@ -1,8 +1,8 @@
 const changeProduct = (product) => ({
 
   type: 'CHANGE_PRODUCT',
-  product
+  product,
 
-})
+});
 
 export default changeProduct;
