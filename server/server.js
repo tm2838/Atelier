@@ -2,6 +2,7 @@ const path = require('path');
 const express = require('express'); // npm installed
 const { getProduct, getStyles } = require('./products'); // Atelier api call to get product/product styles data
 const { getReviews, getReviewMeta } = require('./reviews');
+const { getRelatedProducts } = require('./relatedProducts');
 
 const app = express();
 
@@ -47,4 +48,31 @@ app.get('/reviews', (req, res) => {
     });
 });
 
+app.get('/relatedProducts', (req, res) => {
+  const id = req.query.product_id || 47426;
+  getRelatedProducts(id, (err, data) => {
+    if (err) {
+      throw err;
+    } else {
+      // remove duplicate ids
+      const uniqueData = [...new Set(data)];
+      const response = uniqueData.map((productId) => {
+        console.log(productId);
+        return new Promise((resolve, reject) => {
+          getProduct(productId, (product) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(product);
+            }
+          });
+        });
+      });
+      Promise.all(response)
+        .then((products) => {
+          res.send(JSON.stringify(products));
+        });
+    }
+  });
+});
 app.listen(3000);
