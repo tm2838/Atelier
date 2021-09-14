@@ -1,13 +1,14 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import CSS from './productReviews.module.css';
+import StarRating from '../common/starRating.jsx';
 
 class Review extends React.Component {
   render() {
     return (
       <div className={CSS.review}>
         <div className={CSS['review-header']}>
-          <div className='star-review'>{'star review'}</div>
+          <StarRating />
           <div>{`${this.props.review.reviewer_name}, ${this.props.review.date.split('T')[0]}`}</div>
         </div>
         <div className={CSS['review-summary']}>
