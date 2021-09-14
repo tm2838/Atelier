@@ -48,4 +48,19 @@
 .rating-summary {
   display: flex;
   flex-direction: row;
+  margin-bottom: 10px;
+}
+
+.rating-score {
+  font-weight: bold;
+  font-size: 30px;
+  margin-right: 10px;
+}
+
+.star-breakdown {
+  margin-bottom: 10px;
+}
+
+.product-breakdown {
+  margin-top: 10px;
 }
