@@ -22,7 +22,6 @@ app.use((req, res, next) => {
 // --Product Overview Widget-- GET handler that builds a response object
 // from product and styles api data to send to client
 app.get('/products', (req, res) => {
-
   // --Product_id-- Unsure on route handling atm,
   // so just using a single product for testing (id=47425)
   const id = req.query.product_id || 47426;
@@ -35,7 +34,6 @@ app.get('/products', (req, res) => {
     });
   });
 });
-
 
 app.get('/reviews', (req, res) => {
   const id = req.query.product_id || 47421;

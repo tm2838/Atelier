@@ -10,39 +10,39 @@ class ImageGallery extends React.Component {
     this.state = {
       main: 0,
       thumb: 0,
-    }
+    };
     this.handleImageClick = this.handleImageClick.bind(this);
     this.handleNavClick = this.handleNavClick.bind(this);
   }
 
   handleImageClick(index) {
-    let main = index + this.state.thumb;
+    const main = index + this.state.thumb;
     this.setState({
-      main
-    })
+      main,
+    });
   }
 
   handleNavClick(direction) {
     if (direction === 'up') {
-      let thumb = this.state.thumb - 1;
+      const thumb = this.state.thumb - 1;
       this.setState({
-        thumb
-      })
+        thumb,
+      });
     } else if (direction === 'right') {
-      let main = this.state.main + 1;
+      const main = this.state.main + 1;
       this.setState({
-        main
-      })
+        main,
+      });
     } else if (direction === 'down') {
-      let thumb = this.state.thumb + 1;
+      const thumb = this.state.thumb + 1;
       this.setState({
-        thumb
-      })
+        thumb,
+      });
     } else if (direction === 'left') {
-      let main = this.state.main - 1;
+      const main = this.state.main - 1;
       this.setState({
-        main
-      })
+        main,
+      });
     }
   }
 
@@ -52,7 +52,7 @@ class ImageGallery extends React.Component {
         {
           (this.props.styles.length === 0)
             ? <figure>
-              <img className='gallery-img' alt='Main image'></img>
+              <img className='gallery-img' alt='Loading gallery...'></img>
             </figure>
 
             : <div className='gallery'>
@@ -104,23 +104,23 @@ class ImageGallery extends React.Component {
                 </img>
               </figure>
 
-              {this.props.styles.length > 0 && this.state.main < this.props.styles[0].photos.length - 1 &&
-              <figure className='gallery-nav-right'>
+              {this.props.styles[0] && this.state.main < this.props.styles[0].photos.length - 1
+              && <figure className='gallery-nav-right'>
                 <GalleryButton direction='right' icon={'arrow-right'} onClick={this.handleNavClick} />
               </figure>}
 
-              {this.props.styles.length > 0 && this.state.main > 0 &&
-              <figure className='gallery-nav-left'>
+              {this.props.styles.length > 0 && this.state.main > 0
+              && <figure className='gallery-nav-left'>
                 <GalleryButton direction={'left'} icon={'arrow-left'} onClick={this.handleNavClick} />
               </figure>}
 
-              {this.props.styles.length > 0 && this.state.thumb > 0 &&
-              <figure className='gallery-nav-up'>
+              {this.props.styles.length > 0 && this.state.thumb > 0
+              && <figure className='gallery-nav-up'>
                 <GalleryButton direction={'up'} icon={'angle-up'} onClick={this.handleNavClick} />
               </figure>}
 
-              {this.props.styles.length > 0 && this.state.thumb + 4 < this.props.styles[0].photos.length - 1 &&
-              <figure className='gallery-nav-down'>
+              {this.props.styles[0] && this.state.thumb + 4 < this.props.styles[0].photos.length - 1
+              && <figure className='gallery-nav-down'>
                 <GalleryButton direction={'down'} icon={'angle-down'} onClick={this.handleNavClick} />
               </figure>}
             </div>
@@ -128,12 +128,12 @@ class ImageGallery extends React.Component {
         <div>
         </div>
       </div>
-    )
+    );
   }
 }
 
 const mapStateToProps = (state) => ({
-  styles: state.styleList
+  styles: state.styleList,
 });
 
 export default connect(mapStateToProps)(ImageGallery);

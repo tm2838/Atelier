@@ -1,8 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { connect } from 'react-redux';
+// import { connect } from 'react-redux';
 import './fontawesome';
-import './styles.css';
 import './common/fontAwesomeIcons';
 
 import ProductReviews from './productReviews/productReviews.jsx';
@@ -16,4 +15,4 @@ const App = () => (
   </div>
 );
 
-export default connect(mapStateToProps)(App);
+export default App;
