@@ -10,14 +10,24 @@ class ProductInfo extends React.Component {
       (this.props.styles.length === 0)
         ? <div>loading...</div>
         : <div className='product-info'>
-          <StarRating /> <a>Read all reviews</a>
+          <StarRating /> <a><u>Read all reviews</u></a>
           <p className='product-category'>{this.props.product.category}</p>
           <h1 className='product-name'>{this.props.product.name}</h1>
           <p className='price'>{this.props.product.default_price}</p>
-          <p><em>STYLE &gt; {this.props.styles[0].name}</em></p>
+          <p><b>STYLE &gt; </b> {this.props.styles[0].name}</p>
           <li></li>
-          <select></select>
-          <select></select>
+          <label htmlFor='sizes'></label>
+          <select name='sizes' id='sizes'>
+            <option value="none" selected disabled hidden>
+              SELECT SIZE
+            </option>
+          </select>
+          <label htmlFor='qty'></label>
+          <select name='qty' id='qty'>
+            <option value="1" selected>
+              1
+            </option>
+          </select>
           <button>ADD TO BAG</button>
         </div>
 
