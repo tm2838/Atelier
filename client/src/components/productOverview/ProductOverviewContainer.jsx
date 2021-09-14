@@ -1,8 +1,10 @@
 /* eslint-disable react/prop-types */
+/* eslint class-methods-use-this: ["error", { "exceptMethods": ["render"] }] */
 import React from 'react';
 import { connect } from 'react-redux';
 import ImageGallery from './ImageGallery.jsx';
 import fetchProductAndStyles from '../../actions/fetchProduct';
+import './styles.css';
 
 class ProductOverviewContainer extends React.Component {
   componentDidMount() {
@@ -11,14 +13,10 @@ class ProductOverviewContainer extends React.Component {
 
   render() {
     return (
-      <ImageGallery currentStyle={this.props.currentStyle}/>
+      <ImageGallery />
     );
   }
 }
-
-const mapStateToProps = (state) => ({
-  currentStyle: state.styleList,
-});
 
 const mapDispatchToProps = (dispatch) => ({
   handleFetchProduct: () => {
@@ -26,4 +24,4 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductOverviewContainer);
+export default connect(null, mapDispatchToProps)(ProductOverviewContainer);

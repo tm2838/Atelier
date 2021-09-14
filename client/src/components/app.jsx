@@ -1,10 +1,11 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import { connect } from 'react-redux';
-import './styles.css';
+// import { connect } from 'react-redux';
+import './fontawesome';
+import './common/fontAwesomeIcons';
+
 import ProductReviews from './productReviews/productReviews.jsx';
 import ProductOverviewContainer from './productOverview/ProductOverviewContainer.jsx';
-import './common/fontAwesomeIcons';
 
 const App = () => (
   <div>
@@ -14,8 +15,4 @@ const App = () => (
   </div>
 );
 
-const mapStateToProps = (state) => ({
-  ...state,
-});
-
-export default connect(mapStateToProps)(App);
+export default App;

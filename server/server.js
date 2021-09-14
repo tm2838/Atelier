@@ -26,8 +26,8 @@ app.get('/products', (req, res) => {
   // so just using a single product for testing (id=47425)
   const id = req.query.product_id || 47426;
   const response = {};
-  getProduct(id, (data) => {
-    response.product = data;
+  getProduct(id, (product) => {
+    response.product = product;
     getStyles(id, (styles) => {
       response.styles = styles;
       res.send(JSON.stringify(response));
