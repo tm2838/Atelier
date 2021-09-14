@@ -8,7 +8,7 @@ const ProductCard = (props) => {
   const productCategory = props.product.category.toUpperCase();
   return (
     <div className='card'>
-      <Button type={'outfit'} />
+      <Button type={ props.type } />
       <img src='' alt={ props.product.name } />
       <div className='container'>
         <p>{productCategory}</p>
@@ -27,6 +27,7 @@ ProductCard.propTypes = {
   name: PropTypes.string,
   category: PropTypes.string,
   default_price: PropTypes.number,
+  type: PropTypes.string,
 };
 
 export default ProductCard;
