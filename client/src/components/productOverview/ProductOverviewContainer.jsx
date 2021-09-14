@@ -3,6 +3,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import ImageGallery from './ImageGallery.jsx';
+import ProductInfo from './ProductInfo.jsx';
 import fetchProductAndStyles from '../../actions/fetchProduct';
 import './styles.css';
 
@@ -13,7 +14,14 @@ class ProductOverviewContainer extends React.Component {
 
   render() {
     return (
-      <ImageGallery />
+      <div className='product-container'>
+        <figure className='gallery-container'>
+        <ImageGallery />
+        </figure>
+        <figure className='product-info-container'>
+        <ProductInfo />
+        </figure>
+      </div>
     );
   }
 }
