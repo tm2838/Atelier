@@ -8,13 +8,13 @@ const Ratings = (props) => (
     <div>
     {props.reviewMeta.ratingScore && (
       <div className={CSS['rating-summary']}>
-        <div>{props.reviewMeta.ratingScore.toFixed(1)}</div>
+        <div>{props.reviewMeta.ratingScore}</div>
         <StarRating />
       </div>
     )}
 
     {props.reviewMeta.recommendationRate && (
-      <div>{(props.reviewMeta.recommendationRate * 100).toFixed(0)}%
+      <div>{props.reviewMeta.recommendationRate}%
       of reviews recommend this product</div>
     )}
   </div>

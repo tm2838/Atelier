@@ -24,14 +24,14 @@ const getRatingScore = (ratings) => {
     },
   );
   ratingScore /= totalReviews;
-  return ratingScore;
+  return ratingScore.toFix(1);
 };
 
 const getRecommendationMetric = (recommended) => {
   const recommendationRate = parseInt(recommended.true, 10)
     / (parseInt(recommended.true, 10)
     + parseInt(recommended.false, 10));
-  return recommendationRate;
+  return (recommendationRate * 100).toFix(2);
 };
 
 module.exports = {
