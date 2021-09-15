@@ -64,3 +64,21 @@
 .product-breakdown {
   margin-top: 10px;
 }
+
+.review-modal {
+  width: 50%;
+  height: 50%;
+  border: 1px solid #dbe7f7ff;
+  padding: 10px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.review-modal-content {
+  width: 70%;
+  margin: auto;
+}
+
+.review-modal-input {
+  margin-bottom: 10px;
+}

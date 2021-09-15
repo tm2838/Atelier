@@ -8,8 +8,8 @@ class ReviewButtons extends React.Component {
   render() {
     return (
       <div>
-        {this.props.reviews.length > 2 && <button className={CSS['review-btn']}>MORE REVIEWS</button>}
-        <button className={CSS['review-btn']}>ADD A REVIEW<FontAwesomeIcon icon='plus'/></button>
+        {this.props.reviews.length > 2 && <button className={CSS['review-btn']} onClick={() => {}}>MORE REVIEWS</button>}
+        <button className={CSS['review-btn']} onClick={this.props.onAddReview}>ADD A REVIEW<FontAwesomeIcon icon='plus'/></button>
       </div>
     );
   }

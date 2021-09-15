@@ -8,9 +8,17 @@ import fetchReviews from '../../actions/fetchReviews';
 import Ratings from './ratings.jsx';
 import ReviewsList from './reviewsList.jsx';
 import ReviewButtons from './reviewButtons.jsx';
+import ReviewModal from './reviewModal.jsx';
 import CSS from './productReviews.module.css';
 
 class ProductReviews extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      isAddReviewModalOpen: false,
+    };
+  }
+
   componentDidMount() {
     this.props.handleFetchReviews();
   }
@@ -24,10 +32,16 @@ class ProductReviews extends React.Component {
           <Ratings />
           <div>
             <ReviewsList />
-            <ReviewButtons />
+            <ReviewButtons onAddReview={
+              () => { this.setState({ isAddReviewModalOpen: true }); }}/>
           </div>
           <div>{''}</div>
         </div>
+        {
+          this.state.isAddReviewModalOpen
+            && <ReviewModal onModalClose={
+            () => { this.setState({ isAddReviewModalOpen: false }); }}/>
+        }
       </>
     );
   }
