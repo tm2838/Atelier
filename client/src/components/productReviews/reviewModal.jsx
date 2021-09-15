@@ -51,7 +51,7 @@ class ReviewModal extends React.Component {
             </div>
           </>
           <div>
-            <button className={CSS['review-btn']} onClick={() => {}}>Add Review</button>
+            <button className={CSS['review-btn']} onClick={this.props.onModalClose}>Add Review</button>
             <button className={CSS['review-btn']} onClick={this.props.onModalClose}>Cancel</button>
           </div>
         </form>
