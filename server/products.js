@@ -8,13 +8,14 @@ const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products';
 const apiKey = process.env.API_KEY;
 
 const getProduct = (id, callback) => {
-  axios.get(`${url}/${id}`, {
+  axios.get(`${url}/${id}?`, {
     headers: { Authorization: apiKey },
   })
     .then((res) => {
       callback(res.data);
     })
     .catch((err) => {
+      console.log(err);
       throw err;
     });
 };

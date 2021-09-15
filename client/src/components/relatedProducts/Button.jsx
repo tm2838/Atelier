@@ -1,18 +1,23 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './styles.css';
 
-{/* <i class="fas fa-star"></i> solid star */}
-{/* <i class="far fa-star"></i> outline star */}
-{/* <i class="fas fa-star-half-alt"></i> half star */}
-{/* <i class="far fa-times-circle"></i> close X */}
-
-const Button = props => {
+const Button = (props) => {
   // if props = related product, render
   if (props.type === 'related') {
-    return <i className='far fa-star'></i>
+    return <FontAwesomeIcon icon={['far', 'star']} onClick={ () => props.onClickStar(props.product) } />;
+    // return <i className='far fa-star'></i>
   }
   // else if props = outfit, render
-  return <i className='far fa-times-circle'></i>
-}
+  return <FontAwesomeIcon icon={'faTimesCircle'} />;
+  // return <i className='far '></i>
+};
+
+Button.propTypes = {
+  type: PropTypes.string,
+  product: PropTypes.object,
+  onClickStar: PropTypes.func,
+};
 
 export default Button;
