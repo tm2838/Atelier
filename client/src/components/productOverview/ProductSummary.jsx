@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 class ProductSummary extends React.Component {
   render() {
     return (
-      <div className='summary'>
+      <div className='product-summary'>
         <p className='product-slogan'><b>{this.props.product.slogan}</b></p>
         <p className='product-description'>{this.props.product.description}</p>
       </div>

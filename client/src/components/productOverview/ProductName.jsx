@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 
-const ProductTitle = (props) => (
+const ProductName = (props) => (
   <p className='product-title'>
   <span className='product product-category'>{props.category}</span>
   <span className='product product-name'>{props.name}</span>
@@ -9,4 +9,4 @@ const ProductTitle = (props) => (
   </p>
 );
 
-export default ProductTitle;
+export default ProductName;
