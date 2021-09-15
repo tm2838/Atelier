@@ -22,10 +22,11 @@ app.use((req, res, next) => {
 
 // --Product Overview Widget-- GET handler that builds a response object
 // from product and styles api data to send to client
-app.get('/products', (req, res) => {
+app.get('/products/:id?', (req, res) => { // added optional id param to route
   // --Product_id-- Unsure on route handling atm,
   // so just using a single product for testing (id=47425)
-  const id = req.query.product_id || 47424;
+  const id = req.params.id || 47426;
+  // const id = req.query.product_id || 47426;
   const response = {};
   getProduct(id, (data) => {
     response.product = data;
@@ -49,27 +50,16 @@ app.get('/reviews', (req, res) => {
 });
 
 app.get('/relatedProducts', (req, res) => {
-  const id = req.query.product_id || 47426;
+  const id = req.query.product_id || 47421;
   getRelatedProducts(id, (err, data) => {
     if (err) {
       throw err;
     } else {
-      const uniqueData = [...new Set(data)];
-      const response = uniqueData.map((productId) => new Promise((resolve, reject) => {
-        getProduct(productId, (product) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(product);
-          }
-        });
-      }));
-      Promise.all(response)
-        .then((products) => {
-          res.send(JSON.stringify(products));
-        });
+      // remove duplicate ids
+      res.send(JSON.stringify(data));
     }
   });
   // remove duplicate ids
 });
+
 app.listen(3000);
