@@ -2,10 +2,12 @@
 /* eslint-disable class-methods-use-this */
 import React from 'react';
 import { connect } from 'react-redux';
-import './styles.css';
-import ProductReviews from './productReviews/productReviews.jsx';
-import ProductOverviewContainer from './productOverview/ProductOverviewContainer.jsx';
+import './fontawesome';
 import './common/fontAwesomeIcons';
+
+import ProductReviews from './productReviews/productReviews.jsx';
+import RelatedProducts from './relatedProducts/RelatedProducts.jsx';
+import ProductOverviewContainer from './productOverview/ProductOverviewContainer.jsx';
 import fetchProductAndStyles from '../actions/fetchProduct';
 import fetchReviews from '../actions/fetchReviews';
 
@@ -19,6 +21,7 @@ class App extends React.Component {
     return (<div>
     <h1>Hello Atelier</h1>
     <ProductOverviewContainer />
+    <RelatedProducts />
     <ProductReviews />
   </div>);
   }

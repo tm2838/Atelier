@@ -1,18 +1,15 @@
 /* eslint-disable react/prop-types */
+/* eslint class-methods-use-this: ["error", { "exceptMethods": ["render"] }] */
 import React from 'react';
-import { connect } from 'react-redux';
 import ImageGallery from './ImageGallery.jsx';
+import './styles.css';
 
 class ProductOverviewContainer extends React.Component {
   render() {
     return (
-      <ImageGallery currentStyle={this.props.currentStyle}/>
+      <ImageGallery />
     );
   }
 }
 
-const mapStateToProps = (state) => ({
-  currentStyle: state.styleList,
-});
-
-export default connect(mapStateToProps)(ProductOverviewContainer);
+export default ProductOverviewContainer;

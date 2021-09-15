@@ -7,6 +7,7 @@ const {
   getRatingScore,
   getRecommendationMetric,
 } = require('./reviews');
+const { getRelatedProducts } = require('./relatedProducts');
 
 const app = express();
 
@@ -31,8 +32,8 @@ app.get('/products', (req, res) => {
   // so just using a single product for testing (id=47425)
   const id = req.query.product_id || 47426;
   const response = {};
-  getProduct(id, (data) => {
-    response.product = data;
+  getProduct(id, (product) => {
+    response.product = product;
     getStyles(id, (styles) => {
       response.styles = styles;
       res.send(JSON.stringify(response));
@@ -41,6 +42,7 @@ app.get('/products', (req, res) => {
 });
 
 app.get('/reviews', (req, res) => {
+  // using 47421 for now since 47426 doesn't have any reviews
   const id = req.query.product_id || 47421;
   const response = {};
   getReviews(id)
@@ -48,6 +50,7 @@ app.get('/reviews', (req, res) => {
     .then(() => getReviewMeta(id))
     .then((data) => {
       const reviewMeta = data.data;
+      console.log(reviewMeta);
       reviewMeta.ratingScore = getRatingScore(reviewMeta.ratings);
       reviewMeta.recommendationRate = getRecommendationMetric(reviewMeta.recommended);
       response.reviewMeta = reviewMeta;
@@ -57,4 +60,31 @@ app.get('/reviews', (req, res) => {
     });
 });
 
+app.get('/relatedProducts', (req, res) => {
+  const id = req.query.product_id || 47426;
+  getRelatedProducts(id, (err, data) => {
+    if (err) {
+      throw err;
+    } else {
+      // remove duplicate ids
+      const uniqueData = [...new Set(data)];
+      const response = uniqueData.map((productId) => {
+        console.log(productId);
+        return new Promise((resolve, reject) => {
+          getProduct(productId, (product) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(product);
+            }
+          });
+        });
+      });
+      Promise.all(response)
+        .then((products) => {
+          res.send(JSON.stringify(products));
+        });
+    }
+  });
+});
 app.listen(3000);
