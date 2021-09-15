@@ -33,11 +33,11 @@ app.get('/products/:id?', (req, res) => { // added optional id param to route
   const id = req.params.id || 47426;
   // const id = req.query.product_id || 47426;
   const response = {};
-  getProduct(id, (product) => {
-    response.product = product;
+  getProduct(id, (data) => {
+    response.product = data;
     getStyles(id, (styles) => {
       response.styles = styles;
-      res.send(JSON.stringify(response));
+      res.status(200).send(JSON.stringify(response));
     });
   });
 });
@@ -70,6 +70,7 @@ app.get('/relatedProducts', (req, res) => {
       res.send(JSON.stringify(data));
     }
   });
+  // remove duplicate ids
 });
 
 app.listen(3000);

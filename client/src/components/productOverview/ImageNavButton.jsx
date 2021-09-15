@@ -2,7 +2,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const GalleryButton = (props) => (
+const ImageNavButton = (props) => (
     <div>
       <FontAwesomeIcon
         className='gallery-nav'
@@ -12,4 +12,4 @@ const GalleryButton = (props) => (
     </div>
 );
 
-export default GalleryButton;
+export default ImageNavButton;
