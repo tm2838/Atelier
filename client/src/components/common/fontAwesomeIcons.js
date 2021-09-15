@@ -1,7 +1,15 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { far } from '@fortawesome/free-regular-svg-icons';
 import {
-  faStar, faStarHalfAlt, faArrowRight, faArrowLeft, faAngleDown, faAngleUp, faTimes, faTimesCircle,
+  faStar,
+  faStarHalfAlt,
+  faArrowRight,
+  faArrowLeft,
+  faAngleDown,
+  faAngleUp,
+  faTimes,
+  faTimesCircle,
+  faPlus,
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
@@ -14,4 +22,5 @@ library.add(
   faAngleUp,
   faTimes,
   faTimesCircle,
+  faPlus,
 );

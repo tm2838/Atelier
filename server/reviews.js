@@ -14,7 +14,29 @@ const getReviewMeta = (id) => axios.get(`${reviewUrl}/meta`, {
   params: { product_id: id },
 });
 
+const getRatingScore = (ratings) => {
+  let ratingScore = 0;
+  let totalReviews = 0;
+  Object.keys(ratings).forEach(
+    (key) => {
+      ratingScore += parseInt(key, 10) * parseInt(ratings[key], 10);
+      totalReviews += parseInt(ratings[key], 10);
+    },
+  );
+  ratingScore /= totalReviews;
+  return ratingScore.toFixed(1);
+};
+
+const getRecommendationMetric = (recommended) => {
+  const recommendationRate = parseInt(recommended.true, 10)
+    / (parseInt(recommended.true, 10)
+    + parseInt(recommended.false, 10));
+  return (recommendationRate * 100).toFixed(2);
+};
+
 module.exports = {
   getReviews,
   getReviewMeta,
+  getRatingScore,
+  getRecommendationMetric,
 };
