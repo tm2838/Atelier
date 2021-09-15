@@ -3,9 +3,9 @@ import React from 'react';
 
 const Style = (props) => (
 
-  <figure className='style-selector' >
+  <li className={`style-selector style-selector-${props.index}`} >
     <img className='style-img' src={props.photo} alt='styles...'></img>
-  </figure>
+  </li>
 
 );
 

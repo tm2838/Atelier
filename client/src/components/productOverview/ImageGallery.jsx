@@ -2,7 +2,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import GalleryButton from './GalleryButton.jsx';
+import ImageNavButton from './ImageNavButton.jsx';
 
 class ImageGallery extends React.Component {
   constructor(props) {
@@ -105,22 +105,22 @@ class ImageGallery extends React.Component {
 
           {this.props.styles[0] && this.state.main < this.props.styles[0].photos.length - 1
             && <figure className='gallery-nav-right'>
-              <GalleryButton direction='right' icon={'arrow-right'} onClick={this.handleNavClick} />
+              <ImageNavButton direction='right' icon={'arrow-right'} onClick={this.handleNavClick} />
             </figure>}
 
           {this.props.styles.length > 0 && this.state.main > 0
             && <figure className='gallery-nav-left'>
-              <GalleryButton direction={'left'} icon={'arrow-left'} onClick={this.handleNavClick} />
+              <ImageNavButton direction={'left'} icon={'arrow-left'} onClick={this.handleNavClick} />
             </figure>}
 
           {this.props.styles.length > 0 && this.state.thumb > 0
             && <figure className='gallery-nav-up'>
-              <GalleryButton direction={'up'} icon={'angle-up'} onClick={this.handleNavClick} />
+              <ImageNavButton direction={'up'} icon={'angle-up'} onClick={this.handleNavClick} />
             </figure>}
 
           {this.props.styles[0] && this.state.thumb + 4 < this.props.styles[0].photos.length - 1
             && <figure className='gallery-nav-down'>
-              <GalleryButton direction={'down'} icon={'angle-down'} onClick={this.handleNavClick} />
+              <ImageNavButton direction={'down'} icon={'angle-down'} onClick={this.handleNavClick} />
             </figure>}
         </div>
     );

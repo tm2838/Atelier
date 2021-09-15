@@ -7,7 +7,7 @@ import ProductInfo from './ProductInfo.jsx';
 import fetchProductAndStyles from '../../actions/fetchProduct';
 import './styles.css';
 
-class ProductOverviewContainer extends React.Component {
+class OverviewContainer extends React.Component {
   componentDidMount() {
     this.props.handleFetchProduct();
   }
@@ -32,4 +32,4 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export default connect(null, mapDispatchToProps)(ProductOverviewContainer);
+export default connect(null, mapDispatchToProps)(OverviewContainer);
