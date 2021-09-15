@@ -53,6 +53,7 @@
 
 .gallery-thumb:hover {
   border: solid 2px white;
+  cursor: pointer;
 }
 
 .gallery-thumb-0 {
@@ -94,6 +95,7 @@
 
 .gallery-nav:hover {
   color: lightgray;
+  cursor: pointer;
 }
 
 .gallery-nav-up {
@@ -155,7 +157,7 @@
 }
 
 .style-img:hover {
-  border: solid red 2px;
+  cursor: pointer;
 }
 
 .style-selector {
