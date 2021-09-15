@@ -18,16 +18,16 @@ class ProductReviews extends React.Component {
   render() {
     return (
       <>
-      <h3>{'RATINGS & REVIEWS'}</h3>
-      <div className={CSS['reviews-container']}>
-        <div>{''}</div>
-        <Ratings />
-        <div>
-          <ReviewsList />
-          <ReviewButtons />
+        <h3>{'RATINGS & REVIEWS'}</h3>
+        <div className={CSS['reviews-container']}>
+          <div>{''}</div>
+          <Ratings />
+          <div>
+            <ReviewsList />
+            <ReviewButtons />
+          </div>
+          <div>{''}</div>
         </div>
-        <div>{''}</div>
-      </div>
       </>
     );
   }

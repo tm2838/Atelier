@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
-import reviewsReducer from './productReviews/reviewsReducer';
+import reviews from './productReviews/reviewsReducer';
+import reviewMeta from './productReviews/reviewMetaReducer';
 import currentProduct from './productOverview/currentProduct';
 import styleList from './productOverview/styleList';
 
@@ -7,5 +8,6 @@ import styleList from './productOverview/styleList';
 export default combineReducers({
   currentProduct,
   styleList,
-  reviews: reviewsReducer,
+  reviews,
+  reviewMeta,
 });
