@@ -3,7 +3,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import StarRating from '../common/starRating.jsx';
+import ProductRating from './ProductRating.jsx';
 import ProductName from './ProductName.jsx';
 import StyleList from './StyleList.jsx';
 import SelectSize from './SelectSize.jsx';
@@ -15,10 +15,7 @@ class ProductInfo extends React.Component {
       (this.props.styles.length === 0)
         ? <div>loading...</div>
         : <div className='product-info'>
-          <div className='rating-overview'>
-            <StarRating />
-            <a><u>Read all {this.props.reviews.length} reviews</u></a>
-          </div>
+          {this.props.reviews.length && <ProductRating reviewNumber={this.props.reviews.length}/>}
           <ProductName
             category={this.props.product.category.toUpperCase()}
             name={this.props.product.name}

@@ -173,3 +173,7 @@
 .product-slogan {
   font-size: large;
 }
+
+.product-features {
+  justify-self: end;
+}
