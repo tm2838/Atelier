@@ -50,7 +50,6 @@ app.get('/reviews', (req, res) => {
     .then(() => getReviewMeta(id))
     .then((data) => {
       const reviewMeta = data.data;
-      console.log(reviewMeta);
       reviewMeta.ratingScore = getRatingScore(reviewMeta.ratings);
       reviewMeta.recommendationRate = getRecommendationMetric(reviewMeta.recommended);
       response.reviewMeta = reviewMeta;
@@ -69,7 +68,7 @@ app.get('/relatedProducts', (req, res) => {
       // remove duplicate ids
       const uniqueData = [...new Set(data)];
       const response = uniqueData.map((productId) => {
-        console.log(productId);
+        console.log(productId); //eslint-disable-line
         return new Promise((resolve, reject) => {
           getProduct(productId, (product) => {
             if (err) {
