@@ -7,15 +7,13 @@ import ProductReviews from './productReviews/productReviews.jsx';
 import RelatedProducts from './relatedProducts/RelatedProducts.jsx';
 import OverviewContainer from './productOverview/OverviewContainer.jsx';
 
-class App extends React.Component {
-  render() {
-    return (<div>
+const App = () => (
+  <div>
     <h1>Hello Atelier</h1>
     <OverviewContainer />
     <RelatedProducts />
     <ProductReviews />
-  </div>);
-  }
-}
+  </div>
+);
 
 export default App;

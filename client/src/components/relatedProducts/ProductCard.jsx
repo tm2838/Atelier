@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import Button from './Button.jsx';
 import StarRating from '../common/starRating.jsx';
 import './styles.css';
