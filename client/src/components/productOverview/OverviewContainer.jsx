@@ -2,8 +2,10 @@
 /* eslint class-methods-use-this: ["error", { "exceptMethods": ["render"] }] */
 import React from 'react';
 import { connect } from 'react-redux';
+
 import ImageGallery from './ImageGallery.jsx';
 import ProductInfo from './ProductInfo.jsx';
+import ProductSummary from './ProductSummary.jsx';
 import fetchProductAndStyles from '../../actions/fetchProduct';
 import './styles.css';
 
@@ -20,6 +22,9 @@ class OverviewContainer extends React.Component {
         </figure>
         <figure className='product-info-container'>
         <ProductInfo />
+        </figure>
+        <figure className='product-summary-container'>
+          <ProductSummary />
         </figure>
       </div>
     );
