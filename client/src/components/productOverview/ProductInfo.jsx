@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import StarRating from '../common/starRating.jsx';
 import ProductTitle from './ProductTitle.jsx';
-import ProductStyle from './ProductStyle.jsx';
+import StyleList from './StyleList.jsx';
 import SelectSize from './SelectSize.jsx';
 import SelectQty from './SelectQty.jsx';
 
@@ -24,7 +24,7 @@ class ProductInfo extends React.Component {
             name={this.props.product.name}
             price={this.props.product.default_price}
           />
-          <ProductStyle />
+          <StyleList />
           <SelectSize skus={this.props.styles[0].skus}/>
           <SelectQty />
           <button>ADD TO BAG</button>

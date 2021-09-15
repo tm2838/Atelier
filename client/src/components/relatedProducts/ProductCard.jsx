@@ -1,24 +1,21 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import Button from './Button.jsx';
 import StarRating from '../common/starRating.jsx';
 import './styles.css';
 
 const ProductCard = (props) => {
   const { product } = props.product;
-  const productCategory = product.category.toUpperCase();
-
+  const { category, name } = props.product.product;
   return (
     <div className='card'>
-      <Button type={ props.type } product={ product } onClickStar={ props.onClickStar } />
-      <img src='' alt={ product.name } />
+      <Button type={props.type} product={product} onClickStar={props.onClickStar} />      <img src='' alt={props.product.name} />
       <div className='container'>
-        <p>{productCategory}</p>
-        <p><b>{ product.name }</b></p>
+        <p>{category.toUpperCase()}</p>
+        <p><b>{name}</b></p>
         {/* 3. price for default style
           if on sale, sale price in red followed by orig. price w/ strikethrough */}
-        <p>{ product.default_price }</p>
+        <p>{props.product.product.default_price}</p>
         <StarRating />
       </div>
     </div>
