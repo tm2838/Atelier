@@ -10,7 +10,6 @@ const apiKey = process.env.API_KEY;
 const getProduct = (id, callback) => {
   axios.get(`${url}/${id}`, {
     headers: { Authorization: apiKey },
-
   })
     .then((res) => {
       callback(res.data);
