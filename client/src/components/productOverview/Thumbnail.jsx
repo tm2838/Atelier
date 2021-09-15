@@ -1,11 +1,9 @@
 import React from 'react';
 
-const Thumbnail = (props) => {
-  return (
+const Thumbnail = () => (
     <div>
 
     </div>
-  )
-}
+);
 
 export default Thumbnail;
