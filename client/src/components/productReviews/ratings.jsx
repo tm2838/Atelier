@@ -10,7 +10,7 @@ const Ratings = (props) => (
   <div>
     {props.reviewMeta.ratingScore && (
       <div className={CSS['rating-summary']}>
-        <div>{props.reviewMeta.ratingScore}</div>
+        <div className={CSS['rating-score']}>{props.reviewMeta.ratingScore}</div>
         <StarRating />
       </div>
     )}

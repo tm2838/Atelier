@@ -16,6 +16,8 @@ const ProductBreakdown = (props) => {
   );
 };
 
-const mapStateToProps = (state) => state.reviewMeta;
+const mapStateToProps = (state) => ({
+  reviewMeta: state.reviewMeta,
+});
 
 export default connect(mapStateToProps)(ProductBreakdown);

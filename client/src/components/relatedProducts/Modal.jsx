@@ -16,7 +16,7 @@ const Modal = (props) => {
           <tr>
             <th><b>Current Product short name</b></th>
             <th></th>
-            <th><b>{ comparedProduct.product.name }</b></th>
+            <th><b>{ comparedProduct.product?.name || '' }</b></th>
           </tr>
         </thead>
         <tbody>
