@@ -24,7 +24,7 @@ class RelatedProducts extends React.Component {
   // get product id from overview
   componentDidMount() {
     // make api call to related products; reset state to empty arrays
-    const newArray = [];
+    const relatedProducts = [];
     fetch('http://127.0.0.1:3000/relatedProducts') // get request to server route
       .then((res) => res.json())
       .then((ids) => {
@@ -32,13 +32,13 @@ class RelatedProducts extends React.Component {
           fetch(`http://127.0.0.1:3000/products/${id}`)
             .then((res) => res.json())
             .then((data) => {
-              newArray.push(data);
+              relatedProducts.push(data);
             })
             .then(() => {
               this.setState((prevState) => ({
                 ...prevState,
                 relatedProductIds: ids,
-                relatedProducts: newArray,
+                relatedProducts,
                 comparedProduct: {},
               }));
             });

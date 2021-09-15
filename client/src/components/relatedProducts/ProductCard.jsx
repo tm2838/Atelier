@@ -10,7 +10,7 @@ const ProductCard = (props) => {
 
   return (
     <div className='card'>
-      <Button type={ props.type } product={ props.product } onClickStar={ props.onClickStar } />
+      <Button type={ props.type } product={ product } onClickStar={ props.onClickStar } />
       <img src='' alt={ product.name } />
       <div className='container'>
         <p>{productCategory}</p>
