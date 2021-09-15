@@ -6,6 +6,8 @@ import { connect } from 'react-redux';
 import StarRating from '../common/starRating.jsx';
 import ProductTitle from './ProductTitle.jsx';
 import ProductStyle from './ProductStyle.jsx';
+import SelectSize from './SelectSize.jsx';
+import SelectQty from './SelectQty.jsx';
 
 class ProductInfo extends React.Component {
   render() {
@@ -23,21 +25,10 @@ class ProductInfo extends React.Component {
             price={this.props.product.default_price}
           />
           <ProductStyle />
-          <label htmlFor='sizes'></label>
-          <select name='sizes' id='sizes'>
-            <option value="none" selected disabled hidden>
-              SELECT SIZE
-            </option>
-          </select>
-          <label htmlFor='qty'></label>
-          <select name='qty' id='qty'>
-            <option value="1" selected>
-              1
-            </option>
-          </select>
+          <SelectSize skus={this.props.styles[0].skus}/>
+          <SelectQty />
           <button>ADD TO BAG</button>
         </div>
-
     );
   }
 }
