@@ -43,3 +43,9 @@
   margin-right: 5px;
   cursor: pointer
 }
+
+.review-modal {
+  width: 100%;
+  height: 50%;
+  border: 1px solid #dbe7f7ff;
+}
