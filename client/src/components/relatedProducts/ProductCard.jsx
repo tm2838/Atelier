@@ -9,7 +9,8 @@ const ProductCard = (props) => {
   const { category, name } = props.product.product;
   return (
     <div className='card'>
-      <Button type={props.type} product={product} onClickStar={props.onClickStar} />      <img src='' alt={props.product.name} />
+      <Button type={ props.type } product={ props.product } onClickStar={ props.onClickStar } />
+      <img src='' alt={ product.name } />
       <div className='container'>
         <p>{category.toUpperCase()}</p>
         <p><b>{name}</b></p>

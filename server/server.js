@@ -1,7 +1,12 @@
 const path = require('path');
 const express = require('express'); // npm installed
 const { getProduct, getStyles } = require('./products'); // Atelier api call to get product/product styles data
-const { getReviews, getReviewMeta } = require('./reviews');
+const {
+  getReviews,
+  getReviewMeta,
+  getRatingScore,
+  getRecommendationMetric,
+} = require('./reviews');
 const { getRelatedProducts } = require('./relatedProducts');
 
 const app = express();
@@ -38,12 +43,18 @@ app.get('/products/:id?', (req, res) => { // added optional id param to route
 });
 
 app.get('/reviews', (req, res) => {
+  // using 47421 for now since 47426 doesn't have any reviews
   const id = req.query.product_id || 47421;
   const response = {};
   getReviews(id)
     .then((data) => { response.reviews = data.data.results; })
     .then(() => getReviewMeta(id))
-    .then((data) => { response.reviewMeta = data.data.results; })
+    .then((data) => {
+      const reviewMeta = data.data;
+      reviewMeta.ratingScore = getRatingScore(reviewMeta.ratings);
+      reviewMeta.recommendationRate = getRecommendationMetric(reviewMeta.recommended);
+      response.reviewMeta = reviewMeta;
+    })
     .then(() => {
       res.status(200).send(response);
     });
