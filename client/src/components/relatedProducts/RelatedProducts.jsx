@@ -73,7 +73,7 @@ class RelatedProducts extends React.Component {
       }
       <Modal showModal= { this.state.showModal }
         comparedProduct={ this.state.comparedProduct }
-        onClickCloseModal={ this.state.onClickCloseModal } />
+        onClickCloseModal={ this.onClickCloseModal } />
       </div>
     );
   }

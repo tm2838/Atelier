@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 // shows onClick star icon
 const Modal = (props) => {
-  console.log('compare', props.comparedProduct);
   const { comparedProduct } = props;
   if (props.showModal === false) {
     return null;
@@ -11,7 +10,7 @@ const Modal = (props) => {
   return (
     <div>
       <p>COMPARING</p>
-      <button onClick={ props.onClickCloseModal }>Close</button>
+      <button onClick={ () => props.onClickCloseModal() }>Close</button>
       <table>
         <thead>
           <tr>
