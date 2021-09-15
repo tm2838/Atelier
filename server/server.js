@@ -25,7 +25,7 @@ app.use((req, res, next) => {
 app.get('/products', (req, res) => {
   // --Product_id-- Unsure on route handling atm,
   // so just using a single product for testing (id=47425)
-  const id = req.query.product_id || 47425;
+  const id = req.query.product_id || 47428;
   const response = {};
   getProduct(id, (data) => {
     response.product = data;
