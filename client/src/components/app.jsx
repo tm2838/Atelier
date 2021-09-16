@@ -3,13 +3,14 @@
 import React from 'react';
 import './common/fontAwesomeIcons';
 
+import Banner from './common/banner.jsx';
 import ProductReviews from './productReviews/productReviews.jsx';
 import RelatedProducts from './relatedProducts/RelatedProducts.jsx';
 import OverviewContainer from './productOverview/OverviewContainer.jsx';
 
 const App = () => (
   <div>
-    <h1>Hello Atelier</h1>
+    <Banner />
     <OverviewContainer />
     <RelatedProducts />
     <ProductReviews />

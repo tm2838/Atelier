@@ -9,6 +9,7 @@ import Ratings from './ratings.jsx';
 import ReviewsList from './reviewsList.jsx';
 import ReviewButtons from './reviewButtons.jsx';
 import ReviewModal from './reviewModal.jsx';
+import SortingDropdown from './sortingDropdown.jsx';
 import CSS from './productReviews.module.css';
 
 class ProductReviews extends React.Component {
@@ -26,11 +27,12 @@ class ProductReviews extends React.Component {
   render() {
     return (
       <>
-        <h3>{'RATINGS & REVIEWS'}</h3>
+        <h3 style={{ marginLeft: '180px' }}>{'RATINGS & REVIEWS'}</h3>
         <div className={CSS['reviews-container']}>
           <div>{''}</div>
           <Ratings />
           <div>
+            <SortingDropdown />
             <ReviewsList />
             <ReviewButtons onAddReview={
               () => { this.setState({ isAddReviewModalOpen: true }); }}/>

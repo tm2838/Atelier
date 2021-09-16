@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import CSS from './starRating.module.css';
+import CSS from './commonUI.module.css';
 
 const StarRating = () => (
   <div>

@@ -82,3 +82,8 @@
 .review-modal-input {
   margin-bottom: 10px;
 }
+
+.sort-dropdown {
+  border: none;
+  border-bottom: 1px solid #b1d2b0ff;
+}
