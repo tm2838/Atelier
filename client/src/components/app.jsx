@@ -1,17 +1,22 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable class-methods-use-this */
 import React from 'react';
-import { connect } from 'react-redux';
-import { exampleActionCreator } from '../actions/placeholder'
+import './common/fontAwesomeIcons';
 
-class App extends React.Component {
-  render() {
-    return (
-      <h1>Hello {this.props.placeholder}</h1>
-    )
-  }
-}
+import Banner from './common/banner.jsx';
+import ProductReviews from './productReviews/productReviews.jsx';
+import RelatedProducts from './relatedProducts/RelatedProducts.jsx';
+import Outfit from './relatedProducts/Outfit.jsx';
+import OverviewContainer from './productOverview/OverviewContainer.jsx';
 
-const mapStateToProps = state => ({
-  ...state
-})
+const App = () => (
+  <div>
+    <Banner />
+    <OverviewContainer />
+    <RelatedProducts />
+    <Outfit />
+    <ProductReviews />
+  </div>
+);
 
-export default connect(mapStateToProps)(App);
+export default App;
