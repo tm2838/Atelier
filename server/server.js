@@ -30,7 +30,7 @@ app.use((req, res, next) => {
 app.get('/products/:id?', (req, res) => { // added optional id param to route
   // --Product_id-- Unsure on route handling atm,
   // so just using a single product for testing (id=47425)
-  const id = req.params.id || 47423;
+  const id = req.params.id || 47421;
   // const id = req.query.product_id || 47426;
   const response = {};
   getProduct(id, (data) => {
