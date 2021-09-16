@@ -9,7 +9,11 @@ const ProductCard = (props) => {
   const { category, name } = props.product.product;
   return (
     <div className='card'>
-      <Button type={ props.type } product={ props.product } onClickStar={ props.onClickStar } />
+      <Button type={ props.type }
+        product={ props.product }
+        onClickStar={ props.onClickStar }
+        onClickCircleX={ props.onClickCircleX }
+      />
       <img src='' alt={ product.name } />
       <div className='container'>
         <p>{category.toUpperCase()}</p>
@@ -32,6 +36,7 @@ ProductCard.propTypes = {
   showModal: PropTypes.bool,
   onClickStar: PropTypes.func,
   onClickCloseModal: PropTypes.func,
+  onClickCircleX: PropTypes.func,
 };
 
 export default ProductCard;

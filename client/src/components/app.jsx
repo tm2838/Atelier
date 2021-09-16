@@ -6,6 +6,7 @@ import './common/fontAwesomeIcons';
 import Banner from './common/banner.jsx';
 import ProductReviews from './productReviews/productReviews.jsx';
 import RelatedProducts from './relatedProducts/RelatedProducts.jsx';
+import Outfit from './relatedProducts/Outfit.jsx';
 import OverviewContainer from './productOverview/OverviewContainer.jsx';
 
 const App = () => (
@@ -13,6 +14,7 @@ const App = () => (
     <Banner />
     <OverviewContainer />
     <RelatedProducts />
+    <Outfit />
     <ProductReviews />
   </div>
 );

@@ -6,18 +6,20 @@ import './styles.css';
 const Button = (props) => {
   // if props = related product, render
   if (props.type === 'related') {
-    return <FontAwesomeIcon icon={['far', 'star']} onClick={ () => props.onClickStar(props.product) } />;
-    // return <i className='far fa-star'></i>
+    return <FontAwesomeIcon icon={['far', 'star']}
+      onClick={ () => props.onClickStar(props.product) } />;
   }
   // else if props = outfit, render
-  return <FontAwesomeIcon icon={'faTimesCircle'} />;
-  // return <i className='far '></i>
+  return <FontAwesomeIcon icon={['far', 'times-circle']}
+    onClick={ () => props.onClickCircleX(props.product.id) }
+  />;
 };
 
 Button.propTypes = {
   type: PropTypes.string,
   product: PropTypes.object,
   onClickStar: PropTypes.func,
+  onClickCircleX: PropTypes.func,
 };
 
 export default Button;
