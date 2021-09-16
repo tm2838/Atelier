@@ -11,6 +11,7 @@ class Outfit extends React.Component {
       outfitProducts: [],
     };
     this.onClickPlus = this.onClickPlus.bind(this);
+    this.onClickCircleX = this.onClickCircleX.bind(this);
   }
 
   onClickPlus() {
@@ -23,24 +24,24 @@ class Outfit extends React.Component {
     }));
   }
 
-  // onClickCircleX(id) {
-  // console.log('id', id);
-  // console.log('outfits', this.state.outfitProducts);
-  // const { outfitProducts } = this.state;
-  // let index;
-  // // eslint-disable-next-line no-plusplus
-  // for (let i = 0; i < outfitProducts.length; i++) {
-  //   console.log('outfit array id', outfitProducts[i].product.id);
-  //   if (outfitProducts[i].product.id === id) {
-  //     index = i;
-  //   }
-  // }
-  // outfitProducts.splice(index, 1);
-  // this.setState((prevState) => ({
-  //   ...prevState,
-  //   outfitProducts,
-  // }));
-  // }
+  onClickCircleX(id) {
+    console.log('id', id);
+    console.log('outfits', this.state.outfitProducts);
+    const { outfitProducts } = this.state;
+    let index;
+    // eslint-disable-next-line no-plusplus
+    for (let i = 0; i < outfitProducts.length; i++) {
+      console.log('outfit array id', outfitProducts[i].product.id);
+      if (outfitProducts[i].product.id === id) {
+        index = i;
+      }
+    }
+    outfitProducts.splice(index, 1);
+    this.setState((prevState) => ({
+      ...prevState,
+      outfitProducts,
+    }));
+  }
 
   // eslint-disable-next-line class-methods-use-this
   render() {
@@ -54,7 +55,7 @@ class Outfit extends React.Component {
         {this.state.outfitProducts.map((product) => (
           <ProductCard type={'outfit'} key={product.product.id}
           product={product}
-          // onClickCircleX={ this.onClickCircleX }
+          onClickCircleX={ this.onClickCircleX }
           />))
         }
       </div>

@@ -13,7 +13,7 @@ const ProductCard = (props) => {
       <Button type={ props.type }
         product={ props.product }
         onClickStar={ props.onClickStar }
-        // onClickCircleX={ props.onClickCircleX }
+        onClickCircleX={ props.onClickCircleX }
       />
       <img src='' alt={ product.name } />
       <div className='container'>
