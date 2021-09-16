@@ -13,4 +13,5 @@ To run application locally:
 To stop application, press `CTRL + C` in each of the above terminal windows.
 
 To run unit tests, in a new terminal window, run `npm test`
+
 To view linting problems, in a new terminal window, run `npm run lint`
