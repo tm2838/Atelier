@@ -6,18 +6,17 @@ import './styles.css';
 
 const ProductCard = (props) => {
   const { product } = props.product;
-  const productCategory = product.category.toUpperCase();
-
+  const { category, name } = props.product.product;
   return (
     <div className='card'>
       <Button type={ props.type } product={ props.product } onClickStar={ props.onClickStar } />
       <img src='' alt={ product.name } />
       <div className='container'>
-        <p>{productCategory}</p>
-        <p><b>{ product.name }</b></p>
+        <p>{category.toUpperCase()}</p>
+        <p><b>{name}</b></p>
         {/* 3. price for default style
           if on sale, sale price in red followed by orig. price w/ strikethrough */}
-        <p>{ product.default_price }</p>
+        <p>{props.product.product.default_price}</p>
         <StarRating />
       </div>
     </div>

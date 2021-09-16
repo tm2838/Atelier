@@ -165,11 +165,15 @@
   margin-right: 20px;
 }
 
-.summary {
+.product-summary {
   margin-top: 50px;
   padding-top: 20px;
 }
 
 .product-slogan {
   font-size: large;
+}
+
+.product-features {
+  justify-self: end;
 }

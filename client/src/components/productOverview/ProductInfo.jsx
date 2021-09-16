@@ -3,9 +3,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import StarRating from '../common/starRating.jsx';
-import ProductTitle from './ProductTitle.jsx';
-import ProductStyle from './ProductStyle.jsx';
+import ProductRating from './ProductRating.jsx';
+import ProductName from './ProductName.jsx';
+import StyleList from './StyleList.jsx';
 import SelectSize from './SelectSize.jsx';
 import SelectQty from './SelectQty.jsx';
 
@@ -15,16 +15,14 @@ class ProductInfo extends React.Component {
       (this.props.styles.length === 0)
         ? <div>loading...</div>
         : <div className='product-info'>
-          <div className='rating-overview'>
-            <StarRating />
-            <a><u>Read all reviews</u></a>
-          </div>
-          <ProductTitle
+          {this.props.reviews.length && <ProductRating reviewNumber={this.props.reviews.length}/>}
+          <ProductName
             category={this.props.product.category.toUpperCase()}
             name={this.props.product.name}
-            price={this.props.product.default_price}
+            price={this.props.styles[2].original_price}
+            sale={this.props.styles[2].sale_price}
           />
-          <ProductStyle />
+          <StyleList />
           <SelectSize skus={this.props.styles[0].skus}/>
           <SelectQty />
           <button>ADD TO BAG</button>
@@ -36,6 +34,7 @@ class ProductInfo extends React.Component {
 const mapStateToProps = (state) => ({
   product: state.currentProduct,
   styles: state.styleList,
+  reviews: state.reviews,
 });
 
 export default connect(mapStateToProps)(ProductInfo);

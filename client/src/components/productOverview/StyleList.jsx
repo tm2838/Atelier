@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import Style from './Style.jsx';
 
-class ProductStyle extends React.Component {
+class StyleList extends React.Component {
   render() {
     return (
       <div>
@@ -25,4 +25,4 @@ const mapStateToProps = (state) => ({
   styles: state.styleList,
 });
 
-export default connect(mapStateToProps)(ProductStyle);
+export default connect(mapStateToProps)(StyleList);

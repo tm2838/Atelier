@@ -71,37 +71,45 @@ class ImageGallery extends React.Component {
             </img>
           </figure>
 
-          <figure className='gallery-thumb-1' onClick={() => this.handleImageClick(1)}>
+          {
+            this.props.styles[0].photos[1] && <figure className='gallery-thumb-1' onClick={() => this.handleImageClick(1)}>
             <img
               src={this.props.styles[0].photos[this.state.thumb + 1].thumbnail_url}
               className='gallery-thumb'
               alt='Thumbnail'>
             </img>
           </figure>
+          }
 
-          <figure className='gallery-thumb-2' onClick={() => this.handleImageClick(2)}>
+          {
+            this.props.styles[0].photos[2] && <figure className='gallery-thumb-2' onClick={() => this.handleImageClick(2)}>
             <img
               src={this.props.styles[0].photos[this.state.thumb + 2].thumbnail_url}
               className='gallery-thumb'
               alt='Thumbnail'>
             </img>
           </figure>
+          }
 
-          <figure className='gallery-thumb-3' onClick={() => this.handleImageClick(3)}>
+          {
+            this.props.styles[0].photos[3] && <figure className='gallery-thumb-3' onClick={() => this.handleImageClick(3)}>
             <img
               src={this.props.styles[0].photos[this.state.thumb + 3].thumbnail_url}
               className='gallery-thumb'
               alt='Thumbnail'>
             </img>
           </figure>
+          }
 
-          <figure className='gallery-thumb-4' onClick={() => this.handleImageClick(4)}>
+          {
+            this.props.styles[0].photos[4] && <figure className='gallery-thumb-4' onClick={() => this.handleImageClick(4)}>
             <img
               src={this.props.styles[0].photos[this.state.thumb + 4].thumbnail_url}
               className='gallery-thumb'
               alt='Thumbnail'>
             </img>
           </figure>
+          }
 
           {this.props.styles[0] && this.state.main < this.props.styles[0].photos.length - 1
             && <figure className='gallery-nav-right'>

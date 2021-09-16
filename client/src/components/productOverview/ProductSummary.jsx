@@ -6,10 +6,22 @@ import { connect } from 'react-redux';
 
 class ProductSummary extends React.Component {
   render() {
+    const { slogan, description, features } = this.props.product;
     return (
-      <div className='summary'>
-        <p className='product-slogan'><b>{this.props.product.slogan}</b></p>
-        <p className='product-description'>{this.props.product.description}</p>
+      <div>
+        <figure className='product-summary'>
+          <p className='product-slogan'><b>{slogan}</b></p>
+          <p className='product-description'>{description}</p>
+        </figure>
+        <figure className='product-features'>
+          <ul>
+            {
+              this.props.product.slogan
+              && features.map((item) => <li key={item.feature}>
+                {item.value} {item.feature}</li>)
+            }
+          </ul>
+        </figure>
       </div>
     );
   }
