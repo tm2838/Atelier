@@ -10,7 +10,9 @@ const Button = (props) => {
     // return <i className='far fa-star'></i>
   }
   // else if props = outfit, render
-  return <FontAwesomeIcon icon={'faTimesCircle'} />;
+  return <FontAwesomeIcon icon={['far', 'times-circle']}
+  // onClick={ () => props.onClickCircleX(props.product.id) }
+  />;
   // return <i className='far '></i>
 };
 
@@ -18,6 +20,7 @@ Button.propTypes = {
   type: PropTypes.string,
   product: PropTypes.object,
   onClickStar: PropTypes.func,
+  onClickCircleX: PropTypes.func,
 };
 
 export default Button;
