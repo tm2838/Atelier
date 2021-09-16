@@ -1,4 +1,3 @@
-/* eslint-disable class-methods-use-this */
 import React from 'react';
 import { connect } from 'react-redux';
 import ProductCard from './ProductCard.jsx';
@@ -26,7 +25,6 @@ class RelatedProducts extends React.Component {
   componentDidMount() {
     // make api call to related products; reset state to empty arrays
     const relatedProducts = [];
-    const relatedProductIds = [];
     fetch('http://127.0.0.1:3000/relatedProducts') // get request to server route
       .then((res) => res.json())
       .then((ids) => {
@@ -35,18 +33,20 @@ class RelatedProducts extends React.Component {
             .then((res) => res.json())
             .then((data) => {
               relatedProducts.push(data);
-              relatedProductIds.push(id);
+            })
+            .then(() => {
+              this.setState((prevState) => ({
+                ...prevState,
+                relatedProductIds: ids,
+                relatedProducts,
+                comparedProduct: {},
+              }));
             });
         });
       })
       .catch((err) => {
         throw err;
       });
-    this.setState({
-      relatedProductIds,
-      relatedProducts,
-      comparedProduct: {},
-    });
   }
 
   onClickStar(product) {
