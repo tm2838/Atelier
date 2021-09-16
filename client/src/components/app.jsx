@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
+/* eslint-disable class-methods-use-this */
 import React from 'react';
-// import { connect } from 'react-redux';
 import './common/fontAwesomeIcons';
 
 import ProductReviews from './productReviews/productReviews.jsx';
