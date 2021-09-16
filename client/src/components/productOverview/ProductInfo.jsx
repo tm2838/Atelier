@@ -19,7 +19,8 @@ class ProductInfo extends React.Component {
           <ProductName
             category={this.props.product.category.toUpperCase()}
             name={this.props.product.name}
-            price={this.props.product.default_price}
+            price={this.props.styles[2].original_price}
+            sale={this.props.styles[2].sale_price}
           />
           <StyleList />
           <SelectSize skus={this.props.styles[0].skus}/>
