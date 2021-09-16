@@ -4,10 +4,11 @@ Project Atelier comprises a complete redesign of a client-facing retail portal t
 
 To run application locally:
 
-1. Open a terminal window and run `npm run react-dev`
-2. Open a new terminal window and run `npm start`
-3. Create a `.env` file in the root directory, and the content should be `API_KEY = ${YOUR_GITHUB_TOKEN}`
-4. Navigate to `http://localhost:3000` and enjoy!
+1. Open a terminal window and run `npm install`
+2. Open a new terminal window and run `npm run react-dev`
+3. Open a new terminal window and run `npm start`
+4. Create a `.env` file in the root directory, and the content should be `API_KEY = ${YOUR_GITHUB_TOKEN}`
+5. Navigate to `http://localhost:3000` and enjoy!
 
 To stop application, press `CTRL + C` in each of the above terminal windows.
 
