@@ -2,15 +2,29 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 import fetchMock from 'jest-fetch-mock';
+import rootReducer from '../reducers/rootReducer';
 import configureStore from '../store';
-import { testProduct } from '../fixtures/testProduct.json';
-import { testRelatedProducts } from '../fixtures/testRelatedProducts.json';
-import { testReview } from '../fixtures/testReview.json';
+import testProduct from '../fixtures/testProduct.json';
+import testRelatedProducts from '../fixtures/testRelatedProducts.json';
+import testReview from '../fixtures/testReview.json';
 
 import App from './app.jsx';
 
 describe('App', () => {
+  const testStore = createStore(
+    rootReducer,
+    {
+      currentProduct: testProduct[0].product,
+      styleList: testProduct[0].styles.results,
+      reviews: testReview.reviews,
+      reviewMeta: testReview.reviewMeta,
+    },
+    applyMiddleware(thunk),
+  );
+
   beforeEach(() => {
     fetchMock.mockIf('http://127.0.0.1:3000', (req) => {
       if (req.url.endsWith('/products')) {
@@ -30,7 +44,7 @@ describe('App', () => {
       }
 
       if (req.url.endsWith('/reviews')) {
-        return testReview;
+        return { body: testReview };
       }
 
       return {};
@@ -38,7 +52,7 @@ describe('App', () => {
   });
 
   it('should render without crashing', () => {
-    const { getByTestId } = render(<Provider store={configureStore()}>
+    const { getByTestId, getByRole } = render(<Provider store={testStore}>
       <App />
       </Provider>);
 
