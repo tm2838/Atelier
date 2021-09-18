@@ -12,6 +12,7 @@ import testRelatedProducts from '../fixtures/testRelatedProducts.json';
 import testReview from '../fixtures/testReview.json';
 
 import App from './app.jsx';
+import './common/fontAwesomeIcons';
 
 describe('App', () => {
   const testStore = createStore(
@@ -49,6 +50,10 @@ describe('App', () => {
 
       return {};
     });
+  });
+
+  afterEach(() => {
+    fetchMock.resetMocks();
   });
 
   it('should render without crashing', () => {
