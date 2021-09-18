@@ -10,21 +10,12 @@ import configureStore from '../store';
 import testProduct from '../fixtures/testProduct.json';
 import testRelatedProducts from '../fixtures/testRelatedProducts.json';
 import testReview from '../fixtures/testReview.json';
+import testStore from '../fixtures/testStore';
 
 import App from './app.jsx';
+import './common/fontAwesomeIcons';
 
 describe('App', () => {
-  const testStore = createStore(
-    rootReducer,
-    {
-      currentProduct: testProduct[0].product,
-      styleList: testProduct[0].styles.results,
-      reviews: testReview.reviews,
-      reviewMeta: testReview.reviewMeta,
-    },
-    applyMiddleware(thunk),
-  );
-
   beforeEach(() => {
     fetchMock.mockIf('http://127.0.0.1:3000', (req) => {
       if (req.url.endsWith('/products')) {
@@ -49,6 +40,10 @@ describe('App', () => {
 
       return {};
     });
+  });
+
+  afterEach(() => {
+    fetchMock.resetMocks();
   });
 
   it('should render without crashing', () => {

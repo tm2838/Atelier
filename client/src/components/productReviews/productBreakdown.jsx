@@ -3,18 +3,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import CSS from './productReviews.module.css';
 
-const ProductBreakdown = (props) => {
-  console.log(props.reviewMeta); //eslint-disable-line
-  return (
+const ProductBreakdown = (props) => (
     <div className={CSS['product-breakdown']}>
-      <div>Size:    ---*---- </div>
-      <div>Width:   ------*- </div>
-      <div>Comfort: -*------ </div>
-      <div>Length:  ------*- </div>
-      <div>Fit:     -*------ </div>
+      {props.reviewMeta.characteristics && Object.keys(props.reviewMeta.characteristics)
+        .map((key) => <div key={key}>{key}: ----*----</div>)}
     </div>
-  );
-};
+);
 
 const mapStateToProps = (state) => ({
   reviewMeta: state.reviewMeta,
