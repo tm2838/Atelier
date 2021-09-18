@@ -10,8 +10,8 @@ class ProductSummary extends React.Component {
     return (
       <div>
         <figure className='product-summary'>
-          <p className='product-slogan'><b>{slogan}</b></p>
-          <p className='product-description'>{description}</p>
+          <p className='product-slogan' data-testid='product-slogan'><b>{slogan}</b></p>
+          <p className='product-description' data-testid='product-description'>{description}</p>
         </figure>
         <figure className='product-features'>
           <ul>

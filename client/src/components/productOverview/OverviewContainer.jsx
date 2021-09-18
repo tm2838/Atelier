@@ -18,10 +18,10 @@ class OverviewContainer extends React.Component {
     return (
       <div className='product-container'>
         <figure className='gallery-container'>
-        <ImageGallery />
+          <ImageGallery />
         </figure>
         <figure className='product-info-container'>
-        <ProductInfo />
+          <ProductInfo />
         </figure>
         <figure className='product-summary-container'>
           <ProductSummary />
