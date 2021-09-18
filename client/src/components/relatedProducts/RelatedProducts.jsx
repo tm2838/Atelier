@@ -53,7 +53,7 @@ class RelatedProducts extends React.Component {
   render() {
     return (
       <div>
-        <div>RELATED PRODUCTS</div>
+        <div data-testid='relatedProducts'>RELATED PRODUCTS</div>
         {this.state.relatedProducts.map((product) => <ProductCard type={'related'} key={product.product.id}
           product={product}
           onClickStar={ this.onClickStar }
