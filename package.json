@@ -6,8 +6,7 @@
   "scripts": {
     "react-dev": "webpack",
     "start": "nodemon server/server.js",
-    "test": "jest",
-    "test:coverage": "CI=true jest --coverage --forceExit",
+    "test": "jest --collectCoverage",
     "lint": "eslint '**/*.js' --ignore-pattern node_modules/"
   },
   "repository": {
