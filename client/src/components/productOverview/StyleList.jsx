@@ -14,11 +14,7 @@ class StyleList extends React.Component {
   render() {
     return (
       <div>
-<<<<<<< HEAD
         <p className='style-name' data-testid='style-name'><b>STYLE &gt;</b> {this.props.styles[0].name}</p>
-=======
-        <p className='style-name' ><b>STYLE &gt;</b> {this.props.currentStyle.name}</p>
->>>>>>> dev
         {
           this.props.styles.map((style, index) => {
             const photo = style.photos[0].thumbnail_url;
