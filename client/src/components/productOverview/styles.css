@@ -130,6 +130,17 @@
   margin-top: 50px;
 }
 
+.overview-rating {
+  display: flex;
+  flex-direction: row;
+}
+
+.rating-link {
+  margin-left: 10px;
+  font-size: small;
+  cursor: pointer;
+}
+
 .product {
   display: flex;
   align-items: center;
@@ -138,10 +149,13 @@
 
 .product-category {
   font-size: large;
+  margin-top: 5px;
+  padding-top:25px;
 }
 
 .product-name {
   font-size: xxx-large;
+  margin-bottom: 10px;
 }
 
 .product-price {
@@ -149,8 +163,8 @@
 }
 
 .style-img {
-  width: 60px;
-  height: 60px;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
   margin-bottom: 15px;
   border: solid black 1px;
@@ -176,4 +190,27 @@
 
 .product-features {
   justify-self: end;
+}
+
+.checkout {
+  font-size: large;
+  font-weight: 600;
+  padding-left: 10px;
+}
+
+#select-sizes {
+  width: 65%;
+  height: 3vw;
+  margin-right: 15px;
+}
+
+#select-qty {
+  width: 30%;
+  height: 3vw;
+}
+
+#add-item {
+  margin-top: 15px;
+  width: 80%;
+  height: 3vw;
 }
