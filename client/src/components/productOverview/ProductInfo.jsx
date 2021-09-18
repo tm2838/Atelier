@@ -23,9 +23,11 @@ class ProductInfo extends React.Component {
             sale={this.props.currentStyle.sale_price}
           />
           <StyleList />
+          <div>
           <SelectSize skus={this.props.currentStyle.skus}/>
           <SelectQty />
-          <button>ADD TO BAG</button>
+          <button id='add-item' className='checkout'>ADD TO BAG</button>
+          </div>
         </div>
     );
   }
