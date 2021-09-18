@@ -3,17 +3,30 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import Style from './Style.jsx';
+import changeStyle from '../../actions/productOverview/currentStyle';
 
 class StyleList extends React.Component {
+  handleClick(index) {
+    const newStyle = this.props.styles[index];
+    this.props.changeStyle(newStyle);
+  }
+
   render() {
     return (
       <div>
+<<<<<<< HEAD
         <p className='style-name' data-testid='style-name'><b>STYLE &gt;</b> {this.props.styles[0].name}</p>
+=======
+        <p className='style-name' ><b>STYLE &gt;</b> {this.props.currentStyle.name}</p>
+>>>>>>> dev
         {
-          this.props.styles.map((style) => {
+          this.props.styles.map((style, index) => {
             const photo = style.photos[0].thumbnail_url;
-            const index = style.style_id % 10;
-            return <Style key={style.style_id} photo={photo} index={index} />;
+            return <Style
+              key={style.style_id}
+              photo={photo}
+              index={index}
+              onClick={this.handleClick.bind(this)} />;
           })
         }
       </div>
@@ -23,6 +36,13 @@ class StyleList extends React.Component {
 
 const mapStateToProps = (state) => ({
   styles: state.styleList,
+  currentStyle: state.currentStyle,
 });
 
-export default connect(mapStateToProps)(StyleList);
+const mapDispatchToProps = (dispatch) => ({
+  changeStyle: (style) => {
+    dispatch(changeStyle(style));
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(StyleList);

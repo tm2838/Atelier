@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import StarRating from '../common/starRating.jsx';
 
 const ProductRating = (props) => (
-  <div className='rating-overview'>
+  <div className='overview-rating'>
     <StarRating />
-    <a><u>Read all {props.reviewNumber} reviews</u></a>
+    <a className='rating-link'><u>Read all {props.reviewNumber} reviews</u></a>
   </div>
 );
 
