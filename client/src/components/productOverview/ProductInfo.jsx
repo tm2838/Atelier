@@ -12,18 +12,18 @@ import SelectQty from './SelectQty.jsx';
 class ProductInfo extends React.Component {
   render() {
     return (
-      (this.props.styles.length === 0)
+      (!this.props.styles.length || !Object.keys(this.props.currentStyle).length)
         ? <div>loading...</div>
         : <div className='product-info'>
           {this.props.reviews.length && <ProductRating reviewNumber={this.props.reviews.length}/>}
           <ProductName
             category={this.props.product.category.toUpperCase()}
             name={this.props.product.name}
-            price={this.props.styles[0].original_price}
-            sale={this.props.styles[0].sale_price}
+            price={this.props.currentStyle.original_price}
+            sale={this.props.currentStyle.sale_price}
           />
           <StyleList />
-          <SelectSize skus={this.props.styles[0].skus}/>
+          <SelectSize skus={this.props.currentStyle.skus}/>
           <SelectQty />
           <button>ADD TO BAG</button>
         </div>
@@ -34,6 +34,7 @@ class ProductInfo extends React.Component {
 const mapStateToProps = (state) => ({
   product: state.currentProduct,
   styles: state.styleList,
+  currentStyle: state.currentStyle,
   reviews: state.reviews,
 });
 
