@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
-import { render, unmountComponentAtNode } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
@@ -11,7 +11,6 @@ import testProduct from '../../../fixtures/testProduct.json';
 import ProductSummary from '../ProductSummary.jsx';
 
 let testStore = null;
-let container = null;
 beforeAll(() => {
   testStore = createStore(
     rootReducer,
