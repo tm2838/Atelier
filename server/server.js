@@ -66,7 +66,21 @@ app.get('/relatedProducts', (req, res) => {
     if (err) {
       throw err;
     } else {
-      res.send(JSON.stringify(data));
+      return Promise.all(data.map((productId) => (
+        new Promise((resolve) => {
+          const relatedProduct = {};
+          getProduct(productId, (product) => {
+            relatedProduct.product = product;
+            getStyles(productId, (styles) => {
+              relatedProduct.styles = styles;
+              resolve(relatedProduct);
+            });
+          });
+        })
+      )))
+        .then((relatedProducts) => {
+          res.status(200).send(relatedProducts).end();
+        });
     }
   });
 });
