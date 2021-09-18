@@ -6,7 +6,7 @@
   "scripts": {
     "react-dev": "webpack",
     "start": "nodemon server/server.js",
-    "test": "jest",
+    "test": "jest --collectCoverage",
     "lint": "eslint '**/*.js' --ignore-pattern node_modules/"
   },
   "repository": {

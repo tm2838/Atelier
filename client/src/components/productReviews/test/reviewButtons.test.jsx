@@ -7,19 +7,12 @@ import thunk from 'redux-thunk';
 import fetchMock from 'jest-fetch-mock';
 import rootReducer from '../../../reducers/rootReducer';
 import testReview from '../../../fixtures/testReview.json';
+import testStore from '../../../fixtures/testStore';
 
 import ReviewButtons from '../reviewButtons.jsx';
 import '../../common/fontAwesomeIcons';
 
 describe('reviewButtons', () => {
-  let testStore = createStore(
-    rootReducer,
-    {
-      reviews: testReview.reviews,
-      reviewMeta: testReview.reviewMeta,
-    },
-    applyMiddleware(thunk),
-  );
   beforeEach(() => {
     fetchMock.mockIf('http://127.0.0.1:3000', (req) => {
       if (req.url.endsWith('/reviews')) {
@@ -46,7 +39,7 @@ describe('reviewButtons', () => {
   });
 
   it('should not have a more review button when there are less than two reviews', () => {
-    testStore = createStore(
+    const newTestStore = createStore(
       rootReducer,
       {
         reviews: testReview.reviews[0],
@@ -55,7 +48,7 @@ describe('reviewButtons', () => {
       applyMiddleware(thunk),
     );
     const { queryByRole, getByRole } = render(
-      <Provider store={testStore}>
+      <Provider store={newTestStore}>
         <ReviewButtons reviews={testReview} onAddReview={() => {}}/>
       </Provider>,
     );
