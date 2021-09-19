@@ -59,6 +59,7 @@ class ImageGallery extends React.Component {
             <img
               src={this.props.currentStyle.photos[this.state.main].url}
               className='gallery-img'
+              data-testid='gallery-img'
               alt='Main image'>
             </img>
           </figure>
@@ -72,7 +73,8 @@ class ImageGallery extends React.Component {
           </figure>
 
           {
-            this.props.currentStyle.photos[1] && <figure className='gallery-thumb-1' onClick={() => this.handleImageClick(1)}>
+            this.props.currentStyle.photos[1] && <figure className='gallery-thumb-1' data-testid='gallery-thumb-1'
+            onClick={() => this.handleImageClick(1)}>
             <img
               src={this.props.currentStyle.photos[this.state.thumb + 1].thumbnail_url}
               className='gallery-thumb'
@@ -82,7 +84,8 @@ class ImageGallery extends React.Component {
           }
 
           {
-            this.props.currentStyle.photos[2] && <figure className='gallery-thumb-2' onClick={() => this.handleImageClick(2)}>
+            this.props.currentStyle.photos[2] && <figure className='gallery-thumb-2' data-testid='gallery-thumb-2'
+            onClick={() => this.handleImageClick(2)}>
             <img
               src={this.props.currentStyle.photos[this.state.thumb + 2].thumbnail_url}
               className='gallery-thumb'
@@ -92,7 +95,8 @@ class ImageGallery extends React.Component {
           }
 
           {
-            this.props.currentStyle.photos[3] && <figure className='gallery-thumb-3' onClick={() => this.handleImageClick(3)}>
+            this.props.currentStyle.photos[3] && <figure className='gallery-thumb-3' data-testid='gallery-thumb-3'
+            onClick={() => this.handleImageClick(3)}>
             <img
               src={this.props.currentStyle.photos[this.state.thumb + 3].thumbnail_url}
               className='gallery-thumb'
@@ -102,7 +106,8 @@ class ImageGallery extends React.Component {
           }
 
           {
-            this.props.currentStyle.photos[4] && <figure className='gallery-thumb-4' onClick={() => this.handleImageClick(4)}>
+            this.props.currentStyle.photos[4] && <figure className='gallery-thumb-4' data-testid='gallery-thumb-4'
+            onClick={() => this.handleImageClick(4)}>
             <img
               src={this.props.currentStyle.photos[this.state.thumb + 4].thumbnail_url}
               className='gallery-thumb'
