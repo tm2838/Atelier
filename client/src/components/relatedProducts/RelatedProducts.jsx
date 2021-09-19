@@ -52,7 +52,7 @@ class RelatedProducts extends React.Component {
   // eslint-disable-next-line class-methods-use-this
   render() {
     return (
-      <div>
+      <div className='relatedProducts'>
         <div>RELATED PRODUCTS</div>
         {this.state.relatedProducts.map((product) => <ProductCard type={'related'} key={product.product.id}
           product={product}
