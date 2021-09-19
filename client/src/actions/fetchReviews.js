@@ -1,4 +1,4 @@
-import changeReviews from './productReviews/changeReviews';
+import { changeReviews, changeLoadedReviews, changeRemainingReviews } from './productReviews/changeReviews';
 import changeReviewMeta from './productReviews/changeReviewMeta';
 
 const fetchReviews = () => (dispatch) => {
@@ -6,6 +6,10 @@ const fetchReviews = () => (dispatch) => {
     .then((response) => response.json())
     .then((response) => {
       dispatch(changeReviews(response.reviews));
+      const loadedReviews = response.reviews.slice(0, 2);
+      const remainingReviews = response.reviews.filter((review) => !loadedReviews.includes(review));
+      dispatch(changeLoadedReviews(loadedReviews));
+      dispatch(changeRemainingReviews(remainingReviews));
       dispatch(changeReviewMeta(response.reviewMeta));
     })
     .catch((err) => console.log(err)); //eslint-disable-line

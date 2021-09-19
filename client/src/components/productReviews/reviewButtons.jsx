@@ -8,7 +8,7 @@ class ReviewButtons extends React.Component {
   render() {
     return (
       <div>
-        {this.props.reviews.length > 2 && <button className={CSS['review-btn']} onClick={() => {}}>MORE REVIEWS</button>}
+        {this.props.remainingReviews.length > 0 && <button className={CSS['review-btn']} onClick={this.props.onLoadReviews}>MORE REVIEWS</button>}
         <button className={CSS['review-btn']} onClick={this.props.onAddReview}>ADD A REVIEW<FontAwesomeIcon icon='plus'/></button>
       </div>
     );
@@ -16,7 +16,7 @@ class ReviewButtons extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  reviews: state.reviews,
+  remainingReviews: state.remainingReviews,
 });
 
 export default connect(mapStateToProps)(ReviewButtons);

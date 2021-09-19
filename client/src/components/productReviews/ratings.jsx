@@ -8,25 +8,29 @@ import CSS from './productReviews.module.css';
 
 const Ratings = (props) => (
   <div>
-    {props.reviewMeta.ratingScore && (
-      <div className={CSS['rating-summary']}>
-        <div className={CSS['rating-score']}>{props.reviewMeta.ratingScore}</div>
-        <StarRating />
-      </div>
-    )}
+    {props.reviews.length === 0
+      ? <>No Reviews Available</>
+      : <>
+          {props.reviewMeta.ratingScore && (
+            <div className={CSS['rating-summary']}>
+              <div className={CSS['rating-score']}>{props.reviewMeta.ratingScore}</div>
+              <StarRating />
+            </div>
+          )}
+          {props.reviewMeta.recommendationRate && (
+            <div className={CSS['rating-recommendation']}>{props.reviewMeta.recommendationRate}%
+            of reviews recommend this product</div>
+          )}
+          <StarBreakdown />
+          <ProductBreakdown />
+        </>
+    }
 
-    <StarBreakdown />
-
-    {props.reviewMeta.recommendationRate && (
-      <div>{props.reviewMeta.recommendationRate}%
-      of reviews recommend this product</div>
-    )}
-
-    <ProductBreakdown />
   </div>
 );
 
 const mapStateToProps = (state) => ({
+  reviews: state.reviews,
   reviewMeta: state.reviewMeta,
 });
 

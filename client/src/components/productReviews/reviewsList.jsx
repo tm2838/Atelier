@@ -8,7 +8,7 @@ class ReviewsList extends React.Component {
   render() {
     return (
       <div>
-        {this.props.reviews.slice(0, 2).map(
+        {this.props.loadedReviews.map(
           (review) => <Review key={review.review_id} review={review}/>,
         )}
       </div>
@@ -16,7 +16,7 @@ class ReviewsList extends React.Component {
   }
 }
 const mapStateToProps = (state) => ({
-  reviews: state.reviews,
+  loadedReviews: state.loadedReviews,
 });
 
 export default connect(mapStateToProps)(ReviewsList);

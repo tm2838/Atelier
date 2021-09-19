@@ -4,6 +4,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import fetchReviews from '../../actions/fetchReviews';
+import { changeLoadedReviews, changeRemainingReviews } from '../../actions/productReviews/changeReviews';
 
 import Ratings from './ratings.jsx';
 import ReviewsList from './reviewsList.jsx';
@@ -13,15 +14,24 @@ import SortingDropdown from './sortingDropdown.jsx';
 import CSS from './productReviews.module.css';
 
 class ProductReviews extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       isAddReviewModalOpen: false,
+      isLoadingMoreReviews: false,
     };
+    this.onLoadReviews = this.onLoadReviews.bind(this);
   }
 
   componentDidMount() {
     this.props.handleFetchReviews();
+  }
+
+  onLoadReviews() {
+    this.setState({ isLoadingMoreReviews: true });
+    const loadedReviews = this.props.loadedReviews.concat(this.props.remainingReviews.slice(0, 2));
+    const remainingReviews = this.props.reviews.filter((review) => !loadedReviews.includes(review));
+    this.props.handleLoadReviews(loadedReviews, remainingReviews);
   }
 
   render() {
@@ -34,8 +44,10 @@ class ProductReviews extends React.Component {
           <div>
             <SortingDropdown />
             <ReviewsList />
-            <ReviewButtons onAddReview={
-              () => { this.setState({ isAddReviewModalOpen: true }); }}/>
+            <ReviewButtons
+              onLoadReviews={this.onLoadReviews}
+              onAddReview={() => { this.setState({ isAddReviewModalOpen: true }); }}
+            />
           </div>
           <div>{''}</div>
         </div>
@@ -49,10 +61,20 @@ class ProductReviews extends React.Component {
   }
 }
 
+const mapStateToProps = (state) => ({
+  reviews: state.reviews,
+  loadedReviews: state.loadedReviews,
+  remainingReviews: state.remainingReviews,
+});
+
 const mapDispatchToProps = (dispatch) => ({
   handleFetchReviews: () => {
     dispatch(fetchReviews());
   },
+  handleLoadReviews: (loadedReviews, remainingReviews) => {
+    dispatch(changeLoadedReviews(loadedReviews));
+    dispatch(changeRemainingReviews(remainingReviews));
+  },
 });
 
-export default connect(null, mapDispatchToProps)(ProductReviews);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductReviews);

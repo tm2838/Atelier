@@ -11,6 +11,8 @@ const testStore = createStore(
     styleList: testProduct[0].styles.results,
     reviews: testReview.reviews,
     reviewMeta: testReview.reviewMeta,
+    loadedReviews: testReview.reviews.slice(0, 2),
+    remainingReviews: [testReview.reviews[2]],
   },
   applyMiddleware(thunk),
 );
