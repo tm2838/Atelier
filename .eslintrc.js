@@ -7,4 +7,9 @@ module.exports = {
     jest: true,
   },
   ignorePatterns: ['bundle.js'],
+  settings: {
+    react: {
+      version: 'detect',
+    },
+  },
 };

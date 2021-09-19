@@ -7,9 +7,9 @@ const ProductName = (props) => (
     <span className='product product-name'>{props.name}</span>
     {
       (props.sale)
-        ? <><span className='product price' style={{ textDecorationLine: 'line-through', textDecorationStyle: 'solid' }}>${props.price}</span>
+        ? <><span className='product-price' style={{ textDecorationLine: 'line-through', textDecorationStyle: 'solid' }}>${props.price}</span>
         <span className='product-sale' style={{ color: 'red' }}>{props.sale}</span></>
-        : <span className='product price'>${props.price}</span>
+        : <span className='product-price'>${props.price}</span>
     }
   </div>
 );

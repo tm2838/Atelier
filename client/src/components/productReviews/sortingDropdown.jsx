@@ -22,7 +22,7 @@ class SortingDropdown extends React.Component {
     return (
       <div>
         <div>{this.props.reviews.length} reviews, sorted by
-          <select className={CSS['sort-dropdown']} onChange={this.handleSortChange} defaultValue={this.state.sortedBy}>
+          <select data-testId='select' className={CSS['sort-dropdown']} onChange={this.handleSortChange} defaultValue={this.state.sortedBy}>
             {this.sortingOptions.map(
               (opt) => <option key={opt} value={opt}>
                 {opt}
