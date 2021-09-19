@@ -1,15 +1,53 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
 
 // shows onClick star icon
 const Modal = (props) => {
   const { comparedProduct, currentProduct } = props;
+  const features = {};
+  if (comparedProduct.product !== undefined && comparedProduct.product.features !== undefined) {
+    // eslint-disable-next-line no-plusplus
+    for (let i = 0; i < currentProduct.features.length; i++) {
+      if (currentProduct.features[i].value === true) {
+        currentProduct.features[i].value = <FontAwesomeIcon icon={'faCheck'} />;
+      } else if (currentProduct.features[i].value === false) {
+        currentProduct.features[i].value = '';
+      }
+      features[currentProduct.features[i].feature] = {
+        currentProduct: currentProduct.features[i].value,
+      };
+    }
+    // eslint-disable-next-line no-plusplus
+    for (let j = 0; j < comparedProduct.product.features.length; j++) {
+      if (comparedProduct.product.features[j].value === true) {
+        comparedProduct.product.features[j].value = <FontAwesomeIcon icon={'faCheck'} />;
+      } else if (comparedProduct.product.features[j].value === false) {
+        comparedProduct.product.features[j].value = '';
+      }
+      features[comparedProduct.product.features[j].feature] = {
+        comparedProduct: comparedProduct.product.features[j].value,
+      };
+    }
+  }
+
+  const keys = Object.keys(features);
+  // eslint-disable-next-line react/jsx-key
+  const rows = keys.map((key) => (
+      // eslint-disable-next-line react/jsx-key
+      <tr className='features'>
+        <td className='check'>{features[key].currentProduct}</td>
+        <td>{key}</td>
+        <td className='check'>{features[key].comparedProduct}</td>
+      </tr>
+  ));
+
   if (props.showModal === false) {
     return null;
   }
   return (
     <div className='modal' onClick={ () => props.onClickCloseModal() }>
-      <p className='categoryFont'>COMPARING</p>
+      <p style={{ fontSize: '0.8em' }}>COMPARING</p>
       <table>
         <thead>
           <tr>
@@ -19,46 +57,7 @@ const Modal = (props) => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td className='check'>1</td>
-            <td className='categoryFont'>GMO and Pesticide-free</td>
-            <td className='check'>2</td>
-          </tr>
-          <tr>
-            <td className='check'>1</td>
-            <td className='categoryFont'>Made with 100% Genetic Modification</td>
-            <td className='check'>2</td>
-          </tr>
-          <tr>
-            <td className='check'>1</td>
-            <td className='categoryFont'>This is made up</td>
-            <td className='check'>2</td>
-          </tr>
-          <tr>
-            <td className='check'>1</td>
-            <td className='categoryFont'>It doesn&apos;t matter</td>
-            <td className='check'>2</td>
-          </tr>
-          <tr>
-            <td className='check'>1</td>
-            <td className='categoryFont'>Feature description</td>
-            <td className='check'>2</td>
-          </tr>
-          <tr>
-            <td className='check'>1</td>
-            <td className='categoryFont'>Uses React Hooks and Redux</td>
-            <td className='check'>2</td>
-          </tr>
-          <tr>
-            <td className='check'>1</td>
-            <td className='categoryFont'>Angular</td>
-            <td className='check'>2</td>
-          </tr>
-          <tr>
-            <td className='check'>1</td>
-            <td className='categoryFont'>Some other product comparison metric</td>
-            <td className='check'>2</td>
-          </tr>
+          { rows }
         </tbody>
       </table>
     </div>

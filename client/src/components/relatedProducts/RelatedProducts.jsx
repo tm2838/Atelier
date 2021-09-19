@@ -12,9 +12,7 @@ class RelatedProducts extends React.Component {
       relatedProducts: [],
       showModal: false,
       comparedProduct: {
-        product: {
-          name: '',
-        },
+        product: {},
         styles: {},
       },
     };
@@ -30,7 +28,10 @@ class RelatedProducts extends React.Component {
         this.setState((prevState) => ({
           ...prevState,
           relatedProducts,
-          comparedProduct: {},
+          comparedProduct: {
+            name: '',
+            features: [],
+          },
         }));
       })
       .catch((err) => {
@@ -39,7 +40,6 @@ class RelatedProducts extends React.Component {
   }
 
   onClickStar(product) {
-    console.log(this.props);
     this.setState((prevState) => ({
       ...prevState,
       showModal: true,

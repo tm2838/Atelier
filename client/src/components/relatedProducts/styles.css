@@ -31,6 +31,8 @@ div {
 .modal {
   position: absolute;
   z-index: 2;
+  max-height: 50vh;
+  overflow-y: auto;
   top: 85%;
   margin: 0% 25%;
   background-color: whitesmoke;
@@ -38,10 +40,6 @@ div {
   padding: 1.5% 2% 2.5%;
 }
 
-.categoryFont {
-  font-size: 0.75em;
-}
-
-.check {
+.features {
   text-align: center;
 }
