@@ -33,7 +33,7 @@ afterAll(() => {
   );
 });
 
-test('renders product info', () => {
+test('renders styles list', () => {
   const { getByTestId } = render(<Provider store={testStore}>
     <StyleList />
     </Provider>);

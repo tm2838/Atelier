@@ -6,6 +6,7 @@ const ImageNavButton = (props) => (
     <div>
       <FontAwesomeIcon
         className='gallery-nav'
+        data-testid={props.direction}
         icon={props.icon}
         size='2x'
         onClick={() => props.onClick(props.direction)} />
