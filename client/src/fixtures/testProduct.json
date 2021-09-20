@@ -36,6 +36,18 @@
             {
               "thumbnail_url": "another-fake-thumbnail-url",
               "url": "another-fake-url"
+            },
+            {
+              "thumbnail_url": "third-fake-thumbnail-url",
+              "url": "third-fake-url"
+            },
+            {
+              "thumbnail_url": "fourth-fake-thumbnail-url",
+              "url": "fourth-fake-url"
+            },
+            {
+              "thumbnail_url": "fifth-fake-thumbnail-url",
+              "url": "fifth-fake-url"
             }
           ],
           "sale_price": null,

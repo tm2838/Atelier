@@ -5,17 +5,25 @@ import StarRating from '../common/starRating.jsx';
 import './styles.css';
 
 const ProductCard = (props) => {
-  const { product } = props.product;
+  const styles = props.product.styles.results;
+  let photo = '';
+  for (let i = 0; i < styles.length; i += 1) {
+    if (styles[i]['default?'] === true) {
+      photo = styles[i].photos[0].thumbnail_url;
+    }
+  }
   const { category, name } = props.product.product;
   return (
     <div className='card'>
-      <Button type={ props.type }
-        product={ props.product }
-        onClickStar={ props.onClickStar }
-        onClickCircleX={ props.onClickCircleX }
-      />
-      <img src='' alt={ product.name } />
-      <div className='container'>
+      <div className='image' style={{ backgroundImage: `url(${photo})`, size: 'cover', repeat: 'no-repeat' }}>
+        <Button type={ props.type }
+          product={ props.product }
+          onClickStar={ props.onClickStar }
+          onClickCircleX={ props.onClickCircleX }
+        />
+        {!photo ? props.product.product.name : ''}
+      </div>
+      <div>
         <p>{category.toUpperCase()}</p>
         <p><b>{name}</b></p>
         {/* 3. price for default style
