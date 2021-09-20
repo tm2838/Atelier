@@ -5,30 +5,83 @@ import StarRating from '../common/starRating.jsx';
 import './styles.css';
 
 const ProductCard = (props) => {
+  const relatedProduct = props.product.product;
   const styles = props.product.styles.results;
+  const { name } = relatedProduct;
+  const category = relatedProduct.category.toUpperCase();
+  let defaultStyle = false;
   let photo = '';
+  let price = '';
   for (let i = 0; i < styles.length; i += 1) {
     if (styles[i]['default?'] === true) {
-      photo = styles[i].photos[0].thumbnail_url;
+      defaultStyle = true;
+      if (styles[i].photos[0].thumbnail_url !== null) {
+        photo = <div className='image' style={{ backgroundImage: `url(${styles[i].photos[0].thumbnail_url})`, size: 'cover', repeat: 'no-repeat' }}>
+            <Button type={ props.type }
+              product={ props.product }
+              onClickStar={ props.onClickStar }
+              onClickCircleX={ props.onClickCircleX }
+            />
+          </div>;
+      } else {
+        photo = <div className='image'>
+          <Button type={ props.type }
+              product={ props.product }
+              onClickStar={ props.onClickStar }
+              onClickCircleX={ props.onClickCircleX }
+            />
+          { name }
+        </div>;
+      }
+      if (styles[i].sale_price !== null) {
+        price = (
+          <p>
+            <span style={{ color: 'red' }}>${styles[i].sale_price}</span>
+            <span style={{ textDecorationLine: 'line-through' }}>${relatedProduct.default_price}</span>
+          </p>
+        );
+      } else {
+        price = <p><span>${relatedProduct.default_price}</span></p>;
+      }
     }
   }
-  const { category, name } = props.product.product;
+  if (defaultStyle === false) {
+    if (styles[0].photos[0].thumbnail_url !== null) {
+      photo = <div className='image' style={{ backgroundImage: `url(${styles[0].photos[0].thumbnail_url})`, size: 'cover', repeat: 'no-repeat' }}>
+          <Button type={ props.type }
+            product={ props.product }
+            onClickStar={ props.onClickStar }
+            onClickCircleX={ props.onClickCircleX }
+          />
+        </div>;
+    } else {
+      photo = <div className='image'>
+          <Button type={ props.type }
+              product={ props.product }
+              onClickStar={ props.onClickStar }
+              onClickCircleX={ props.onClickCircleX }
+            />
+          { name }
+        </div>;
+    }
+    if (styles[0].sale_price !== null) {
+      price = (
+        <p>
+          <span style={{ color: 'red' }}>${styles[0].sale_price}</span>
+          <span style={{ textDecoration: 'strikethrough' }}>${relatedProduct.default_price}</span>
+        </p>);
+    } else {
+      price = <p><span>${relatedProduct.default_price}</span></p>;
+    }
+  }
+
   return (
     <div className='card'>
-      <div className='image' style={{ backgroundImage: `url(${photo})`, size: 'cover', repeat: 'no-repeat' }}>
-        <Button type={ props.type }
-          product={ props.product }
-          onClickStar={ props.onClickStar }
-          onClickCircleX={ props.onClickCircleX }
-        />
-        {!photo ? props.product.product.name : ''}
-      </div>
+      { photo }
       <div>
-        <p>{category.toUpperCase()}</p>
-        <p><b>{name}</b></p>
-        {/* 3. price for default style
-          if on sale, sale price in red followed by orig. price w/ strikethrough */}
-        <p>{props.product.product.default_price}</p>
+        <p>{ category }</p>
+        <p><b>{ name }</b></p>
+        { price }
         <StarRating />
       </div>
     </div>
