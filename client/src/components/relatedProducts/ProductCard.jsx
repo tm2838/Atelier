@@ -6,7 +6,6 @@ import './styles.css';
 
 const ProductCard = (props) => {
   const relatedProduct = props.product.product;
-  console.log(relatedProduct);
   const styles = props.product.styles.results;
   const { name } = relatedProduct;
   const category = relatedProduct.category.toUpperCase();
