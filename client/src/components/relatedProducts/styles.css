@@ -33,6 +33,21 @@ div {
 
 /* position button */
 .icon {
-  z-index: 1;
   margin: 5% 0 0 85%;
+}
+
+.modal {
+  position: absolute;
+  z-index: 2;
+  max-height: 50vh;
+  overflow-y: auto;
+  top: 85%;
+  margin: 0% 25%;
+  background-color: whitesmoke;
+  border: 1px solid black;
+  padding: 1.5% 2% 2.5%;
+}
+
+.features {
+  text-align: center;
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import ProductCard from './ProductCard.jsx';
 import Modal from './Modal.jsx';
 
@@ -31,7 +32,10 @@ class RelatedProducts extends React.Component {
         this.setState((prevState) => ({
           ...prevState,
           relatedProducts,
-          comparedProduct: {},
+          comparedProduct: {
+            name: '',
+            features: [],
+          },
         }));
       })
       .catch((err) => {
@@ -63,6 +67,7 @@ class RelatedProducts extends React.Component {
       }
       <Modal showModal= { this.state.showModal }
         comparedProduct={ this.state.comparedProduct }
+        currentProduct={ this.props.currentProduct }
         onClickCloseModal={ this.onClickCloseModal } />
       </div>
     );
@@ -70,5 +75,9 @@ class RelatedProducts extends React.Component {
 }
 
 const mapStateToProps = (state) => ({ currentProduct: state.currentProduct });
+
+RelatedProducts.propTypes = {
+  currentProduct: PropTypes.object,
+};
 
 export default connect(mapStateToProps)(RelatedProducts);
