@@ -6,6 +6,8 @@ const {
   getReviewMeta,
   getRatingScore,
   getRecommendationMetric,
+  addNewestTag,
+  addRelevanceTag,
 } = require('./reviews');
 const { getRelatedProducts } = require('./relatedProducts');
 
@@ -47,7 +49,11 @@ app.get('/reviews', (req, res) => {
   const id = req.query.product_id || 47421;
   const response = {};
   getReviews(id)
-    .then((data) => { response.reviews = data.data.results; })
+    .then((data) => {
+      let reviews = addNewestTag(data.data.results);
+      reviews = addRelevanceTag(reviews);
+      response.reviews = reviews;
+    })
     .then(() => getReviewMeta(id))
     .then((data) => {
       const reviewMeta = data.data;

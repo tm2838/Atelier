@@ -1,8 +1,28 @@
+/* eslint-disable no-param-reassign */
 const axios = require('axios');
 require('dotenv').config(); // allow server to read .env for environmental variables
 
 const reviewUrl = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews';
 const apiKey = process.env.API_KEY;
+
+const addNewestTag = (reviews) => {
+  // higher number indicates more recent
+  const sorted = reviews.slice();
+  const updatedReviews = reviews.slice();
+  sorted.sort((a, b) => new Date(a.date) - new Date(b.date));
+  updatedReviews.forEach((review) => { review.newest = sorted.indexOf(review) + 1; });
+  return updatedReviews;
+};
+
+const addRelevanceTag = (reviews) => {
+  // higher number indicates more relevant
+  const updatedReviews = reviews.slice();
+  updatedReviews.forEach(
+    (review) => { review.relevant = review.helpfulness * 0.6 + review.newest * 0.4; },
+  );
+  updatedReviews.sort((a, b) => b.relevant - a.relevant);
+  return updatedReviews;
+};
 
 const getReviews = (id) => axios.get(reviewUrl, {
   headers: { Authorization: apiKey },
@@ -39,4 +59,6 @@ module.exports = {
   getReviewMeta,
   getRatingScore,
   getRecommendationMetric,
+  addNewestTag,
+  addRelevanceTag,
 };
