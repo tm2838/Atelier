@@ -46,7 +46,7 @@ class Outfit extends React.Component {
   // eslint-disable-next-line class-methods-use-this
   render() {
     return (
-      <div>
+      <div className='outfit'>
         <div>YOUR OUTFIT</div>
         <div className='card'>
           <h4>Add to Outfit</h4>
