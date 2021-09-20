@@ -1,5 +1,7 @@
 import { combineReducers } from 'redux';
 import reviews from './productReviews/reviewsReducer';
+import loadedReviews from './productReviews/loadedReviewsReducer';
+import remainingReviews from './productReviews/remainingReviewsReducer';
 import reviewMeta from './productReviews/reviewMetaReducer';
 import currentProduct from './productOverview/currentProduct';
 import styleList from './productOverview/styleList';
@@ -12,4 +14,6 @@ export default combineReducers({
   currentStyle,
   reviews,
   reviewMeta,
+  loadedReviews,
+  remainingReviews,
 });

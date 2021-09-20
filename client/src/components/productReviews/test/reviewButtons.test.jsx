@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
+import { render, fireEvent, waitfor } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
@@ -12,7 +12,7 @@ import testStore from '../../../fixtures/testStore';
 import ReviewButtons from '../reviewButtons.jsx';
 import '../../common/fontAwesomeIcons';
 
-describe('reviewButtons', () => {
+describe.only('reviewButtons', () => {
   beforeEach(() => {
     fetchMock.mockIf('http://127.0.0.1:3000', (req) => {
       if (req.url.endsWith('/reviews')) {
@@ -28,44 +28,42 @@ describe('reviewButtons', () => {
   });
 
   it('should have a more review button when there are more than two reviews', () => {
-    const { getByRole } = render(
+    const { findByRole, getByRole } = render(
       <Provider store={testStore}>
-      <ReviewButtons reviews={testReview} onAddReview={() => {}}/>
+        <ReviewButtons onLoadReview={() => {}} onAddReview={() => {}}/>
       </Provider>,
     );
 
-    expect(getByRole('button', { name: /more reviews/i })).toBeTruthy();
+    expect(findByRole('button', { name: /more reviews/i })).toBeTruthy();
     expect(getByRole('button', { name: /add a review/i })).toBeTruthy();
   });
 
-  it('should not have a more review button when there are less than two reviews', () => {
+  it('should not have a more review button when there are no unloaded reviews', () => {
     const newTestStore = createStore(
       rootReducer,
       {
-        reviews: testReview.reviews[0],
-        reviewMeta: testReview.reviewMeta,
+        remainingReviews: [],
       },
       applyMiddleware(thunk),
     );
     const { queryByRole, getByRole } = render(
       <Provider store={newTestStore}>
-        <ReviewButtons reviews={testReview} onAddReview={() => {}}/>
+        <ReviewButtons onLoadReview={() => {}} onAddReview={() => {}}/>
       </Provider>,
     );
-
     expect(queryByRole('button', { name: /more reviews/i })).toBeFalsy();
     expect(getByRole('button', { name: /add a review/i })).toBeTruthy();
   });
 
-  it('should pop up a write new review modal when a button is clicked', () => {
+  it('should pop up a modal when the "add a review" button is clicked', () => {
     const onAddReview = jest.fn();
-    const { getByRole, getByText } = render(
+    const { getByRole } = render(
       <Provider store={testStore}>
-        <ReviewButtons reviews={testReview} onAddReview={onAddReview}/>
+        <ReviewButtons onLoadReview={() => {}} onAddReview={onAddReview}/>
       </Provider>,
     );
 
-    fireEvent.click(getByText(/add a review/i));
+    fireEvent.click(getByRole('button', { name: /add a review/i }));
     expect(onAddReview).toHaveBeenCalledTimes(1);
   });
 });
