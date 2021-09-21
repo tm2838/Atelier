@@ -35,13 +35,13 @@ const ProductCard = (props) => {
       }
       if (styles[i].sale_price !== null) {
         price = (
-          <p>
+          <p className='cardInfo'>
             <span style={{ color: 'red' }}>${styles[i].sale_price}</span>
             <span style={{ textDecorationLine: 'line-through' }}>${relatedProduct.default_price}</span>
           </p>
         );
       } else {
-        price = <p><span>${relatedProduct.default_price}</span></p>;
+        price = <p className='cardInfo'><span>${relatedProduct.default_price}</span></p>;
       }
     }
   }
@@ -66,24 +66,22 @@ const ProductCard = (props) => {
     }
     if (styles[0].sale_price !== null) {
       price = (
-        <p>
+        <p className='cardInfo'>
           <span style={{ color: 'red' }}>${styles[0].sale_price}</span>
           <span style={{ textDecoration: 'strikethrough' }}>${relatedProduct.default_price}</span>
         </p>);
     } else {
-      price = <p><span>${relatedProduct.default_price}</span></p>;
+      price = <p className='cardInfo'><span>${relatedProduct.default_price}</span></p>;
     }
   }
 
   return (
     <div className='card'>
       { photo }
-      <div>
-        <p>{ category }</p>
-        <p><b>{ name }</b></p>
+      <p className='cardInfo'>{ category }</p>
+      <p className='cardInfo'><b>{ name }</b></p>
         { price }
         <StarRating />
-      </div>
     </div>
   );
 };
