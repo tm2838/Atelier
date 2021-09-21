@@ -8,6 +8,7 @@ const {
   getRecommendationMetric,
   addNewestTag,
   addRelevanceTag,
+  getTotalReviews,
 } = require('./reviews');
 const { getRelatedProducts } = require('./relatedProducts');
 
@@ -59,6 +60,7 @@ app.get('/reviews', (req, res) => {
       const reviewMeta = data.data;
       reviewMeta.ratingScore = getRatingScore(reviewMeta.ratings);
       reviewMeta.recommendationRate = getRecommendationMetric(reviewMeta.recommended);
+      reviewMeta.totalReviews = getTotalReviews(reviewMeta.ratings);
       response.reviewMeta = reviewMeta;
     })
     .then(() => {

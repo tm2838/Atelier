@@ -18,7 +18,7 @@ const Ratings = (props) => (
             </div>
           )}
           {props.reviewMeta.recommendationRate && (
-            <div className={CSS['rating-recommendation']}>{props.reviewMeta.recommendationRate}%
+            <div className={CSS['rating-recommendation']}>{props.reviewMeta.recommendationRate !== 'NaN' ? props.reviewMeta.recommendationRate : 0}%
             of reviews recommend this product</div>
           )}
           <StarBreakdown />
