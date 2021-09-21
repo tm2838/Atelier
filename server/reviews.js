@@ -54,6 +54,10 @@ const getRecommendationMetric = (recommended) => {
   return (recommendationRate * 100).toFixed(2);
 };
 
+const getTotalReviews = (ratings) => Object.values(ratings).reduce(
+  (p, c) => parseInt(p, 10) + parseInt(c, 10),
+);
+
 module.exports = {
   getReviews,
   getReviewMeta,
@@ -61,4 +65,5 @@ module.exports = {
   getRecommendationMetric,
   addNewestTag,
   addRelevanceTag,
+  getTotalReviews,
 };

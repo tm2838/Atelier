@@ -8,6 +8,7 @@ const {
   getRecommendationMetric,
   addNewestTag,
   addRelevanceTag,
+  getTotalReviews,
 } = require('./reviews');
 const { getRelatedProducts } = require('./relatedProducts');
 
@@ -46,7 +47,7 @@ app.get('/products/:id?', (req, res) => { // added optional id param to route
 
 app.get('/reviews', (req, res) => {
   // using 47421 for now since 47426 doesn't have any reviews
-  const id = req.query.product_id || 47421;
+  const id = req.query.product_id || 47425;
   const response = {};
   getReviews(id)
     .then((data) => {
@@ -59,6 +60,7 @@ app.get('/reviews', (req, res) => {
       const reviewMeta = data.data;
       reviewMeta.ratingScore = getRatingScore(reviewMeta.ratings);
       reviewMeta.recommendationRate = getRecommendationMetric(reviewMeta.recommended);
+      reviewMeta.totalReviews = getTotalReviews(reviewMeta.ratings);
       response.reviewMeta = reviewMeta;
     })
     .then(() => {
