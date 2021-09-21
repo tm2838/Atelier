@@ -72,7 +72,7 @@ class StarBreakdown extends React.Component {
             </div>
           </div>
           {this.props.filters.length > 0
-            && <div>Filters Applied: {this.props.filters.map((filter) => `${filter} stars `)}</div>
+            && <div style={{ fontStyle: 'italic', color: '#92a4b3' }}>Filters Applied: {this.props.filters.map((filter) => `${filter} stars `)}</div>
           }
           </>
         }
