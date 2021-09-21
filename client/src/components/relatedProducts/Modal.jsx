@@ -8,14 +8,12 @@ const Modal = (props) => {
   const { comparedProduct, currentProduct } = props;
   const features = {};
   if (comparedProduct.product !== undefined && comparedProduct.product.features !== undefined) {
-    // eslint-disable-next-line no-plusplus
-    for (let i = 0; i < currentProduct.features.length; i++) {
+    for (let i = 0; i < currentProduct.features.length; i += 1) {
       features[currentProduct.features[i].feature] = {
         currentProduct: currentProduct.features[i].value,
       };
     }
-    // eslint-disable-next-line no-plusplus
-    for (let j = 0; j < comparedProduct.product.features.length; j++) {
+    for (let j = 0; j < comparedProduct.product.features.length; j += 1) {
       if (!features[comparedProduct.product.features[j].feature]) {
         features[comparedProduct.product.features[j].feature] = {
           comparedProduct: comparedProduct.product.features[j].value,
