@@ -19,12 +19,13 @@ class StarBreakdown extends React.Component {
     if (!['1', '2', '3', '4', '5'].includes(rating)) {
       rating = e.target.parentNode.parentNode.className;
     }
-    const filters = [...this.props.filters];
+    let filters = [...this.props.filters];
     if (!filters.includes(rating)) {
       filters.push(rating);
     } else {
       filters.splice(filters.indexOf(rating), 1);
     }
+    filters = filters.filter((filter) => filter);
     let reviews;
     if (filters.length === 0) {
       reviews = this.props.reviews;
@@ -45,6 +46,10 @@ class StarBreakdown extends React.Component {
         { this.props.reviewMeta.ratings
           && <>
           <div className={CSS['star-breakdown']}>
+            <h5>Ratings Breakdown</h5>
+            {this.props.filters.length > 0
+            && <div style={{ fontStyle: 'italic', color: '#92a4b3' }}>Filters Applied: {this.props.filters.map((filter) => `${filter} stars `)}</div>
+            }
             <div style={{ display: 'flex' }} onClick={this.onFilter} className='5'>
               <div style={{ marginRight: '10px' }}>5 Stars</div>
               <StarBreakdownBar barStyle={{ width: `${(this.props.reviewMeta.ratings['5'] / this.props.reviewMeta.totalReviews) * 100 || 0}%` }}/>
@@ -71,9 +76,6 @@ class StarBreakdown extends React.Component {
               <div>{this.props.reviewMeta.ratings['1'] || 0} reviews</div>
             </div>
           </div>
-          {this.props.filters.length > 0
-            && <div style={{ fontStyle: 'italic', color: '#92a4b3' }}>Filters Applied: {this.props.filters.map((filter) => `${filter} stars `)}</div>
-          }
           </>
         }
       </>
