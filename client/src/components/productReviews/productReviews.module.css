@@ -70,6 +70,14 @@
   margin-bottom: 10px;
 }
 
+.star-breakdown-div {
+  display: flex;
+}
+
+.star-breakdown-div:hover {
+  background: linear-gradient(to right, #dbe7f7ff 80%, white 20%);
+}
+
 .star-breakdown-bar-container {
   background-color: #dcdcdc;
   width: 40%;

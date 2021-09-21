@@ -15,9 +15,9 @@ class StarBreakdown extends React.Component {
   }
 
   onFilter(e) {
-    let rating = e.target.parentNode.className;
+    let rating = e.target.parentNode.className.split(' ')[1];
     if (!['1', '2', '3', '4', '5'].includes(rating)) {
-      rating = e.target.parentNode.parentNode.className;
+      [, rating] = e.target.parentNode.parentNode.className.split(' ');
     }
     let filters = [...this.props.filters];
     if (!filters.includes(rating)) {
@@ -50,27 +50,27 @@ class StarBreakdown extends React.Component {
             {this.props.filters.length > 0
             && <div style={{ fontStyle: 'italic', color: '#92a4b3' }}>Filters Applied: {this.props.filters.map((filter) => `${filter} stars `)}</div>
             }
-            <div style={{ display: 'flex' }} onClick={this.onFilter} className='5'>
+            <div onClick={this.onFilter} className={`${CSS['star-breakdown-div']} 5`}>
               <div style={{ marginRight: '10px' }}>5 Stars</div>
               <StarBreakdownBar barStyle={{ width: `${(this.props.reviewMeta.ratings['5'] / this.props.reviewMeta.totalReviews) * 100 || 0}%` }}/>
               <div>{this.props.reviewMeta.ratings['5'] || 0} reviews</div>
             </div>
-            <div style={{ display: 'flex' }} onClick={this.onFilter} className='4'>
+            <div onClick={this.onFilter} className={`${CSS['star-breakdown-div']} 4`}>
               <div style={{ marginRight: '10px' }}>4 Stars</div>
               <StarBreakdownBar barStyle={{ width: `${(this.props.reviewMeta.ratings['4'] / this.props.reviewMeta.totalReviews) * 100 || 0}%` }}/>
               <div>{this.props.reviewMeta.ratings['4'] || 0} reviews</div>
             </div>
-            <div style={{ display: 'flex' }} onClick={this.onFilter} className='3'>
+            <div onClick={this.onFilter} className={`${CSS['star-breakdown-div']} 3`}>
               <div style={{ marginRight: '10px' }}>3 Stars</div>
               <StarBreakdownBar barStyle={{ width: `${(this.props.reviewMeta.ratings['3'] / this.props.reviewMeta.totalReviews) * 100 || 0}%` }}/>
               <div>{this.props.reviewMeta.ratings['3'] || 0} reviews</div>
             </div>
-            <div style={{ display: 'flex' }} onClick={this.onFilter} className='2'>
+            <div onClick={this.onFilter} className={`${CSS['star-breakdown-div']} 2`}>
               <div style={{ marginRight: '10px' }}>2 Stars</div>
               <StarBreakdownBar barStyle={{ width: `${(this.props.reviewMeta.ratings['2'] / this.props.reviewMeta.totalReviews) * 100 || 0}%` }}/>
               <div>{this.props.reviewMeta.ratings['2'] || 0} reviews</div>
             </div>
-            <div style={{ display: 'flex' }} onClick={this.onFilter} className='1'>
+            <div onClick={this.onFilter} className={`${CSS['star-breakdown-div']} 1`}>
               <div style={{ marginRight: '16px' }}>1 Star {' '}</div>
               <StarBreakdownBar barStyle={{ width: `${(this.props.reviewMeta.ratings['1'] / this.props.reviewMeta.totalReviews) * 100 || 0}%` }}/>
               <div>{this.props.reviewMeta.ratings['1'] || 0} reviews</div>
