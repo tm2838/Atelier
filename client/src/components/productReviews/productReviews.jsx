@@ -18,7 +18,6 @@ class ProductReviews extends React.Component {
     super(props);
     this.state = {
       isAddReviewModalOpen: false,
-      isLoadingMoreReviews: false,
     };
     this.onLoadReviews = this.onLoadReviews.bind(this);
   }
@@ -28,9 +27,8 @@ class ProductReviews extends React.Component {
   }
 
   onLoadReviews() {
-    this.setState({ isLoadingMoreReviews: true });
     const loadedReviews = this.props.loadedReviews.concat(this.props.remainingReviews.slice(0, 2));
-    const remainingReviews = this.props.reviews.filter((review) => !loadedReviews.includes(review));
+    const remainingReviews = this.props.remainingReviews.slice(2);
     this.props.handleLoadReviews(loadedReviews, remainingReviews);
   }
 
