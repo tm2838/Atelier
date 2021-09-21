@@ -1,5 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
 import ProductCard from './ProductCard.jsx';
 import Modal from './Modal.jsx';
@@ -60,15 +62,17 @@ class RelatedProducts extends React.Component {
     return (
       <div className='relatedProducts'>
         <div>RELATED PRODUCTS</div>
+        <FontAwesomeIcon className='arrow left' data-testid='left-arrow' icon={ faChevronLeft } />
         {this.state.relatedProducts.map((product) => <ProductCard type={'related'} key={product.product.id}
           product={ product }
           onClickStar={ this.onClickStar }
           />)
-      }
-      <Modal showModal= { this.state.showModal }
-        comparedProduct={ this.state.comparedProduct }
-        currentProduct={ this.props.currentProduct }
-        onClickCloseModal={ this.onClickCloseModal } />
+        }
+        <FontAwesomeIcon className='arrow right' data-testid='right-arrow' icon={ faChevronRight } />
+        <Modal showModal= { this.state.showModal }
+          comparedProduct={ this.state.comparedProduct }
+          currentProduct={ this.props.currentProduct }
+          onClickCloseModal={ this.onClickCloseModal } />
       </div>
     );
   }

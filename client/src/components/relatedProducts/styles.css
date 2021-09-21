@@ -15,6 +15,8 @@ div {
 .card {
   /* Add shadows to create the "card" effect */
   display: inline-block;
+  position: relative;
+  z-index: -1;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
   width: 15%;
@@ -34,6 +36,21 @@ div {
 /* position button */
 .icon {
   margin: 5% 0 0 85%;
+}
+
+.arrow {
+  position: relative;
+  margin: 5% 0;
+  z-index: 1;
+}
+.left {
+  position: relative;
+  margin-left: 5%;
+}
+
+.right {
+  position: relative;
+  margin-right: 5%;
 }
 
 .modal {
