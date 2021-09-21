@@ -12,6 +12,7 @@ class StarBreakdown extends React.Component {
   constructor(props) {
     super(props);
     this.onFilter = this.onFilter.bind(this);
+    this.onRemoveFilter = this.onRemoveFilter.bind(this);
   }
 
   onFilter(e) {
@@ -40,6 +41,13 @@ class StarBreakdown extends React.Component {
     this.props.handleAddFilter(filters);
   }
 
+  onRemoveFilter() {
+    this.props.handleAddFilter([]);
+    const loadedReviews = this.props.reviews.slice(0, this.props.loadedReviews.length || 2);
+    const remainingReviews = this.props.reviews.filter((review) => !loadedReviews.includes(review));
+    this.props.handleFilterReview(loadedReviews, remainingReviews);
+  }
+
   render() {
     return (
       <>
@@ -48,8 +56,20 @@ class StarBreakdown extends React.Component {
           <div className={CSS['star-breakdown']}>
             <h5>Ratings Breakdown</h5>
             {this.props.filters.length > 0
-            && <div style={{ fontStyle: 'italic', color: '#92a4b3' }}>Filters Applied: {this.props.filters.map((filter) => `${filter} stars `)}</div>
-            }
+            && (
+              <>
+              <div style={{ fontStyle: 'italic', color: '#92a4b3' }}>
+                Filters Applied: {this.props.filters.map((filter) => `${filter} stars `)}
+              </div>
+              <div
+                onClick={this.onRemoveFilter}
+                style={{
+                  textDecoration: 'underline', fontStyle: 'italic', color: '#92a4b3', cursor: 'pointer',
+                }}>
+                  Remove Filters
+                </div>
+              </>
+            )}
             <div onClick={this.onFilter} className={`${CSS['star-breakdown-div']} 5`}>
               <div style={{ marginRight: '10px' }}>5 Stars</div>
               <StarBreakdownBar barStyle={{ width: `${(this.props.reviewMeta.ratings['5'] / this.props.reviewMeta.totalReviews) * 100 || 0}%` }}/>
