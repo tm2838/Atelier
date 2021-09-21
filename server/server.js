@@ -11,7 +11,7 @@ const { getRelatedProducts } = require('./relatedProducts');
 
 const app = express();
 
-app.use(express.static(path.join(__dirname, '/../client/dist')));
+app.use('/product/:id', express.static(path.join(__dirname, '/../client/dist')));
 
 // middleware that helps the client pass CORS policy and request resources from server
 app.use((req, res, next) => {
