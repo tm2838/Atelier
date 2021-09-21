@@ -41,7 +41,7 @@ class ProductReviews extends React.Component {
           <Ratings />
           <div>
             <SortingDropdown />
-            <ReviewsList />
+            {this.props.loadedReviews.length > 0 && <ReviewsList />}
             <ReviewButtons
               onLoadReviews={this.onLoadReviews}
               onAddReview={() => { this.setState({ isAddReviewModalOpen: true }); }}

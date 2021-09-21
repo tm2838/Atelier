@@ -25,24 +25,26 @@ class StarBreakdown extends React.Component {
     } else {
       filters.splice(filters.indexOf(rating), 1);
     }
-    console.log(filters);
-    const reviews = this.props.reviews.filter(
-      (review) => filters.includes(review.rating.toString()),
-    );
-    console.log('reviews', reviews);
-    const loadedReviews = reviews.slice(0, this.props.loadedReviews.length);
+    let reviews;
+    if (filters.length === 0) {
+      reviews = this.props.reviews;
+    } else {
+      reviews = this.props.reviews.filter(
+        (review) => filters.includes(review.rating.toString()),
+      );
+    }
+    const loadedReviews = reviews.slice(0, this.props.loadedReviews.length || 2);
     const remainingReviews = reviews.filter((review) => !loadedReviews.includes(review));
     this.props.handleFilterReview(loadedReviews, remainingReviews);
     this.props.handleAddFilter(filters);
-    console.log('remaining', this.props.remainingReviews);
   }
 
   render() {
-    console.log(this.props.reviewMeta.totalReviews);
     return (
       <>
         { this.props.reviewMeta.ratings
-          && <div className={CSS['star-breakdown']}>
+          && <>
+          <div className={CSS['star-breakdown']}>
             <div style={{ display: 'flex' }} onClick={this.onFilter} className='5'>
               <div style={{ marginRight: '10px' }}>5 Stars</div>
               <StarBreakdownBar barStyle={{ width: `${(this.props.reviewMeta.ratings['5'] / this.props.reviewMeta.totalReviews) * 100 || 0}%` }}/>
@@ -69,6 +71,10 @@ class StarBreakdown extends React.Component {
               <div>{this.props.reviewMeta.ratings['1'] || 0} reviews</div>
             </div>
           </div>
+          {this.props.filters.length > 0
+            && <div>Filters Applied: {this.props.filters.map((filter) => `${filter} stars `)}</div>
+          }
+          </>
         }
       </>
     );
