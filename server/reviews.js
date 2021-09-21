@@ -26,7 +26,7 @@ const addRelevanceTag = (reviews) => {
 
 const getReviews = (id) => axios.get(reviewUrl, {
   headers: { Authorization: apiKey },
-  params: { product_id: id },
+  params: { product_id: id, count: 100, page: 1 },
 });
 
 const getReviewMeta = (id) => axios.get(`${reviewUrl}/meta`, {

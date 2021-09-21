@@ -70,6 +70,15 @@
   margin-bottom: 10px;
 }
 
+.star-breakdown-bar-container {
+  background-color: #dcdcdc;
+  width: 40%;
+  height: 10px;
+  z-index: 100;
+  margin-right: 10px;
+  margin-top: 5px;
+}
+
 .product-breakdown {
   margin-top: 10px;
 }
