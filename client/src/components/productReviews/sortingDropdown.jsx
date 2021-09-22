@@ -27,7 +27,7 @@ class SortingDropdown extends React.Component {
     } else {
       reviews = sortRelevant(this.props.reviews);
     }
-    const loadedReviews = reviews.slice(0, this.props.loadedReviews.length);
+    const loadedReviews = reviews.slice(0, this.props.loadedReviews.length || 2);
     const remainingReviews = reviews.filter((review) => !loadedReviews.includes(review));
     this.props.handleSortChange(loadedReviews, remainingReviews);
   }

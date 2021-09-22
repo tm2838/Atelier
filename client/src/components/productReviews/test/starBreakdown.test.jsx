@@ -12,10 +12,10 @@ describe('starBreakdown', () => {
       </Provider>,
     );
 
-    expect(getByText(/1 Star: ------- 3 reviews/)).toBeTruthy();
-    expect(getByText(/4 Stars: ------- 6 reviews/)).toBeTruthy();
-    expect(getByText(/5 Stars: ------- 5 reviews/)).toBeTruthy();
-    expect(getByText(/2 Stars: ------- 0 reviews/)).toBeTruthy();
-    expect(getByText(/3 Stars: ------- 0 reviews/)).toBeTruthy();
+    expect(getByText(/1 Star/)).toBeTruthy();
+    expect(getByText(/4 Stars/)).toBeTruthy();
+    expect(getByText(/5 Stars/)).toBeTruthy();
+    expect(getByText(/2 Stars/)).toBeTruthy();
+    expect(getByText(/3 Stars/)).toBeTruthy();
   });
 });
