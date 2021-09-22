@@ -7,17 +7,37 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from '../../../reducers/rootReducer';
 import RelatedProducts from '../RelatedProducts.jsx';
-import relatedProductsTestData from './relatedProductsTestData.json';
+import relatedProducts from './relatedProductsTestData.json';
 
 describe('relatedProducts', () => {
   beforeEach(() => {
     fetchMock.mockIf('http://127.0.0.1:3000', (req) => {
       if (req.url.endsWith('/relatedProducts')) {
-        return relatedProductsTestData;
+        // return relatedProducts;
+        RelatedProducts.setState({
+          relatedProducts,
+        });
       }
       return {};
     });
   });
+  // beforeEach(() => {
+  //   // if you have an existing `beforeEach` just add the following lines to it
+  //   fetchMock.mockIf(/^https?:\/\/example.com.*$/, req => {
+  //     if (req.url.endsWith('/path1')) {
+  //       return 'some response body'
+  //     } else if (req.url.endsWith('/path2')) {
+  //       return {
+  //         body: 'another response body',
+  //         headers: {
+  //           'X-Some-Response-Header': 'Some header value'
+  //         }
+  //       }
+  //     } else {
+  //       return {
+  //         status: 404,
+  //         body: 'Not Found'
+  //       }
 
   afterEach(() => {
     fetchMock.resetMocks();
@@ -48,15 +68,15 @@ describe('relatedProducts', () => {
       expect(queryAllByTestId('left-arrow')).toHaveLength(0);
     });
 
-  // it('should render right arrow when first related product displayed is at index 0',
-  //   () => {
-  //     const { getByTestId } = render(
-  //       <Provider store={testStore}>
-  //         <RelatedProducts />
-  //       </Provider>,
-  //     );
-  //     expect(getByTestId('right-arrow')).toBeInTheDocument();
-  //   });
+  it('should render right arrow when first related product displayed is at index 0',
+    () => {
+      const { getByTestId } = render(
+        <Provider store={testStore}>
+          <RelatedProducts />
+        </Provider>,
+      );
+      expect(getByTestId('right-arrow')).toBeInTheDocument();
+    });
 
   // it('should render left arrow when first related product displayed is at index 1',
   //   () => {
