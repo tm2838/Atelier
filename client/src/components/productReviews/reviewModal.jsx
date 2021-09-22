@@ -3,6 +3,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import CSS from './productReviews.module.css';
+import CharRating from './reviewModalCharRating.jsx';
 
 class ReviewModal extends React.Component {
   constructor(props) {
@@ -25,8 +26,37 @@ class ReviewModal extends React.Component {
             <div className={CSS['review-modal-input']}>
               <label>
                 <div required>Do you recommend this product? * </div>
-                <input type='radio' value='yes'/>Yes
-                <input type='radio' value='no'/>No
+                <input type='radio' value='yes' name='recommend'/>Yes
+                <input type='radio' value='no' name='recommend'/>No
+              </label>
+            </div>
+            <div className={CSS['review-modal-input']}>
+              <label>
+                <div required>Please rate each characteristic * </div>
+                <CharRating
+                  characteristic='Size'
+                  options={['A size too small', '1⁄2 a size too small', 'Perfect', '1⁄2 a size too big', 'A size too wide']}
+                />
+                <CharRating
+                  characteristic='Width'
+                  options={['Too narrow', 'Slightly narrow', 'Perfect', 'Slightly wide', 'Too wide']}
+                />
+                <CharRating
+                  characteristic='Comfort'
+                  options={['Uncomfortable', 'Slightly uncomfortable', 'OK', 'Comfortable', 'Perfect']}
+                />
+                <CharRating
+                  characteristic='Quality'
+                  options={['Poor', 'Below average', 'What I expected', 'Pretty great', 'Perfect']}
+                />
+                <CharRating
+                  characteristic='Length'
+                  options={['Runs Short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long']}
+                />
+                <CharRating
+                  characteristic='Fit'
+                  options={['Runs Tight', 'Runs slightly tight', 'Perfect', 'Runs slightly long', 'Runs long']}
+                />
               </label>
             </div>
             <div className={CSS['review-modal-input']}>
