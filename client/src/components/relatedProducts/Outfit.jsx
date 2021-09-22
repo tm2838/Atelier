@@ -12,10 +12,16 @@ class Outfit extends React.Component {
       outfitProducts: [],
       index: 0,
     };
+    this.onClickCard = this.onClickCard.bind(this);
     this.onClickPlus = this.onClickPlus.bind(this);
     this.onClickCircleX = this.onClickCircleX.bind(this);
     this.onClickLeft = this.onClickLeft.bind(this);
     this.onClickRight = this.onClickRight.bind(this);
+  }
+
+  onClickCard(id) {
+    console.log('id', id);
+    this.props.history.push(`/product/${id}`);
   }
 
   onClickPlus() {
@@ -91,6 +97,7 @@ class Outfit extends React.Component {
           <ProductCard type={'outfit'} key={product.product.id}
           product={product}
           onClickCircleX={ this.onClickCircleX }
+          onClickCard={ this.onClickCard }
           />))
         }
         {index < endRangeLimit && <FontAwesomeIcon className='arrow right' data-testid='right-arrow'
@@ -109,6 +116,7 @@ const mapStateToProps = (state) => ({
 Outfit.propTypes = {
   currentProduct: PropTypes.object,
   currentStyle: PropTypes.object,
+  history: PropTypes.object,
 };
 
 export default connect(mapStateToProps)(Outfit);

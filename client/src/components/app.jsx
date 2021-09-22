@@ -9,23 +9,29 @@ import {
 import './common/fontAwesomeIcons';
 
 import Banner from './common/banner.jsx';
-import ProductReviews from './productReviews/productReviews.jsx';
-import RelatedProducts from './relatedProducts/RelatedProducts.jsx';
-import Outfit from './relatedProducts/Outfit.jsx';
-import OverviewContainer from './productOverview/OverviewContainer.jsx';
+import Wrapper from './Wrapper.jsx';
 
-const App = () => (
-  <Router>
-    <Banner />
-    <Switch>
-      <Route exact path='/product/:productId'>
-        <OverviewContainer />
-        <RelatedProducts />
-        <Outfit />
-        <ProductReviews />
-      </Route>
-    </Switch>
-  </Router>
-);
+class App extends React.Component {
+  // eslint-disable-next-line no-useless-constructor
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <Router>
+        <Banner />
+        <Switch>
+          <Route exact={false} path='/product/:productId' component={Wrapper} {...this.props}>
+            {/* <OverviewContainer />
+            <RelatedProducts />
+            <Outfit />
+            <ProductReviews /> */}
+          </Route>
+        </Switch>
+      </Router>
+    );
+  }
+}
 
 export default App;
