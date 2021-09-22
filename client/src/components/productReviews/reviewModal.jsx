@@ -8,31 +8,43 @@ import CharRating from './reviewModalCharRating.jsx';
 class ReviewModal extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      selected: '',
+    };
     this.handlePostReview = this.handlePostReview.bind(this);
+    this.onSelectOption = this.onSelectOption.bind(this);
   }
 
   handlePostReview() {
 
   }
 
+  onSelectOption(e) {
+    if (e.target.value === this.state.selected) {
+      this.setState({ selected: '' });
+    } else {
+      this.setState({ selected: e.target.value });
+    }
+  }
+
   render() {
     return (
       <div className={CSS['review-modal']}>
         <div className={CSS['review-modal-content']}>
-        <h2> Write Your Review</h2>
-        <h4> About the {`${this.props.product.name}`}</h4>
+        <h2 className={CSS['review-modal-title']}> Write Your Review</h2>
+        <h4 className={CSS['review-modal-subtitle']}> About the {`${this.props.product.name}`}</h4>
         <form onSubmit={this.handlePostReview}>
           <>
             <div className={CSS['review-modal-input']}>
               <label>
-                <div required>Do you recommend this product? * </div>
-                <input type='radio' value='yes' name='recommend'/>Yes
-                <input type='radio' value='no' name='recommend'/>No
+                <div required><b>Do you recommend this product? * </b></div>
+                <input type='radio' value='yes' name='recommend' checked={this.state.selected === 'yes'} onClick={this.onSelectOption} />  Yes
+                <input type='radio' value='no' name='recommend' checked={this.state.selected === 'no'} onClick={this.onSelectOption} />  No
               </label>
             </div>
             <div className={CSS['review-modal-input']}>
               <label>
-                <div required>Please rate each characteristic * </div>
+                <div required><b>Please rate each characteristic * </b></div>
                 <CharRating
                   characteristic='Size'
                   options={['A size too small', '1⁄2 a size too small', 'Perfect', '1⁄2 a size too big', 'A size too wide']}
@@ -61,21 +73,21 @@ class ReviewModal extends React.Component {
             </div>
             <div className={CSS['review-modal-input']}>
               <label>
-                <div>Review Summary: </div>
-                <textarea placeholder='Example: Best purchase ever!' maxLength='60'/>
+                <div><b>Review Summary: </b></div>
+                <textarea placeholder='Example: Best purchase ever!' maxLength='60' className={CSS['review-modal-textbox']}/>
               </label>
             </div>
             <div className={CSS['review-modal-input']}>
               <label>
-                <div>What is your nick name? * </div>
-                <textarea placeholder='Example: jackson11' maxLength='60' required/>
+                <div><b>What is your nick name? * </b></div>
+                <textarea placeholder='Example: jackson11' maxLength='60' required className={CSS['review-modal-textbox']}/>
                 <div><i>For privacy reasons, do not use your full name or email address</i></div>
               </label>
             </div>
             <div className={CSS['review-modal-input']}>
               <label>
-                <div>Your email? * </div>
-                <textarea placeholder='Example: jackson11@email.com' maxLength='60' required/>
+                <div><b>Your email? * </b></div>
+                <textarea placeholder='Example: jackson11@email.com' maxLength='60' required className={CSS['review-modal-textbox']} />
                 <div><i>For authentication reasons, you will not be emailed</i></div>
               </label>
             </div>

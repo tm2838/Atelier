@@ -2,20 +2,47 @@
 import React from 'react';
 import CSS from './productReviews.module.css';
 
-const CharRating = ({ characteristic, options }) => (
-  <>
-    <div className={CSS['char-option-chosen']}>Current selection: {'None selected'}</div>
-    <div className={CSS['char-rating-container']}>
-      <div className={CSS['char-rating-title']}>{characteristic}:</div>
-      <input type='radio' value={`${options[0]}`} name={characteristic} className={CSS['char-rating-option-0']}/>
-      <input type='radio' value={`${options[1]}`} name={characteristic} className={CSS['char-rating-option-1']}/>
-      <input type='radio' value={`${options[2]}`} name={characteristic} className={CSS['char-rating-option-2']}/>
-      <input type='radio' value={`${options[3]}`} name={characteristic} className={CSS['char-rating-option-3']}/>
-      <input type='radio' value={`${options[4]}`} name={characteristic} className={CSS['char-rating-option-4']}/>
-      <div className={CSS['char-option-indicator-0']}>{options[0]}</div>
-      <div className={CSS['char-option-indicator-1']}>{options[4]}</div>
-    </div>
-  </>
-);
+class CharRating extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selected: '',
+    };
+    this.onSelectOption = this.onSelectOption.bind(this);
+  }
+
+  onSelectOption (e) {
+    if (e.target.value === this.state.selected) {
+      this.setState({ selected: '' })
+    } else {
+      this.setState({ selected: e.target.value })
+    }
+  }
+
+  render() {
+    const { characteristic, options } = this.props;
+    const { selected } = this.state;
+    return (
+      <>
+        <div className={CSS['char-option-chosen']}>Current selection: {selected ? selected : 'None selected'}</div>
+        <div className={CSS['char-rating-container']}>
+          <div className={CSS['char-rating-title']}>{characteristic}:</div>
+          {options.map((option) =>
+            <input
+              type='radio'
+              value={option}
+              name={characteristic}
+              checked={selected === option}
+              className={CSS[`char-rating-option-${options.indexOf(option)}`]}
+              onClick={this.onSelectOption}
+            />
+          )}
+          <div className={CSS['char-option-indicator-0']}>{options[0]}</div>
+          <div className={CSS['char-option-indicator-1']}>{options[4]}</div>
+        </div>
+      </>
+    )
+  }
+};
 
 export default CharRating;
