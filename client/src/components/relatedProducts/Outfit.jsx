@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ProductCard from './ProductCard.jsx';
 
@@ -9,15 +10,27 @@ class Outfit extends React.Component {
     super(props);
     this.state = {
       outfitProducts: [],
+      index: 0,
     };
     this.onClickPlus = this.onClickPlus.bind(this);
     this.onClickCircleX = this.onClickCircleX.bind(this);
+    this.onClickLeft = this.onClickLeft.bind(this);
+    this.onClickRight = this.onClickRight.bind(this);
   }
 
   onClickPlus() {
-    console.log(this.props.currentProduct);
+    console.log(this.props);
     const { outfitProducts } = this.state;
-    outfitProducts.push({ product: this.props.currentProduct });
+    for (let i = 0; i < outfitProducts.length; i += 1) {
+      if (outfitProducts[i].product.id === this.props.currentProduct.id) {
+        alert('product already in your outfit');
+        return;
+      }
+    }
+    outfitProducts.push({
+      product: this.props.currentProduct,
+      styles: this.props.currentStyle,
+    });
     this.setState((prevState) => ({
       ...prevState,
       outfitProducts,
@@ -43,8 +56,27 @@ class Outfit extends React.Component {
     }));
   }
 
+  onClickLeft() {
+    if (this.state.index > 0) {
+      this.setState({
+        index: this.state.index - 1,
+      });
+    }
+  }
+
+  onClickRight() {
+    if (this.state.index < this.state.outfitProducts.length - 4) {
+      this.setState({
+        index: this.state.index + 1,
+      });
+    }
+  }
+
   // eslint-disable-next-line class-methods-use-this
   render() {
+    const { index } = this.state;
+    const endRangeLimit = this.state.outfitProducts.length - 4;
+    const productRange = this.state.outfitProducts.slice(index, index + 4);
     return (
       <div className='outfit'>
         <div>YOUR OUTFIT</div>
@@ -52,21 +84,31 @@ class Outfit extends React.Component {
           <h4>Add to Outfit</h4>
           <FontAwesomeIcon icon={['fas', 'plus']} onClick={ this.onClickPlus } />
         </div>
-        {this.state.outfitProducts.map((product) => (
+        { index ? <FontAwesomeIcon className='arrow left' data-testid='left-arrow'
+            icon={ faChevronLeft } onClick={this.onClickLeft}/> : ''
+        }
+        {productRange.map((product) => (
           <ProductCard type={'outfit'} key={product.product.id}
           product={product}
           onClickCircleX={ this.onClickCircleX }
           />))
+        }
+        {index < endRangeLimit && <FontAwesomeIcon className='arrow right' data-testid='right-arrow'
+            icon={ faChevronRight } onClick={this.onClickRight} />
         }
       </div>
     );
   }
 }
 
-const mapStateToProps = (state) => ({ currentProduct: state.currentProduct });
+const mapStateToProps = (state) => ({
+  currentProduct: state.currentProduct,
+  currentStyle: state.currentStyle,
+});
 
 Outfit.propTypes = {
   currentProduct: PropTypes.object,
+  currentStyle: PropTypes.object,
 };
 
 export default connect(mapStateToProps)(Outfit);
