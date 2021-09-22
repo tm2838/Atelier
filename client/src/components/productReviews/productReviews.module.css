@@ -15,25 +15,75 @@
 
 .review-header {
   display: flex;
-  justify-content: space-between
+  justify-content: space-between;
+  margin-bottom: 10px
+}
+
+.review-body {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 10px
 }
 
 .review-summary {
   font-weight: bold;
-  font-size: 20px
+  font-size: 20px;
+  margin-bottom: 10px
+}
+
+.review-recommendation {
+  margin-bottom: 10px
 }
 
 .review-response {
-  background-color: lightblue
+  background-color: #dbe7f7ff;
+  margin-bottom: 10px
+}
+
+.review-photo-container {
+  margin-bottom: 10px;
+}
+
+.review-photo {
+  width: auto;
+  height: 100px;
+  margin-right: 20px;
+}
+
+.review-photo:hover {
+  cursor: pointer;
+}
+
+.review-photo-modal {
+  width: 90%;
+  height: 90%;
+  border: 1px solid #dbe7f7ff;
+  padding: 10px;
+  position: fixed;
+  z-index: 100;
+  display: block;
+  top: 2%;
+  left: 2%;
+  background-color: white;
+  overflow-y: auto;
+  display: flex;
+}
+
+.review-photo-expanded {
+  width: 70%;
+  margin-left: 15%;
+  margin-right: 10%;
 }
 
 .review-helpful-rating {
   display: flex;
-  justify-content: flex-start
+  justify-content: flex-start;
+  margin-bottom: 10px
 }
 
 .review-helpful-rating-sub {
   margin-right: 5px;
+  margin-bottom: 10px
 }
 
 .review-division {
