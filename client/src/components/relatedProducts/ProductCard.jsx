@@ -5,7 +5,6 @@ import StarRating from '../common/starRating.jsx';
 import './styles.css';
 
 const ProductCard = (props) => {
-  console.log('ProductCard', props);
   const relatedProduct = props.product.product;
   const { name } = relatedProduct;
   const category = relatedProduct.category.toUpperCase();
@@ -108,7 +107,7 @@ const ProductCard = (props) => {
     }
   }
   return (
-    <div className='card'>
+    <div className='card' onClick={() => props.onClickCard(relatedProduct.id)}>
       { photo }
       <p className='cardInfo'>{ category }</p>
       <p className='cardInfo'><b>{ name }</b></p>
@@ -125,6 +124,7 @@ ProductCard.propTypes = {
   default_price: PropTypes.number,
   type: PropTypes.string,
   showModal: PropTypes.bool,
+  onClickCard: PropTypes.func,
   onClickStar: PropTypes.func,
   onClickCloseModal: PropTypes.func,
   onClickCircleX: PropTypes.func,

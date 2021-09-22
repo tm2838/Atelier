@@ -23,6 +23,7 @@ class RelatedProducts extends React.Component {
         },
       },
     };
+    this.onClickCard = this.onClickCard.bind(this);
     this.onClickLeft = this.onClickLeft.bind(this);
     this.onClickRight = this.onClickRight.bind(this);
     this.onClickStar = this.onClickStar.bind(this);
@@ -31,7 +32,9 @@ class RelatedProducts extends React.Component {
 
   // get product id from overview
   componentDidMount() {
-    fetch('http://127.0.0.1:3000/relatedProducts')
+    const url = window.location.pathname.match(/^\/product\/(\d+)/);
+    const id = url[1];
+    fetch(`http://127.0.0.1:3000/relatedProducts/${id}`)
       .then((res) => res.json())
       .then((relatedProducts) => {
         this.setState((prevState) => ({
@@ -46,6 +49,11 @@ class RelatedProducts extends React.Component {
       .catch((err) => {
         throw err;
       });
+  }
+
+  onClickCard(id) {
+    console.log('id', id);
+    this.props.history.push(`/product/${id}`);
   }
 
   onClickLeft() {
@@ -90,6 +98,7 @@ class RelatedProducts extends React.Component {
         {productRange.map((product) => <ProductCard type={'related'} key={product.product.id}
           product={ product }
           onClickStar={ this.onClickStar }
+          onClickCard={ this.onClickCard }
           />)
         }
         {index < endRangeLimit && <FontAwesomeIcon className='arrow right' data-testid='right-arrow'
@@ -108,6 +117,7 @@ const mapStateToProps = (state) => ({ currentProduct: state.currentProduct });
 
 RelatedProducts.propTypes = {
   currentProduct: PropTypes.object,
+  history: PropTypes.object,
 };
 
 export default connect(mapStateToProps)(RelatedProducts);

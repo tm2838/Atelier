@@ -68,8 +68,8 @@ app.get('/reviews', (req, res) => {
     });
 });
 
-app.get('/relatedProducts', (req, res) => {
-  const id = req.query.product_id || 47421;
+app.get('/relatedProducts/:id', (req, res) => {
+  const id = req.params.id || 47421;
   getRelatedProducts(id, (err, data) => {
     if (err) {
       throw err;
