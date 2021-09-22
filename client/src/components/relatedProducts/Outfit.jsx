@@ -19,9 +19,18 @@ class Outfit extends React.Component {
   }
 
   onClickPlus() {
-    console.log(this.props.currentProduct);
+    console.log(this.props);
     const { outfitProducts } = this.state;
-    outfitProducts.push({ product: this.props.currentProduct });
+    for (let i = 0; i < outfitProducts.length; i += 1) {
+      if (outfitProducts[i].product.id === this.props.currentProduct.id) {
+        alert('product already in your outfit');
+        return;
+      }
+    }
+    outfitProducts.push({
+      product: this.props.currentProduct,
+      styles: this.props.currentStyle,
+    });
     this.setState((prevState) => ({
       ...prevState,
       outfitProducts,
@@ -92,10 +101,14 @@ class Outfit extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({ currentProduct: state.currentProduct });
+const mapStateToProps = (state) => ({
+  currentProduct: state.currentProduct,
+  currentStyle: state.currentStyle,
+});
 
 Outfit.propTypes = {
   currentProduct: PropTypes.object,
+  currentStyle: PropTypes.object,
 };
 
 export default connect(mapStateToProps)(Outfit);
