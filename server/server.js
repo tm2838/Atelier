@@ -46,8 +46,7 @@ app.get('/products/:id?', (req, res) => { // added optional id param to route
 });
 
 app.get('/reviews', (req, res) => {
-  // using 47421 for now since 47426 doesn't have any reviews
-  const id = req.query.product_id || 47421;
+  const id = req.query.productId || 47421;
   const response = {};
   getReviews(id)
     .then((data) => {

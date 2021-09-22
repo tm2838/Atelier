@@ -6,6 +6,7 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from '../../../reducers/rootReducer';
 import Outfit from '../Outfit.jsx';
+import '../../common/fontAwesomeIcons';
 
 describe('outfit', () => {
   const testStore = createStore(

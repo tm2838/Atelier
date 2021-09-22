@@ -3,6 +3,7 @@ import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import StarBreakdown from '../starBreakdown.jsx';
 import testStore from '../../../fixtures/testStore';
+import '../../common/fontAwesomeIcons';
 
 describe('starBreakdown', () => {
   it('should render the distribution of star reviews', () => {

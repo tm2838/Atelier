@@ -2,6 +2,9 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import { Provider } from 'react-redux';
+import {
+  BrowserRouter as Router,
+} from 'react-router-dom';
 import fetchMock from 'jest-fetch-mock';
 import testReview from '../../../fixtures/testReview.json';
 import testStore from '../../../fixtures/testStore';
@@ -27,7 +30,9 @@ describe('productReviews', () => {
   it('should have a section review title', () => {
     const { getByRole } = render(
       <Provider store={testStore}>
-        <ProductReviews />
+        <Router>
+          <ProductReviews />
+        </Router>
       </Provider>,
     );
 
@@ -37,7 +42,9 @@ describe('productReviews', () => {
   it('should pop up a write new review modal when a button is clicked', () => {
     const { getByRole, getByText } = render(
       <Provider store={testStore}>
-        <ProductReviews />
+        <Router>
+          <ProductReviews />
+        </Router>
       </Provider>,
     );
 

@@ -10,6 +10,7 @@ import testProduct from '../../../fixtures/testProduct.json';
 import testReview from '../../../fixtures/testReview.json';
 
 import ProductInfo from '../ProductInfo.jsx';
+import '../../common/fontAwesomeIcons';
 
 let testStore = null;
 beforeAll(() => {
