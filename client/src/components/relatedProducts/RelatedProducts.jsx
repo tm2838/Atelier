@@ -23,6 +23,7 @@ class RelatedProducts extends React.Component {
         },
       },
     };
+    this.fetchRelatedProducts = this.fetchRelatedProducts.bind(this);
     this.onClickCard = this.onClickCard.bind(this);
     this.onClickLeft = this.onClickLeft.bind(this);
     this.onClickRight = this.onClickRight.bind(this);
@@ -34,6 +35,10 @@ class RelatedProducts extends React.Component {
   componentDidMount() {
     const url = window.location.pathname.match(/^\/product\/(\d+)/);
     const id = url[1];
+    this.fetchRelatedProducts(id);
+  }
+
+  fetchRelatedProducts(id) {
     fetch(`http://127.0.0.1:3000/relatedProducts/${id}`)
       .then((res) => res.json())
       .then((relatedProducts) => {
@@ -53,7 +58,11 @@ class RelatedProducts extends React.Component {
 
   onClickCard(id) {
     console.log('id', id);
+    this.setState({
+      showModal: false,
+    });
     this.props.history.push(`/product/${id}`);
+    this.fetchRelatedProducts(id);
   }
 
   onClickLeft() {
@@ -90,7 +99,7 @@ class RelatedProducts extends React.Component {
     const endRangeLimit = this.state.relatedProducts.length - 4;
     const productRange = this.state.relatedProducts.slice(index, index + 4);
     return (
-      <div className='relatedProducts'>
+      <div className='relatedProducts carousel'>
         <div>RELATED PRODUCTS</div>
         { index ? <FontAwesomeIcon className='arrow left' data-testid='left-arrow'
             icon={ faChevronLeft } onClick={this.onClickLeft}/> : ''

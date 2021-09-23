@@ -5,6 +5,7 @@ import StarRating from '../common/starRating.jsx';
 import './styles.css';
 
 const ProductCard = (props) => {
+  console.log('star', props);
   const relatedProduct = props.product.product;
   const { name } = relatedProduct;
   const category = relatedProduct.category.toUpperCase();
@@ -17,20 +18,9 @@ const ProductCard = (props) => {
       if (styles[i]['default?'] === true) {
         defaultStyle = true;
         if (styles[i].photos[0].thumbnail_url !== null) {
-          photo = <div className='image' style={{ backgroundImage: `url(${styles[i].photos[0].thumbnail_url})`, size: 'cover', repeat: 'no-repeat' }}>
-              <Button type={ props.type }
-                product={ props.product }
-                onClickStar={ props.onClickStar }
-                onClickCircleX={ props.onClickCircleX }
-              />
-            </div>;
+          photo = <div className='image' style={{ backgroundImage: `url(${styles[i].photos[0].thumbnail_url})`, backgroundSize: 'cover', repeat: 'no-repeat' }}></div>;
         } else {
           photo = <div className='image'>
-            <Button type={ props.type }
-                product={ props.product }
-                onClickStar={ props.onClickStar }
-                onClickCircleX={ props.onClickCircleX }
-              />
             { name }
           </div>;
         }
@@ -48,20 +38,9 @@ const ProductCard = (props) => {
     }
     if (defaultStyle === false) {
       if (styles[0].photos[0].thumbnail_url !== null) {
-        photo = <div className='image' style={{ backgroundImage: `url(${styles[0].photos[0].thumbnail_url})`, size: 'cover', repeat: 'no-repeat' }}>
-            <Button type={ props.type }
-              product={ props.product }
-              onClickStar={ props.onClickStar }
-              onClickCircleX={ props.onClickCircleX }
-            />
-          </div>;
+        photo = <div className='image' style={{ backgroundImage: `url(${styles[0].photos[0].thumbnail_url})`, backgroundSize: 'cover', repeat: 'no-repeat' }}></div>;
       } else {
         photo = <div className='image'>
-            <Button type={ props.type }
-                product={ props.product }
-                onClickStar={ props.onClickStar }
-                onClickCircleX={ props.onClickCircleX }
-              />
             { name }
           </div>;
       }
@@ -79,18 +58,9 @@ const ProductCard = (props) => {
     // photo
     const { styles } = props.product;
     if (styles.photos[0].thumbnail_url !== null) {
-      photo = <div className='image' style={{ backgroundImage: `url(${styles.photos[0].thumbnail_url})`, size: 'cover', repeat: 'no-repeat' }}>
-          <Button type={ props.type }
-            product={ props.product }
-            onClickCircleX = { props.onClickCircleX }
-          />
-        </div>;
+      photo = <div className='image' style={{ backgroundImage: `url(${styles.photos[0].thumbnail_url})`, backgroundSize: 'cover', repeat: 'no-repeat' }}></div>;
     } else {
       photo = <div className='image'>
-          <Button type={ props.type }
-            product={ props.product }
-            onClickCircleX={ props.onClickCircleX }
-          />
           { name }
         </div>;
     }
@@ -107,12 +77,23 @@ const ProductCard = (props) => {
     }
   }
   return (
-    <div className='card' onClick={() => props.onClickCard(relatedProduct.id)}>
-      { photo }
-      <p className='cardInfo'>{ category }</p>
-      <p className='cardInfo'><b>{ name }</b></p>
-        { price }
-        <StarRating />
+    <div>
+      { props.type === 'related' ? <Button type={ props.type }
+        product={ props.product }
+        onClickStar={ props.onClickStar }
+        onClickCircleX={ props.onClickCircleX }
+        /> : <Button type={ props.type }
+        product={ props.product }
+        onClickCircleX={ props.onClickCircleX }
+        />
+      }
+      <div className='card' onClick={() => props.onClickCard(relatedProduct.id)}>
+        { photo }
+        <p className='cardInfo'>{ category }</p>
+        <p className='cardInfo'><b>{ name }</b></p>
+          { price }
+          <StarRating />
+      </div>
     </div>
   );
 };
