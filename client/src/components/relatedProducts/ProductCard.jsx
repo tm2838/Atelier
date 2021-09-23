@@ -17,7 +17,7 @@ const ProductCard = (props) => {
       if (styles[i]['default?'] === true) {
         defaultStyle = true;
         if (styles[i].photos[0].thumbnail_url !== null) {
-          photo = <div className='image' style={{ backgroundImage: `url(${styles[i].photos[0].thumbnail_url})`, size: 'cover', repeat: 'no-repeat' }}>
+          photo = <div className='image' style={{ backgroundImage: `url(${styles[i].photos[0].thumbnail_url})`, backgroundSize: 'cover', repeat: 'no-repeat' }}>
               <Button type={ props.type }
                 product={ props.product }
                 onClickStar={ props.onClickStar }
@@ -48,7 +48,7 @@ const ProductCard = (props) => {
     }
     if (defaultStyle === false) {
       if (styles[0].photos[0].thumbnail_url !== null) {
-        photo = <div className='image' style={{ backgroundImage: `url(${styles[0].photos[0].thumbnail_url})`, size: 'cover', repeat: 'no-repeat' }}>
+        photo = <div className='image' style={{ backgroundImage: `url(${styles[0].photos[0].thumbnail_url})`, backgroundSize: 'cover', repeat: 'no-repeat' }}>
             <Button type={ props.type }
               product={ props.product }
               onClickStar={ props.onClickStar }
@@ -79,7 +79,7 @@ const ProductCard = (props) => {
     // photo
     const { styles } = props.product;
     if (styles.photos[0].thumbnail_url !== null) {
-      photo = <div className='image' style={{ backgroundImage: `url(${styles.photos[0].thumbnail_url})`, size: 'cover', repeat: 'no-repeat' }}>
+      photo = <div className='image' style={{ backgroundImage: `url(${styles.photos[0].thumbnail_url})`, backgroundSize: 'cover', repeat: 'no-repeat' }}>
           <Button type={ props.type }
             product={ props.product }
             onClickCircleX = { props.onClickCircleX }
