@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import ProductReviews from './productReviews/productReviews.jsx';
+import RatingsAndReviews from './ratingsAndReviews/ratingsAndReviews.jsx';
 import RelatedProducts from './relatedProducts/RelatedProducts.jsx';
 import Outfit from './relatedProducts/Outfit.jsx';
 import OverviewContainer from './productOverview/OverviewContainer.jsx';
@@ -11,7 +11,7 @@ const Wrapper = (props) => (
     <OverviewContainer />
     <RelatedProducts history={ props.history } />
     <Outfit history={ props.history } />
-    <ProductReviews productId={ props.match.params.productId } />
+    <RatingsAndReviews productId={ props.match.params.productId } />
   </div>
 );
 

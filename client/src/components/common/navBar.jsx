@@ -2,10 +2,10 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import CSS from './commonUI.module.css';
 
-const Banner = () => (
-  <div className={CSS.banner}>
+const NavBar = () => (
+  <div className={CSS['nav-bar']}>
     <FontAwesomeIcon className={CSS.logo} icon='paw' size='4x' data-testid="logo"/>
   </div>
 );
 
-export default Banner;
+export default NavBar;

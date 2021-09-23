@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import Review from '../review.jsx';
+import Review from '../reviews/review.jsx';
 import testReview from '../../../fixtures/testReview.json';
 import '../../common/fontAwesomeIcons';
 

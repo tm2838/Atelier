@@ -4,16 +4,16 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import fetchReviews from '../../actions/fetchReviews';
-import { changeLoadedReviews, changeRemainingReviews } from '../../actions/productReviews/changeReviews';
+import { changeLoadedReviews, changeRemainingReviews } from '../../actions/ratingsAndReviews/changeReviews';
 
-import Ratings from './ratings.jsx';
-import ReviewsList from './reviewsList.jsx';
-import ReviewButtons from './reviewButtons.jsx';
-import ReviewModal from './reviewModal.jsx';
-import SortingDropdown from './sortingDropdown.jsx';
-import CSS from './productReviews.module.css';
+import Ratings from './ratings/ratings.jsx';
+import ReviewsList from './reviews/reviewsList.jsx';
+import ReviewButtons from './reviews/reviewButtons.jsx';
+import ReviewModal from './reviewModal/reviewModal.jsx';
+import SortingDropdown from './reviews/sortingDropdown.jsx';
+import CSS from './ratingsAndReviews.module.css';
 
-class ProductReviews extends React.Component {
+class RatingsAndReviews extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -34,27 +34,29 @@ class ProductReviews extends React.Component {
 
   render() {
     return (
-      <>
-        <h3 style={{ marginLeft: '180px' }}>{'RATINGS & REVIEWS'}</h3>
-        <div className={CSS['reviews-container']}>
-          <div>{''}</div>
+      <div id='ratings-and-reviews'>
+        <div className={CSS['ratings-and-reviews']}>
+          <h3 className={CSS['ratings-and-reviews-title']}>{'RATINGS & REVIEWS'}</h3>
           <Ratings />
-          <div>
+
+          <div className={CSS['reviews-container']}>
             <SortingDropdown />
+
             {this.props.loadedReviews.length > 0 && <ReviewsList />}
+
             <ReviewButtons
               onLoadReviews={this.onLoadReviews}
               onAddReview={() => { this.setState({ isAddReviewModalOpen: true }); }}
             />
           </div>
-          <div>{''}</div>
+
         </div>
         {
           this.state.isAddReviewModalOpen
             && <ReviewModal onModalClose={
             () => { this.setState({ isAddReviewModalOpen: false }); }}/>
         }
-      </>
+      </div>
     );
   }
 }
@@ -76,4 +78,4 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductReviews);
+export default connect(mapStateToProps, mapDispatchToProps)(RatingsAndReviews);

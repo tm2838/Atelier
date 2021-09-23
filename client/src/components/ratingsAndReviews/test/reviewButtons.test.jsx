@@ -9,7 +9,7 @@ import rootReducer from '../../../reducers/rootReducer';
 import testReview from '../../../fixtures/testReview.json';
 import testStore from '../../../fixtures/testStore';
 
-import ReviewButtons from '../reviewButtons.jsx';
+import ReviewButtons from '../reviews/reviewButtons.jsx';
 import '../../common/fontAwesomeIcons';
 
 describe.only('reviewButtons', () => {

@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { connect } from 'react-redux';
-import CSS from './productReviews.module.css';
-import { changeLoadedReviews, changeRemainingReviews } from '../../actions/productReviews/changeReviews';
-import { sortHelpful, sortNewest, sortRelevant } from '../../helpers/sortReviews';
+import CSS from '../ratingsAndReviews.module.css';
+import { changeLoadedReviews, changeRemainingReviews } from '../../../actions/ratingsAndReviews/changeReviews';
+import { sortHelpful, sortNewest, sortRelevant } from '../../../helpers/sortReviews';
 
 class SortingDropdown extends React.Component {
   constructor(props) {
@@ -34,7 +34,7 @@ class SortingDropdown extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className='sort-container' >
         <div>{this.props.reviews.length} reviews, sorted by
           <select data-testid='select' className={CSS['sort-dropdown']} onChange={this.onSortChange} defaultValue={this.state.sortedBy}>
             {this.sortingOptions.map(
