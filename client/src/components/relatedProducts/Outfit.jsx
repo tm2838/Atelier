@@ -71,7 +71,7 @@ class Outfit extends React.Component {
   }
 
   onClickRight() {
-    if (this.state.index < this.state.outfitProducts.length - 4) {
+    if (this.state.index < this.state.outfitProducts.length - 3) {
       this.setState({
         index: this.state.index + 1,
       });
@@ -81,8 +81,8 @@ class Outfit extends React.Component {
   // eslint-disable-next-line class-methods-use-this
   render() {
     const { index } = this.state;
-    const endRangeLimit = this.state.outfitProducts.length - 4;
-    const productRange = this.state.outfitProducts.slice(index, index + 4);
+    const endRangeLimit = this.state.outfitProducts.length - 3;
+    const productRange = this.state.outfitProducts.slice(index, index + 3);
     return (
       <div className='outfit'>
         <div>YOUR OUTFIT</div>
