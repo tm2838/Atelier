@@ -4,13 +4,18 @@ div {
   border: 0;
 }
 
-.relatedProducts {
+.carousel {
+  width: 100%;
+  margin: 10% 0;
+}
+
+/* .relatedProducts {
   margin-top: 10%;
 }
 
 .outfit {
   margin-top: 5%;
-}
+} */
 
 .card {
   /* Add shadows to create the "card" effect */
@@ -33,7 +38,11 @@ div {
 
 /* position button */
 .icon {
-  margin: 5% 0 0 85%;
+  /* margin: 5% 0; */
+  display: inline-block;
+  position: relative;
+  z-index: 100;
+  margin: 0 0 0 50%;
 }
 
 .cardInfo {

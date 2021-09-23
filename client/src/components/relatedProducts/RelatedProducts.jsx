@@ -58,6 +58,9 @@ class RelatedProducts extends React.Component {
 
   onClickCard(id) {
     console.log('id', id);
+    this.setState({
+      showModal: false,
+    });
     this.props.history.push(`/product/${id}`);
     this.fetchRelatedProducts(id);
   }
@@ -96,7 +99,7 @@ class RelatedProducts extends React.Component {
     const endRangeLimit = this.state.relatedProducts.length - 4;
     const productRange = this.state.relatedProducts.slice(index, index + 4);
     return (
-      <div className='relatedProducts'>
+      <div className='relatedProducts carousel'>
         <div>RELATED PRODUCTS</div>
         { index ? <FontAwesomeIcon className='arrow left' data-testid='left-arrow'
             icon={ faChevronLeft } onClick={this.onClickLeft}/> : ''
