@@ -18,7 +18,7 @@ const OverviewContainer = (props) => {
   }, [productId]);
 
   return (
-    <div className='product-container'>
+    <div className='product-container' id='product-overview'>
       <figure className='gallery-container'>
         <ImageGallery />
       </figure>
