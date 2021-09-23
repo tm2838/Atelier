@@ -7,16 +7,18 @@ import Outfit from './relatedProducts/Outfit.jsx';
 import OverviewContainer from './productOverview/OverviewContainer.jsx';
 
 const Wrapper = (props) => (
-  <>
+  <div key={props.location.pathname}>
     <OverviewContainer />
     <RelatedProducts history={ props.history } />
     <Outfit history={ props.history } />
-    <ProductReviews />
-  </>
+    <ProductReviews productId={ props.match.params.productId } />
+  </div>
 );
 
 Wrapper.propTypes = {
   history: PropTypes.object,
+  location: PropTypes.object,
+  match: PropTypes.object,
 };
 
 export default withRouter(Wrapper);

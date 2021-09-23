@@ -2,7 +2,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router';
 
 import fetchReviews from '../../actions/fetchReviews';
 import { changeLoadedReviews, changeRemainingReviews } from '../../actions/productReviews/changeReviews';
@@ -24,8 +23,7 @@ class ProductReviews extends React.Component {
   }
 
   componentDidMount() {
-    const { match: { params: { productId } } } = this.props;
-    this.props.handleFetchReviews(productId);
+    this.props.handleFetchReviews(this.props.productId);
   }
 
   onLoadReviews() {
@@ -62,6 +60,7 @@ class ProductReviews extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
+  currentProduct: state.currentProduct,
   reviews: state.reviews,
   loadedReviews: state.loadedReviews,
   remainingReviews: state.remainingReviews,
@@ -77,4 +76,4 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ProductReviews));
+export default connect(mapStateToProps, mapDispatchToProps)(ProductReviews);
