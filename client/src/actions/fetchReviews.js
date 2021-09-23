@@ -2,7 +2,7 @@ import { changeReviews, changeLoadedReviews, changeRemainingReviews } from './pr
 import changeReviewMeta from './productReviews/changeReviewMeta';
 
 const fetchReviews = (productId) => (dispatch) => {
-  fetch(`http://127.0.0.1:3000/reviews?productId=${productId}`)
+  fetch(`http://127.0.0.1:3000/reviews/${productId}`)
     .then((response) => response.json())
     .then((response) => {
       dispatch(changeReviews(response.reviews));
