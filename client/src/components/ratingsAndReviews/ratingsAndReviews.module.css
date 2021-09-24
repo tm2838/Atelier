@@ -97,6 +97,8 @@
 }
 
 .review-helpful-rating-sub {
+  display: flex;
+  justify-content: flex-start;
   margin-right: 5px;
   margin-bottom: 10px
 }

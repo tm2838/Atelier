@@ -34,6 +34,18 @@ const getReviewMeta = (id) => axios.get(`${reviewUrl}/meta`, {
   params: { product_id: id },
 });
 
+const markReviewHelpful = (id) => axios({
+  method: 'put',
+  url: `${reviewUrl}/${id}/helpful`,
+  headers: { Authorization: apiKey },
+});
+
+const reportReview = (id) => axios({
+  method: 'put',
+  url: `${reviewUrl}/${id}/report`,
+  headers: { Authorization: apiKey },
+});
+
 const getRatingScore = (ratings) => {
   let ratingScore = 0;
   let totalReviews = 0;
@@ -66,4 +78,6 @@ module.exports = {
   addNewestTag,
   addRelevanceTag,
   getTotalReviews,
+  markReviewHelpful,
+  reportReview,
 };
