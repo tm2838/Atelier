@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import CSS from './productReviews.module.css';
+import CSS from '../ratingsAndReviews.module.css';
 
 const StarBreakdownBar = ({ barStyle = { width: '50%' } }) => (
   <div className={CSS['star-breakdown-bar-container']}>

@@ -1,6 +1,21 @@
-.reviews-container {
+.ratings-and-reviews {
   display: grid;
   grid-template-columns: 0.5fr 1fr 2fr 0.5fr
+}
+
+.ratings-and-reviews-title {
+  grid-column-start: 2;
+  grid-column-end: 3;
+}
+
+.ratings-container {
+  grid-column-start: 2;
+  grid-column-end: 3;
+}
+
+.reviews-container {
+  grid-column-start: 3;
+  grid-column-end: 4;
 }
 
 .reviews-list {

@@ -9,10 +9,10 @@ import fetchMock from 'jest-fetch-mock';
 import testReview from '../../../fixtures/testReview.json';
 import testStore from '../../../fixtures/testStore';
 
-import ProductReviews from '../productReviews.jsx';
+import RatingsAndReviews from '../ratingsAndReviews.jsx';
 import '../../common/fontAwesomeIcons';
 
-describe('productReviews', () => {
+describe('ratingsAndReviews', () => {
   beforeEach(() => {
     fetchMock.mockIf('http://127.0.0.1:3000', (req) => {
       if (req.url.endsWith('/reviews')) {
@@ -31,7 +31,7 @@ describe('productReviews', () => {
     const { getByRole } = render(
       <Provider store={testStore}>
         <Router>
-          <ProductReviews />
+          <RatingsAndReviews />
         </Router>
       </Provider>,
     );
@@ -43,7 +43,7 @@ describe('productReviews', () => {
     const { getByRole, getByText } = render(
       <Provider store={testStore}>
         <Router>
-          <ProductReviews />
+          <RatingsAndReviews />
         </Router>
       </Provider>,
     );

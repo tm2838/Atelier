@@ -2,11 +2,11 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { connect } from 'react-redux';
-import CSS from './productReviews.module.css';
+import CSS from '../ratingsAndReviews.module.css';
 
 import StarBreakdownBar from './starBreakdownBar.jsx';
-import changeFilters from '../../actions/productReviews/changeFilters';
-import { changeLoadedReviews, changeRemainingReviews } from '../../actions/productReviews/changeReviews';
+import changeFilters from '../../../actions/ratingsAndReviews/changeFilters';
+import { changeLoadedReviews, changeRemainingReviews } from '../../../actions/ratingsAndReviews/changeReviews';
 
 class StarBreakdown extends React.Component {
   constructor(props) {
@@ -49,51 +49,58 @@ class StarBreakdown extends React.Component {
   }
 
   render() {
+    const { reviewMeta, filters } = this.props;
     return (
       <>
-        { this.props.reviewMeta.ratings
+        {reviewMeta.ratings
           && <>
           <div className={CSS['star-breakdown']}>
-            <h5>Ratings Breakdown</h5>
-            {this.props.filters.length > 0
-            && (
-              <>
-              <div style={{ fontStyle: 'italic', color: '#92a4b3' }}>
-                Filters Applied: {this.props.filters.map((filter) => `${filter} stars `)}
-              </div>
-              <div
-                onClick={this.onRemoveFilter}
-                style={{
-                  textDecoration: 'underline', fontStyle: 'italic', color: '#92a4b3', cursor: 'pointer',
-                }}>
-                  Remove Filters
-                </div>
-              </>
-            )}
+            <div>Ratings Breakdown</div>
+            {filters.length > 0
+              && (
+                <>
+                  <div style={{ fontStyle: 'italic', color: '#92a4b3' }}>
+                    Filters Applied: {filters.map((filter) => `${filter} stars `)}
+                  </div>
+
+                  <div
+                    onClick={this.onRemoveFilter}
+                    style={{
+                      textDecoration: 'underline', fontStyle: 'italic', color: '#92a4b3', cursor: 'pointer',
+                    }}>
+                      Remove Filters
+                  </div>
+                </>
+              )
+            }
             <div onClick={this.onFilter} className={`${CSS['star-breakdown-div']} 5`}>
               <div style={{ marginRight: '10px' }}>5 Stars</div>
-              <StarBreakdownBar barStyle={{ width: `${(this.props.reviewMeta.ratings['5'] / this.props.reviewMeta.totalReviews) * 100 || 0}%` }}/>
-              <div>{this.props.reviewMeta.ratings['5'] || 0} reviews</div>
+              <StarBreakdownBar barStyle={{ width: `${(reviewMeta.ratings['5'] / reviewMeta.totalReviews) * 100 || 0}%` }}/>
+              <div>{reviewMeta.ratings['5'] || 0} reviews</div>
             </div>
+
             <div onClick={this.onFilter} className={`${CSS['star-breakdown-div']} 4`}>
               <div style={{ marginRight: '10px' }}>4 Stars</div>
-              <StarBreakdownBar barStyle={{ width: `${(this.props.reviewMeta.ratings['4'] / this.props.reviewMeta.totalReviews) * 100 || 0}%` }}/>
-              <div>{this.props.reviewMeta.ratings['4'] || 0} reviews</div>
+              <StarBreakdownBar barStyle={{ width: `${(reviewMeta.ratings['4'] / reviewMeta.totalReviews) * 100 || 0}%` }}/>
+              <div>{reviewMeta.ratings['4'] || 0} reviews</div>
             </div>
+
             <div onClick={this.onFilter} className={`${CSS['star-breakdown-div']} 3`}>
               <div style={{ marginRight: '10px' }}>3 Stars</div>
-              <StarBreakdownBar barStyle={{ width: `${(this.props.reviewMeta.ratings['3'] / this.props.reviewMeta.totalReviews) * 100 || 0}%` }}/>
-              <div>{this.props.reviewMeta.ratings['3'] || 0} reviews</div>
+              <StarBreakdownBar barStyle={{ width: `${(reviewMeta.ratings['3'] / reviewMeta.totalReviews) * 100 || 0}%` }}/>
+              <div>{reviewMeta.ratings['3'] || 0} reviews</div>
             </div>
+
             <div onClick={this.onFilter} className={`${CSS['star-breakdown-div']} 2`}>
               <div style={{ marginRight: '10px' }}>2 Stars</div>
-              <StarBreakdownBar barStyle={{ width: `${(this.props.reviewMeta.ratings['2'] / this.props.reviewMeta.totalReviews) * 100 || 0}%` }}/>
-              <div>{this.props.reviewMeta.ratings['2'] || 0} reviews</div>
+              <StarBreakdownBar barStyle={{ width: `${(reviewMeta.ratings['2'] / reviewMeta.totalReviews) * 100 || 0}%` }}/>
+              <div>{reviewMeta.ratings['2'] || 0} reviews</div>
             </div>
+
             <div onClick={this.onFilter} className={`${CSS['star-breakdown-div']} 1`}>
               <div style={{ marginRight: '16px' }}>1 Star {' '}</div>
-              <StarBreakdownBar barStyle={{ width: `${(this.props.reviewMeta.ratings['1'] / this.props.reviewMeta.totalReviews) * 100 || 0}%` }}/>
-              <div>{this.props.reviewMeta.ratings['1'] || 0} reviews</div>
+              <StarBreakdownBar barStyle={{ width: `${(reviewMeta.ratings['1'] / reviewMeta.totalReviews) * 100 || 0}%` }}/>
+              <div>{reviewMeta.ratings['1'] || 0} reviews</div>
             </div>
           </div>
           </>

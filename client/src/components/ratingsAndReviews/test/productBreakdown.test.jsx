@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import testStore from '../../../fixtures/testStore';
-import ProductBreakdown from '../productBreakdown.jsx';
+import ProductBreakdown from '../ratings/productBreakdown.jsx';
 
 describe('productBreakdown', () => {
   it('should render a list of characteristics', () => {

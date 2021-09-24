@@ -1,5 +1,5 @@
-import { changeReviews, changeLoadedReviews, changeRemainingReviews } from './productReviews/changeReviews';
-import changeReviewMeta from './productReviews/changeReviewMeta';
+import { changeReviews, changeLoadedReviews, changeRemainingReviews } from './ratingsAndReviews/changeReviews';
+import changeReviewMeta from './ratingsAndReviews/changeReviewMeta';
 
 const fetchReviews = (productId) => (dispatch) => {
   fetch(`http://127.0.0.1:3000/reviews/${productId}`)

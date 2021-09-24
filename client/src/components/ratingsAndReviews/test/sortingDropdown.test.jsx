@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import SortingDropdown from '../sortingDropdown.jsx';
+import SortingDropdown from '../reviews/sortingDropdown.jsx';
 import testStore from '../../../fixtures/testStore';
 import '../../common/fontAwesomeIcons';
 
