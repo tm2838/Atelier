@@ -13,11 +13,12 @@ const {
   reportReview,
 } = require('./reviews');
 const { getRelatedProducts } = require('./relatedProducts');
+const postInteractions = require('./interactions');
 
 const app = express();
 
 app.use('/product/:id', express.static(path.join(__dirname, '/../client/dist')));
-
+app.use(express.json());
 // middleware that helps the client pass CORS policy and request resources from server
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -112,6 +113,15 @@ app.get('/relatedProducts/:id', (req, res) => {
           res.status(200).send(relatedProducts).end();
         });
     }
+  });
+});
+
+// eslint-disable-next-line no-unused-vars
+app.post('/interactions', (req, res) => {
+  const { body } = req;
+  postInteractions(body, (response) => {
+    console.log(response.status);
+    res.status(response.status).send();
   });
 });
 
