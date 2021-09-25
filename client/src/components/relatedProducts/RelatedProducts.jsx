@@ -55,7 +55,7 @@ class RelatedProducts extends React.Component {
   }
 
   onClickCard(id) {
-    console.log('id', id);
+    // console.log('id', id);
     this.setState({
       showModal: false,
     });

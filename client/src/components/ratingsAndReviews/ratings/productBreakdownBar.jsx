@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import CSS from '../ratingsAndReviews.module.css';
 
 const ProductBreakdownBar = ({ characteristic, options, point }) => {
-  console.log(characteristic, point)
   let marginLeft = (parseInt(point, 10).toFixed(2) / 5) * 100;
   if (marginLeft === 100) {
     marginLeft = 93;

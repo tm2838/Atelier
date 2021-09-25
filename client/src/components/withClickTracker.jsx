@@ -22,10 +22,6 @@ function withClickTracker(WrappedComponent, widget) {
       });
     }
 
-    // componentWillUnmount() {
-    //   document.removeEventListener('click');
-    // }
-
     render() {
       return <WrappedComponent {...this.props} />;
     }

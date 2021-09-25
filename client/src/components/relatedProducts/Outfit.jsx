@@ -20,15 +20,16 @@ class Outfit extends React.Component {
   }
 
   onClickCard(id) {
-    console.log('id', id);
+    // console.log('id', id);
     this.props.history.push(`/product/${id}`);
   }
 
   onClickPlus() {
-    console.log(this.props);
+    // console.log(this.props);
     const { outfitProducts } = this.state;
     for (let i = 0; i < outfitProducts.length; i += 1) {
       if (outfitProducts[i].product.id === this.props.currentProduct.id) {
+        // eslint-disable-next-line no-alert
         alert('product already in your outfit');
         return;
       }
@@ -44,13 +45,13 @@ class Outfit extends React.Component {
   }
 
   onClickCircleX(id) {
-    console.log('id', id);
-    console.log('outfits', this.state.outfitProducts);
+    // console.log('id', id);
+    // console.log('outfits', this.state.outfitProducts);
     const { outfitProducts } = this.state;
     let index;
     // eslint-disable-next-line no-plusplus
     for (let i = 0; i < outfitProducts.length; i++) {
-      console.log('outfit array id', outfitProducts[i].product.id);
+      // console.log('outfit array id', outfitProducts[i].product.id);
       if (outfitProducts[i].product.id === id) {
         index = i;
       }
