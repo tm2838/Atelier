@@ -50,7 +50,7 @@ class RelatedProducts extends React.Component {
         }));
       })
       .catch((err) => {
-        throw err;
+        console.log(err);
       });
   }
 
@@ -60,7 +60,7 @@ class RelatedProducts extends React.Component {
       showModal: false,
     });
     this.props.history.push(`/product/${id}`);
-    this.fetchRelatedProducts(id);
+    // this.fetchRelatedProducts(id);
   }
 
   onClickLeft() {

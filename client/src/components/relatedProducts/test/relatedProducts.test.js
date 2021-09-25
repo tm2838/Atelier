@@ -16,9 +16,12 @@ describe('relatedProducts', () => {
   );
 
   it('should render RelatedProducts component without crashing', () => {
+    const location = {
+      pathname: 47421,
+    };
     const { getByTestId } = render(
       <Provider store={testStore}>
-        <RelatedProductsContainer productId={47421}/>
+        <RelatedProductsContainer productId='47421' />
       </Provider>,
     );
     expect(getByTestId('related-products')).toBeTruthy();
