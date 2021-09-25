@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Button from './Button.jsx';
 import StarRating from '../common/starRating.jsx';
-import './styles.css';
 
 const ProductCard = (props) => {
   console.log('star', props);
