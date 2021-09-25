@@ -9,13 +9,14 @@ import withClickTracker from './withClickTracker.jsx';
 
 const OverviewContainerWithTracker = withClickTracker(OverviewContainer, 'product-overview');
 const RelatedProductsWithTracker = withClickTracker(RelatedProducts, 'related-products');
+const OutfitWithTracker = withClickTracker(Outfit, 'outfit');
 const RatingsAndReviewsWithTracker = withClickTracker(RatingsAndReviews, 'ratings-and-reviews');
 
 const Wrapper = (props) => (
   <div key={props.location.pathname}>
     <OverviewContainerWithTracker />
     <RelatedProductsWithTracker history={ props.history } />
-    <Outfit history={ props.history } />
+    <OutfitWithTracker history={ props.history } />
     <RatingsAndReviewsWithTracker productId={ props.match.params.productId } />
   </div>
 );
