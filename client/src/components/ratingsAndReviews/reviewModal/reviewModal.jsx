@@ -9,24 +9,26 @@ class ReviewModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selected: '',
       uploadedPhotos: [],
+      characters: 0,
+      recommend: '',
     };
     this.handlePostReview = this.handlePostReview.bind(this);
-    this.onSelectOption = this.onSelectOption.bind(this);
+    this.handleRecommendation = this.handleRecommendation.bind(this);
     this.handleUploadPhoto = this.handleUploadPhoto.bind(this);
     this.handleDeletePhoto = this.handleDeletePhoto.bind(this);
+    this.handleBodyChange = this.handleBodyChange.bind(this);
   }
 
   handlePostReview() {
 
   }
 
-  onSelectOption(e) {
-    if (e.target.value === this.state.selected) {
-      this.setState({ selected: '' });
+  handleRecommendation(e) {
+    if (e.target.value === this.state.recommend) {
+      this.setState({ recommend: '' });
     } else {
-      this.setState({ selected: e.target.value });
+      this.setState({ recommend: e.target.value });
     }
   }
 
@@ -44,8 +46,12 @@ class ReviewModal extends React.Component {
     this.setState({ uploadedPhotos: remainingPhotos });
   }
 
+  handleBodyChange(e) {
+    this.setState({ characters: e.target.value.length });
+  }
+
   render() {
-    const { selected } = this.state;
+    const { characters } = this.state;
     const { product, onModalClose } = this.props;
     return (
       <div className={CSS['review-modal']}>
@@ -56,8 +62,8 @@ class ReviewModal extends React.Component {
             <>
               <div className={CSS['review-modal-input']}>
                 <div required><b>Do you recommend this product? * </b></div>
-                <input type='radio' value='yes' name='recommend' checked={selected === 'yes'} onClick={this.onSelectOption} />  Yes
-                <input type='radio' value='no' name='recommend' checked={selected === 'no'} onClick={this.onSelectOption} />  No
+                <input type='radio' value='yes' name='recommend' id='recommend-yes' onChange={this.handleRecommendation} />  Yes
+                <input type='radio' value='no' name='recommend' id='recommend-no' onChange={this.handleRecommendation} />  No
               </div>
 
               <div className={CSS['review-modal-input']}>
@@ -96,6 +102,20 @@ class ReviewModal extends React.Component {
                   maxLength='60'
                   className={CSS['review-modal-textbox']}
                 />
+              </div>
+
+              <div className={CSS['review-modal-input']}>
+                <div><b>Review Body * </b></div>
+                <textarea
+                  id='review-body'
+                  placeholder='Why did you like the product or not?'
+                  maxLength='1000'
+                  minLength='50'
+                  required
+                  className={CSS['review-modal-textbox-body']}
+                  onChange={this.handleBodyChange}
+                />
+                <div><i>{characters < 50 ? `Minimum required characters left: ${50 - characters}` : 'Minimum Reached'}</i></div>
               </div>
 
               <div className={CSS['review-modal-input']}>
