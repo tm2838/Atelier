@@ -21,7 +21,7 @@ describe('relatedProducts', () => {
     };
     const { getByTestId } = render(
       <Provider store={testStore}>
-        <RelatedProductsContainer productId={47421} />
+        <RelatedProductsContainer productId='47421' />
       </Provider>,
     );
     expect(getByTestId('related-products')).toBeTruthy();
