@@ -33,7 +33,7 @@ class RelatedProducts extends React.Component {
 
   // get product id from overview
   componentDidMount() {
-    this.fetchRelatedProducts(this.props.productId || 47421);
+    this.fetchRelatedProducts(this.props.productId);
   }
 
   fetchRelatedProducts(id) {
@@ -123,7 +123,7 @@ class RelatedProducts extends React.Component {
 const mapStateToProps = (state) => ({ currentProduct: state.currentProduct });
 
 RelatedProducts.propTypes = {
-  productId: PropTypes.number,
+  productId: PropTypes.string,
   currentProduct: PropTypes.object,
   history: PropTypes.object,
 };

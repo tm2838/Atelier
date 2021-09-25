@@ -12,7 +12,7 @@ const RelatedProductsContainer = (props) => (
 
 RelatedProductsContainer.propTypes = {
   history: PropTypes.object,
-  productId: PropTypes.number,
+  productId: PropTypes.string,
 };
 
 export default RelatedProductsContainer;

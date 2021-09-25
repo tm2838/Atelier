@@ -11,7 +11,7 @@ function withClickTracker(WrappedComponent, widget) {
           event.preventDefault();
         }
         const body = {
-          element: event.target.className,
+          element: event.target.tagName,
           widget,
           time: event.timeStamp.toString(),
         };
