@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ProductCard from './ProductCard.jsx';
+import './styles.css';
 
 class Outfit extends React.Component {
   constructor(props) {
