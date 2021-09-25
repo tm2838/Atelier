@@ -33,9 +33,7 @@ class RelatedProducts extends React.Component {
 
   // get product id from overview
   componentDidMount() {
-    const url = window.location.pathname.match(/^\/product\/(\d+)/);
-    const id = url[1];
-    this.fetchRelatedProducts(id);
+    this.fetchRelatedProducts(this.props.productId);
   }
 
   fetchRelatedProducts(id) {
@@ -125,6 +123,7 @@ class RelatedProducts extends React.Component {
 const mapStateToProps = (state) => ({ currentProduct: state.currentProduct });
 
 RelatedProducts.propTypes = {
+  productId: PropTypes.string,
   currentProduct: PropTypes.object,
   history: PropTypes.object,
 };

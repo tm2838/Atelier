@@ -23,10 +23,6 @@ class App extends React.Component {
         <NavBar />
         <Switch>
           <Route exact={false} path='/product/:productId' component={Wrapper} {...this.props}>
-            {/* <OverviewContainer />
-            <RelatedProducts />
-            <Outfit />
-            <ProductReviews /> */}
           </Route>
         </Switch>
       </Router>
