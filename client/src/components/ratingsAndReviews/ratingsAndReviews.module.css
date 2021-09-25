@@ -201,6 +201,11 @@
   width: 600px;
 }
 
+.review-modal-textbox-body {
+  width: 600px;
+  height: 100px;
+}
+
 .char-rating-container {
   display: grid;
   grid-template-columns: repeat(7, 90px);
