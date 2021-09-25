@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from '../../../reducers/rootReducer';
-import RelatedProducts from '../RelatedProducts.jsx';
+import RelatedProductsContainer from '../RelatedProductsContainer.jsx';
 
 describe('relatedProducts', () => {
   const testStore = createStore(
@@ -16,11 +16,11 @@ describe('relatedProducts', () => {
   );
 
   it('should render RelatedProducts component without crashing', () => {
-    const { getByText } = render(
+    const { getByTestId } = render(
       <Provider store={testStore}>
-        <RelatedProducts />
+        <RelatedProductsContainer productId={47421}/>
       </Provider>,
     );
-    expect(getByText('RELATED PRODUCTS')).toBeTruthy();
+    expect(getByTestId('related-products')).toBeTruthy();
   });
 });
