@@ -5,8 +5,6 @@ import configureStore from './store';
 
 import App from './components/app.jsx';
 
-// configureStore().dispatch(fetchReviews());
-
 ReactDOM.render(
   <Provider store={configureStore()}>
     <App />

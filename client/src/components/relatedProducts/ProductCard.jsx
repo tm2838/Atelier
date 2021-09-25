@@ -4,7 +4,7 @@ import Button from './Button.jsx';
 import StarRating from '../common/starRating.jsx';
 
 const ProductCard = (props) => {
-  console.log('star', props);
+  // console.log('star', props);
   const relatedProduct = props.product.product;
   const { name } = relatedProduct;
   const category = relatedProduct.category.toUpperCase();

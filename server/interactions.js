@@ -12,7 +12,7 @@ const postInteractions = (body, callback) => {
       callback(res);
     })
     .catch((error) => {
-      console.log(error);
+      console.log(error); // eslint-disable-line
     });
 };
 
