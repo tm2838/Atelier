@@ -9,6 +9,8 @@ const {
   addNewestTag,
   addRelevanceTag,
   getTotalReviews,
+  markReviewHelpful,
+  reportReview,
 } = require('./reviews');
 const { getRelatedProducts } = require('./relatedProducts');
 const postInteractions = require('./interactions');
@@ -23,6 +25,9 @@ app.use((req, res, next) => {
   res.header(
     'Access-Control-Allow-Headers',
     'Origin, X-Requested-With, Content-Type, Accept',
+  );
+  res.header(
+    'Access-Control-Allow-Methods', 'POST, PUT, GET, OPTIONS',
   );
   next();
 });
@@ -66,6 +71,24 @@ app.get('/reviews/:id', (req, res) => {
     .then(() => {
       res.status(200).send(response);
     });
+});
+
+app.put('/reviews/:reviewId/helpful', (req, res) => {
+  const id = req.params.reviewId;
+  markReviewHelpful(id)
+    .then(() => {
+      res.status(204).end();
+    })
+    .catch((e) => console.log(e)); //eslint-disable-line
+});
+
+app.put('/reviews/:reviewId/report', (req, res) => {
+  const id = req.params.reviewId;
+  reportReview(id)
+    .then(() => {
+      res.status(204).end();
+    })
+    .catch((e) => console.log(e)); //eslint-disable-line
 });
 
 app.get('/relatedProducts/:id', (req, res) => {
