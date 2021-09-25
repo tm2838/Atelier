@@ -4,10 +4,10 @@ import RelatedProducts from './RelatedProducts.jsx';
 import Outfit from './Outfit.jsx';
 
 const RelatedProductsContainer = (props) => (
-  <>
+  <div id='related-products'>
     <RelatedProducts history={props.history} />
     <Outfit history={props.history} />
-  </>
+  </div>
 );
 
 RelatedProductsContainer.propTypes = {

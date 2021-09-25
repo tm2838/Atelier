@@ -99,7 +99,7 @@ class RelatedProducts extends React.Component {
     const endRangeLimit = this.state.relatedProducts.length - 4;
     const productRange = this.state.relatedProducts.slice(index, index + 4);
     return (
-      <div className='relatedProducts carousel' id='related-products'>
+      <div className='relatedProducts carousel'>
         <div>RELATED PRODUCTS</div>
         { index ? <FontAwesomeIcon className='arrow left' data-testid='left-arrow'
             icon={ faChevronLeft } onClick={this.onClickLeft}/> : ''
