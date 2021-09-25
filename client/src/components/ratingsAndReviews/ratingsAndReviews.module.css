@@ -16,47 +16,49 @@
 .reviews-container {
   grid-column-start: 3;
   grid-column-end: 4;
+  height: 95%;
 }
 
 .reviews-list {
-  height: 70%;
+  margin-top: 40px;
+  height: 450px;
   overflow-y: auto;
 }
 
 .review {
   border-bottom: 2px solid #dbe7f7ff;
-  margin-bottom: 10px
+  margin-bottom: 20px
 }
 
 .review-header {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 10px
+  margin-bottom: 20px
 }
 
 .review-body {
   display: flex;
   justify-content: flex-start;
-  margin-bottom: 10px
+  margin-bottom: 20px
 }
 
 .review-summary {
   font-weight: bold;
   font-size: 20px;
-  margin-bottom: 10px
+  margin-bottom: 20px
 }
 
 .review-recommendation {
-  margin-bottom: 10px
+  margin-bottom: 20px
 }
 
 .review-response {
   background-color: #dbe7f7ff;
-  margin-bottom: 10px
+  margin-bottom: 20px
 }
 
 .review-photo-container {
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .review-photo {
@@ -107,6 +109,10 @@
   color: #dbe7f7ff;
 }
 
+.review-buttons {
+  margin-bottom: 20px;
+}
+
 .review-btn {
   background-color: #dbe7f7ff;
   border: none;
@@ -139,6 +145,7 @@
 
 .star-breakdown-div {
   display: flex;
+  margin-top: 10px;
 }
 
 .star-breakdown-div:hover {
@@ -150,8 +157,10 @@
   width: 50%;
   height: 10px;
   z-index: 100;
-  margin-right: 10px;
+  margin-left: 20px;
+  margin-right: 20px;
   margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .product-breakdown {
@@ -159,20 +168,12 @@
   width: '50%';
 }
 
-.product-breakdown-characteristic {
-  /* grid-column-start: 1;
-  grid-column-end: 2;
-  grid-row-start: 1;
-  grid-row-end: 2; */
-}
-
 .product-breakdown-container {
   display: grid;
-  grid-template-columns: repeat(6, 90px);
-  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: repeat(5, 16%);
+  grid-template-rows: repeat(2, 15px);
   row-gap: 5px;
   margin-bottom: 10px;
-  /* position: relative; */
 }
 
 .product-breakdown-option-0 {
@@ -180,30 +181,35 @@
   grid-column-end: 2;
   grid-row-start: 1;
   grid-row-end: 2;
+  margin-top: 10px;
 }
 .product-breakdown-option-1 {
   grid-column-start: 2;
   grid-column-end: 3;
   grid-row-start: 1;
   grid-row-end: 2;
+  margin-top: 10px;
 }
 .product-breakdown-option-2 {
   grid-column-start: 3;
   grid-column-end: 4;
   grid-row-start: 1;
   grid-row-end: 2;
+  margin-top: 10px;
 }
 .product-breakdown-option-3 {
   grid-column-start: 4;
   grid-column-end: 5;
   grid-row-start: 1;
   grid-row-end: 2;
+  margin-top: 10px;
 }
 .product-breakdown-option-4 {
   grid-column-start: 5;
   grid-column-end: 6;
   grid-row-start: 1;
   grid-row-end: 2;
+  margin-top: 10px;
 }
 
 .product-breakdown-indicator-0 {

@@ -6,7 +6,7 @@ import ProductBreakdownBar from './productBreakdownBar.jsx';
 
 const ProductBreakdown = ({ reviewMeta }) => {
   const options = {
-    Size: ['A size too small', '1⁄2 a size too small', 'Perfect', '1⁄2 a size too big', 'A size too wide'],
+    Size: ['Too small', '1⁄2 a size too small', 'Perfect', '1⁄2 a size too big', 'Too wide'],
     Width: ['Too narrow', 'Slightly narrow', 'Perfect', 'Slightly wide', 'Too wide'],
     Comfort: ['Uncomfortable', 'Slightly uncomfortable', 'OK', 'Comfortable', 'Perfect'],
     Quality: ['Poor', 'Below average', 'What I expected', 'Pretty great', 'Perfect'],
