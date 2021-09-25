@@ -12,6 +12,7 @@ import {
   faPlus,
   faPaw,
   faCheck,
+  faCaretDown,
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
@@ -27,4 +28,5 @@ library.add(
   faPlus,
   faPaw,
   faCheck,
+  faCaretDown,
 );
