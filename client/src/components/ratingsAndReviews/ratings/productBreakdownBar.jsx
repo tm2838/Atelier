@@ -17,7 +17,7 @@ const ProductBreakdownBar = ({ characteristic, options, point }) => {
       <div className={CSS['product-breakdown-indicator-0']}>{options[0]}</div>
       <div className={CSS['product-breakdown-indicator-1']}>{options[4]}</div>
       <FontAwesomeIcon icon='caret-down' size='2x' className={CSS['product-breakdown-caret-down']} style={{
-        marginLeft: `${marginLeft}`,
+        marginLeft: `${marginLeft}%`,
       }}/>
     </div>
 </>
