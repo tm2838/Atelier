@@ -2,7 +2,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import ImageMain from './ImageMain.jsx';
 import ImageNavButton from './ImageNavButton.jsx';
+import ExpandButton from './ImageExButton.jsx';
 
 class ImageGallery extends React.Component {
   constructor(props) {
@@ -55,14 +57,7 @@ class ImageGallery extends React.Component {
         </figure>
 
         : <div className='gallery'>
-          <figure className='gallery-main'>
-            <img
-              src={this.props.currentStyle.photos[this.state.main].url}
-              className='gallery-img'
-              data-testid='gallery-img'
-              alt='Main image'>
-            </img>
-          </figure>
+          <ImageMain photo={this.props.currentStyle.photos[this.state.main].url}/>
 
           <figure className='gallery-thumb-0' onClick={() => this.handleImageClick(0)}>
             <img
@@ -136,6 +131,8 @@ class ImageGallery extends React.Component {
             && <figure className='gallery-nav-down'>
               <ImageNavButton direction={'down'} icon={'angle-down'} onClick={this.handleNavClick} />
             </figure>}
+
+            <ExpandButton />
         </div>
     );
   }

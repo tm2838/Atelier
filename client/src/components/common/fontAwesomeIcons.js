@@ -13,6 +13,7 @@ import {
   faPaw,
   faCheck,
   faCaretDown,
+  faExpand,
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
@@ -29,4 +30,5 @@ library.add(
   faPaw,
   faCheck,
   faCaretDown,
+  faExpand,
 );
