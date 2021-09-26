@@ -141,6 +141,7 @@ class ImageGallery extends React.Component {
 const mapStateToProps = (state) => ({
   styles: state.styleList,
   currentStyle: state.currentStyle,
+  imageView: state.imageView,
 });
 
 export default connect(mapStateToProps)(ImageGallery);

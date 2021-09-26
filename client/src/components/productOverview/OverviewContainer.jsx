@@ -19,18 +19,32 @@ const OverviewContainer = (props) => {
 
   return (
     <div className='product-container' id='product-overview'>
-      <figure className='gallery-container'>
+      {
+      (!props.imageView)
+        ? <>
+        <figure className='gallery-container'>
+          <ImageGallery />
+        </figure>
+        <figure className='product-info-container'>
+          <ProductInfo />
+        </figure>
+        </>
+        : <>
+      <figure className='gallery-expanded-container'>
         <ImageGallery />
       </figure>
-      <figure className='product-info-container'>
-        <ProductInfo />
-      </figure>
+      </>
+      }
       <figure className='product-summary-container'>
         <ProductSummary />
       </figure>
-    </div>
+    </div >
   );
 };
+
+const mapStateToProps = (state) => ({
+  imageView: state.imageView,
+});
 
 const mapDispatchToProps = (dispatch) => ({
   handleFetchProduct: (id) => {
@@ -38,4 +52,4 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export default connect(null, mapDispatchToProps)(OverviewContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(OverviewContainer);

@@ -11,6 +11,13 @@
   grid-row-end: 6;
 }
 
+.gallery-expanded-container {
+  grid-column-start: 1;
+  grid-column-end: 9;
+  grid-row-start: 1;
+  grid-row-end: 6;
+}
+
 .product-info-container {
   grid-column-start: 6;
   grid-column-end: 8;
