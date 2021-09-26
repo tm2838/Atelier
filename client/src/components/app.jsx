@@ -1,22 +1,33 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable class-methods-use-this */
 import React from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from 'react-router-dom';
 import './common/fontAwesomeIcons';
 
-import Banner from './common/banner.jsx';
-import ProductReviews from './productReviews/productReviews.jsx';
-import RelatedProducts from './relatedProducts/RelatedProducts.jsx';
-import Outfit from './relatedProducts/Outfit.jsx';
-import OverviewContainer from './productOverview/OverviewContainer.jsx';
+import NavBar from './common/navBar.jsx';
+import Wrapper from './Wrapper.jsx';
 
-const App = () => (
-  <div>
-    <Banner />
-    <OverviewContainer />
-    <RelatedProducts />
-    <Outfit />
-    <ProductReviews />
-  </div>
-);
+class App extends React.Component {
+  // eslint-disable-next-line no-useless-constructor
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <Router>
+        <NavBar />
+        <Switch>
+          <Route exact={false} path='/product/:productId' component={Wrapper} {...this.props}>
+          </Route>
+        </Switch>
+      </Router>
+    );
+  }
+}
 
 export default App;

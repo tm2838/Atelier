@@ -11,6 +11,8 @@ import {
   faTimesCircle,
   faPlus,
   faPaw,
+  faCheck,
+  faCaretDown,
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
@@ -25,4 +27,6 @@ library.add(
   faTimesCircle,
   faPlus,
   faPaw,
+  faCheck,
+  faCaretDown,
 );

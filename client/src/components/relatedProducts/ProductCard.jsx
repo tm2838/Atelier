@@ -2,26 +2,96 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Button from './Button.jsx';
 import StarRating from '../common/starRating.jsx';
-import './styles.css';
 
 const ProductCard = (props) => {
-  const { product } = props.product;
-  const { category, name } = props.product.product;
+  // console.log('star', props);
+  const relatedProduct = props.product.product;
+  const { name } = relatedProduct;
+  const category = relatedProduct.category.toUpperCase();
+  let defaultStyle = false;
+  let photo = '';
+  let price = '';
+  if (props.type === 'related') {
+    const styles = props.product.styles.results;
+    for (let i = 0; i < styles.length; i += 1) {
+      if (styles[i]['default?'] === true) {
+        defaultStyle = true;
+        if (styles[i].photos[0].thumbnail_url !== null) {
+          photo = <div className='image' style={{ backgroundImage: `url(${styles[i].photos[0].thumbnail_url})`, backgroundSize: 'cover', repeat: 'no-repeat' }}></div>;
+        } else {
+          photo = <div className='image'>
+            { name }
+          </div>;
+        }
+        if (styles[i].sale_price !== null) {
+          price = (
+            <p>
+              <span style={{ color: 'red' }}>${styles[i].sale_price}</span>
+              <span style={{ textDecorationLine: 'line-through' }}>${relatedProduct.default_price}</span>
+            </p>
+          );
+        } else {
+          price = <p><span>${relatedProduct.default_price}</span></p>;
+        }
+      }
+    }
+    if (defaultStyle === false) {
+      if (styles[0].photos[0].thumbnail_url !== null) {
+        photo = <div className='image' style={{ backgroundImage: `url(${styles[0].photos[0].thumbnail_url})`, backgroundSize: 'cover', repeat: 'no-repeat' }}></div>;
+      } else {
+        photo = <div className='image'>
+            { name }
+          </div>;
+      }
+      if (styles[0].sale_price !== null) {
+        price = (
+          <p>
+            <span style={{ color: 'red' }}>${styles[0].sale_price}</span>
+            <span style={{ textDecoration: 'strikethrough' }}>${relatedProduct.default_price}</span>
+          </p>);
+      } else {
+        price = <p className='cardInfo'><span>${relatedProduct.default_price}</span></p>;
+      }
+    }
+  } else { // if props.type = 'outfit
+    // photo
+    const { styles } = props.product;
+    if (styles.photos[0].thumbnail_url !== null) {
+      photo = <div className='image' style={{ backgroundImage: `url(${styles.photos[0].thumbnail_url})`, backgroundSize: 'cover', repeat: 'no-repeat' }}></div>;
+    } else {
+      photo = <div className='image'>
+          { name }
+        </div>;
+    }
+    // price
+    if (styles.sale_price !== null) {
+      price = (
+        <p>
+          <span style={{ color: 'red' }}>${styles.sale_price}</span>
+          <span style={{ textDecorationLine: 'line-through' }}>${relatedProduct.default_price}</span>
+        </p>
+      );
+    } else {
+      price = <p className='cardInfo'><span>${relatedProduct.default_price}</span></p>;
+    }
+  }
   return (
-    <div className='card'>
-      <Button type={ props.type }
+    <div>
+      { props.type === 'related' ? <Button type={ props.type }
         product={ props.product }
         onClickStar={ props.onClickStar }
         onClickCircleX={ props.onClickCircleX }
-      />
-      <img src='' alt={ product.name } />
-      <div className='container'>
-        <p>{category.toUpperCase()}</p>
-        <p><b>{name}</b></p>
-        {/* 3. price for default style
-          if on sale, sale price in red followed by orig. price w/ strikethrough */}
-        <p>{props.product.product.default_price}</p>
-        <StarRating />
+        /> : <Button type={ props.type }
+        product={ props.product }
+        onClickCircleX={ props.onClickCircleX }
+        />
+      }
+      <div className='card' onClick={() => props.onClickCard(relatedProduct.id)}>
+        { photo }
+        <p className='cardInfo'>{ category }</p>
+        <p className='cardInfo'><b>{ name }</b></p>
+          { price }
+          <StarRating />
       </div>
     </div>
   );
@@ -34,6 +104,7 @@ ProductCard.propTypes = {
   default_price: PropTypes.number,
   type: PropTypes.string,
   showModal: PropTypes.bool,
+  onClickCard: PropTypes.func,
   onClickStar: PropTypes.func,
   onClickCloseModal: PropTypes.func,
   onClickCircleX: PropTypes.func,

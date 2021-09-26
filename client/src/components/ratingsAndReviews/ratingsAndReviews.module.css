@@ -1,0 +1,359 @@
+.ratings-and-reviews {
+  display: grid;
+  grid-template-columns: 0.5fr 1fr 2fr 0.5fr
+}
+
+.ratings-and-reviews-title {
+  grid-column-start: 2;
+  grid-column-end: 3;
+}
+
+.ratings-container {
+  grid-column-start: 2;
+  grid-column-end: 3;
+}
+
+.reviews-container {
+  grid-column-start: 3;
+  grid-column-end: 4;
+  height: 95%;
+}
+
+.reviews-list {
+  margin-top: 40px;
+  height: 450px;
+  overflow-y: auto;
+}
+
+.review {
+  border-bottom: 2px solid #dbe7f7ff;
+  margin-bottom: 20px
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px
+}
+
+.review-body {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 20px
+}
+
+.review-summary {
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 20px
+}
+
+.review-recommendation {
+  margin-bottom: 20px
+}
+
+.review-response {
+  background-color: #dbe7f7ff;
+  margin-bottom: 20px
+}
+
+.review-photo-container {
+  margin-bottom: 20px;
+}
+
+.review-photo {
+  width: auto;
+  height: 100px;
+  margin-right: 20px;
+}
+
+.review-photo:hover {
+  cursor: pointer;
+}
+
+.review-photo-modal {
+  width: 90%;
+  height: 90%;
+  border: 1px solid #dbe7f7ff;
+  padding: 10px;
+  position: fixed;
+  z-index: 100;
+  display: block;
+  top: 2%;
+  left: 2%;
+  background-color: white;
+  overflow-y: auto;
+  display: flex;
+}
+
+.review-photo-expanded {
+  width: 70%;
+  margin-left: 15%;
+  margin-right: 10%;
+}
+
+.review-helpful-rating {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 10px
+}
+
+.review-helpful-rating-sub {
+  display: flex;
+  justify-content: flex-start;
+  margin-right: 5px;
+  margin-bottom: 10px
+}
+
+.review-division {
+  color: #dbe7f7ff;
+}
+
+.review-buttons {
+  margin-bottom: 20px;
+}
+
+.review-btn {
+  background-color: #dbe7f7ff;
+  border: none;
+  padding: 10px 20px;
+  text-align: 'center';
+  margin-right: 5px;
+  cursor: pointer;
+  align-items: center;
+}
+
+.rating-summary {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
+}
+
+.rating-score {
+  font-weight: bold;
+  font-size: 30px;
+  margin-right: 10px;
+}
+
+.rating-recommendation {
+  margin-bottom: 10px;
+}
+
+.star-breakdown {
+  margin-bottom: 10px;
+}
+
+.star-breakdown-div {
+  display: flex;
+  margin-top: 10px;
+}
+
+.star-breakdown-div:hover {
+  background: linear-gradient(to right, #dbe7f7ff 80%, white 20%);
+}
+
+.star-breakdown-bar-container {
+  background-color: #dcdcdc;
+  width: 50%;
+  height: 10px;
+  z-index: 100;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.product-breakdown {
+  margin-top: 10px;
+  width: '50%';
+}
+
+.product-breakdown-container {
+  display: grid;
+  grid-template-columns: repeat(5, 16%);
+  grid-template-rows: repeat(2, 15px);
+  row-gap: 5px;
+  margin-bottom: 10px;
+}
+
+.product-breakdown-option-0 {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  margin-top: 10px;
+}
+.product-breakdown-option-1 {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  margin-top: 10px;
+}
+.product-breakdown-option-2 {
+  grid-column-start: 3;
+  grid-column-end: 4;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  margin-top: 10px;
+}
+.product-breakdown-option-3 {
+  grid-column-start: 4;
+  grid-column-end: 5;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  margin-top: 10px;
+}
+.product-breakdown-option-4 {
+  grid-column-start: 5;
+  grid-column-end: 6;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  margin-top: 10px;
+}
+
+.product-breakdown-indicator-0 {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  font-size: small;
+}
+
+.product-breakdown-indicator-1 {
+  grid-column-start: 5;
+  grid-column-end: 6;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  font-size: small;
+}
+
+.product-breakdown-caret-down {
+  grid-column-start: 1;
+  grid-column-end: 6;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  color: #b1d2b0ff;
+}
+
+.review-modal {
+  width: 50%;
+  height: 80%;
+  border: 1px solid #dbe7f7ff;
+  padding: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  position: fixed;
+  z-index: 100;
+  display: block;
+  top: 10%;
+  left: 23%;
+  background-color: white;
+  overflow-y: auto;
+}
+
+.review-modal-content {
+  width: 80%;
+  margin: auto;
+}
+
+.review-modal-title {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
+}
+
+.review-modal-subtitle {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+}
+
+.review-modal-input {
+  margin-bottom: 10px;
+}
+
+.review-modal-textbox {
+  width: 600px;
+}
+
+.review-modal-textbox-body {
+  width: 600px;
+  height: 100px;
+}
+
+.char-rating-container {
+  display: grid;
+  grid-template-columns: repeat(7, 90px);
+  grid-template-rows: repeat(2, 1fr);
+  row-gap: 5px;
+  margin-bottom: 10px;
+}
+
+.char-rating-title {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  margin-left: 10px;
+}
+.char-rating-option-0 {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
+.char-rating-option-1 {
+  grid-column-start: 3;
+  grid-column-end: 4;
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
+.char-rating-option-2 {
+  grid-column-start: 4;
+  grid-column-end: 5;
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
+.char-rating-option-3 {
+  grid-column-start: 5;
+  grid-column-end: 6;
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
+.char-rating-option-4 {
+  grid-column-start: 6;
+  grid-column-end: 7;
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
+
+.char-option-indicator-0 {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  font-size: small;
+}
+
+.char-option-indicator-1 {
+  grid-column-start: 6;
+  grid-column-end: 7;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  font-size: small;
+}
+
+.char-option-chosen {
+  font-style: italic;
+  color: #92a4b3;
+  font-size: small;
+  margin-left: 90px;
+}
+
+.sort-dropdown {
+  border: none;
+  border-bottom: 1px solid #b1d2b0ff;
+}

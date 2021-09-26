@@ -17,6 +17,7 @@ beforeAll(() => {
     {
       currentProduct: testProduct[0].product,
       styleList: testProduct[0].styles.results,
+      currentStyle: testProduct[0].styles.results[0],
     },
     applyMiddleware(thunk),
   );
@@ -28,6 +29,7 @@ afterAll(() => {
     {
       currentProduct: {},
       styleList: [],
+      currentStyle: {},
     },
     applyMiddleware(thunk),
   );

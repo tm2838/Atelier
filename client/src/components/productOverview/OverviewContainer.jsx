@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint class-methods-use-this: ["error", { "exceptMethods": ["render"] }] */
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import ImageGallery from './ImageGallery.jsx';
@@ -9,31 +10,31 @@ import ProductSummary from './ProductSummary.jsx';
 import fetchProductAndStyles from '../../actions/fetchProduct';
 import './styles.css';
 
-class OverviewContainer extends React.Component {
-  componentDidMount() {
-    this.props.handleFetchProduct();
-  }
+const OverviewContainer = (props) => {
+  const { productId } = useParams();
 
-  render() {
-    return (
-      <div className='product-container'>
-        <figure className='gallery-container'>
-          <ImageGallery />
-        </figure>
-        <figure className='product-info-container'>
-          <ProductInfo />
-        </figure>
-        <figure className='product-summary-container'>
-          <ProductSummary />
-        </figure>
-      </div>
-    );
-  }
-}
+  useEffect(() => {
+    props.handleFetchProduct(productId);
+  }, [productId]);
+
+  return (
+    <div className='product-container' id='product-overview'>
+      <figure className='gallery-container'>
+        <ImageGallery />
+      </figure>
+      <figure className='product-info-container'>
+        <ProductInfo />
+      </figure>
+      <figure className='product-summary-container'>
+        <ProductSummary />
+      </figure>
+    </div>
+  );
+};
 
 const mapDispatchToProps = (dispatch) => ({
-  handleFetchProduct: () => {
-    dispatch(fetchProductAndStyles());
+  handleFetchProduct: (id) => {
+    dispatch(fetchProductAndStyles(id));
   },
 });
 
