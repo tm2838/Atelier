@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import Modal from '../Modal.jsx';
 
 describe('modal', () => {
@@ -115,5 +115,16 @@ describe('modal', () => {
       <Modal comparedProduct={ relatedProduct } currentProduct={ currentProduct } />,
     );
     expect(getByTestId('checkMark')).toBeTruthy();
+  });
+
+  it('should fire clickCloseModal when clicking on Modal', () => {
+    const onClickCloseModal = jest.fn();
+    // const onClickCloseModal = jest.fn;
+    const { getByText } = render(
+      <Modal comparedProduct={ relatedProduct }
+        currentProduct={ currentProduct } onClickCloseModal={onClickCloseModal} />,
+    );
+    fireEvent.click(getByText('COMPARING'));
+    expect(onClickCloseModal).toHaveBeenCalled();
   });
 });

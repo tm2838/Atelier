@@ -9,6 +9,8 @@ const {
   addNewestTag,
   addRelevanceTag,
   getTotalReviews,
+  markReviewHelpful,
+  reportReview,
 } = require('./reviews');
 const { getRelatedProducts } = require('./relatedProducts');
 const postInteractions = require('./interactions');
@@ -24,6 +26,9 @@ app.use((req, res, next) => {
     'Access-Control-Allow-Headers',
     'Origin, X-Requested-With, Content-Type, Accept',
   );
+  res.header(
+    'Access-Control-Allow-Methods', 'POST, PUT, GET, OPTIONS',
+  );
   next();
 });
 
@@ -35,7 +40,6 @@ app.get('/products/:id?', (req, res) => { // added optional id param to route
   // --Product_id-- Unsure on route handling atm,
   // so just using a single product for testing (id=47425)
   const id = req.params.id || 47421;
-  // const id = req.query.product_id || 47426;
   const response = {};
   getProduct(id, (product) => {
     response.product = product;
@@ -66,6 +70,24 @@ app.get('/reviews/:id', (req, res) => {
     .then(() => {
       res.status(200).send(response);
     });
+});
+
+app.put('/reviews/:reviewId/helpful', (req, res) => {
+  const id = req.params.reviewId;
+  markReviewHelpful(id)
+    .then(() => {
+      res.status(204).end();
+    })
+    .catch((e) => console.log(e)); //eslint-disable-line
+});
+
+app.put('/reviews/:reviewId/report', (req, res) => {
+  const id = req.params.reviewId;
+  reportReview(id)
+    .then(() => {
+      res.status(204).end();
+    })
+    .catch((e) => console.log(e)); //eslint-disable-line
 });
 
 app.get('/relatedProducts/:id', (req, res) => {
@@ -99,8 +121,8 @@ app.post('/interactions', (req, res) => {
   if (!Object.keys(body.element).length) {
     body.element = 'unknown-element';
   }
-  console.log(body);
   postInteractions(body, (response) => {
+    console.log(response.status); //eslint-disable-line
     res.status(response.status).send();
   });
 });

@@ -76,31 +76,31 @@ class StarBreakdown extends React.Component {
             <div onClick={this.onFilter} className={`${CSS['star-breakdown-div']} 5`}>
               <div style={{ marginRight: '10px' }}>5 Stars</div>
               <StarBreakdownBar barStyle={{ width: `${(reviewMeta.ratings['5'] / reviewMeta.totalReviews) * 100 || 0}%` }}/>
-              <div>{reviewMeta.ratings['5'] || 0} reviews</div>
+              <div>{reviewMeta.ratings['5'] || 0}</div>
             </div>
 
             <div onClick={this.onFilter} className={`${CSS['star-breakdown-div']} 4`}>
               <div style={{ marginRight: '10px' }}>4 Stars</div>
               <StarBreakdownBar barStyle={{ width: `${(reviewMeta.ratings['4'] / reviewMeta.totalReviews) * 100 || 0}%` }}/>
-              <div>{reviewMeta.ratings['4'] || 0} reviews</div>
+              <div>{reviewMeta.ratings['4'] || 0}</div>
             </div>
 
             <div onClick={this.onFilter} className={`${CSS['star-breakdown-div']} 3`}>
               <div style={{ marginRight: '10px' }}>3 Stars</div>
               <StarBreakdownBar barStyle={{ width: `${(reviewMeta.ratings['3'] / reviewMeta.totalReviews) * 100 || 0}%` }}/>
-              <div>{reviewMeta.ratings['3'] || 0} reviews</div>
+              <div>{reviewMeta.ratings['3'] || 0}</div>
             </div>
 
             <div onClick={this.onFilter} className={`${CSS['star-breakdown-div']} 2`}>
               <div style={{ marginRight: '10px' }}>2 Stars</div>
               <StarBreakdownBar barStyle={{ width: `${(reviewMeta.ratings['2'] / reviewMeta.totalReviews) * 100 || 0}%` }}/>
-              <div>{reviewMeta.ratings['2'] || 0} reviews</div>
+              <div>{reviewMeta.ratings['2'] || 0}</div>
             </div>
 
             <div onClick={this.onFilter} className={`${CSS['star-breakdown-div']} 1`}>
               <div style={{ marginRight: '16px' }}>1 Star {' '}</div>
               <StarBreakdownBar barStyle={{ width: `${(reviewMeta.ratings['1'] / reviewMeta.totalReviews) * 100 || 0}%` }}/>
-              <div>{reviewMeta.ratings['1'] || 0} reviews</div>
+              <div>{reviewMeta.ratings['1'] || 0}</div>
             </div>
           </div>
           </>

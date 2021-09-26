@@ -7,19 +7,17 @@ function withClickTracker(WrappedComponent, widget) {
   return class extends React.Component {
     componentDidMount() {
       document.getElementById(widget).addEventListener('click', (event) => {
-        // event.preventDefault();
+        if (!['INPUT', 'TEXTAREA'].includes(event.target.tagName)) {
+          event.preventDefault();
+        }
         const body = {
-          element: event.target.className,
+          element: event.target.tagName,
           widget,
           time: new Date().toString(),
         };
         postInteractions(body);
       });
     }
-
-    // componentWillUnmount() {
-    //   document.removeEventListener('click');
-    // }
 
     render() {
       return <WrappedComponent {...this.props} />;

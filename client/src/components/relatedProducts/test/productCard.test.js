@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import ProductCard from '../ProductCard.jsx';
 import '../../common/fontAwesomeIcons';
 
@@ -45,29 +45,29 @@ describe('productCard', () => {
   };
 
   it('should render related product ProductCard component without crashing', () => {
-    const { getAllByText } = render(<ProductCard product={ relatedProduct } />);
+    const { getAllByText } = render(<ProductCard type='related' product={ relatedProduct } />);
     expect(getAllByText(/Bright Future Sunglasses/i)).toBeTruthy();
   });
 
   it('should render sale price when default style is on sale', () => {
-    const { getByText } = render(<ProductCard product={ relatedProduct } />);
+    const { getByText } = render(<ProductCard type='related' product={ relatedProduct } />);
     expect(getByText(/30.00/)).toBeTruthy();
   });
 
   it('should also render default price when default style is on sale', () => {
-    const { getByText } = render(<ProductCard product={ relatedProduct } />);
+    const { getByText } = render(<ProductCard type='related' product={ relatedProduct } />);
     expect(getByText(/69.00/)).toBeTruthy();
   });
 
   it('should render default price when default style is not on sale', () => {
     relatedProduct.styles.results[1].sale_price = null;
-    const { getByText } = render(<ProductCard product={ relatedProduct } />);
+    const { getByText } = render(<ProductCard type='related' product={ relatedProduct } />);
     expect(getByText(/69.00/)).toBeTruthy();
   });
 
   it('should not render sale price when default style is not on sale', () => {
     relatedProduct.styles.results[1].sale_price = null;
-    const { queryAllByText } = render(<ProductCard product={ relatedProduct } />);
+    const { queryAllByText } = render(<ProductCard type='related' product={ relatedProduct } />);
     expect(queryAllByText(/30.00/)).toHaveLength(0);
   });
 });

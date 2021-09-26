@@ -34,7 +34,7 @@ class CharRating extends React.Component {
               name={characteristic}
               checked={selected === option}
               className={CSS[`char-rating-option-${options.indexOf(option)}`]}
-              onClick={this.onSelectOption}
+              onChange={this.onSelectOption}
             />)}
           <div className={CSS['char-option-indicator-0']}>{options[0]}</div>
           <div className={CSS['char-option-indicator-1']}>{options[4]}</div>
