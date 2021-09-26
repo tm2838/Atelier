@@ -1,12 +1,16 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
-import { render } from '@testing-library/react';
+import { StateMock } from '@react-mock/state';
+import 'regenerator-runtime/runtime';
+import { render, fireEvent } from '@testing-library/react';
+import { waitFor } from '@testing-library/dom';
 import fetchMock from 'jest-fetch-mock';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from '../../../reducers/rootReducer';
-import RelatedProductsContainer from '../RelatedProductsContainer.jsx';
+import RelatedProducts from '../RelatedProducts.jsx';
+import ProductCard from '../ProductCard.jsx';
 
 describe('relatedProducts', () => {
   const testStore = createStore(
@@ -16,14 +20,11 @@ describe('relatedProducts', () => {
   );
 
   it('should render RelatedProducts component without crashing', () => {
-    const location = {
-      pathname: 47421,
-    };
-    const { getByTestId } = render(
+    const { getByText } = render(
       <Provider store={testStore}>
-        <RelatedProductsContainer productId='47421' />
+        <RelatedProducts />
       </Provider>,
     );
-    expect(getByTestId('related-products')).toBeTruthy();
+    expect(getByText('RELATED PRODUCTS')).toBeTruthy();
   });
 });
