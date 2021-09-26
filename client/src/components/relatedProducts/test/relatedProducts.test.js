@@ -1,9 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
-import { StateMock } from '@react-mock/state';
-import 'regenerator-runtime/runtime';
 import { render, fireEvent } from '@testing-library/react';
-import { waitFor } from '@testing-library/dom';
 import fetchMock from 'jest-fetch-mock';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
