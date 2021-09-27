@@ -10,47 +10,26 @@ class ReviewModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      uploadedPhotos: [],
-      characters: 0,
+      rating: 0,
+      summary: '',
+      body: '',
       recommend: '',
-      starRating: 0,
+      name: '',
+      email: '',
+      photos: [],
+      characteristics: {},
+      characters: 0,
     };
-    this.handlePostReview = this.handlePostReview.bind(this);
+    this.handleStarRating = this.handleStarRating.bind(this);
+    this.handleReviewSummary = this.handleReviewSummary.bind(this);
+    this.handleBodyChange = this.handleBodyChange.bind(this);
     this.handleRecommendation = this.handleRecommendation.bind(this);
+    this.handleName = this.handleName.bind(this);
+    this.handleEmail = this.handleEmail.bind(this);
     this.handleUploadPhoto = this.handleUploadPhoto.bind(this);
     this.handleDeletePhoto = this.handleDeletePhoto.bind(this);
-    this.handleBodyChange = this.handleBodyChange.bind(this);
-    this.handleStarRating = this.handleStarRating.bind(this);
-  }
-
-  handlePostReview() {
-
-  }
-
-  handleRecommendation(e) {
-    if (e.target.value === this.state.recommend) {
-      this.setState({ recommend: '' });
-    } else {
-      this.setState({ recommend: e.target.value });
-    }
-  }
-
-  handleUploadPhoto(e) {
-    e.preventDefault();
-    this.setState({
-      uploadedPhotos: [...this.state.uploadedPhotos, URL.createObjectURL(e.target.files[0])],
-    });
-  }
-
-  handleDeletePhoto(e) {
-    const photoToDelete = this.state.uploadedPhotos.indexOf(e.target.src);
-    const remainingPhotos = this.state.uploadedPhotos.slice();
-    remainingPhotos.splice(photoToDelete, 1);
-    this.setState({ uploadedPhotos: remainingPhotos });
-  }
-
-  handleBodyChange(e) {
-    this.setState({ characters: e.target.value.length });
+    this.handleReviewCharacteristics = this.handleReviewCharacteristics.bind(this);
+    this.handlePostReview = this.handlePostReview.bind(this);
   }
 
   handleStarRating(e) {
@@ -61,11 +40,85 @@ class ReviewModal extends React.Component {
       classes = e.target.parentNode.getAttribute('class').split(' ');
     }
     const rating = classes[classes.length - 1];
-    this.setState({ starRating: rating });
+    this.setState({ rating });
+  }
+
+  handleReviewSummary(e) {
+    this.setState({ summary: e.target.value });
+  }
+
+  handleBodyChange(e) {
+    this.setState({ body: e.target.value, characters: e.target.value.length });
+  }
+
+  handleRecommendation(e) {
+    if (e.target.value === this.state.recommend) {
+      this.setState({ recommend: '' });
+    } else {
+      this.setState({ recommend: e.target.value });
+    }
+  }
+
+  handleName(e) {
+    this.setState({ name: e.target.value });
+  }
+
+  handleEmail(e) {
+    this.setState({ email: e.target.value });
+  }
+
+  handleUploadPhoto(e) {
+    e.preventDefault();
+    this.setState({
+      photos: [...this.state.photos, URL.createObjectURL(e.target.files[0])],
+    });
+  }
+
+  handleDeletePhoto(e) {
+    const photoToDelete = this.state.photos.indexOf(e.target.src);
+    const remainingPhotos = this.state.photos.slice();
+    remainingPhotos.splice(photoToDelete, 1);
+    this.setState({ photos: remainingPhotos });
+  }
+
+  handleReviewCharacteristics(e) {
+    const { reviewMeta: { characteristics } } = this.props;
+    const newCharacteristics = {};
+    if (characteristics[e.target.name]) {
+      newCharacteristics[characteristics[e.target.name].id] = parseInt(e.target.className.split(' ')[1], 10);
+    } else {
+      let currentIdMax = 0;
+      const charsArr = Object.values(characteristics);
+      for (let i = 0; i < charsArr.length; i += 1) {
+        const currentChar = charsArr[i];
+        if (currentChar.id > currentIdMax) {
+          currentIdMax = currentChar.id;
+        }
+      }
+      newCharacteristics[currentIdMax + 1] = parseInt(e.target.className.split(' ')[1], 10);
+    }
+    this.setState({ characteristics: { ...this.state.characteristics, ...newCharacteristics } });
+  }
+
+  handlePostReview() {
+    const {
+      rating, summary, body, recommend, name, email, photos, characteristics,
+    } = this.state;
+    const newReview = {
+      rating: parseInt(rating, 10),
+      summary,
+      body,
+      recommend: recommend === 'yes',
+      name,
+      email,
+      photos,
+      characteristics,
+    };
+    console.log(newReview); //eslint-disable-line
   }
 
   render() {
-    const { characters, starRating } = this.state;
+    const { characters, rating } = this.state;
     const { product, onModalClose } = this.props;
     const starRatingOptions = {
       1: 'Poor', 2: 'Fair', 3: 'Average', 4: 'Good', 5: 'Great',
@@ -82,8 +135,8 @@ class ReviewModal extends React.Component {
                 <div style={{
                   display: 'flex', color: '#92a4b3', fontStyle: 'italic',
                 }}>
-                <StarRating rating={starRating} onClick={this.handleStarRating}/>
-                {starRatingOptions[starRating]}
+                <StarRating rating={rating} onClick={this.handleStarRating}/>
+                {starRatingOptions[rating]}
                 </div>
               </div>
 
@@ -98,26 +151,32 @@ class ReviewModal extends React.Component {
                 <CharRating
                   characteristic='Size'
                   options={['A size too small', '1⁄2 a size too small', 'Perfect', '1⁄2 a size too big', 'A size too wide']}
+                  handleChange={this.handleReviewCharacteristics}
                 />
                 <CharRating
                   characteristic='Width'
                   options={['Too narrow', 'Slightly narrow', 'Perfect', 'Slightly wide', 'Too wide']}
+                  handleChange={this.handleReviewCharacteristics}
                 />
                 <CharRating
                   characteristic='Comfort'
                   options={['Uncomfortable', 'Slightly uncomfortable', 'OK', 'Comfortable', 'Perfect']}
+                  handleChange={this.handleReviewCharacteristics}
                 />
                 <CharRating
                   characteristic='Quality'
                   options={['Poor', 'Below average', 'What I expected', 'Pretty great', 'Perfect']}
+                  handleChange={this.handleReviewCharacteristics}
                 />
                 <CharRating
                   characteristic='Length'
                   options={['Runs Short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long']}
+                  handleChange={this.handleReviewCharacteristics}
                 />
                 <CharRating
                   characteristic='Fit'
                   options={['Runs Tight', 'Runs slightly tight', 'Perfect', 'Runs slightly long', 'Runs long']}
+                  handleChange={this.handleReviewCharacteristics}
                 />
               </div>
 
@@ -128,6 +187,7 @@ class ReviewModal extends React.Component {
                   placeholder='Example: Best purchase ever!'
                   maxLength='60'
                   className={CSS['review-modal-textbox']}
+                  onChange={this.handleReviewSummary}
                 />
               </div>
 
@@ -152,12 +212,12 @@ class ReviewModal extends React.Component {
                   id='review-photo'
                   name='filename'
                   onChange={this.handleUploadPhoto}
-                  disabled={this.state.uploadedPhotos.length === 5}
+                  disabled={this.state.photos.length === 5}
                   style={{ marginBottom: '10px' }}
                 />
               </div>
 
-              {this.state.uploadedPhotos.map(
+              {this.state.photos.map(
                 (url) => <img src={url} alt='uploaded l=hoto' key={url} className={CSS['review-photo']} onClick={this.handleDeletePhoto} />,
               )}
 
@@ -169,6 +229,7 @@ class ReviewModal extends React.Component {
                   maxLength='60'
                   required
                   className={CSS['review-modal-textbox']}
+                  onChange={this.handleName}
                 />
                 <div><i>For privacy reasons, do not use your full name or email address</i></div>
               </div>
@@ -181,13 +242,14 @@ class ReviewModal extends React.Component {
                     maxLength='60'
                     required
                     className={CSS['review-modal-textbox']}
+                    onChange={this.handleEmail}
                   />
                   <div><i>For authentication reasons, you will not be emailed</i></div>
               </div>
             </>
 
             <div>
-              <button className={CSS['review-btn']} onClick={onModalClose}>Add Review</button>
+              <button className={CSS['review-btn']} onClick={this.handlePostReview}>Submit Review</button>
               <button className={CSS['review-btn']} onClick={onModalClose}>Cancel</button>
             </div>
           </form>
@@ -199,6 +261,7 @@ class ReviewModal extends React.Component {
 
 const mapStateToProps = (state) => ({
   product: state.currentProduct,
+  reviewMeta: state.reviewMeta,
 });
 
 export default connect(mapStateToProps)(ReviewModal);

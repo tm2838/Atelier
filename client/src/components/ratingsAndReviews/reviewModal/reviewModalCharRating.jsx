@@ -17,6 +17,7 @@ class CharRating extends React.Component {
     } else {
       this.setState({ selected: e.target.value });
     }
+    this.props.handleChange(e);
   }
 
   render() {
@@ -33,7 +34,7 @@ class CharRating extends React.Component {
               value={option}
               name={characteristic}
               checked={selected === option}
-              className={CSS[`char-rating-option-${options.indexOf(option)}`]}
+              className={`${CSS[`char-rating-option-${options.indexOf(option)}`]} ${options.indexOf(option)}`}
               onChange={this.onSelectOption}
             />)}
           <div className={CSS['char-option-indicator-0']}>{options[0]}</div>
