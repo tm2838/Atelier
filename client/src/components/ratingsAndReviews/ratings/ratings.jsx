@@ -14,7 +14,7 @@ const Ratings = ({ reviews, reviewMeta }) => (
           {reviewMeta.ratingScore && (
             <div className={CSS['rating-summary']}>
               <div className={CSS['rating-score']}>{reviewMeta.ratingScore}</div>
-              <StarRating />
+              <StarRating rating={reviewMeta.ratingScore}/>
             </div>
           )}
           {reviewMeta.recommendationRate && (

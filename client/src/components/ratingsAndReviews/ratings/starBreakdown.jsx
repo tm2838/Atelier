@@ -35,7 +35,8 @@ class StarBreakdown extends React.Component {
         (review) => filters.includes(review.rating.toString()),
       );
     }
-    const loadedReviews = reviews.slice(0, this.props.loadedReviews.length || 2);
+    const reviewsToLoad = this.props.loadedReviews.length > 2 ? this.props.loadedReviews.length : 2;
+    const loadedReviews = reviews.slice(0, reviewsToLoad);
     const remainingReviews = reviews.filter((review) => !loadedReviews.includes(review));
     this.props.handleFilterReview(loadedReviews, remainingReviews);
     this.props.handleAddFilter(filters);
@@ -43,7 +44,8 @@ class StarBreakdown extends React.Component {
 
   onRemoveFilter() {
     this.props.handleAddFilter([]);
-    const loadedReviews = this.props.reviews.slice(0, this.props.loadedReviews.length || 2);
+    const reviewsToLoad = this.props.loadedReviews.length > 2 ? this.props.loadedReviews.length : 2;
+    const loadedReviews = this.props.reviews.slice(0, reviewsToLoad);
     const remainingReviews = this.props.reviews.filter((review) => !loadedReviews.includes(review));
     this.props.handleFilterReview(loadedReviews, remainingReviews);
   }

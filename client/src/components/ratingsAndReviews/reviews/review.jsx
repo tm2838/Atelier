@@ -65,7 +65,7 @@ class Review extends React.Component {
       <>
       <div className={CSS.review}>
         <div className={CSS['review-header']}>
-          <StarRating />
+          <StarRating rating={review.rating} />
           <div>{`${review.reviewer_name}, ${review.date.split('T')[0]}`}</div>
         </div>
 
