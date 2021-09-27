@@ -67,6 +67,9 @@ class ReviewModal extends React.Component {
   render() {
     const { characters, starRating } = this.state;
     const { product, onModalClose } = this.props;
+    const starRatingOptions = {
+      1: 'Poor', 2: 'Fair', 3: 'Average', 4: 'Good', 5: 'Great',
+    };
     return (
       <div className={CSS['review-modal']}>
         <div className={CSS['review-modal-content']}>
@@ -76,7 +79,12 @@ class ReviewModal extends React.Component {
             <>
               <div className={CSS['review-modal-star-rating']}>
                 <div required><b>Overall rating * </b></div>
+                <div style={{
+                  display: 'flex', color: '#92a4b3', fontStyle: 'italic',
+                }}>
                 <StarRating rating={starRating} onClick={this.handleStarRating}/>
+                {starRatingOptions[starRating]}
+                </div>
               </div>
 
               <div className={CSS['review-modal-input']}>
