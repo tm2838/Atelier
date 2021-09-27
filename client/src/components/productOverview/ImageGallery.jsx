@@ -3,10 +3,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import ImageMain from './ImageMain.jsx';
+import ImageZoomed from './ImageZoomed.jsx';
 import ImageList from './ImageList.jsx';
 import NavList from './ImageNavList.jsx';
 import ExpandButton from './ImageExButton.jsx';
-// import IconList from './ImageIconList.jsx';
+import IconList from './ImageIconList.jsx';
 
 class ImageGallery extends React.Component {
   constructor(props) {
@@ -14,12 +15,14 @@ class ImageGallery extends React.Component {
     this.state = {
       main: 0,
       thumb: 0,
+      isZoomed: false,
     };
-    this.handleImageClick = this.handleImageClick.bind(this);
+    this.handleThumbClick = this.handleThumbClick.bind(this);
     this.handleNavClick = this.handleNavClick.bind(this);
+    this.handleZoom = this.handleZoom.bind(this);
   }
 
-  handleImageClick(index) {
+  handleThumbClick(index) {
     const main = index + this.state.thumb;
     this.setState({
       main,
@@ -50,6 +53,13 @@ class ImageGallery extends React.Component {
     }
   }
 
+  handleZoom() {
+    const isZoomed = !this.state.isZoomed;
+    this.setState({
+      isZoomed,
+    });
+  }
+
   render() {
     return (
 
@@ -59,20 +69,43 @@ class ImageGallery extends React.Component {
         </figure>
 
         : <div className='gallery'>
-          <ImageMain photo={this.props.currentStyle.photos[this.state.main].url} />
 
-          <ImageList
-          thumb={this.state.thumb}
-          handleImageClick={this.handleImageClick}
-          />
-
-          <NavList
-            main={this.state.main}
-            thumb={this.state.thumb}
-            handleNavClick={this.handleNavClick}
-          />
-
-          <ExpandButton />
+          {
+            (!this.props.imageView)
+              ? <>
+                <ImageMain photo={this.props.currentStyle.photos[this.state.main].url} />
+                <ImageList
+                  thumb={this.state.thumb}
+                  handleImageClick={this.handleThumbClick} />
+                <NavList
+                  main={this.state.main}
+                  thumb={this.state.thumb}
+                  handleNavClick={this.handleNavClick} />
+                <ExpandButton />
+              </>
+              : <>
+                {
+                  (!this.state.isZoomed)
+                    ? <>
+                      <ImageMain
+                        photo={this.props.currentStyle.photos[this.state.main].url}
+                        onClick={this.handleZoom} />
+                      <IconList
+                        thumb={this.state.thumb}
+                        handleImageClick={this.handleThumbClick} />
+                      <NavList
+                        main={this.state.main}
+                        thumb={this.state.thumb}
+                        handleNavClick={this.handleNavClick}
+                      />
+                      <ExpandButton />
+                    </>
+                    : <ImageZoomed
+                      photo={this.props.currentStyle.photos[this.state.main].url}
+                      onClick={this.handleZoom} />
+                }
+              </>
+          }
         </div>
     );
   }

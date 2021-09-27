@@ -56,6 +56,15 @@
   grid-column-end: 30;
   grid-row-start: 1;
   grid-row-end: 32;
+  overflow: hidden;
+}
+
+.gallery-zoomed {
+  grid-column-start: 1;
+  grid-column-end: 30;
+  grid-row-start: 1;
+  grid-row-end: 32;
+  background-repeat: no-repeat;
 }
 
 .gallery-thumb {
@@ -66,6 +75,11 @@
 }
 
 .gallery-thumb:hover {
+  border: solid 2px white;
+  cursor: pointer;
+}
+
+.gallery-icon:hover {
   border: solid 2px white;
   cursor: pointer;
 }

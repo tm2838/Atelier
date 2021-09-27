@@ -7,13 +7,15 @@ const ImageMain = (props) => (
       src={props.photo}
       className='gallery-img'
       data-testid='gallery-img'
-      alt='Main image'>
+      alt='Main image'
+      onClick={() => props.onClick()}>
     </img>
   </figure>
 );
 
 ImageMain.propTypes = {
   photo: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
 export default ImageMain;

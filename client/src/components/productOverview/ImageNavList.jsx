@@ -35,7 +35,7 @@ const mapStateToProps = (state) => ({
 });
 
 NavList.propTypes = {
-  styles: PropTypes.object,
+  styles: PropTypes.array,
   currentStyle: PropTypes.object,
   main: PropTypes.number,
   thumb: PropTypes.number,

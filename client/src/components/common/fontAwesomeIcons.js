@@ -14,6 +14,7 @@ import {
   faCheck,
   faCaretDown,
   faExpand,
+  faImage,
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
@@ -31,4 +32,5 @@ library.add(
   faCheck,
   faCaretDown,
   faExpand,
+  faImage,
 );
