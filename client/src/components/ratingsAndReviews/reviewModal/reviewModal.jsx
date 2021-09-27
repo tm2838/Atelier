@@ -6,6 +6,8 @@ import CSS from '../ratingsAndReviews.module.css';
 import CharRating from './reviewModalCharRating.jsx';
 import StarRating from '../../common/starRating.jsx';
 import validateNewReview from '../../../helpers/validateNewReview';
+import submitReview from '../../../helpers/submitReview';
+import fetchReviews from '../../../actions/fetchReviews';
 
 class ReviewModal extends React.Component {
   constructor(props) {
@@ -87,19 +89,8 @@ class ReviewModal extends React.Component {
   handleReviewCharacteristics(e) {
     const { reviewMeta: { characteristics } } = this.props;
     const newCharacteristics = {};
-    if (characteristics[e.target.name]) {
-      newCharacteristics[characteristics[e.target.name].id] = parseInt(e.target.className.split(' ')[1], 10);
-    } else {
-      let currentIdMax = 0;
-      const charsArr = Object.values(characteristics);
-      for (let i = 0; i < charsArr.length; i += 1) {
-        const currentChar = charsArr[i];
-        if (currentChar.id > currentIdMax) {
-          currentIdMax = currentChar.id;
-        }
-      }
-      newCharacteristics[currentIdMax + 1] = parseInt(e.target.className.split(' ')[1], 10);
-    }
+    newCharacteristics[characteristics[e.target.name].id] = parseInt(e.target.className.split(' ')[1], 10) + 1;
+
     this.setState({ characteristics: { ...this.state.characteristics, ...newCharacteristics } });
   }
 
@@ -107,7 +98,9 @@ class ReviewModal extends React.Component {
     const {
       rating, summary, body, recommend, name, email, photos, characteristics,
     } = this.state;
+    const { product, onModalClose } = this.props;
     const newReview = {
+      product_id: product.id,
       rating: parseInt(rating, 10),
       summary,
       body,
@@ -122,13 +115,27 @@ class ReviewModal extends React.Component {
 
     const [valid, violations] = validateNewReview(newReview);
     this.setState({ valid, violations });
+    if (valid) {
+      submitReview(newReview)
+        .then(this.props.handleFetchReviews(newReview.product_id))
+        .catch((e) => console.log(e)); //eslint-disable-line
+      onModalClose();
+    }
   }
 
   render() {
     const {
-      characters, rating, violations,
+      characters, rating, valid, violations,
     } = this.state;
-    const { product, onModalClose } = this.props;
+    const { product, onModalClose, reviewMeta: { characteristics } } = this.props;
+    const charRatingOptions = {
+      Size: ['A size too small', '1⁄2 a size too small', 'Perfect', '1⁄2 a size too big', 'A size too wide'],
+      Width: ['Too narrow', 'Slightly narrow', 'Perfect', 'Slightly wide', 'Too wide'],
+      Comfort: ['Uncomfortable', 'Slightly uncomfortable', 'OK', 'Comfortable', 'Perfect'],
+      Quality: ['Poor', 'Below average', 'What I expected', 'Pretty great', 'Perfect'],
+      Length: ['Runs Short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long'],
+      Fit: ['Runs Tight', 'Runs slightly tight', 'Perfect', 'Runs slightly long', 'Runs long'],
+    };
     const starRatingOptions = {
       1: 'Poor', 2: 'Fair', 3: 'Average', 4: 'Good', 5: 'Great',
     };
@@ -146,9 +153,8 @@ class ReviewModal extends React.Component {
           <h4 className={CSS['review-modal-subtitle']}> About the {`${product.name}`}</h4>
           <form onSubmit={this.handlePostReview}>
             <>
-              {/*
-              {!valid && <div style={{ marginBottom: '10px' }}>You must enter the following:</div>}
-              */}
+              {!valid && <div style={{ marginBottom: '10px', color: 'red' }}>You must enter the following: {violations.join(', ')} </div>}
+
               <div className={`${CSS['review-modal-star-rating']} ${ratingViolation}`}>
                 <div required><b>Overall rating * </b></div>
                 <div style={{
@@ -167,36 +173,13 @@ class ReviewModal extends React.Component {
 
               <div className={CSS['review-modal-input']}>
                 <div required><b>Characteristics * </b></div>
-                <CharRating
-                  characteristic='Size'
-                  options={['A size too small', '1⁄2 a size too small', 'Perfect', '1⁄2 a size too big', 'A size too wide']}
-                  handleChange={this.handleReviewCharacteristics}
-                />
-                <CharRating
-                  characteristic='Width'
-                  options={['Too narrow', 'Slightly narrow', 'Perfect', 'Slightly wide', 'Too wide']}
-                  handleChange={this.handleReviewCharacteristics}
-                />
-                <CharRating
-                  characteristic='Comfort'
-                  options={['Uncomfortable', 'Slightly uncomfortable', 'OK', 'Comfortable', 'Perfect']}
-                  handleChange={this.handleReviewCharacteristics}
-                />
-                <CharRating
-                  characteristic='Quality'
-                  options={['Poor', 'Below average', 'What I expected', 'Pretty great', 'Perfect']}
-                  handleChange={this.handleReviewCharacteristics}
-                />
-                <CharRating
-                  characteristic='Length'
-                  options={['Runs Short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long']}
-                  handleChange={this.handleReviewCharacteristics}
-                />
-                <CharRating
-                  characteristic='Fit'
-                  options={['Runs Tight', 'Runs slightly tight', 'Perfect', 'Runs slightly long', 'Runs long']}
-                  handleChange={this.handleReviewCharacteristics}
-                />
+                {Object.keys(characteristics).map(
+                  (char) => <CharRating
+                  key={char}
+                  characteristic={char}
+                  options={charRatingOptions[char]}
+                  handleChange={this.handleReviewCharacteristics}/>,
+                )}
               </div>
 
               <div className={CSS['review-modal-input']}>
@@ -283,4 +266,10 @@ const mapStateToProps = (state) => ({
   reviewMeta: state.reviewMeta,
 });
 
-export default connect(mapStateToProps)(ReviewModal);
+const mapDispatchToProps = (dispatch) => ({
+  handleFetchReviews: (productId) => {
+    dispatch(fetchReviews(productId));
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ReviewModal);
