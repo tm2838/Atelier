@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import ImageMain from './ImageMain.jsx';
-import ImageNavButton from './ImageNavButton.jsx';
+import NavList from './ImageNavList.jsx';
 import ExpandButton from './ImageExButton.jsx';
 
 class ImageGallery extends React.Component {
@@ -57,7 +57,7 @@ class ImageGallery extends React.Component {
         </figure>
 
         : <div className='gallery'>
-          <ImageMain photo={this.props.currentStyle.photos[this.state.main].url}/>
+          <ImageMain photo={this.props.currentStyle.photos[this.state.main].url} />
 
           <figure className='gallery-thumb-0' onClick={() => this.handleImageClick(0)}>
             <img
@@ -69,70 +69,55 @@ class ImageGallery extends React.Component {
 
           {
             this.props.currentStyle.photos[1] && <figure className='gallery-thumb-1' data-testid='gallery-thumb-1'
-            onClick={() => this.handleImageClick(1)}>
-            <img
-              src={this.props.currentStyle.photos[this.state.thumb + 1].thumbnail_url}
-              className='gallery-thumb'
-              alt='Thumbnail'>
-            </img>
-          </figure>
+              onClick={() => this.handleImageClick(1)}>
+              <img
+                src={this.props.currentStyle.photos[this.state.thumb + 1].thumbnail_url}
+                className='gallery-thumb'
+                alt='Thumbnail'>
+              </img>
+            </figure>
           }
 
           {
             this.props.currentStyle.photos[2] && <figure className='gallery-thumb-2' data-testid='gallery-thumb-2'
-            onClick={() => this.handleImageClick(2)}>
-            <img
-              src={this.props.currentStyle.photos[this.state.thumb + 2].thumbnail_url}
-              className='gallery-thumb'
-              alt='Thumbnail'>
-            </img>
-          </figure>
+              onClick={() => this.handleImageClick(2)}>
+              <img
+                src={this.props.currentStyle.photos[this.state.thumb + 2].thumbnail_url}
+                className='gallery-thumb'
+                alt='Thumbnail'>
+              </img>
+            </figure>
           }
 
           {
             this.props.currentStyle.photos[3] && <figure className='gallery-thumb-3' data-testid='gallery-thumb-3'
-            onClick={() => this.handleImageClick(3)}>
-            <img
-              src={this.props.currentStyle.photos[this.state.thumb + 3].thumbnail_url}
-              className='gallery-thumb'
-              alt='Thumbnail'>
-            </img>
-          </figure>
+              onClick={() => this.handleImageClick(3)}>
+              <img
+                src={this.props.currentStyle.photos[this.state.thumb + 3].thumbnail_url}
+                className='gallery-thumb'
+                alt='Thumbnail'>
+              </img>
+            </figure>
           }
 
           {
             this.props.currentStyle.photos[4] && <figure className='gallery-thumb-4' data-testid='gallery-thumb-4'
-            onClick={() => this.handleImageClick(4)}>
-            <img
-              src={this.props.currentStyle.photos[this.state.thumb + 4].thumbnail_url}
-              className='gallery-thumb'
-              alt='Thumbnail'>
-            </img>
-          </figure>
+              onClick={() => this.handleImageClick(4)}>
+              <img
+                src={this.props.currentStyle.photos[this.state.thumb + 4].thumbnail_url}
+                className='gallery-thumb'
+                alt='Thumbnail'>
+              </img>
+            </figure>
           }
 
-          {this.props.currentStyle && this.state.main < this.props.currentStyle.photos.length - 1
-            && <figure className='gallery-nav-right'>
-              <ImageNavButton direction='right' icon={'arrow-right'} onClick={this.handleNavClick} />
-            </figure>}
+          <NavList
+          main={this.state.main}
+          thumb={this.state.thumb}
+          handleNavClick={this.handleNavClick}
+          />
 
-          {this.props.styles.length > 0 && this.state.main > 0
-            && <figure className='gallery-nav-left'>
-              <ImageNavButton direction={'left'} icon={'arrow-left'} onClick={this.handleNavClick} />
-            </figure>}
-
-          {this.props.styles.length > 0 && this.state.thumb > 0
-            && <figure className='gallery-nav-up'>
-              <ImageNavButton direction={'up'} icon={'angle-up'} onClick={this.handleNavClick} />
-            </figure>}
-
-          {this.props.currentStyle
-          && this.state.thumb + 4 < this.props.currentStyle.photos.length - 1
-            && <figure className='gallery-nav-down'>
-              <ImageNavButton direction={'down'} icon={'angle-down'} onClick={this.handleNavClick} />
-            </figure>}
-
-            <ExpandButton />
+          <ExpandButton />
         </div>
     );
   }

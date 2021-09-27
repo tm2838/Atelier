@@ -1,8 +1,7 @@
-/* eslint-disable react/prop-types */
-/* eslint class-methods-use-this: ["error", { "exceptMethods": ["render"] }] */
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import ImageGallery from './ImageGallery.jsx';
 import ProductInfo from './ProductInfo.jsx';
@@ -51,5 +50,10 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(fetchProductAndStyles(id));
   },
 });
+
+OverviewContainer.propTypes = {
+  imageView: PropTypes.bool,
+  handleFetchProduct: PropTypes.func,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(OverviewContainer);
