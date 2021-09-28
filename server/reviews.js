@@ -70,6 +70,10 @@ const getTotalReviews = (ratings) => Object.values(ratings).reduce(
   (p, c) => parseInt(p, 10) + parseInt(c, 10),
 );
 
+const postNewReview = (review) => axios.post(reviewUrl, review, {
+  headers: { Authorization: apiKey },
+});
+
 module.exports = {
   getReviews,
   getReviewMeta,
@@ -80,4 +84,5 @@ module.exports = {
   getTotalReviews,
   markReviewHelpful,
   reportReview,
+  postNewReview,
 };

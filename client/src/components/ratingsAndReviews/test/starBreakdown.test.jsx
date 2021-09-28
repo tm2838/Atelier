@@ -1,6 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
+
 import StarBreakdown from '../ratings/starBreakdown.jsx';
 import testStore from '../../../fixtures/testStore';
 import '../../common/fontAwesomeIcons';
