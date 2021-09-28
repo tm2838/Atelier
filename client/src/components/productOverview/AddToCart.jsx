@@ -16,6 +16,7 @@ class AddToCart extends React.Component {
     };
     this.handleSizeChange = this.handleSizeChange.bind(this);
     this.handleQtyChange = this.handleQtyChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSizeChange(e) {
@@ -31,10 +32,9 @@ class AddToCart extends React.Component {
     });
   }
 
-  handleSubmit(e) {
-    e.preventDefault();
+  handleSubmit() {
     if (this.state.sku) {
-      this.props.handleAdd(this.state.sku);
+      postToCart(this.state.sku);
     }
   }
 
@@ -58,7 +58,7 @@ class AddToCart extends React.Component {
       <>
         <SelectSize skus={currentStyle.skus} handleSizeChange={this.handleSizeChange}/>
         <SelectQty size={size} styleQty={styleQty} handleQtyChange={this.handleQtyChange}/>
-        <button id='add-item' className='checkout'>ADD TO BAG</button>
+        <button id='add-item' className='checkout' onClick={this.handleSubmit}>ADD TO BAG</button>
       </>
     );
   }
@@ -68,15 +68,9 @@ const mapStateToProps = (state) => ({
   currentStyle: state.currentStyle,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  handleAdd: (sku) => {
-    dispatch(postToCart(sku));
-  },
-});
-
 AddToCart.propTypes = {
   currentStyle: PropTypes.object,
   handleAdd: PropTypes.func,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddToCart);
+export default connect(mapStateToProps)(AddToCart);
