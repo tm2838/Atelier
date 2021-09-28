@@ -118,6 +118,9 @@ app.get('/relatedProducts/:id', (req, res) => {
 // eslint-disable-next-line no-unused-vars
 app.post('/interactions', (req, res) => {
   const { body } = req;
+  if (!Object.keys(body.element).length) {
+    body.element = 'unknown-element';
+  }
   postInteractions(body, (response) => {
     console.log(response.status); //eslint-disable-line
     res.status(response.status).send();

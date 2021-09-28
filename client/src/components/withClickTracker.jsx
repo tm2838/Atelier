@@ -15,9 +15,6 @@ function withClickTracker(WrappedComponent, widget) {
           widget,
           time: event.timeStamp.toString(),
         };
-        if (!body.element) {
-          body.element = 'unknown-element';
-        }
         postInteractions(body);
       });
     }
