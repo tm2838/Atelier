@@ -29,6 +29,7 @@ class CharRating extends React.Component {
         <div className={CSS['char-rating-container']}>
           <div className={CSS['char-rating-title']}>{characteristic}:</div>
           {options.map((option) => <input
+              data-testid={`option-${options.indexOf(option) + 1}`}
               key={option}
               type='radio'
               value={option}

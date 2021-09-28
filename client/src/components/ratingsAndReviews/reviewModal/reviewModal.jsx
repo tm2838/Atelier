@@ -183,9 +183,10 @@ class ReviewModal extends React.Component {
               </div>
 
               <div className={CSS['review-modal-input']}>
-                <div><b>Review Summary: </b></div>
+                <label htmlFor='review-summary'><b>Review Summary: </b></label>
                 <textarea
                   id='review-summary'
+                  data-testid='review-summary'
                   placeholder='Example: Best purchase ever!'
                   maxLength='60'
                   className={CSS['review-modal-textbox']}
