@@ -40,7 +40,7 @@ class AddToCart extends React.Component {
 
   render() {
     let styleQty = [];
-    const { size } = this.state;
+    const { sku, size } = this.state;
     const { currentStyle } = this.props;
     const makeQtyList = (qty) => {
       const qtyList = [];
@@ -51,7 +51,7 @@ class AddToCart extends React.Component {
       return qtyList;
     };
     if (size) {
-      styleQty = makeQtyList(currentStyle.quantity);
+      styleQty = makeQtyList(currentStyle.skus[sku].quantity);
     }
 
     return (
