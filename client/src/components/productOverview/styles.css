@@ -175,8 +175,19 @@
 }
 
 .style-selector {
-  display: inline;
+  position: relative;
+  display: inline-block;
   margin-right: 20px;
+}
+
+.style-selector img {
+  display: block;
+}
+
+.style-selector .style-check {
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .product-summary {

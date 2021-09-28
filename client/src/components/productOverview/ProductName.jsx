@@ -1,5 +1,5 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const ProductName = (props) => (
   <div className='product-title'>
@@ -13,5 +13,12 @@ const ProductName = (props) => (
     }
   </div>
 );
+
+ProductName.propTypes = {
+  category: PropTypes.string,
+  name: PropTypes.string,
+  price: PropTypes.string,
+  sale: PropTypes.string,
+};
 
 export default ProductName;
