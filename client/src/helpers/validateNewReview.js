@@ -17,10 +17,10 @@ const validationNewReview = (review) => {
     violations.push('recommend');
   }
 
-  if (Object.keys(review.characteristics).length < 6) {
-    valid = false;
-    violations.push('characteristics');
-  }
+  // if (Object.keys(review.characteristics).length < 6) {
+  //   valid = false;
+  //   violations.push('characteristics');
+  // }
 
   if (!review.name) {
     valid = false;
