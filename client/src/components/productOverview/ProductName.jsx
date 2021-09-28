@@ -1,15 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const ProductName = (props) => (
+const ProductName = ({
+  category,
+  name,
+  price,
+  sale,
+}) => (
   <div className='product-title'>
-    <span className='product product-category'>{props.category}</span>
-    <span className='product product-name'>{props.name}</span>
+    <span className='product product-category'>{category}</span>
+    <span className='product product-name'>{name}</span>
     {
-      (props.sale)
-        ? <><span className='product-price' style={{ textDecorationLine: 'line-through', textDecorationStyle: 'solid' }}>${props.price}</span>
-        <span className='product-sale' style={{ color: 'red' }}>{props.sale}</span></>
-        : <span className='product-price'>${props.price}</span>
+      (sale)
+        ? <><span className='product-price' style={{ textDecorationLine: 'line-through', textDecorationStyle: 'solid' }}>${price}</span>
+        <span className='product-sale' style={{ color: 'red' }}>{sale}</span></>
+        : <span className='product-price'>${price}</span>
     }
   </div>
 );
