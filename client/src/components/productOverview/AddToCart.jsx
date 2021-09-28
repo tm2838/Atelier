@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 import SelectSize from './SelectSize.jsx';
 import SelectQty from './SelectQty.jsx';
+import postToCart from '../../actions/productOverview/postToCart';
 
 class AddToCart extends React.Component {
   constructor(props) {
@@ -19,15 +20,22 @@ class AddToCart extends React.Component {
 
   handleSizeChange(e) {
     this.setState({
-      sku: e.target.value,
+      sku: Number(e.target.value),
       size: e.target.selectedOptions[0].text,
     });
   }
 
   handleQtyChange(e) {
     this.setState({
-      quantity: e.target.value,
+      quantity: Number(e.target.value),
     });
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    if (this.state.sku) {
+      this.props.handleAdd(this.state.sku);
+    }
   }
 
   render() {
@@ -60,8 +68,15 @@ const mapStateToProps = (state) => ({
   currentStyle: state.currentStyle,
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  handleAdd: (sku) => {
+    dispatch(postToCart(sku));
+  },
+});
+
 AddToCart.propTypes = {
   currentStyle: PropTypes.object,
+  handleAdd: PropTypes.func,
 };
 
-export default connect(mapStateToProps)(AddToCart);
+export default connect(mapStateToProps, mapDispatchToProps)(AddToCart);

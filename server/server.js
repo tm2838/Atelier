@@ -1,6 +1,6 @@
 const path = require('path');
 const express = require('express'); // npm installed
-const { getProduct, getStyles } = require('./products'); // Atelier api call to get product/product styles data
+const { getProduct, getStyles, postCart } = require('./products'); // Atelier api call to get product/product styles data
 const {
   getReviews,
   getReviewMeta,
@@ -47,6 +47,14 @@ app.get('/products/:id?', (req, res) => { // added optional id param to route
       response.styles = styles;
       res.send(JSON.stringify(response));
     });
+  });
+});
+
+app.post('/cart', (req, res) => {
+  const { body } = req;
+  postCart(body, (response) => {
+    console.log(response.status); //eslint-disable-line
+    res.status(response.status).send();
   });
 });
 
