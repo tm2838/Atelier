@@ -4,6 +4,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import CSS from '../ratingsAndReviews.module.css';
 import CharRating from './reviewModalCharRating.jsx';
+import StarRating from '../../common/starRating.jsx';
 
 class ReviewModal extends React.Component {
   constructor(props) {
@@ -12,12 +13,14 @@ class ReviewModal extends React.Component {
       uploadedPhotos: [],
       characters: 0,
       recommend: '',
+      starRating: 0,
     };
     this.handlePostReview = this.handlePostReview.bind(this);
     this.handleRecommendation = this.handleRecommendation.bind(this);
     this.handleUploadPhoto = this.handleUploadPhoto.bind(this);
     this.handleDeletePhoto = this.handleDeletePhoto.bind(this);
     this.handleBodyChange = this.handleBodyChange.bind(this);
+    this.handleStarRating = this.handleStarRating.bind(this);
   }
 
   handlePostReview() {
@@ -50,9 +53,23 @@ class ReviewModal extends React.Component {
     this.setState({ characters: e.target.value.length });
   }
 
+  handleStarRating(e) {
+    let classes;
+    if (e.target.getAttribute('class')) {
+      classes = e.target.getAttribute('class').split(' ');
+    } else {
+      classes = e.target.parentNode.getAttribute('class').split(' ');
+    }
+    const rating = classes[classes.length - 1];
+    this.setState({ starRating: rating });
+  }
+
   render() {
-    const { characters } = this.state;
+    const { characters, starRating } = this.state;
     const { product, onModalClose } = this.props;
+    const starRatingOptions = {
+      1: 'Poor', 2: 'Fair', 3: 'Average', 4: 'Good', 5: 'Great',
+    };
     return (
       <div className={CSS['review-modal']}>
         <div className={CSS['review-modal-content']}>
@@ -60,6 +77,16 @@ class ReviewModal extends React.Component {
           <h4 className={CSS['review-modal-subtitle']}> About the {`${product.name}`}</h4>
           <form onSubmit={this.handlePostReview}>
             <>
+              <div className={CSS['review-modal-star-rating']}>
+                <div required><b>Overall rating * </b></div>
+                <div style={{
+                  display: 'flex', color: '#92a4b3', fontStyle: 'italic',
+                }}>
+                <StarRating rating={starRating} onClick={this.handleStarRating}/>
+                {starRatingOptions[starRating]}
+                </div>
+              </div>
+
               <div className={CSS['review-modal-input']}>
                 <div required><b>Do you recommend this product? * </b></div>
                 <input type='radio' value='yes' name='recommend' id='recommend-yes' onChange={this.handleRecommendation} />  Yes
@@ -67,7 +94,7 @@ class ReviewModal extends React.Component {
               </div>
 
               <div className={CSS['review-modal-input']}>
-                <div required><b>Please rate each characteristic * </b></div>
+                <div required><b>Characteristics * </b></div>
                 <CharRating
                   characteristic='Size'
                   options={['A size too small', '1⁄2 a size too small', 'Perfect', '1⁄2 a size too big', 'A size too wide']}
@@ -118,32 +145,8 @@ class ReviewModal extends React.Component {
                 <div><i>{characters < 50 ? `Minimum required characters left: ${50 - characters}` : 'Minimum Reached'}</i></div>
               </div>
 
-              <div className={CSS['review-modal-input']}>
-                <div><b>What is your nick name? * </b></div>
-                <textarea
-                  id='username'
-                  placeholder='Example: jackson11'
-                  maxLength='60'
-                  required
-                  className={CSS['review-modal-textbox']}
-                />
-                <div><i>For privacy reasons, do not use your full name or email address</i></div>
-              </div>
-
-              <div className={CSS['review-modal-input']}>
-                <div><b>Your email? * </b></div>
-                  <textarea
-                    id='email'
-                    placeholder='Example: jackson11@email.com'
-                    maxLength='60'
-                    required
-                    className={CSS['review-modal-textbox']}
-                  />
-                  <div><i>For authentication reasons, you will not be emailed</i></div>
-              </div>
-
               <div>
-                <div><b>Upload photo (Max: 5)</b></div>
+                <div><b>Upload your photos (Max: 5)</b></div>
                 <input
                   type='file'
                   id='review-photo'
@@ -157,6 +160,30 @@ class ReviewModal extends React.Component {
               {this.state.uploadedPhotos.map(
                 (url) => <img src={url} alt='uploaded l=hoto' key={url} className={CSS['review-photo']} onClick={this.handleDeletePhoto} />,
               )}
+
+              <div className={CSS['review-modal-input']}>
+                <div><b>What is your nick name * </b></div>
+                <textarea
+                  id='username'
+                  placeholder='Example: jackson11'
+                  maxLength='60'
+                  required
+                  className={CSS['review-modal-textbox']}
+                />
+                <div><i>For privacy reasons, do not use your full name or email address</i></div>
+              </div>
+
+              <div className={CSS['review-modal-input']}>
+                <div><b>Your email * </b></div>
+                  <textarea
+                    id='email'
+                    placeholder='Example: jackson11@email.com'
+                    maxLength='60'
+                    required
+                    className={CSS['review-modal-textbox']}
+                  />
+                  <div><i>For authentication reasons, you will not be emailed</i></div>
+              </div>
             </>
 
             <div>
