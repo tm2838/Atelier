@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
 import ProductCard from './ProductCard.jsx';
 import Modal from './Modal.jsx';
+import './styles.css';
 
 class RelatedProducts extends React.Component {
   constructor(props) {
@@ -97,20 +98,26 @@ class RelatedProducts extends React.Component {
     const endRangeLimit = this.state.relatedProducts.length - 4;
     const productRange = this.state.relatedProducts.slice(index, index + 4);
     return (
-      <div className='relatedProducts carousel'>
-        <div>RELATED PRODUCTS</div>
-        { index ? <FontAwesomeIcon className='arrow left' data-testid='left-arrow'
-            icon={ faChevronLeft } onClick={this.onClickLeft}/> : ''
-        }
-        {productRange.map((product) => <ProductCard type={'related'} key={product.product.id}
-          product={ product }
-          onClickStar={ this.onClickStar }
-          onClickCard={ this.onClickCard }
-          />)
-        }
-        {index < endRangeLimit && <FontAwesomeIcon className='arrow right' data-testid='right-arrow'
-            icon={ faChevronRight } onClick={this.onClickRight} />
-        }
+      <div className='carousel'>
+        <div className='carouselHeading'>RELATED PRODUCTS</div>
+        <div className='left'>
+          { index ? <FontAwesomeIcon data-testid='left-arrow'
+              icon={ faChevronLeft } onClick={this.onClickLeft}/> : ''
+          }
+        </div>
+        <div className="relatedCardContainer">
+          {productRange.map((product) => <ProductCard type={'related'} key={product.product.id}
+            product={ product }
+            onClickStar={ this.onClickStar }
+            onClickCard={ this.onClickCard }
+            />)
+          }
+        </div>
+        <div className='right'>
+          {index < endRangeLimit ? <FontAwesomeIcon data-testid='right-arrow'
+              icon={ faChevronRight } onClick={this.onClickRight} /> : ''
+          }
+        </div>
         <Modal showModal= { this.state.showModal }
           comparedProduct={ this.state.comparedProduct }
           currentProduct={ this.props.currentProduct }

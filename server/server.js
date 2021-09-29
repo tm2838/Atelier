@@ -11,6 +11,7 @@ const {
   getTotalReviews,
   markReviewHelpful,
   reportReview,
+  postNewReview,
 } = require('./reviews');
 const { getRelatedProducts } = require('./relatedProducts');
 const postInteractions = require('./interactions');
@@ -94,6 +95,15 @@ app.put('/reviews/:reviewId/report', (req, res) => {
   reportReview(id)
     .then(() => {
       res.status(204).end();
+    })
+    .catch((e) => console.log(e)); //eslint-disable-line
+});
+
+app.post('/reviews', (req, res) => {
+  const { body } = req;
+  postNewReview(body)
+    .then(() => {
+      res.status(201).end();
     })
     .catch((e) => console.log(e)); //eslint-disable-line
 });
