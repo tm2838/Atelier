@@ -3,11 +3,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import CSS from '../ratingsAndReviews.module.css';
-import CharRating from './reviewModalCharRating.jsx';
-import StarRating from '../../common/starRating.jsx';
 import validateNewReview from '../../../helpers/validateNewReview';
 import submitReview from '../../../helpers/submitReview';
 import fetchReviews from '../../../actions/fetchReviews';
+
+import ReviewOverallRating from './reviewModalOverallRating.jsx';
+import ReviewRecommendation from './reviewModalRecommendation.jsx';
+import ReviewCharRatings from './reviewModalCharRatings.jsx';
+import ReviewContent from './reviewModalContent.jsx';
+import ReviewUserInfo from './reviewModalUserInfo.jsx';
 
 class ReviewModal extends React.Component {
   constructor(props) {
@@ -21,7 +25,6 @@ class ReviewModal extends React.Component {
       email: '',
       photos: [],
       characteristics: {},
-      characters: 0,
       valid: true,
       violations: [],
     };
@@ -31,37 +34,35 @@ class ReviewModal extends React.Component {
     this.handleRecommendation = this.handleRecommendation.bind(this);
     this.handleName = this.handleName.bind(this);
     this.handleEmail = this.handleEmail.bind(this);
-    this.handleUploadPhoto = this.handleUploadPhoto.bind(this);
-    this.handleDeletePhoto = this.handleDeletePhoto.bind(this);
+    this.handleUpdatePhotos = this.handleUpdatePhotos.bind(this);
     this.handleReviewCharacteristics = this.handleReviewCharacteristics.bind(this);
     this.handlePostReview = this.handlePostReview.bind(this);
   }
 
-  handleStarRating(e) {
-    let classes;
-    if (e.target.getAttribute('class')) {
-      classes = e.target.getAttribute('class').split(' ');
-    } else {
-      classes = e.target.parentNode.getAttribute('class').split(' ');
-    }
-    const rating = classes[classes.length - 1];
+  handleStarRating(rating) {
     this.setState({ rating });
   }
 
-  handleReviewSummary(e) {
-    this.setState({ summary: e.target.value });
+  handleRecommendation(recommend) {
+    this.setState({ recommend });
   }
 
-  handleBodyChange(e) {
-    this.setState({ body: e.target.value, characters: e.target.value.length });
+  handleReviewCharacteristics(characteristics) {
+    this.setState({ characteristics });
   }
 
-  handleRecommendation(e) {
-    if (e.target.value === this.state.recommend) {
-      this.setState({ recommend: '' });
-    } else {
-      this.setState({ recommend: e.target.value });
-    }
+  handleReviewSummary(summary) {
+    this.setState({ summary });
+  }
+
+  handleBodyChange(body) {
+    this.setState({ body });
+  }
+
+  handleUpdatePhotos(photos) {
+    this.setState({
+      photos,
+    });
   }
 
   handleName(e) {
@@ -72,33 +73,11 @@ class ReviewModal extends React.Component {
     this.setState({ email: e.target.value });
   }
 
-  handleUploadPhoto(e) {
-    e.preventDefault();
-    this.setState({
-      photos: [...this.state.photos, URL.createObjectURL(e.target.files[0])],
-    });
-  }
-
-  handleDeletePhoto(e) {
-    const photoToDelete = this.state.photos.indexOf(e.target.src);
-    const remainingPhotos = this.state.photos.slice();
-    remainingPhotos.splice(photoToDelete, 1);
-    this.setState({ photos: remainingPhotos });
-  }
-
-  handleReviewCharacteristics(e) {
-    const { reviewMeta: { characteristics } } = this.props;
-    const newCharacteristics = {};
-    newCharacteristics[characteristics[e.target.name].id] = parseInt(e.target.className.split(' ')[1], 10) + 1;
-
-    this.setState({ characteristics: { ...this.state.characteristics, ...newCharacteristics } });
-  }
-
   handlePostReview() {
     const {
       rating, summary, body, recommend, name, email, photos, characteristics,
     } = this.state;
-    const { product, onModalClose } = this.props;
+    const { product, onModalClose, reviewMeta } = this.props;
     const newReview = {
       product_id: product.id,
       rating: parseInt(rating, 10),
@@ -113,7 +92,10 @@ class ReviewModal extends React.Component {
       newReview.recommend = recommend === 'yes';
     }
 
-    const [valid, violations] = validateNewReview(newReview);
+    const [valid, violations] = validateNewReview(
+      newReview,
+      Object.keys(reviewMeta.characteristics),
+    );
     this.setState({ valid, violations });
     if (valid) {
       submitReview(newReview)
@@ -124,28 +106,9 @@ class ReviewModal extends React.Component {
   }
 
   render() {
-    const {
-      characters, rating, valid, violations,
-    } = this.state;
+    const { valid, violations } = this.state;
     const { product, onModalClose, reviewMeta: { characteristics } } = this.props;
-    const charRatingOptions = {
-      Size: ['A size too small', '1⁄2 a size too small', 'Perfect', '1⁄2 a size too big', 'A size too wide'],
-      Width: ['Too narrow', 'Slightly narrow', 'Perfect', 'Slightly wide', 'Too wide'],
-      Comfort: ['Uncomfortable', 'Slightly uncomfortable', 'OK', 'Comfortable', 'Perfect'],
-      Quality: ['Poor', 'Below average', 'What I expected', 'Pretty great', 'Perfect'],
-      Length: ['Runs Short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long'],
-      Fit: ['Runs Tight', 'Runs slightly tight', 'Perfect', 'Runs slightly long', 'Runs long'],
-    };
-    const starRatingOptions = {
-      1: 'Poor', 2: 'Fair', 3: 'Average', 4: 'Good', 5: 'Great',
-    };
-    const ratingViolation = violations.includes('rating') ? 'rating-violation' : '';
-    const bodyViolation = violations.includes('body') ? 'body-violation' : '';
-    const recommendViolation = violations.includes('recommend') ? 'recommend-violation' : '';
-    // const characteristicsViolation =
-    // violations.includes('characteristics') ? 'characteristics-violation' : '';
-    const nameViolation = violations.includes('name') ? 'name-violation' : '';
-    const emailViolation = violations.includes('email') ? 'email-violation' : '';
+
     return (
       <div className={CSS['review-modal']}>
         <div className={CSS['review-modal-content']}>
@@ -155,100 +118,34 @@ class ReviewModal extends React.Component {
             <>
               {!valid && <div style={{ marginBottom: '10px', color: 'red' }}>You must enter the following: {violations.join(', ')} </div>}
 
-              <div className={`${CSS['review-modal-star-rating']} ${ratingViolation}`}>
-                <div required><b>Overall rating * </b></div>
-                <div style={{
-                  display: 'flex', color: '#92a4b3', fontStyle: 'italic',
-                }}>
-                <StarRating rating={rating} onClick={this.handleStarRating}/>
-                {starRatingOptions[rating]}
-                </div>
-              </div>
+              <ReviewOverallRating
+                handleStarRating={this.handleStarRating}
+                violations={violations}
+              />
 
-              <div className={`${CSS['review-modal-input']} ${recommendViolation}`}>
-                <div required><b>Do you recommend this product? * </b></div>
-                <input type='radio' value='yes' name='recommend' id='recommend-yes' onChange={this.handleRecommendation} />  Yes
-                <input type='radio' value='no' name='recommend' id='recommend-no' onChange={this.handleRecommendation} />  No
-              </div>
+              <ReviewRecommendation
+                handleRecommendation={this.handleRecommendation}
+                violations={violations}
+              />
 
-              <div className={CSS['review-modal-input']}>
-                <div required><b>Characteristics * </b></div>
-                {Object.keys(characteristics).map(
-                  (char) => <CharRating
-                  key={char}
-                  characteristic={char}
-                  options={charRatingOptions[char]}
-                  handleChange={this.handleReviewCharacteristics}/>,
-                )}
-              </div>
+              <ReviewCharRatings
+                handleReviewCharacteristics={this.handleReviewCharacteristics}
+                violations={violations}
+                characteristics={characteristics}
+              />
 
-              <div className={CSS['review-modal-input']}>
-                <label htmlFor='review-summary'><b>Review Summary: </b></label>
-                <textarea
-                  id='review-summary'
-                  data-testid='review-summary'
-                  placeholder='Example: Best purchase ever!'
-                  maxLength='60'
-                  className={CSS['review-modal-textbox']}
-                  onChange={this.handleReviewSummary}
-                />
-              </div>
+              <ReviewContent
+                handleReviewSummary={this.handleReviewSummary}
+                handleBodyChange={this.handleBodyChange}
+                handleUpdatePhotos={this.handleUpdatePhotos}
+                violations={violations}
+              />
 
-              <div className={CSS['review-modal-input']}>
-                <div><b>Review Body * </b></div>
-                <textarea
-                  id='review-body'
-                  placeholder='Why did you like the product or not?'
-                  maxLength='1000'
-                  minLength='50'
-                  required
-                  className={`${CSS['review-modal-textbox-body']} ${bodyViolation}`}
-                  onChange={this.handleBodyChange}
-                />
-                <div><i>{characters < 50 ? `Minimum required characters left: ${50 - characters}` : 'Minimum Reached'}</i></div>
-              </div>
-
-              <div>
-                <div><b>Upload your photos (Max: 5)</b></div>
-                <input
-                  type='file'
-                  id='review-photo'
-                  name='filename'
-                  onChange={this.handleUploadPhoto}
-                  disabled={this.state.photos.length === 5}
-                  style={{ marginBottom: '10px' }}
-                />
-              </div>
-
-              {this.state.photos.map(
-                (url) => <img src={url} alt='uploaded photo' key={url} className={CSS['review-photo']} onClick={this.handleDeletePhoto} />,
-              )}
-
-              <div className={`${CSS['review-modal-input']} ${nameViolation}`}>
-                <div><b>What is your nick name * </b></div>
-                <textarea
-                  id='username'
-                  placeholder='Example: jackson11'
-                  maxLength='60'
-                  required
-                  className={CSS['review-modal-textbox']}
-                  onChange={this.handleName}
-                />
-                <div><i>For privacy reasons, do not use your full name or email address</i></div>
-              </div>
-
-              <div className={`${CSS['review-modal-input']} ${emailViolation}`}>
-                <div><b>Your email * </b></div>
-                  <textarea
-                    id='email'
-                    placeholder='Example: jackson11@email.com'
-                    maxLength='60'
-                    required
-                    className={CSS['review-modal-textbox']}
-                    onChange={this.handleEmail}
-                  />
-                  <div><i>For authentication reasons, you will not be emailed</i></div>
-              </div>
+              <ReviewUserInfo
+                handleName={this.handleName}
+                handleEmail={this.handleEmail}
+                violations={violations}
+              />
             </>
 
             <div>
