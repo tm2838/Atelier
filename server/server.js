@@ -54,7 +54,7 @@ app.get('/products/:id?', (req, res) => { // added optional id param to route
 app.post('/cart', (req, res) => {
   const { body } = req;
   postCart(body, (response) => {
-    console.log('cart success'); //eslint-disable-line
+    console.log(response.status, 'cart success'); //eslint-disable-line
     res.status(response.status).send();
   });
 });

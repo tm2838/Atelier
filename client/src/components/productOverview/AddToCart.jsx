@@ -80,7 +80,7 @@ class AddToCart extends React.Component {
       <>
         <SelectSize skus={currentStyle.skus} handleSizeChange={this.handleSizeChange}/>
         <SelectQty size={size} styleQty={styleQty} handleQtyChange={this.handleQtyChange}/>
-        <button id='add-item' className='checkout' onClick={this.handleSubmit}>ADD TO BAG</button>
+        <button id='add-item' className='checkout' onClick={this.handleSubmit}>ADD TO CART</button>
       </>
     );
   }
