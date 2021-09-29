@@ -65,12 +65,12 @@ class ReviewModal extends React.Component {
     });
   }
 
-  handleName(e) {
-    this.setState({ name: e.target.value });
+  handleName(name) {
+    this.setState({ name });
   }
 
-  handleEmail(e) {
-    this.setState({ email: e.target.value });
+  handleEmail(email) {
+    this.setState({ email });
   }
 
   handlePostReview() {
