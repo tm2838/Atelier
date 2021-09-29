@@ -17,7 +17,7 @@ const ProductInfo = ({
   (!styles.length || !Object.keys(currentStyle).length)
     ? <div>loading...</div>
     : <div className='product-info'>
-      {reviews.length && <ProductRating reviewNumber={reviews.length} />}
+      {!!reviews.length && <ProductRating reviewNumber={reviews.length} />}
       <ProductName
         category={product.category.toUpperCase()}
         name={product.name}

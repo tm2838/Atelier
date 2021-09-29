@@ -13,6 +13,7 @@ class AddToCart extends React.Component {
       sku: null,
       size: null,
       quantity: 0,
+      id: null,
     };
     this.handleSizeChange = this.handleSizeChange.bind(this);
     this.handleQtyChange = this.handleQtyChange.bind(this);
@@ -35,6 +36,26 @@ class AddToCart extends React.Component {
   handleSubmit() {
     if (this.state.sku) {
       postToCart(this.state.sku);
+      this.setState({
+        sku: null,
+        size: null,
+        quantity: 0,
+      });
+    }
+  }
+
+  componentDidMount() {
+    this.setState({
+      id: this.props.productId,
+    });
+  }
+
+  componentDidUpdate() {
+    if (this.state.id !== this.props.productId) {
+      this.setState({
+        sku: null,
+        id: this.props.productId,
+      });
     }
   }
 
@@ -50,8 +71,9 @@ class AddToCart extends React.Component {
       }
       return qtyList;
     };
-    if (size) {
-      styleQty = makeQtyList(currentStyle.skus[sku].quantity);
+    if (sku) {
+      const currentQty = currentStyle.skus[sku].quantity || 0;
+      styleQty = makeQtyList(currentQty);
     }
 
     return (
@@ -65,10 +87,12 @@ class AddToCart extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
+  productId: state.currentProduct.id,
   currentStyle: state.currentStyle,
 });
 
 AddToCart.propTypes = {
+  productId: PropTypes.number,
   currentStyle: PropTypes.object,
   handleAdd: PropTypes.func,
 };
