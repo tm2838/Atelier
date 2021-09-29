@@ -286,6 +286,7 @@
 .review-modal-textbox-body {
   width: 600px;
   height: 100px;
+  /* border:1px solid red; */
 }
 
 .char-rating-container {
@@ -360,4 +361,11 @@
 .sort-dropdown {
   border: none;
   border-bottom: 1px solid #b1d2b0ff;
+}
+
+.body-violation {
+  /* outline-color: red !important;
+  z-index: 100; */
+  border:1px solid red !important;
+  /* border-color: red; */
 }

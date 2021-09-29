@@ -5,52 +5,36 @@ import { connect } from 'react-redux';
 import CSS from '../ratingsAndReviews.module.css';
 import CharRating from './reviewModalCharRating.jsx';
 import StarRating from '../../common/starRating.jsx';
+import validateNewReview from '../../../helpers/validateNewReview';
+import submitReview from '../../../helpers/submitReview';
+import fetchReviews from '../../../actions/fetchReviews';
 
 class ReviewModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      uploadedPhotos: [],
-      characters: 0,
+      rating: 0,
+      summary: '',
+      body: '',
       recommend: '',
-      starRating: 0,
+      name: '',
+      email: '',
+      photos: [],
+      characteristics: {},
+      characters: 0,
+      valid: true,
+      violations: [],
     };
-    this.handlePostReview = this.handlePostReview.bind(this);
+    this.handleStarRating = this.handleStarRating.bind(this);
+    this.handleReviewSummary = this.handleReviewSummary.bind(this);
+    this.handleBodyChange = this.handleBodyChange.bind(this);
     this.handleRecommendation = this.handleRecommendation.bind(this);
+    this.handleName = this.handleName.bind(this);
+    this.handleEmail = this.handleEmail.bind(this);
     this.handleUploadPhoto = this.handleUploadPhoto.bind(this);
     this.handleDeletePhoto = this.handleDeletePhoto.bind(this);
-    this.handleBodyChange = this.handleBodyChange.bind(this);
-    this.handleStarRating = this.handleStarRating.bind(this);
-  }
-
-  handlePostReview() {
-
-  }
-
-  handleRecommendation(e) {
-    if (e.target.value === this.state.recommend) {
-      this.setState({ recommend: '' });
-    } else {
-      this.setState({ recommend: e.target.value });
-    }
-  }
-
-  handleUploadPhoto(e) {
-    e.preventDefault();
-    this.setState({
-      uploadedPhotos: [...this.state.uploadedPhotos, URL.createObjectURL(e.target.files[0])],
-    });
-  }
-
-  handleDeletePhoto(e) {
-    const photoToDelete = this.state.uploadedPhotos.indexOf(e.target.src);
-    const remainingPhotos = this.state.uploadedPhotos.slice();
-    remainingPhotos.splice(photoToDelete, 1);
-    this.setState({ uploadedPhotos: remainingPhotos });
-  }
-
-  handleBodyChange(e) {
-    this.setState({ characters: e.target.value.length });
+    this.handleReviewCharacteristics = this.handleReviewCharacteristics.bind(this);
+    this.handlePostReview = this.handlePostReview.bind(this);
   }
 
   handleStarRating(e) {
@@ -61,15 +45,107 @@ class ReviewModal extends React.Component {
       classes = e.target.parentNode.getAttribute('class').split(' ');
     }
     const rating = classes[classes.length - 1];
-    this.setState({ starRating: rating });
+    this.setState({ rating });
+  }
+
+  handleReviewSummary(e) {
+    this.setState({ summary: e.target.value });
+  }
+
+  handleBodyChange(e) {
+    this.setState({ body: e.target.value, characters: e.target.value.length });
+  }
+
+  handleRecommendation(e) {
+    if (e.target.value === this.state.recommend) {
+      this.setState({ recommend: '' });
+    } else {
+      this.setState({ recommend: e.target.value });
+    }
+  }
+
+  handleName(e) {
+    this.setState({ name: e.target.value });
+  }
+
+  handleEmail(e) {
+    this.setState({ email: e.target.value });
+  }
+
+  handleUploadPhoto(e) {
+    e.preventDefault();
+    this.setState({
+      photos: [...this.state.photos, URL.createObjectURL(e.target.files[0])],
+    });
+  }
+
+  handleDeletePhoto(e) {
+    const photoToDelete = this.state.photos.indexOf(e.target.src);
+    const remainingPhotos = this.state.photos.slice();
+    remainingPhotos.splice(photoToDelete, 1);
+    this.setState({ photos: remainingPhotos });
+  }
+
+  handleReviewCharacteristics(e) {
+    const { reviewMeta: { characteristics } } = this.props;
+    const newCharacteristics = {};
+    newCharacteristics[characteristics[e.target.name].id] = parseInt(e.target.className.split(' ')[1], 10) + 1;
+
+    this.setState({ characteristics: { ...this.state.characteristics, ...newCharacteristics } });
+  }
+
+  handlePostReview() {
+    const {
+      rating, summary, body, recommend, name, email, photos, characteristics,
+    } = this.state;
+    const { product, onModalClose } = this.props;
+    const newReview = {
+      product_id: product.id,
+      rating: parseInt(rating, 10),
+      summary,
+      body,
+      name,
+      email,
+      photos,
+      characteristics,
+    };
+    if (recommend !== '') {
+      newReview.recommend = recommend === 'yes';
+    }
+
+    const [valid, violations] = validateNewReview(newReview);
+    this.setState({ valid, violations });
+    if (valid) {
+      submitReview(newReview)
+        .then(this.props.handleFetchReviews(newReview.product_id))
+        .catch((e) => console.log(e)); //eslint-disable-line
+      onModalClose();
+    }
   }
 
   render() {
-    const { characters, starRating } = this.state;
-    const { product, onModalClose } = this.props;
+    const {
+      characters, rating, valid, violations,
+    } = this.state;
+    const { product, onModalClose, reviewMeta: { characteristics } } = this.props;
+    const charRatingOptions = {
+      Size: ['A size too small', '1⁄2 a size too small', 'Perfect', '1⁄2 a size too big', 'A size too wide'],
+      Width: ['Too narrow', 'Slightly narrow', 'Perfect', 'Slightly wide', 'Too wide'],
+      Comfort: ['Uncomfortable', 'Slightly uncomfortable', 'OK', 'Comfortable', 'Perfect'],
+      Quality: ['Poor', 'Below average', 'What I expected', 'Pretty great', 'Perfect'],
+      Length: ['Runs Short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long'],
+      Fit: ['Runs Tight', 'Runs slightly tight', 'Perfect', 'Runs slightly long', 'Runs long'],
+    };
     const starRatingOptions = {
       1: 'Poor', 2: 'Fair', 3: 'Average', 4: 'Good', 5: 'Great',
     };
+    const ratingViolation = violations.includes('rating') ? 'rating-violation' : '';
+    const bodyViolation = violations.includes('body') ? 'body-violation' : '';
+    const recommendViolation = violations.includes('recommend') ? 'recommend-violation' : '';
+    // const characteristicsViolation =
+    // violations.includes('characteristics') ? 'characteristics-violation' : '';
+    const nameViolation = violations.includes('name') ? 'name-violation' : '';
+    const emailViolation = violations.includes('email') ? 'email-violation' : '';
     return (
       <div className={CSS['review-modal']}>
         <div className={CSS['review-modal-content']}>
@@ -77,17 +153,19 @@ class ReviewModal extends React.Component {
           <h4 className={CSS['review-modal-subtitle']}> About the {`${product.name}`}</h4>
           <form onSubmit={this.handlePostReview}>
             <>
-              <div className={CSS['review-modal-star-rating']}>
+              {!valid && <div style={{ marginBottom: '10px', color: 'red' }}>You must enter the following: {violations.join(', ')} </div>}
+
+              <div className={`${CSS['review-modal-star-rating']} ${ratingViolation}`}>
                 <div required><b>Overall rating * </b></div>
                 <div style={{
                   display: 'flex', color: '#92a4b3', fontStyle: 'italic',
                 }}>
-                <StarRating rating={starRating} onClick={this.handleStarRating}/>
-                {starRatingOptions[starRating]}
+                <StarRating rating={rating} onClick={this.handleStarRating}/>
+                {starRatingOptions[rating]}
                 </div>
               </div>
 
-              <div className={CSS['review-modal-input']}>
+              <div className={`${CSS['review-modal-input']} ${recommendViolation}`}>
                 <div required><b>Do you recommend this product? * </b></div>
                 <input type='radio' value='yes' name='recommend' id='recommend-yes' onChange={this.handleRecommendation} />  Yes
                 <input type='radio' value='no' name='recommend' id='recommend-no' onChange={this.handleRecommendation} />  No
@@ -95,39 +173,24 @@ class ReviewModal extends React.Component {
 
               <div className={CSS['review-modal-input']}>
                 <div required><b>Characteristics * </b></div>
-                <CharRating
-                  characteristic='Size'
-                  options={['A size too small', '1⁄2 a size too small', 'Perfect', '1⁄2 a size too big', 'A size too wide']}
-                />
-                <CharRating
-                  characteristic='Width'
-                  options={['Too narrow', 'Slightly narrow', 'Perfect', 'Slightly wide', 'Too wide']}
-                />
-                <CharRating
-                  characteristic='Comfort'
-                  options={['Uncomfortable', 'Slightly uncomfortable', 'OK', 'Comfortable', 'Perfect']}
-                />
-                <CharRating
-                  characteristic='Quality'
-                  options={['Poor', 'Below average', 'What I expected', 'Pretty great', 'Perfect']}
-                />
-                <CharRating
-                  characteristic='Length'
-                  options={['Runs Short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long']}
-                />
-                <CharRating
-                  characteristic='Fit'
-                  options={['Runs Tight', 'Runs slightly tight', 'Perfect', 'Runs slightly long', 'Runs long']}
-                />
+                {Object.keys(characteristics).map(
+                  (char) => <CharRating
+                  key={char}
+                  characteristic={char}
+                  options={charRatingOptions[char]}
+                  handleChange={this.handleReviewCharacteristics}/>,
+                )}
               </div>
 
               <div className={CSS['review-modal-input']}>
-                <div><b>Review Summary: </b></div>
+                <label htmlFor='review-summary'><b>Review Summary: </b></label>
                 <textarea
                   id='review-summary'
+                  data-testid='review-summary'
                   placeholder='Example: Best purchase ever!'
                   maxLength='60'
                   className={CSS['review-modal-textbox']}
+                  onChange={this.handleReviewSummary}
                 />
               </div>
 
@@ -139,7 +202,7 @@ class ReviewModal extends React.Component {
                   maxLength='1000'
                   minLength='50'
                   required
-                  className={CSS['review-modal-textbox-body']}
+                  className={`${CSS['review-modal-textbox-body']} ${bodyViolation}`}
                   onChange={this.handleBodyChange}
                 />
                 <div><i>{characters < 50 ? `Minimum required characters left: ${50 - characters}` : 'Minimum Reached'}</i></div>
@@ -152,16 +215,16 @@ class ReviewModal extends React.Component {
                   id='review-photo'
                   name='filename'
                   onChange={this.handleUploadPhoto}
-                  disabled={this.state.uploadedPhotos.length === 5}
+                  disabled={this.state.photos.length === 5}
                   style={{ marginBottom: '10px' }}
                 />
               </div>
 
-              {this.state.uploadedPhotos.map(
-                (url) => <img src={url} alt='uploaded l=hoto' key={url} className={CSS['review-photo']} onClick={this.handleDeletePhoto} />,
+              {this.state.photos.map(
+                (url) => <img src={url} alt='uploaded photo' key={url} className={CSS['review-photo']} onClick={this.handleDeletePhoto} />,
               )}
 
-              <div className={CSS['review-modal-input']}>
+              <div className={`${CSS['review-modal-input']} ${nameViolation}`}>
                 <div><b>What is your nick name * </b></div>
                 <textarea
                   id='username'
@@ -169,11 +232,12 @@ class ReviewModal extends React.Component {
                   maxLength='60'
                   required
                   className={CSS['review-modal-textbox']}
+                  onChange={this.handleName}
                 />
                 <div><i>For privacy reasons, do not use your full name or email address</i></div>
               </div>
 
-              <div className={CSS['review-modal-input']}>
+              <div className={`${CSS['review-modal-input']} ${emailViolation}`}>
                 <div><b>Your email * </b></div>
                   <textarea
                     id='email'
@@ -181,13 +245,14 @@ class ReviewModal extends React.Component {
                     maxLength='60'
                     required
                     className={CSS['review-modal-textbox']}
+                    onChange={this.handleEmail}
                   />
                   <div><i>For authentication reasons, you will not be emailed</i></div>
               </div>
             </>
 
             <div>
-              <button className={CSS['review-btn']} onClick={onModalClose}>Add Review</button>
+              <button className={CSS['review-btn']} onClick={this.handlePostReview}>Submit Review</button>
               <button className={CSS['review-btn']} onClick={onModalClose}>Cancel</button>
             </div>
           </form>
@@ -199,6 +264,13 @@ class ReviewModal extends React.Component {
 
 const mapStateToProps = (state) => ({
   product: state.currentProduct,
+  reviewMeta: state.reviewMeta,
 });
 
-export default connect(mapStateToProps)(ReviewModal);
+const mapDispatchToProps = (dispatch) => ({
+  handleFetchReviews: (productId) => {
+    dispatch(fetchReviews(productId));
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ReviewModal);
