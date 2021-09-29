@@ -42,6 +42,9 @@ class ReviewContent extends React.Component {
   }
 
   render() {
+    const { violations } = this.props;
+    const violated = violations.includes('body');
+    const violationStyle = violated ? { border: '1px solid red' } : {};
     return (
       <>
         <div className={CSS['review-modal-input']}>
@@ -58,6 +61,7 @@ class ReviewContent extends React.Component {
 
         <div className={CSS['review-modal-input']}>
           <div><b>Review Body * </b></div>
+          { violated && <div style={{ color: 'red' }}>You must enter the following</div> }
           <textarea
             id='review-body'
             placeholder='Why did you like the product or not?'
@@ -66,6 +70,7 @@ class ReviewContent extends React.Component {
             required
             className={CSS['review-modal-textbox-body']}
             onChange={this.onBodyChange}
+            style={violationStyle}
           />
           <div><i>{this.state.characters < 50 ? `Minimum required characters left: ${50 - this.state.characters}` : 'Minimum Reached'}</i></div>
         </div>

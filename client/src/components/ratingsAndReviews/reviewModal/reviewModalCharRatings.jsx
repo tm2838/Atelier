@@ -23,7 +23,7 @@ class ReviewModalCharRatings extends React.Component {
   }
 
   render() {
-    const { characteristics } = this.props;
+    const { characteristics, violations } = this.props;
     const charRatingOptions = {
       Size: ['A size too small', '1⁄2 a size too small', 'Perfect', '1⁄2 a size too big', 'A size too wide'],
       Width: ['Too narrow', 'Slightly narrow', 'Perfect', 'Slightly wide', 'Too wide'],
@@ -32,9 +32,13 @@ class ReviewModalCharRatings extends React.Component {
       Length: ['Runs Short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long'],
       Fit: ['Runs Tight', 'Runs slightly tight', 'Perfect', 'Runs slightly long', 'Runs long'],
     };
+    const violated = violations.includes('characteristics');
+    const violationStyle = violated ? { color: 'red' } : {};
     return (
+      <>
       <div className={CSS['review-modal-input']}>
         <div required><b>Characteristics * </b></div>
+        {violated && <div style={violationStyle}>You must enter the following</div>}
         {Object.keys(characteristics).map(
           (char) => <CharRating
           key={char}
@@ -43,6 +47,7 @@ class ReviewModalCharRatings extends React.Component {
           handleChange={this.onReviewCharacteristics}/>,
         )}
       </div>
+      </>
     );
   }
 }

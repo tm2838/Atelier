@@ -106,7 +106,7 @@ class ReviewModal extends React.Component {
   }
 
   render() {
-    const { valid, violations } = this.state;
+    const { violations } = this.state;
     const { product, onModalClose, reviewMeta: { characteristics } } = this.props;
 
     return (
@@ -116,8 +116,6 @@ class ReviewModal extends React.Component {
           <h4 className={CSS['review-modal-subtitle']}> About the {`${product.name}`}</h4>
           <form onSubmit={this.handlePostReview}>
             <>
-              {!valid && <div style={{ marginBottom: '10px', color: 'red' }}>You must enter the following: {violations.join(', ')} </div>}
-
               <ReviewOverallRating
                 handleStarRating={this.handleStarRating}
                 violations={violations}

@@ -31,14 +31,16 @@ class ReviewOverallRating extends React.Component {
       1: 'Poor', 2: 'Fair', 3: 'Average', 4: 'Good', 5: 'Great',
     };
 
+    const violated = violations.includes('rating');
+    const violationStyle = violated ? { color: 'red' } : {};
     return (
       <div className={CSS['review-modal-star-rating']}>
         <div required><b>Overall rating * </b></div>
+        {violated && <div style={violationStyle}>You must enter the following</div>}
         <div style={{
           display: 'flex', color: '#92a4b3', fontStyle: 'italic',
         }}>
-          {violations.includes('rating') && <div style={{ marginBottom: '10px', color: 'red' }}>You must enter the following: Overall Rating</div>}
-          <StarRating rating={rating} onClick={this.onStarRating}/>
+          <StarRating rating={rating} onClick={this.onStarRating} />
           {starRatingOptions[rating]}
         </div>
       </div>
