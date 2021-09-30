@@ -12,7 +12,7 @@ const RatingsAndReviewsWithTracker = withClickTracker(RatingsAndReviews, 'rating
 
 const Wrapper = (props) => (
   <div>
-    <OverviewContainerWithTracker />
+    <OverviewContainerWithTracker productId={props.match.params.productId} />
     <RelatedProductsWithTracker productId={ props.match.params.productId }
       history={ props.history } location={props.location} />
     <RatingsAndReviewsWithTracker key={props.location.pathname}
