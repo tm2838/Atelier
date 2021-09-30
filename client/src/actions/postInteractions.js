@@ -1,5 +1,5 @@
 const postInteractions = (body) => {
-  const url = 'http://127.0.0.1:3000/interactions';
+  const url = '/interactions';
   fetch(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },

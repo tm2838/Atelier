@@ -38,7 +38,7 @@ class RelatedProducts extends React.Component {
   }
 
   fetchRelatedProducts(id) {
-    fetch(`http://127.0.0.1:3000/relatedProducts/${id}`)
+    fetch(`/relatedProducts/${id}`)
       .then((res) => res.json())
       .then((relatedProducts) => {
         this.setState((prevState) => ({
