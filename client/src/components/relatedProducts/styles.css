@@ -4,17 +4,20 @@ div {
   border: 0;
 }
 
+#related-products {
+  margin-top: 30vh;
+}
+
 .carousel {
   display: grid;
   grid-template-columns: 10vw 20vw 20vw 20vw 20vw 10vw;
   grid-template-rows: 1fr 1fr;
-  margin-top: 50vh;
-  max-height: 100vh;
+  margin-top: 10vh;
+  max-height: 90vh;
 }
 
 .carouselHeading {
   grid-column: 1 / span 2;
-  margin-bottom: 2vw;
 }
 
 .left {
@@ -28,6 +31,7 @@ div {
   grid-row-start: 2;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  margin-top: -20%;
 }
 
 .outfitCardContainer {
@@ -35,6 +39,7 @@ div {
   grid-row-start: 2;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  margin-top: -25%;
 }
 
 .right {
@@ -85,7 +90,7 @@ div {
   height: 30vh;
   grid-column: 2;
   grid-row: 2;
-  margin-top: -5%;
+  margin-top: -15%;
 }
 
 .modal {
@@ -93,7 +98,6 @@ div {
   z-index: 2;
   max-height: 50vh;
   overflow-y: auto;
-  top: 85%;
   margin: 0% 25%;
   background-color: whitesmoke;
   border: 1px solid black;
