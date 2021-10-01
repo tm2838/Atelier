@@ -12,13 +12,6 @@ import changeQtyInStock from '../../actions/productOverview/inStockQty';
 class AddToCart extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      // sku: null,
-      // size: null,
-      // quantity: 0,
-      // id: null,
-      selected: false,
-    };
     this.handleSizeChange = this.handleSizeChange.bind(this);
     this.handleQtyChange = this.handleQtyChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -40,7 +33,7 @@ class AddToCart extends React.Component {
   }
 
   handleQtyChange(e) {
-    const quantity = e.target.value;
+    const quantity = Number(e.target.value);
     this.props.changeQty(quantity);
   }
 
@@ -50,44 +43,12 @@ class AddToCart extends React.Component {
     }
   }
 
-  // componentDidMount() {
-  //   this.setState({
-  //     id: this.props.productId,
-  //   });
-  // }
-
-  // componentDidUpdate() {
-  //   if (this.state.id !== this.props.productId) {
-  //     this.setState({
-  //       sku: null,
-  //       id: this.props.productId,
-  //       selected: false,
-  //     });
-  //   }
-  // }
-
   render() {
-    // let styleQty = [];
-    // const { sku, size } = this.state;
     const { currentStyle } = this.props;
-    // const makeQtyList = (qty) => {
-    //   const qtyList = [];
-    //   const length = qty < 15 ? qty : 15;
-    //   for (let i = 1; i <= length; i += 1) {
-    //     qtyList.push(i);
-    //   }
-    //   return qtyList;
-    // };
-    // if (sku) {
-    //   const currentQty = currentStyle.skus[sku].quantity || 0;
-    //   styleQty = makeQtyList(currentQty);
-    // }
-
     return (
       <>
         <SelectSize
         skus={currentStyle.skus}
-        // selected={this.state.selected}
         handleSizeChange={this.handleSizeChange}/>
         <SelectQty handleQtyChange={this.handleQtyChange}/>
         <button id='add-item' className='checkout' onClick={this.handleSubmit}>ADD TO CART</button>
