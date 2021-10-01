@@ -1,5 +1,7 @@
+// import resetSelected from './resetSelected';
+
 const postToCart = (sku) => {
-  const url = 'http://127.0.0.1:3000/cart';
+  const url = '/cart';
   const body = { sku_id: sku };
   fetch(url, {
     method: 'POST',
@@ -7,6 +9,7 @@ const postToCart = (sku) => {
     body: JSON.stringify(body),
   })
     .then((data) => {
+      // dispatch(resetSelected());
       console.log(data.status); //eslint-disable-line
     })
     .catch((err) => {

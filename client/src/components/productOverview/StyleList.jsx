@@ -4,10 +4,12 @@ import PropTypes from 'prop-types';
 
 import Style from './Style.jsx';
 import changeStyle from '../../actions/productOverview/currentStyle';
+import resetSelected from '../../actions/productOverview/resetSelected';
 
 class StyleList extends React.Component {
   handleClick(index) {
     const newStyle = this.props.styles[index];
+    this.props.resetSelected();
     this.props.changeStyle(newStyle);
   }
 
@@ -39,6 +41,9 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
+  resetSelected: () => {
+    dispatch(resetSelected());
+  },
   changeStyle: (style) => {
     dispatch(changeStyle(style));
   },
@@ -47,6 +52,7 @@ const mapDispatchToProps = (dispatch) => ({
 StyleList.propTypes = {
   styles: PropTypes.array,
   currentStyle: PropTypes.object,
+  resetSelected: PropTypes.func,
   changeStyle: PropTypes.func,
 };
 
