@@ -1,5 +1,6 @@
-const postInteractions = (body) => {
-  const url = '/interactions';
+const postToCart = (sku) => {
+  const url = 'http://127.0.0.1:3000/cart';
+  const body = { sku_id: sku };
   fetch(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -13,4 +14,4 @@ const postInteractions = (body) => {
     });
 };
 
-export default postInteractions;
+export default postToCart;

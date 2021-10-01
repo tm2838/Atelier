@@ -1,4 +1,4 @@
-const validationNewReview = (review) => {
+const validationNewReview = (review, characteristics) => {
   let valid = true;
   const violations = [];
 
@@ -17,10 +17,10 @@ const validationNewReview = (review) => {
     violations.push('recommend');
   }
 
-  // if (Object.keys(review.characteristics).length < 6) {
-  //   valid = false;
-  //   violations.push('characteristics');
-  // }
+  if (Object.keys(review.characteristics).length < characteristics.length) {
+    valid = false;
+    violations.push('characteristics');
+  }
 
   if (!review.name) {
     valid = false;
