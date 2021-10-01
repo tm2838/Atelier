@@ -57,7 +57,7 @@
       "body": "This is a review body 3",
       "date": "2018-01-11T00:00:00.000Z",
       "helpfulness": 12,
-      "photos": [],
+      "photos": [{"id":1, "url":"a-photo-url"}],
       "rating": 4,
       "recommend": false,
       "response": "",

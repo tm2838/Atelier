@@ -6,9 +6,9 @@ import StarRating from '../../common/starRating.jsx';
 import { rateReviewHelpful, reportReview } from '../../../helpers/rateReviewHelpful';
 
 const PhotoModal = ({ imgUrl, closePhoto }) => (
-  <div className={CSS['review-photo-modal']}>
+  <div className={CSS['review-photo-modal']} data-testid='review-photo-modal' >
     <img src={imgUrl} alt='review-photo' className={CSS['review-photo-expanded']}/>
-    <FontAwesomeIcon icon='times' onClick={closePhoto} style={{ color: '#b1d2b0ff' }}/>
+    <FontAwesomeIcon icon='times' onClick={closePhoto} style={{ color: '#b1d2b0ff' }} data-testid='review-photo-close-modal'/>
   </div>
 );
 
@@ -101,7 +101,7 @@ class Review extends React.Component {
           <div className={CSS['review-helpful-rating-sub']}>
             Helpful?
             <div style={{ textDecoration: 'underline', cursor: 'pointer' }} onClick={this.handleRateHelpful}>Yes</div>
-            <div>({this.state.helpfulness})</div>
+            <div>{`(${this.state.helpfulness})`}</div>
           </div>
           <div className={`${CSS['review-helpful-rating-sub']} ${CSS['review-division']}`}>{'|'}</div>
           <div style={{ textDecoration: 'underline', cursor: 'pointer' }} onClick={this.handleReportReview}>{ reported ? 'Reported' : 'Report'}</div>

@@ -1,6 +1,9 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import { Provider } from 'react-redux';
+// import changeFilters from '../../../actions/ratingsAndReviews/changeFilters';
+// import { changeLoadedReviews, changeRemainingReviews }
+// from '../../../actions/ratingsAndReviews/changeReviews';
 
 import StarBreakdown from '../ratings/starBreakdown.jsx';
 import testStore from '../../../fixtures/testStore';
@@ -19,5 +22,31 @@ describe('starBreakdown', () => {
     expect(getByText(/5 Stars/)).toBeTruthy();
     expect(getByText(/2 Stars/)).toBeTruthy();
     expect(getByText(/3 Stars/)).toBeTruthy();
+  });
+
+  it('should add star rating as a filter on click', () => {
+    testStore.dispatch = jest.fn();
+    const { getByText } = render(
+      <Provider store={testStore}>
+        <StarBreakdown />
+      </Provider>,
+    );
+
+    fireEvent.click(getByText(/3 Stars/));
+    expect(testStore.dispatch).toHaveBeenCalledTimes(3);
+    expect(testStore.dispatch).toHaveBeenCalledWith({ filters: ['3'], type: 'CHANGE_FILTERS' });
+  });
+
+  it('should remove star rating as a filter on second click', () => {
+    testStore.dispatch = jest.fn();
+    const { getByText } = render(
+      <Provider store={testStore}>
+        <StarBreakdown />
+      </Provider>,
+    );
+
+    fireEvent.click(getByText(/3 Stars/));
+    fireEvent.click(getByText(/3 Stars/));
+    expect(testStore.dispatch).toHaveBeenCalledTimes(6);
   });
 });
