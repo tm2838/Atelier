@@ -27,15 +27,17 @@
   "reviews": [
     {
       "body": "This is a review body 1",
-      "date": "2019-01-11T00:00:00.000Z",
-      "helpfulness": 11,
+      "date": "2021-01-11T00:00:00.000Z",
+      "helpfulness": 0,
       "photos": [],
       "rating": 4,
       "recommend": false,
       "response": "",
       "review_id": 1,
       "reviewer_name": "reviewer1",
-      "summary": "This is a review summay 1"
+      "summary": "This is a review summay 1",
+      "newest": 3,
+      "relevant": 1.2
     },
     {
       "body": "This is a review body 2",
@@ -47,19 +49,23 @@
       "response": "",
       "review_id": 2,
       "reviewer_name": "reviewer2",
-      "summary": "This is a review summay 2"
+      "summary": "This is a review summay 2",
+      "newest": 2,
+      "relevant": 6.8
     },
     {
       "body": "This is a review body 3",
-      "date": "2019-01-11T00:00:00.000Z",
-      "helpfulness": 0,
+      "date": "2018-01-11T00:00:00.000Z",
+      "helpfulness": 12,
       "photos": [],
       "rating": 4,
       "recommend": false,
       "response": "",
       "review_id": 3,
       "reviewer_name": "reviewer3",
-      "summary": "This is a review summay 3"
+      "summary": "This is a review summay 3",
+      "newest": 1,
+      "relevant": 7.6
     }
   ]
 }
