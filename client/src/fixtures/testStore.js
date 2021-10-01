@@ -13,6 +13,7 @@ const testStore = createStore(
     reviewMeta: testReview.reviewMeta,
     loadedReviews: testReview.reviews.slice(0, 2),
     remainingReviews: [testReview.reviews[2]],
+    filters: [],
   },
   applyMiddleware(thunk),
 );

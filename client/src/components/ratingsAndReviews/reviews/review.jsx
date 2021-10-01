@@ -65,7 +65,7 @@ class Review extends React.Component {
       <>
       <div className={CSS.review}>
         <div className={CSS['review-header']}>
-          <StarRating />
+          <StarRating rating={review.rating} />
           <div>{`${review.reviewer_name}, ${review.date.split('T')[0]}`}</div>
         </div>
 
@@ -74,11 +74,12 @@ class Review extends React.Component {
         </div>
 
         <div className={CSS['review-body']}>
-          <div>{reviewBody}</div>
-          {!bodyShown
+          <div>{review.body.length > 250 ? reviewBody : review.body}
+          {review.body.length > 250 && !bodyShown
             && <div style={{
               fontStyle: 'italic', color: 'black', textDecoration: 'underline', cursor: 'pointer',
             }} onClick={this.loadBody}>Show More</div>}
+          </div>
         </div>
 
         {review.recommend

@@ -202,6 +202,10 @@
   font-size: large;
 }
 
+.product-sale {
+  margin-left: 10px;
+}
+
 .style-img {
   width: 70px;
   height: 70px;
@@ -215,8 +219,19 @@
 }
 
 .style-selector {
-  display: inline;
+  position: relative;
+  display: inline-block;
   margin-right: 20px;
+}
+
+.style-selector img {
+  display: block;
+}
+
+.style-selector .style-check {
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .product-summary {

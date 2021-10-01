@@ -8,12 +8,18 @@ import currentProduct from './productOverview/currentProduct';
 import styleList from './productOverview/styleList';
 import currentStyle from './productOverview/currentStyle';
 import imageView from './productOverview/imageView';
+import selectedSku from './productOverview/selectedSku';
+import selectedQty from './productOverview/selectedQty';
+import inStockQty from './productOverview/inStockQty';
 
 export default combineReducers({
   currentProduct,
   styleList,
   currentStyle,
   imageView,
+  selectedSku,
+  selectedQty,
+  inStockQty,
   reviews,
   reviewMeta,
   loadedReviews,

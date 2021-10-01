@@ -1,6 +1,6 @@
 const path = require('path');
 const express = require('express'); // npm installed
-const { getProduct, getStyles } = require('./products'); // Atelier api call to get product/product styles data
+const { getProduct, getStyles, postCart } = require('./products'); // Atelier api call to get product/product styles data
 const {
   getReviews,
   getReviewMeta,
@@ -11,6 +11,7 @@ const {
   getTotalReviews,
   markReviewHelpful,
   reportReview,
+  postNewReview,
 } = require('./reviews');
 const { getRelatedProducts } = require('./relatedProducts');
 const postInteractions = require('./interactions');
@@ -50,6 +51,14 @@ app.get('/products/:id?', (req, res) => { // added optional id param to route
   });
 });
 
+app.post('/cart', (req, res) => {
+  const { body } = req;
+  postCart(body, (response) => {
+    console.log(response.status, 'cart success'); //eslint-disable-line
+    res.status(response.status).send();
+  });
+});
+
 app.get('/reviews/:id', (req, res) => {
   const id = req.params.id || 47421;
   const response = {};
@@ -86,6 +95,15 @@ app.put('/reviews/:reviewId/report', (req, res) => {
   reportReview(id)
     .then(() => {
       res.status(204).end();
+    })
+    .catch((e) => console.log(e)); //eslint-disable-line
+});
+
+app.post('/reviews', (req, res) => {
+  const { body } = req;
+  postNewReview(body)
+    .then(() => {
+      res.status(201).end();
     })
     .catch((e) => console.log(e)); //eslint-disable-line
 });
