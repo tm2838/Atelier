@@ -362,10 +362,3 @@
   border: none;
   border-bottom: 1px solid #b1d2b0ff;
 }
-
-.body-violation {
-  /* outline-color: red !important;
-  z-index: 100; */
-  border:1px solid red !important;
-  /* border-color: red; */
-}

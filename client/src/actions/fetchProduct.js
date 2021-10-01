@@ -4,7 +4,7 @@ import changeStyle from './productOverview/currentStyle';
 import resetSelected from './productOverview/resetSelected';
 
 const fetchProductAndStyles = (id) => (dispatch) => {
-  const url = `http://127.0.0.1:3000/products/${id}`;
+  const url = `/products/${id}`;
   fetch(url)
     .then((res) => res.json())
     .then((data) => {
