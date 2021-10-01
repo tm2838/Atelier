@@ -45,13 +45,16 @@ class AddToCart extends React.Component {
 
   render() {
     const { currentStyle } = this.props;
+    const inStock = Object.keys(currentStyle.skus)
+      .reduce((init, sku) => init + currentStyle.skus[sku].quantity, 0);
     return (
       <>
         <SelectSize
         skus={currentStyle.skus}
+        inStock={inStock}
         handleSizeChange={this.handleSizeChange}/>
         <SelectQty handleQtyChange={this.handleQtyChange}/>
-        <button id='add-item' className='checkout' onClick={this.handleSubmit}>ADD TO CART</button>
+        {!!inStock && <button id='add-item' className='checkout' onClick={this.handleSubmit}>ADD TO CART</button>}
       </>
     );
   }
