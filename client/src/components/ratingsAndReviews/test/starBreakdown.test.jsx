@@ -1,10 +1,6 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import { Provider } from 'react-redux';
-// import changeFilters from '../../../actions/ratingsAndReviews/changeFilters';
-// import { changeLoadedReviews, changeRemainingReviews }
-// from '../../../actions/ratingsAndReviews/changeReviews';
-
 import StarBreakdown from '../ratings/starBreakdown.jsx';
 import testStore from '../../../fixtures/testStore';
 import '../../common/fontAwesomeIcons';

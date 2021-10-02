@@ -7,7 +7,7 @@ import Ratings from '../ratings/ratings.jsx';
 import '../../common/fontAwesomeIcons';
 
 describe('Ratings', () => {
-  it('should render the rating section without crash', () => {
+  it('should render the rating section without crashing', () => {
     const { getByText } = render(
       <Provider store={testStore}>
         <Ratings />
