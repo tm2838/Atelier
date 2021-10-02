@@ -4,7 +4,6 @@ import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import fetchMock from 'jest-fetch-mock';
 import rootReducer from '../reducers/rootReducer';
 import configureStore from '../store';
 import testProduct from '../fixtures/testProduct.json';
@@ -17,33 +16,13 @@ import './common/fontAwesomeIcons';
 
 describe('App', () => {
   beforeEach(() => {
-    fetchMock.mockIf('http://127.0.0.1:3000', (req) => {
-      if (req.url.endsWith('/products')) {
-        return testProduct[0];
-      }
-
-      if (req.url.endsWith('/relatedProducts')) {
-        return testRelatedProducts;
-      }
-
-      if (req.url.endsWith(`/products/${testRelatedProducts[0]}`)) {
-        return testProduct[1];
-      }
-
-      if (req.url.endsWith(`/products/${testRelatedProducts[1]}`)) {
-        return testProduct[2];
-      }
-
-      if (req.url.endsWith('/reviews')) {
-        return { body: testReview };
-      }
-
-      return {};
-    });
+    global.fetch = jest.fn(() => Promise.resolve({
+      json: () => Promise.resolve({ status: 201 }),
+    }));
   });
 
   afterEach(() => {
-    fetchMock.resetMocks();
+    fetch.mockClear();
   });
 
   it('should render without crashing', () => {

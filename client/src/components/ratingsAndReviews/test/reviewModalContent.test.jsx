@@ -20,7 +20,7 @@ describe('reviewModalUserInfo', () => {
 
   it('should render review photos', () => {
     const file = new File(['testImage'], 'testImage.png', { type: 'image/png' });
-    global.URL.createObjectURL = jest.fn();
+    global.URL.createObjectURL = jest.fn().mockReturnValue('fake-url');
     const handleUpdatePhotos = jest.fn();
     const { getByRole, getByTestId } = render(
       <ReviewContent
