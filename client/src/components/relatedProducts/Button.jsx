@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './styles.css';
 
 const Button = (props) => {
-  // console.log('button', props);
   // if props = related product, render
   if (props.type === 'related') {
     return <FontAwesomeIcon icon={['far', 'star']}

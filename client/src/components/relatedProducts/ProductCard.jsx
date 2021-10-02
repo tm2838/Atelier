@@ -5,7 +5,6 @@ import StarRating from '../common/starRating.jsx';
 import './styles.css';
 
 const ProductCard = (props) => {
-  // console.log('star', props);
   const relatedProduct = props.product.product;
   const { name } = relatedProduct;
   const category = relatedProduct.category.toUpperCase();
@@ -94,7 +93,7 @@ const ProductCard = (props) => {
         <p className='cardInfo'>{ category }</p>
         <p className='cardInfo'><b>{ name }</b></p>
           { price }
-          <StarRating />
+          <StarRating rating={relatedProduct.ratingScore} />
       </div>
     </div>
   );

@@ -13,10 +13,11 @@ class RelatedProducts extends React.Component {
     this.state = {
       relatedProductIds: [],
       relatedProducts: [],
-      index: 0,
+      index: null,
       showModal: false,
       comparedProduct: {
         product: {
+          id: 0,
           name: '',
         },
         styles: {
@@ -56,12 +57,10 @@ class RelatedProducts extends React.Component {
   }
 
   onClickCard(id) {
-    // console.log('id', id);
     this.setState({
       showModal: false,
     });
     this.props.history.push(`/product/${id}`);
-    // this.fetchRelatedProducts(id);
   }
 
   onClickLeft() {
@@ -119,6 +118,7 @@ class RelatedProducts extends React.Component {
           }
         </div>
         <Modal showModal= { this.state.showModal }
+          key={index}
           comparedProduct={ this.state.comparedProduct }
           currentProduct={ this.props.currentProduct }
           onClickCloseModal={ this.onClickCloseModal } />
