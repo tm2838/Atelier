@@ -60,9 +60,21 @@ const getRatingScore = (ratings) => {
 };
 
 const getRecommendationMetric = (recommended) => {
-  const recommendationRate = parseInt(recommended.true, 10)
+  if (recommended.true && !recommended.false) {
+    return 100;
+  }
+
+  if (!recommended.true) {
+    return 0;
+  }
+
+  let recommendationRate;
+  if (recommended.true && recommended.false) {
+    recommendationRate = parseInt(recommended.true, 10)
     / (parseInt(recommended.true, 10)
     + parseInt(recommended.false, 10));
+  }
+
   return (recommendationRate * 100).toFixed(2);
 };
 
