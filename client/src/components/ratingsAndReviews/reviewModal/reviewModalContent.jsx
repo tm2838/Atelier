@@ -60,10 +60,11 @@ class ReviewContent extends React.Component {
         </div>
 
         <div className={CSS['review-modal-input']}>
-          <div><b>Review Body * </b></div>
+          <label htmlFor='review-body'><b>Review Body * </b></label>
           { violated && <div style={{ color: 'red' }}>You must enter the following</div> }
           <textarea
             id='review-body'
+            data-testid='review-body'
             placeholder='Why did you like the product or not?'
             maxLength='1000'
             minLength='50'
@@ -76,10 +77,11 @@ class ReviewContent extends React.Component {
         </div>
 
         <div>
-          <div><b>Upload your photos (Max: 5)</b></div>
+          <label htmlFor='review-photo'><b>Upload your photos (Max: 5)</b></label>
           <input
             type='file'
             id='review-photo'
+            data-testid='review-photo-upload'
             name='filename'
             onChange={this.onUploadPhoto}
             disabled={this.state.photos.length === 5}

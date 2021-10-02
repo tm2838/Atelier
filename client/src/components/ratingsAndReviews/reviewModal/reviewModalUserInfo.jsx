@@ -15,10 +15,11 @@ const ReviewUserInfo = ({ handleName, handleEmail, violations }) => {
   return (
     <>
       <div className={CSS['review-modal-input']}>
-        <div><b>What is your nick name * </b></div>
+        <label htmlFor='username'><b>What is your nick name * </b></label>
         { violations.includes('name') && <div style={{ color: 'red' }}>You must enter the following</div> }
         <textarea
           id='username'
+          data-testid='review-username'
           placeholder='Example: jackson11'
           maxLength='60'
           required
@@ -30,10 +31,11 @@ const ReviewUserInfo = ({ handleName, handleEmail, violations }) => {
       </div>
 
       <div className={CSS['review-modal-input']}>
-        <div><b>Your email * </b></div>
+        <label htmlFor='email'><b>Your email * </b></label>
           { violations.includes('body') && <div style={{ color: 'red' }}>You must enter the following</div> }
           <textarea
             id='email'
+            data-testid='review-email'
             placeholder='Example: jackson11@email.com'
             maxLength='60'
             required

@@ -7,7 +7,7 @@ const validationNewReview = (review, characteristics) => {
     violations.push('rating');
   }
 
-  if (!review.body || review.body.length < 50) {
+  if (review.body.length < 50) {
     valid = false;
     violations.push('body');
   }
