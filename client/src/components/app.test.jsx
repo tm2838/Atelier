@@ -17,7 +17,7 @@ import './common/fontAwesomeIcons';
 describe('App', () => {
   beforeEach(() => {
     global.fetch = jest.fn(() => Promise.resolve({
-      json: () => Promise.resolve({ status: 201 }),
+      json: () => Promise.resolve({ status: 200 }),
     }));
   });
 
