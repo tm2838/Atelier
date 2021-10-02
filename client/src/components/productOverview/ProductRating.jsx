@@ -6,7 +6,7 @@ import StarRating from '../common/starRating.jsx';
 const ProductRating = ({ reviewMeta, reviewNumber }) => (
   <div className='overview-rating'>
     <StarRating rating={reviewMeta.ratingScore}/>
-    <a className='rating-link' data-testid='rating-link'><u>Read all {reviewNumber} reviews</u></a>
+    <a href='#ratings-and-reviews' className='rating-link' data-testid='rating-link'><u>Read all {reviewNumber} reviews</u></a>
   </div>
 );
 
