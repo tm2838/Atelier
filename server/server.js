@@ -121,7 +121,12 @@ app.get('/relatedProducts/:id', (req, res) => {
             relatedProduct.product = product;
             getStyles(productId, (styles) => {
               relatedProduct.styles = styles;
-              resolve(relatedProduct);
+              getReviewMeta(productId)
+                .then((meta) => {
+                  const reviewMeta = meta.data;
+                  relatedProduct.product.ratingScore = getRatingScore(reviewMeta.ratings);
+                  resolve(relatedProduct);
+                });
             });
           });
         })
