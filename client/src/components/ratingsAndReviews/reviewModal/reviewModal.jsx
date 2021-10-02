@@ -146,7 +146,7 @@ class ReviewModal extends React.Component {
               />
             </>
 
-            <div>
+            <div className={CSS['add-review-btns']}>
               <button className={CSS['review-btn']} onClick={this.handlePostReview}>Submit Review</button>
               <button className={CSS['review-btn']} onClick={onModalClose}>Cancel</button>
             </div>
