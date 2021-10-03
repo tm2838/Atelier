@@ -61,7 +61,7 @@ class Review extends React.Component {
     const {
       bodyShown, reviewBody, expandedPhoto, reported, rated,
     } = this.state;
-    const rateHelpfulStyle = rated ? { textDecoration: 'underline' } : { textDecoration: 'underline', cursor: 'pointer' };
+    const rateHelpfulStyle = rated ? { textDecoration: 'underline', marginLeft: '10px' } : { textDecoration: 'underline', cursor: 'pointer', marginLeft: '10px' };
     const reportStyle = reported ? { textDecoration: 'underline', color: 'grey' } : { textDecoration: 'underline', cursor: 'pointer' };
     return (
       <>
@@ -91,7 +91,7 @@ class Review extends React.Component {
           </div>}
 
         {review.response
-          && <div className={CSS['review-response']}>Response from seller: {review.response}</div>}
+          && <div className={CSS['review-response']}><b>Response from seller: </b><div style={{ marginTop: '10px' }}>{review.response}</div></div>}
 
         <div className={CSS['review-photo-container']}>
           {review.photos.map(
