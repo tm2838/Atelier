@@ -46,7 +46,6 @@ class SortingDropdown extends React.Component {
             )}
           </select>
         </div>}
-        {loadedReviews.length === 0 && <div>No reviews available</div>}
       </div>
     );
   }
