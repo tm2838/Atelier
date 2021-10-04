@@ -6,6 +6,7 @@ import resetSelected from './productOverview/resetSelected';
 // product review
 import { changeReviews, changeLoadedReviews, changeRemainingReviews } from './ratingsAndReviews/changeReviews';
 import changeReviewMeta from './ratingsAndReviews/changeReviewMeta';
+import changeRelatedProducts from './relatedProducts/changeRelatedProducts';
 
 const fetchData = (id) => (dispatch) => {
   const url = `/products/${id}`;
@@ -22,6 +23,7 @@ const fetchData = (id) => (dispatch) => {
       dispatch(changeLoadedReviews(loadedReviews));
       dispatch(changeRemainingReviews(remainingReviews));
       dispatch(changeReviewMeta(data.reviewMeta));
+      dispatch(changeRelatedProducts(data.relatedProducts));
     })
     .catch((err) => {
       console.log(err); //eslint-disable-line

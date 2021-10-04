@@ -62,7 +62,35 @@ app.get('/products/:id?', (req, res) => { // added optional id param to route
           response.reviewMeta = reviewMeta;
         })
         .then(() => {
-          res.status(200).send(response);
+          // res.status(200).send(response);
+          getRelatedProducts(id, (err, data) => {
+            if (err) {
+              throw err;
+            } else {
+              return Promise.all(data.map((productId) => (
+                new Promise((resolve) => {
+                  const relatedProduct = {};
+                  getProduct(productId, (relProduct) => {
+                    relatedProduct.product = relProduct;
+                    getStyles(productId, (relStyles) => {
+                      relatedProduct.styles = relStyles;
+                      getReviewMeta(productId)
+                        .then((meta) => {
+                          const reviewMeta = meta.data;
+                          relatedProduct.product.ratingScore = getRatingScore(reviewMeta.ratings);
+                          resolve(relatedProduct);
+                        });
+                    });
+                  });
+                })
+              )))
+                .then((relatedProducts) => {
+                  response.relatedProducts = relatedProducts;
+                  // res.status(200).send(relatedProducts).end();
+                  res.status(200).send(response);
+                });
+            }
+          });
         });
     });
   });
@@ -125,35 +153,35 @@ app.post('/reviews', (req, res) => {
     .catch((e) => console.log(e)); //eslint-disable-line
 });
 
-app.get('/relatedProducts/:id', (req, res) => {
-  const id = req.params.id || 47421;
-  getRelatedProducts(id, (err, data) => {
-    if (err) {
-      throw err;
-    } else {
-      return Promise.all(data.map((productId) => (
-        new Promise((resolve) => {
-          const relatedProduct = {};
-          getProduct(productId, (product) => {
-            relatedProduct.product = product;
-            getStyles(productId, (styles) => {
-              relatedProduct.styles = styles;
-              getReviewMeta(productId)
-                .then((meta) => {
-                  const reviewMeta = meta.data;
-                  relatedProduct.product.ratingScore = getRatingScore(reviewMeta.ratings);
-                  resolve(relatedProduct);
-                });
-            });
-          });
-        })
-      )))
-        .then((relatedProducts) => {
-          res.status(200).send(relatedProducts).end();
-        });
-    }
-  });
-});
+// app.get('/relatedProducts/:id', (req, res) => {
+//   const id = req.params.id || 47421;
+//   getRelatedProducts(id, (err, data) => {
+//     if (err) {
+//       throw err;
+//     } else {
+//       return Promise.all(data.map((productId) => (
+//         new Promise((resolve) => {
+//           const relatedProduct = {};
+//           getProduct(productId, (product) => {
+//             relatedProduct.product = product;
+//             getStyles(productId, (styles) => {
+//               relatedProduct.styles = styles;
+//               getReviewMeta(productId)
+//                 .then((meta) => {
+//                   const reviewMeta = meta.data;
+//                   relatedProduct.product.ratingScore = getRatingScore(reviewMeta.ratings);
+//                   resolve(relatedProduct);
+//                 });
+//             });
+//           });
+//         })
+//       )))
+//         .then((relatedProducts) => {
+//           res.status(200).send(relatedProducts).end();
+//         });
+//     }
+//   });
+// });
 
 // eslint-disable-next-line no-unused-vars
 app.post('/interactions', (req, res) => {
