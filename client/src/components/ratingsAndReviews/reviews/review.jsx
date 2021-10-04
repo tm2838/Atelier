@@ -8,7 +8,7 @@ import { rateReviewHelpful, reportReview } from '../../../helpers/rateReviewHelp
 const PhotoModal = ({ imgUrl, closePhoto }) => (
   <div className={CSS['review-photo-modal']} data-testid='review-photo-modal' >
     <img src={imgUrl} alt='review-photo' className={CSS['review-photo-expanded']}/>
-    <FontAwesomeIcon icon='times' onClick={closePhoto} style={{ color: '#b1d2b0ff' }} data-testid='review-photo-close-modal'/>
+    <FontAwesomeIcon icon='times' onClick={closePhoto} style={{ color: '#b1d2b0ff', cursor: 'pointer' }} data-testid='review-photo-close-modal'/>
   </div>
 );
 
@@ -59,8 +59,10 @@ class Review extends React.Component {
   render() {
     const { review } = this.props;
     const {
-      bodyShown, reviewBody, expandedPhoto, reported,
+      bodyShown, reviewBody, expandedPhoto, reported, rated,
     } = this.state;
+    const rateHelpfulStyle = rated ? { textDecoration: 'underline', marginLeft: '10px' } : { textDecoration: 'underline', cursor: 'pointer', marginLeft: '10px' };
+    const reportStyle = reported ? { textDecoration: 'underline', color: 'grey' } : { textDecoration: 'underline', cursor: 'pointer' };
     return (
       <>
       <div className={CSS.review}>
@@ -89,7 +91,7 @@ class Review extends React.Component {
           </div>}
 
         {review.response
-          && <div className={CSS['review-response']}>Response from seller: {review.response}</div>}
+          && <div className={CSS['review-response']}><b>Response from seller: </b><div style={{ marginTop: '10px' }}>{review.response}</div></div>}
 
         <div className={CSS['review-photo-container']}>
           {review.photos.map(
@@ -100,11 +102,11 @@ class Review extends React.Component {
         <div className={CSS['review-helpful-rating']}>
           <div className={CSS['review-helpful-rating-sub']}>
             Helpful?
-            <div style={{ textDecoration: 'underline', cursor: 'pointer' }} onClick={this.handleRateHelpful}>Yes</div>
+            <div style={rateHelpfulStyle} onClick={this.handleRateHelpful}>Yes</div>
             <div>{`(${this.state.helpfulness})`}</div>
           </div>
           <div className={`${CSS['review-helpful-rating-sub']} ${CSS['review-division']}`}>{'|'}</div>
-          <div style={{ textDecoration: 'underline', cursor: 'pointer' }} onClick={this.handleReportReview}>{ reported ? 'Reported' : 'Report'}</div>
+          <div style={reportStyle} onClick={this.handleReportReview}>{ reported ? 'Reported' : 'Report'}</div>
         </div>
       </div>
 

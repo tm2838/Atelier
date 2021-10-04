@@ -57,7 +57,7 @@ class StarBreakdown extends React.Component {
         {reviewMeta.ratings
           && <>
           <div className={CSS['star-breakdown']}>
-            <div>Ratings Breakdown</div>
+            <div><b>Ratings Breakdown</b></div>
             {filters.length > 0
               && (
                 <>

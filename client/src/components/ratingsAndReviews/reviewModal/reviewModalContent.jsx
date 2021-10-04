@@ -76,7 +76,7 @@ class ReviewContent extends React.Component {
           <div><i>{this.state.characters < 50 ? `Minimum required characters left: ${50 - this.state.characters}` : 'Minimum Reached'}</i></div>
         </div>
 
-        <div>
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
           <label htmlFor='review-photo'><b>Upload your photos (Max: 5)</b></label>
           <input
             type='file'
