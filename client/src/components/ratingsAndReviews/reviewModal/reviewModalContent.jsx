@@ -8,6 +8,7 @@ class ReviewContent extends React.Component {
     this.state = {
       characters: 0,
       photos: [],
+      photoFiles: [],
     };
     this.onReviewSummary = this.onReviewSummary.bind(this);
     this.onBodyChange = this.onBodyChange.bind(this);
@@ -27,10 +28,12 @@ class ReviewContent extends React.Component {
   onUploadPhoto(e) {
     e.preventDefault();
     const updatedPhotos = [...this.state.photos, URL.createObjectURL(e.target.files[0])];
+    const updatedPhotoFiles = [...this.state.photoFiles, e.target.files[0]];
     this.setState({
       photos: updatedPhotos,
+      photoFiles: updatedPhotoFiles,
     });
-    this.props.handleUpdatePhotos(updatedPhotos);
+    this.props.handleUpdatePhotos(updatedPhotoFiles);
   }
 
   onDeletePhoto(e) {

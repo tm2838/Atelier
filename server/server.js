@@ -1,5 +1,8 @@
 const path = require('path');
 const express = require('express'); // npm installed
+const multer = require('multer');
+
+const upload = multer({ dest: 'uploads/' });
 const { getProduct, getStyles, postCart } = require('./products'); // Atelier api call to get product/product styles data
 const {
   getReviews,
@@ -99,9 +102,9 @@ app.put('/reviews/:reviewId/report', (req, res) => {
     .catch((e) => console.log(e)); //eslint-disable-line
 });
 
-app.post('/reviews', (req, res) => {
-  const { body } = req;
-  postNewReview(body)
+app.post('/reviews', upload.array('photos'), (req, res) => {
+  const { body, files } = req;
+  postNewReview(body, files)
     .then(() => {
       res.status(201).end();
     })

@@ -98,7 +98,23 @@ class ReviewModal extends React.Component {
     );
     this.setState({ valid, violations });
     if (valid) {
-      submitReview(newReview)
+      console.log(newReview.characteristics);
+      const formData = new FormData();
+      formData.append('product_id', newReview.product_id);
+      formData.append('rating', newReview.rating);
+      formData.append('summary', newReview.summary);
+      formData.append('body', newReview.body);
+      formData.append('name', newReview.name);
+      formData.append('email', newReview.email);
+      newReview.photos.forEach((photo) => {
+        formData.append('photos', photo);
+      });
+      Object.keys(newReview.characteristics).forEach((key) => {
+        formData.append(key, newReview.characteristics[key]);
+      });
+      // formData.append('characteristics', newReview.characteristics);
+      formData.append('recommend', newReview.recommend);
+      submitReview(formData)
         .then(this.props.handleFetchReviews(newReview.product_id))
         .catch((e) => console.log(e)); //eslint-disable-line
       onModalClose();
@@ -114,7 +130,7 @@ class ReviewModal extends React.Component {
         <div className={CSS['review-modal-content']}>
           <h2 className={CSS['review-modal-title']}> Write Your Review</h2>
           <h4 className={CSS['review-modal-subtitle']}> About the {`${product.name}`}</h4>
-          <form onSubmit={this.handlePostReview}>
+          <form>
             <>
               <ReviewOverallRating
                 handleStarRating={this.handleStarRating}
