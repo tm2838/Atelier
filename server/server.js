@@ -46,7 +46,24 @@ app.get('/products/:id?', (req, res) => { // added optional id param to route
     response.product = product;
     getStyles(id, (styles) => {
       response.styles = styles;
-      res.send(JSON.stringify(response));
+      // res.send(JSON.stringify(response));
+      getReviews(id)
+        .then((data) => {
+          let reviews = addNewestTag(data.data.results);
+          reviews = addRelevanceTag(reviews);
+          response.reviews = reviews;
+        })
+        .then(() => getReviewMeta(id))
+        .then((data) => {
+          const reviewMeta = data.data;
+          reviewMeta.ratingScore = getRatingScore(reviewMeta.ratings);
+          reviewMeta.recommendationRate = getRecommendationMetric(reviewMeta.recommended);
+          reviewMeta.totalReviews = getTotalReviews(reviewMeta.ratings);
+          response.reviewMeta = reviewMeta;
+        })
+        .then(() => {
+          res.status(200).send(response);
+        });
     });
   });
 });
@@ -59,27 +76,27 @@ app.post('/cart', (req, res) => {
   });
 });
 
-app.get('/reviews/:id', (req, res) => {
-  const id = req.params.id || 47421;
-  const response = {};
-  getReviews(id)
-    .then((data) => {
-      let reviews = addNewestTag(data.data.results);
-      reviews = addRelevanceTag(reviews);
-      response.reviews = reviews;
-    })
-    .then(() => getReviewMeta(id))
-    .then((data) => {
-      const reviewMeta = data.data;
-      reviewMeta.ratingScore = getRatingScore(reviewMeta.ratings);
-      reviewMeta.recommendationRate = getRecommendationMetric(reviewMeta.recommended);
-      reviewMeta.totalReviews = getTotalReviews(reviewMeta.ratings);
-      response.reviewMeta = reviewMeta;
-    })
-    .then(() => {
-      res.status(200).send(response);
-    });
-});
+// app.get('/reviews/:id', (req, res) => {
+//   const id = req.params.id || 47421;
+//   const response = {};
+//   getReviews(id)
+//     .then((data) => {
+//       let reviews = addNewestTag(data.data.results);
+//       reviews = addRelevanceTag(reviews);
+//       response.reviews = reviews;
+//     })
+//     .then(() => getReviewMeta(id))
+//     .then((data) => {
+//       const reviewMeta = data.data;
+//       reviewMeta.ratingScore = getRatingScore(reviewMeta.ratings);
+//       reviewMeta.recommendationRate = getRecommendationMetric(reviewMeta.recommended);
+//       reviewMeta.totalReviews = getTotalReviews(reviewMeta.ratings);
+//       response.reviewMeta = reviewMeta;
+//     })
+//     .then(() => {
+//       res.status(200).send(response);
+//     });
+// });
 
 app.put('/reviews/:reviewId/helpful', (req, res) => {
   const id = req.params.reviewId;
