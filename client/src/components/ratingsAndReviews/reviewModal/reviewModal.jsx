@@ -73,7 +73,8 @@ class ReviewModal extends React.Component {
     this.setState({ email });
   }
 
-  handlePostReview() {
+  handlePostReview(event) {
+    event.preventDefault();
     const {
       rating, summary, body, recommend, name, email, photos, characteristics,
     } = this.state;
@@ -98,7 +99,6 @@ class ReviewModal extends React.Component {
     );
     this.setState({ valid, violations });
     if (valid) {
-      console.log(newReview.characteristics);
       const formData = new FormData();
       formData.append('product_id', newReview.product_id);
       formData.append('rating', newReview.rating);
@@ -106,18 +106,23 @@ class ReviewModal extends React.Component {
       formData.append('body', newReview.body);
       formData.append('name', newReview.name);
       formData.append('email', newReview.email);
+      formData.append('recommend', newReview.recommend);
+
       newReview.photos.forEach((photo) => {
         formData.append('photos', photo);
       });
+
       Object.keys(newReview.characteristics).forEach((key) => {
         formData.append(key, newReview.characteristics[key]);
       });
-      // formData.append('characteristics', newReview.characteristics);
-      formData.append('recommend', newReview.recommend);
+
       submitReview(formData)
-        .then(this.props.handleFetchReviews(newReview.product_id))
+        .then(() => {
+          this.props.handleFetchReviews(newReview.product_id);
+        })
         .catch((e) => console.log(e)); //eslint-disable-line
-      onModalClose();
+
+      onModalClose(event);
     }
   }
 
@@ -130,7 +135,7 @@ class ReviewModal extends React.Component {
         <div className={CSS['review-modal-content']}>
           <h2 className={CSS['review-modal-title']}> Write Your Review</h2>
           <h4 className={CSS['review-modal-subtitle']}> About the {`${product.name}`}</h4>
-          <form>
+          <form onSubmit={this.handlePostReview}>
             <>
               <ReviewOverallRating
                 handleStarRating={this.handleStarRating}
