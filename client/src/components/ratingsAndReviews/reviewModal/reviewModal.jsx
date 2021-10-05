@@ -117,8 +117,10 @@ class ReviewModal extends React.Component {
       });
 
       submitReview(formData)
-        .then(() => {
-          this.props.handleFetchReviews(newReview.product_id);
+        .then((response) => {
+          if (response.ok) {
+            this.props.handleFetchReviews(newReview.product_id);
+          }
         })
         .catch((e) => console.log(e)); //eslint-disable-line
 

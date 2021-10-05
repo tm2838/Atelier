@@ -104,9 +104,7 @@ const postNewReview = (review, files) => {
       .promise()
       .then(() => {
         photoURLs.push(
-          s3.getSignedUrl('getObject', {
-            Bucket: bucket, Key: id,
-          }),
+          `https://${bucket}.s3.amazonaws.com/${id}`,
         );
       })
       .catch((e) => {
