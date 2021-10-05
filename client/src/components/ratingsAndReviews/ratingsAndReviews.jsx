@@ -47,7 +47,7 @@ class RatingsAndReviews extends React.Component {
         {
           this.state.isAddReviewModalOpen
             && <ReviewModal onModalClose={
-            () => { this.setState({ isAddReviewModalOpen: false }); }}/>
+            (e) => { e.preventDefault(); this.setState({ isAddReviewModalOpen: false }); }}/>
         }
       </div>
     );

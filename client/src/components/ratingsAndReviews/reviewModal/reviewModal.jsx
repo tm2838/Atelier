@@ -73,7 +73,8 @@ class ReviewModal extends React.Component {
     this.setState({ email });
   }
 
-  handlePostReview() {
+  handlePostReview(event) {
+    event.preventDefault();
     const {
       rating, summary, body, recommend, name, email, photos, characteristics,
     } = this.state;
@@ -98,10 +99,32 @@ class ReviewModal extends React.Component {
     );
     this.setState({ valid, violations });
     if (valid) {
-      submitReview(newReview)
-        .then(this.props.handleFetchReviews(newReview.product_id))
+      const formData = new FormData();
+      formData.append('product_id', newReview.product_id);
+      formData.append('rating', newReview.rating);
+      formData.append('summary', newReview.summary);
+      formData.append('body', newReview.body);
+      formData.append('name', newReview.name);
+      formData.append('email', newReview.email);
+      formData.append('recommend', newReview.recommend);
+
+      newReview.photos.forEach((photo) => {
+        formData.append('photos', photo);
+      });
+
+      Object.keys(newReview.characteristics).forEach((key) => {
+        formData.append(key, newReview.characteristics[key]);
+      });
+
+      submitReview(formData)
+        .then((response) => {
+          if (response.ok) {
+            this.props.handleFetchReviews(newReview.product_id);
+          }
+        })
         .catch((e) => console.log(e)); //eslint-disable-line
-      onModalClose();
+
+      onModalClose(event);
     }
   }
 

@@ -1,5 +1,8 @@
 const path = require('path');
-const express = require('express');
+const express = require('express'); // npm installed
+const multer = require('multer');
+
+const upload = multer({ dest: 'uploads/' });
 const { getProduct, getStyles, postCart } = require('./products'); // Atelier api call to get product/product styles data
 const {
   getReviews,
@@ -87,6 +90,28 @@ app.get('/products/:id?', (req, res) => {
   });
 });
 
+app.get('/reviews/:id', (req, res) => {
+  const id = req.params.id || 47421;
+  const response = {};
+  getReviews(id)
+    .then((data) => {
+      let reviews = addNewestTag(data.data.results);
+      reviews = addRelevanceTag(reviews);
+      response.reviews = reviews;
+    })
+    .then(() => getReviewMeta(id))
+    .then((data) => {
+      const reviewMeta = data.data;
+      reviewMeta.ratingScore = getRatingScore(reviewMeta.ratings);
+      reviewMeta.recommendationRate = getRecommendationMetric(reviewMeta.recommended);
+      reviewMeta.totalReviews = getTotalReviews(reviewMeta.ratings);
+      response.reviewMeta = reviewMeta;
+    })
+    .then(() => {
+      res.status(200).send(response);
+    });
+});
+
 app.post('/cart', (req, res) => {
   const { body } = req;
   postCart(body, (response) => {
@@ -113,9 +138,9 @@ app.put('/reviews/:reviewId/report', (req, res) => {
     .catch((e) => console.log(e)); //eslint-disable-line
 });
 
-app.post('/reviews', (req, res) => {
-  const { body } = req;
-  postNewReview(body)
+app.post('/reviews', upload.array('photos'), (req, res) => {
+  const { body, files } = req;
+  postNewReview(body, files)
     .then(() => {
       res.status(201).end();
     })

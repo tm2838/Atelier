@@ -20,12 +20,15 @@ describe('submitReview', () => {
       email: 'test@email.com',
       characteristics: {},
     };
-    submitReview(testReview);
+    const formData = new FormData();
+    Object.keys(testReview).forEach((key) => {
+      formData.append(key, testReview[key]);
+    });
+    submitReview(formData);
     expect(fetch).toHaveBeenCalledTimes(1);
     expect(fetch).toHaveBeenCalledWith('/reviews', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(testReview),
+      body: formData,
     });
   });
 });
