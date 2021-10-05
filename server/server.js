@@ -1,7 +1,6 @@
 const path = require('path');
 const express = require('express'); // npm installed
 const multer = require('multer');
-const shrinkRay = require('shrink-ray-current');
 
 const upload = multer({ dest: 'uploads/' });
 const { getProduct, getStyles, postCart } = require('./products'); // Atelier api call to get product/product styles data
@@ -36,8 +35,6 @@ app.use((req, res, next) => {
   );
   next();
 });
-
-app.use(shrinkRay());
 
 app.get('/products/:id?', (req, res) => {
   const id = req.params.id || 47421;
