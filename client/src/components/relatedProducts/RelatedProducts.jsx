@@ -23,36 +23,12 @@ class RelatedProducts extends React.Component {
         },
       },
     };
-    // this.fetchRelatedProducts = this.fetchRelatedProducts.bind(this);
     this.onClickCard = this.onClickCard.bind(this);
     this.onClickLeft = this.onClickLeft.bind(this);
     this.onClickRight = this.onClickRight.bind(this);
     this.onClickStar = this.onClickStar.bind(this);
     this.onClickCloseModal = this.onClickCloseModal.bind(this);
   }
-
-  // get product id from overview
-  // componentDidMount() {
-  //   this.fetchRelatedProducts(this.props.productId);
-  // }
-
-  // fetchRelatedProducts(id) {
-  //   fetch(`/relatedProducts/${id}`)
-  //     .then((res) => res.json())
-  //     .then((relatedProducts) => {
-  //       this.setState((prevState) => ({
-  //         ...prevState,
-  //         relatedProducts,
-  //         comparedProduct: {
-  //           name: '',
-  //           features: [],
-  //         },
-  //       }));
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }
 
   onClickCard(id) {
     this.setState({
@@ -91,7 +67,6 @@ class RelatedProducts extends React.Component {
 
   // eslint-disable-next-line class-methods-use-this
   render() {
-    console.log('props', this.props);
     const { index } = this.state;
     const endRangeLimit = this.props.relatedProducts.length - 4;
     const productRange = this.props.relatedProducts.slice(index, index + 4);

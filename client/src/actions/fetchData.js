@@ -1,9 +1,7 @@
-// product overview
 import changeProduct from './productOverview/currentProduct';
 import changeStyles from './productOverview/styleList';
 import changeStyle from './productOverview/currentStyle';
 import resetSelected from './productOverview/resetSelected';
-// product review
 import { changeReviews, changeLoadedReviews, changeRemainingReviews } from './ratingsAndReviews/changeReviews';
 import changeReviewMeta from './ratingsAndReviews/changeReviewMeta';
 import changeRelatedProducts from './relatedProducts/changeRelatedProducts';
