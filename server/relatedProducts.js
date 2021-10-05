@@ -9,7 +9,8 @@ const getRelatedProducts = (id, callback) => {
     headers: { Authorization: apiKey },
   })
     .then((res) => {
-      callback(null, res.data);
+      const ids = [...new Set(res.data)];
+      callback(null, ids);
     })
     .catch((err) => {
       callback(err);
