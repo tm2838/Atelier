@@ -3,7 +3,14 @@ import PropTypes from 'prop-types';
 
 const SelectSize = ({ skus, inStock, handleSizeChange }) => (
   (inStock)
-    ? <select name='sizes' id='select-sizes' className='checkout' defaultValue='SELECT SIZE' onChange={handleSizeChange}>
+    ? <select
+    name='sizes'
+    id='select-sizes'
+    className='checkout'
+    data-testid='select-sizes'
+    defaultValue='SELECT SIZE'
+    onChange={handleSizeChange}
+    >
       <option value='SELECT SIZE' disabled>SELECT SIZE</option>
       {
         Object.keys(skus).map((sku) => {

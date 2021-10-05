@@ -87,7 +87,7 @@ const getRecommendationMetric = (recommended) => {
 };
 
 const getTotalReviews = (ratings) => Object.values(ratings).reduce(
-  (p, c) => parseInt(p, 10) + parseInt(c, 10),
+  (p, c) => parseInt(p, 10) + parseInt(c, 10), 0,
 );
 
 const postNewReview = (review, files) => {

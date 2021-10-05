@@ -2,10 +2,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { connect } from 'react-redux';
-
-import fetchReviews from '../../actions/fetchReviews';
 import { changeLoadedReviews, changeRemainingReviews } from '../../actions/ratingsAndReviews/changeReviews';
-
 import Ratings from './ratings/ratings.jsx';
 import ReviewsList from './reviews/reviewsList.jsx';
 import ReviewButtons from './reviews/reviewButtons.jsx';
@@ -20,10 +17,6 @@ class RatingsAndReviews extends React.Component {
       isAddReviewModalOpen: false,
     };
     this.onLoadReviews = this.onLoadReviews.bind(this);
-  }
-
-  componentDidMount() {
-    this.props.handleFetchReviews(this.props.productId);
   }
 
   onLoadReviews() {
@@ -69,9 +62,6 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  handleFetchReviews: (productId) => {
-    dispatch(fetchReviews(productId));
-  },
   handleLoadReviews: (loadedReviews, remainingReviews) => {
     dispatch(changeLoadedReviews(loadedReviews));
     dispatch(changeRemainingReviews(remainingReviews));
