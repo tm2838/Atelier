@@ -48,6 +48,10 @@
             {
               "thumbnail_url": "fifth-fake-thumbnail-url",
               "url": "fifth-fake-url"
+            },
+            {
+              "thumbnail_url": "sixth-fake-thumbnail-url",
+              "url": "sixth-fake-url"
             }
           ],
           "sale_price": null,
