@@ -21,6 +21,7 @@ const { getRelatedProducts } = require('./relatedProducts');
 const postInteractions = require('./interactions');
 
 const app = express();
+app.use(compression());
 
 app.use('/product/:id', express.static(path.join(__dirname, '/../client/dist')));
 app.use(express.json());
@@ -36,7 +37,6 @@ app.use((req, res, next) => {
   );
   next();
 });
-app.use(compression());
 
 app.get('/products/:id?', (req, res) => {
   const id = req.params.id || 47421;
