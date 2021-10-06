@@ -90,7 +90,7 @@ class Outfit extends React.Component {
               icon={ faChevronLeft } onClick={this.onClickLeft}/> : ''
           }
         </div>
-        <div className='card addCard darkCard'>
+        <div className='card addCard'>
           <h4>Add to Outfit</h4>
           <FontAwesomeIcon icon={['fas', 'plus']} onClick={ this.onClickPlus } />
         </div>

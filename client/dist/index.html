@@ -21,11 +21,10 @@
   <script>
     $(document).ready(() => {
       const logo = document.getElementById('logo');
-      const cards = document.getElementsByClassName('card');
       $(logo).on('click', (e) => {
         $('body').toggleClass('darkTheme');
-        cards.forEach(card => {
-          $('card').toggleClass('darkCard');
+        $('.card').each(function() {
+          $(this).toggleClass('darkCard');
         });
       });
     });

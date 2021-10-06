@@ -88,7 +88,7 @@ const ProductCard = (props) => {
           />
         }
       </div>
-      <div className='card darkCard' onClick={() => props.onClickCard(relatedProduct.id)}>
+      <div className='card' onClick={() => props.onClickCard(relatedProduct.id)}>
         { photo }
         <p className='cardInfo'>{ category }</p>
         <p className='cardInfo'><b>{ name }</b></p>
