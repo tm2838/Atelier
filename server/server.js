@@ -1,6 +1,7 @@
 const path = require('path');
 const express = require('express'); // npm installed
 const multer = require('multer');
+const compression = require('compression');
 
 const upload = multer({ dest: 'uploads/' });
 const { getProduct, getStyles, postCart } = require('./products'); // Atelier api call to get product/product styles data
@@ -20,6 +21,7 @@ const { getRelatedProducts } = require('./relatedProducts');
 const postInteractions = require('./interactions');
 
 const app = express();
+app.use(compression());
 
 app.use('/product/:id', express.static(path.join(__dirname, '/../client/dist')));
 app.use(express.json());
