@@ -4,9 +4,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="The ultimate modern shopping experience">
   <title>Atelier</title>
+  <style>
+    .darkTheme {
+      color: antiquewhite;
+      background-color: #21201c;
+    }
+    .darkCard {
+      box-shadow: 0 4px 8px 0 rgba(240, 238, 238, 0.815) !important;
+    }
+  </style>
 </head>
 <body>
   <div id="app"></div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   <script type="text/javascript" src="bundle.js"></script>
+  <script>
+    $(document).ready(() => {
+      const logo = document.getElementById('logo');
+      $(logo).on('click', (e) => {
+        $('body').toggleClass('darkTheme');
+        $('.card').each(function() {
+          $(this).toggleClass('darkCard');
+        });
+      });
+    });
+  </script>
 </body>
 </html>
