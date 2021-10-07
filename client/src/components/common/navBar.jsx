@@ -4,7 +4,7 @@ import CSS from './commonUI.module.css';
 
 const NavBar = () => (
   <div className={CSS['nav-bar']}>
-    <FontAwesomeIcon className={CSS.logo} icon='paw' size='4x' data-testid="logo"/>
+    <FontAwesomeIcon id='logo' className={CSS.logo} icon='paw' size='4x' data-testid="logo" />
   </div>
 );
 
