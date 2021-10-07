@@ -95,7 +95,7 @@ class Review extends React.Component {
 
         <div className={CSS['review-photo-container']}>
           {review.photos.map(
-            (photo) => <img src={photo.url} alt='review-photo' key={photo.id} className={CSS['review-photo']} onClick={this.expandPhoto} width='1900' height='600'/>,
+            (photo) => <img src={photo.url} alt='review-photo' key={photo.id} className={CSS['review-photo']} onClick={this.expandPhoto} width='160' height='90'/>,
           )}
         </div>
 
