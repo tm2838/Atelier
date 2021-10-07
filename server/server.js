@@ -1,5 +1,9 @@
 const path = require('path');
 const express = require('express'); // npm installed
+const multer = require('multer');
+const compression = require('compression');
+
+const upload = multer({ dest: 'uploads/' });
 const { getProduct, getStyles, postCart } = require('./products'); // Atelier api call to get product/product styles data
 const {
   getReviews,
@@ -17,6 +21,7 @@ const { getRelatedProducts } = require('./relatedProducts');
 const postInteractions = require('./interactions');
 
 const app = express();
+app.use(compression());
 
 app.use('/product/:id', express.static(path.join(__dirname, '/../client/dist')));
 app.use(express.json());
@@ -33,29 +38,57 @@ app.use((req, res, next) => {
   next();
 });
 
-// other configuration...
-
-// --Product Overview Widget-- GET handler that builds a response object
-// from product and styles api data to send to client
-app.get('/products/:id?', (req, res) => { // added optional id param to route
-  // --Product_id-- Unsure on route handling atm,
-  // so just using a single product for testing (id=47425)
+app.get('/products/:id?', (req, res) => {
   const id = req.params.id || 47421;
   const response = {};
   getProduct(id, (product) => {
     response.product = product;
     getStyles(id, (styles) => {
       response.styles = styles;
-      res.send(JSON.stringify(response));
+      getReviews(id)
+        .then((data) => {
+          let reviews = addNewestTag(data.data.results);
+          reviews = addRelevanceTag(reviews);
+          response.reviews = reviews;
+        })
+        .then(() => getReviewMeta(id))
+        .then((data) => {
+          const reviewMeta = data.data;
+          reviewMeta.ratingScore = getRatingScore(reviewMeta.ratings);
+          reviewMeta.recommendationRate = getRecommendationMetric(reviewMeta.recommended);
+          reviewMeta.totalReviews = getTotalReviews(reviewMeta.ratings);
+          response.reviewMeta = reviewMeta;
+        })
+        .then(() => {
+          getRelatedProducts(id, (err, data) => {
+            if (err) {
+              throw err;
+            } else {
+              return Promise.all(data.map((productId) => (
+                new Promise((resolve) => {
+                  const relatedProduct = {};
+                  getProduct(productId, (relProduct) => {
+                    relatedProduct.product = relProduct;
+                    getStyles(productId, (relStyles) => {
+                      relatedProduct.styles = relStyles;
+                      getReviewMeta(productId)
+                        .then((meta) => {
+                          const reviewMeta = meta.data;
+                          relatedProduct.product.ratingScore = getRatingScore(reviewMeta.ratings);
+                          resolve(relatedProduct);
+                        });
+                    });
+                  });
+                })
+              )))
+                .then((relatedProducts) => {
+                  response.relatedProducts = relatedProducts;
+                  res.status(200).send(response);
+                });
+            }
+          });
+        });
     });
-  });
-});
-
-app.post('/cart', (req, res) => {
-  const { body } = req;
-  postCart(body, (response) => {
-    console.log(response.status, 'cart success'); //eslint-disable-line
-    res.status(response.status).send();
   });
 });
 
@@ -81,6 +114,14 @@ app.get('/reviews/:id', (req, res) => {
     });
 });
 
+app.post('/cart', (req, res) => {
+  const { body } = req;
+  postCart(body, (response) => {
+    console.log(response.status, 'cart success'); //eslint-disable-line
+    res.status(response.status).send();
+  });
+});
+
 app.put('/reviews/:reviewId/helpful', (req, res) => {
   const id = req.params.reviewId;
   markReviewHelpful(id)
@@ -99,38 +140,13 @@ app.put('/reviews/:reviewId/report', (req, res) => {
     .catch((e) => console.log(e)); //eslint-disable-line
 });
 
-app.post('/reviews', (req, res) => {
-  const { body } = req;
-  postNewReview(body)
+app.post('/reviews', upload.array('photos'), (req, res) => {
+  const { body, files } = req;
+  postNewReview(body, files)
     .then(() => {
       res.status(201).end();
     })
     .catch((e) => console.log(e)); //eslint-disable-line
-});
-
-app.get('/relatedProducts/:id', (req, res) => {
-  const id = req.params.id || 47421;
-  getRelatedProducts(id, (err, data) => {
-    if (err) {
-      throw err;
-    } else {
-      return Promise.all(data.map((productId) => (
-        new Promise((resolve) => {
-          const relatedProduct = {};
-          getProduct(productId, (product) => {
-            relatedProduct.product = product;
-            getStyles(productId, (styles) => {
-              relatedProduct.styles = styles;
-              resolve(relatedProduct);
-            });
-          });
-        })
-      )))
-        .then((relatedProducts) => {
-          res.status(200).send(relatedProducts).end();
-        });
-    }
-  });
 });
 
 // eslint-disable-next-line no-unused-vars

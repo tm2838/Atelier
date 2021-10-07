@@ -69,6 +69,56 @@ class ImageGallery extends React.Component {
         </figure>
 
         : <div className='gallery'>
+          <figure className='gallery-main'>
+            <img
+              src={this.props.currentStyle.photos[this.state.main].url}
+              className='gallery-img'
+              data-testid='gallery-img'
+              alt='Main image'>
+            </img>
+          </figure>
+
+          <figure className='gallery-thumb-0' data-testid='gallery-thumb-0' onClick={() => this.handleImageClick(0)}>
+            <img
+              src={this.props.currentStyle.photos[this.state.thumb].thumbnail_url}
+              className='gallery-thumb'
+              data-testid='gallery-thumb-img-0'
+              alt='Thumbnail'>
+            </img>
+          </figure>
+
+          {
+            this.props.currentStyle.photos[1] && <figure className='gallery-thumb-1' data-testid='gallery-thumb-1'
+            onClick={() => this.handleImageClick(1)}>
+            <img
+              src={this.props.currentStyle.photos[this.state.thumb + 1].thumbnail_url}
+              className='gallery-thumb'
+              alt='Thumbnail'>
+            </img>
+          </figure>
+          }
+
+          {
+            this.props.currentStyle.photos[2] && <figure className='gallery-thumb-2' data-testid='gallery-thumb-2'
+            onClick={() => this.handleImageClick(2)}>
+            <img
+              src={this.props.currentStyle.photos[this.state.thumb + 2].thumbnail_url}
+              className='gallery-thumb'
+              alt='Thumbnail'>
+            </img>
+          </figure>
+          }
+
+          {
+            this.props.currentStyle.photos[3] && <figure className='gallery-thumb-3' data-testid='gallery-thumb-3'
+            onClick={() => this.handleImageClick(3)}>
+            <img
+              src={this.props.currentStyle.photos[this.state.thumb + 3].thumbnail_url}
+              className='gallery-thumb'
+              alt='Thumbnail'>
+            </img>
+          </figure>
+          }
 
           {
             (!this.props.imageView)

@@ -11,12 +11,11 @@ class RelatedProducts extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      relatedProductIds: [],
-      relatedProducts: [],
-      index: 0,
+      index: null,
       showModal: false,
       comparedProduct: {
         product: {
+          id: 0,
           name: '',
         },
         styles: {
@@ -24,7 +23,6 @@ class RelatedProducts extends React.Component {
         },
       },
     };
-    this.fetchRelatedProducts = this.fetchRelatedProducts.bind(this);
     this.onClickCard = this.onClickCard.bind(this);
     this.onClickLeft = this.onClickLeft.bind(this);
     this.onClickRight = this.onClickRight.bind(this);
@@ -32,36 +30,11 @@ class RelatedProducts extends React.Component {
     this.onClickCloseModal = this.onClickCloseModal.bind(this);
   }
 
-  // get product id from overview
-  componentDidMount() {
-    this.fetchRelatedProducts(this.props.productId);
-  }
-
-  fetchRelatedProducts(id) {
-    fetch(`/relatedProducts/${id}`)
-      .then((res) => res.json())
-      .then((relatedProducts) => {
-        this.setState((prevState) => ({
-          ...prevState,
-          relatedProducts,
-          comparedProduct: {
-            name: '',
-            features: [],
-          },
-        }));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-
   onClickCard(id) {
-    // console.log('id', id);
     this.setState({
       showModal: false,
     });
     this.props.history.push(`/product/${id}`);
-    // this.fetchRelatedProducts(id);
   }
 
   onClickLeft() {
@@ -73,7 +46,7 @@ class RelatedProducts extends React.Component {
   }
 
   onClickRight() {
-    if (this.state.index < this.state.relatedProducts.length - 4) {
+    if (this.state.index < this.props.relatedProducts.length - 4) {
       this.setState({
         index: this.state.index + 1,
       });
@@ -95,8 +68,8 @@ class RelatedProducts extends React.Component {
   // eslint-disable-next-line class-methods-use-this
   render() {
     const { index } = this.state;
-    const endRangeLimit = this.state.relatedProducts.length - 4;
-    const productRange = this.state.relatedProducts.slice(index, index + 4);
+    const endRangeLimit = this.props.relatedProducts.length - 4;
+    const productRange = this.props.relatedProducts.slice(index, index + 4);
     return (
       <div className='carousel'>
         <div className='carouselHeading'>RELATED PRODUCTS</div>
@@ -119,6 +92,7 @@ class RelatedProducts extends React.Component {
           }
         </div>
         <Modal showModal= { this.state.showModal }
+          key={index}
           comparedProduct={ this.state.comparedProduct }
           currentProduct={ this.props.currentProduct }
           onClickCloseModal={ this.onClickCloseModal } />
@@ -127,12 +101,14 @@ class RelatedProducts extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({ currentProduct: state.currentProduct });
+const mapStateToProps = (state) => (
+  { currentProduct: state.currentProduct, relatedProducts: state.relatedProducts });
 
 RelatedProducts.propTypes = {
   productId: PropTypes.string,
   currentProduct: PropTypes.object,
   history: PropTypes.object,
+  relatedProducts: PropTypes.array,
 };
 
 export default connect(mapStateToProps)(RelatedProducts);

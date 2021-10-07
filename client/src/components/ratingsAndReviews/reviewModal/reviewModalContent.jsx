@@ -8,6 +8,7 @@ class ReviewContent extends React.Component {
     this.state = {
       characters: 0,
       photos: [],
+      photoFiles: [],
     };
     this.onReviewSummary = this.onReviewSummary.bind(this);
     this.onBodyChange = this.onBodyChange.bind(this);
@@ -27,10 +28,12 @@ class ReviewContent extends React.Component {
   onUploadPhoto(e) {
     e.preventDefault();
     const updatedPhotos = [...this.state.photos, URL.createObjectURL(e.target.files[0])];
+    const updatedPhotoFiles = [...this.state.photoFiles, e.target.files[0]];
     this.setState({
       photos: updatedPhotos,
+      photoFiles: updatedPhotoFiles,
     });
-    this.props.handleUpdatePhotos(updatedPhotos);
+    this.props.handleUpdatePhotos(updatedPhotoFiles);
   }
 
   onDeletePhoto(e) {
@@ -60,10 +63,11 @@ class ReviewContent extends React.Component {
         </div>
 
         <div className={CSS['review-modal-input']}>
-          <div><b>Review Body * </b></div>
+          <label htmlFor='review-body'><b>Review Body * </b></label>
           { violated && <div style={{ color: 'red' }}>You must enter the following</div> }
           <textarea
             id='review-body'
+            data-testid='review-body'
             placeholder='Why did you like the product or not?'
             maxLength='1000'
             minLength='50'
@@ -75,11 +79,12 @@ class ReviewContent extends React.Component {
           <div><i>{this.state.characters < 50 ? `Minimum required characters left: ${50 - this.state.characters}` : 'Minimum Reached'}</i></div>
         </div>
 
-        <div>
-          <div><b>Upload your photos (Max: 5)</b></div>
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+          <label htmlFor='review-photo'><b>Upload your photos (Max: 5)</b></label>
           <input
             type='file'
             id='review-photo'
+            data-testid='review-photo-upload'
             name='filename'
             onChange={this.onUploadPhoto}
             disabled={this.state.photos.length === 5}
