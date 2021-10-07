@@ -93,24 +93,30 @@ const getTotalReviews = (ratings) => Object.values(ratings).reduce(
 const postNewReview = (review, files) => {
   const photoURLs = [];
   const promises = [];
-  files.forEach(async (photo) => {
-    const id = uuidv4();
-    promises.push(s3.upload({
-      Bucket: bucket,
-      Body: fs.createReadStream(photo.path),
-      Key: id,
-      ContentType: photo.type,
-    })
-      .promise()
-      .then(() => {
-        photoURLs.push(
-          `https://${bucket}.s3.amazonaws.com/${id}`,
-        );
+  if (bucket) {
+    files.forEach(async (photo) => {
+      const id = uuidv4();
+      promises.push(s3.upload({
+        Bucket: bucket,
+        Body: fs.createReadStream(photo.path),
+        Key: id,
+        ContentType: photo.type,
       })
-      .catch((e) => {
-        console.log(e); //eslint-disable-line
-      }));
-  });
+        .promise()
+        .then(() => {
+          photoURLs.push(
+            `https://${bucket}.s3.amazonaws.com/${id}`,
+          );
+        })
+        .catch((e) => {
+          console.log(e); //eslint-disable-line
+        }));
+    });
+  } else {
+    files.forEach((photo) => {
+      photoURLs.push(`http://localhost:3000/${photo.filename}`);
+    });
+  }
 
   return Promise.all(promises)
     .then(() => {
