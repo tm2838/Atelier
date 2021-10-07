@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import changeImage from '../../actions/productOverview/imageView';
+import changeImage from '../../../actions/productOverview/imageView';
 
 const ExpandButton = (props) => (
   <figure className='gallery-expand-button'>

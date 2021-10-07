@@ -12,7 +12,6 @@ const SelectQty = ({ maxQty, handleQtyChange }) => (
       maxQty.map((qty) => <option key={`qty-${qty}`} value={qty}>{qty}</option>)
       }
   </select >
-
 );
 
 const mapStateToProps = (state) => ({

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-class ImageZoomed extends React.Component {
+class ZoomedImage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -42,9 +42,9 @@ class ImageZoomed extends React.Component {
   }
 }
 
-ImageZoomed.propTypes = {
+ZoomedImage.propTypes = {
   photo: PropTypes.string,
   onClick: PropTypes.func,
 };
 
-export default ImageZoomed;
+export default ZoomedImage;

@@ -1,8 +1,8 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
+import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const ImageNavButton = (props) => (
+const NavButton = (props) => (
     <div>
       <FontAwesomeIcon
         className='gallery-nav'
@@ -13,4 +13,10 @@ const ImageNavButton = (props) => (
     </div>
 );
 
-export default ImageNavButton;
+NavButton.propTypes = {
+  icon: PropTypes.string,
+  direction: PropTypes.string,
+  onClick: PropTypes.func,
+};
+
+export default NavButton;

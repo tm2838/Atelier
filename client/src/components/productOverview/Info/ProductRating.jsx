@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import StarRating from '../common/starRating.jsx';
+import StarRating from '../../common/starRating.jsx';
 
 const ProductRating = ({ reviewMeta, reviewNumber }) => (
   <div className='overview-rating'>

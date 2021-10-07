@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const ImageMain = (props) => (
+const MainImage = (props) => (
   <figure className='gallery-main'>
     <img
       src={props.photo}
@@ -13,9 +13,9 @@ const ImageMain = (props) => (
   </figure>
 );
 
-ImageMain.propTypes = {
+MainImage.propTypes = {
   photo: PropTypes.string,
   onClick: PropTypes.func,
 };
 
-export default ImageMain;
+export default MainImage;

@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import ProductRating from './ProductRating.jsx';
 import ProductName from './ProductName.jsx';
 import StyleList from './StyleList.jsx';
-import AddToCart from './AddToCart.jsx';
+import AddToCart from '../Cart/AddToCart.jsx';
 
 const ProductInfo = ({
   product,

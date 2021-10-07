@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-const ImageList = (props) => (
+const ThumbList = (props) => (
   <>
-    <figure className='gallery-thumb-0' onClick={() => props.handleImageClick(0)}>
+    <figure className='gallery-thumb-0' data-testid='gallery-thumb-0' onClick={() => props.handleImageClick(0)}>
       <img
         src={props.currentStyle.photos[props.thumb].thumbnail_url}
         className='gallery-thumb'
@@ -62,10 +62,10 @@ const mapStateToProps = (state) => ({
   currentStyle: state.currentStyle,
 });
 
-ImageList.propTypes = {
+ThumbList.propTypes = {
   currentStyle: PropTypes.object,
   thumb: PropTypes.number,
   handleImageClick: PropTypes.func,
 };
 
-export default connect(mapStateToProps)(ImageList);
+export default connect(mapStateToProps)(ThumbList);

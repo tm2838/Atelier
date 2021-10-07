@@ -2,29 +2,29 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import ImageNavButton from './ImageNavButton.jsx';
+import NavButton from './NavButton.jsx';
 
 const NavList = (props) => (
   <>
     {props.currentStyle && props.main < props.currentStyle.photos.length - 1
       && <figure className='gallery-nav-right'>
-        <ImageNavButton direction='right' icon={'arrow-right'} onClick={props.handleNavClick} />
+        <NavButton direction='right' icon={'arrow-right'} onClick={props.handleNavClick} />
       </figure>}
 
     {props.styles.length > 0 && props.main > 0
       && <figure className='gallery-nav-left'>
-        <ImageNavButton direction={'left'} icon={'arrow-left'} onClick={props.handleNavClick} />
+        <NavButton direction={'left'} icon={'arrow-left'} onClick={props.handleNavClick} />
       </figure>}
 
     {props.styles.length > 0 && props.thumb > 0
       && <figure className='gallery-nav-up'>
-        <ImageNavButton direction={'up'} icon={'angle-up'} onClick={props.handleNavClick} />
+        <NavButton direction={'up'} icon={'angle-up'} onClick={props.handleNavClick} />
       </figure>}
 
     {props.currentStyle
       && props.thumb + 4 < props.currentStyle.photos.length - 1
       && <figure className='gallery-nav-down'>
-        <ImageNavButton direction={'down'} icon={'angle-down'} onClick={props.handleNavClick} />
+        <NavButton direction={'down'} icon={'angle-down'} onClick={props.handleNavClick} />
       </figure>}
   </>
 );
