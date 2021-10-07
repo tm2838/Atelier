@@ -1,13 +1,14 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import MainImage from './MainImage.jsx';
-import ImageZoomed from './ZoomedImage.jsx';
+// import ImageZoomed from './ZoomedImage.jsx';
 import ImageList from './ThumbList.jsx';
 import NavList from './NavList.jsx';
 import ExpandButton from './ExpandButton.jsx';
-import IconList from './IconList.jsx';
+import ExpandedImage from './ExpandedImage.jsx';
+// import IconList from './IconList.jsx';
 
 class ImageGallery extends React.Component {
   constructor(props) {
@@ -69,24 +70,29 @@ class ImageGallery extends React.Component {
         </figure>
 
         : <div className='gallery'>
-          {
-            (!this.props.imageView)
-              ? <>
-                <MainImage photo={this.props.currentStyle.photos[this.state.main].url} />
-                <ImageList
-                  thumb={this.state.thumb}
-                  handleImageClick={this.handleThumbClick} />
-                <NavList
-                  main={this.state.main}
-                  thumb={this.state.thumb}
-                  handleNavClick={this.handleNavClick} />
-                <ExpandButton />
-              </>
-              : <>
-                {
-                  (!this.state.isZoomed)
-                    ? <>
-                      <MainImage
+          <>
+            <MainImage photo={this.props.currentStyle.photos[this.state.main].url} />
+            <ImageList
+              thumb={this.state.thumb}
+              handleImageClick={this.handleThumbClick} />
+            <NavList
+              main={this.state.main}
+              thumb={this.state.thumb}
+              handleNavClick={this.handleNavClick} />
+            <ExpandButton className={'gallery-modal-open'}/>
+            {
+              this.props.imageView
+              && <ExpandedImage
+                main={this.state.main}
+                thumb={this.state.thumb}
+                onThumbClick={this.handleThumbClick}
+                onNavClick={this.handleNavClick}
+                />
+            }
+          </>
+          {/* (!this.state.isZoomed)
+                  ? <>
+                     <MainImage
                         photo={this.props.currentStyle.photos[this.state.main].url}
                         onClick={this.handleZoom} />
                       <IconList
@@ -101,10 +107,7 @@ class ImageGallery extends React.Component {
                     </>
                     : <ImageZoomed
                       photo={this.props.currentStyle.photos[this.state.main].url}
-                      onClick={this.handleZoom} />
-                }
-              </>
-          }
+                      onClick={this.handleZoom} /> */}
         </div>
     );
   }
@@ -115,5 +118,11 @@ const mapStateToProps = (state) => ({
   currentStyle: state.currentStyle,
   imageView: state.imageView,
 });
+
+ImageGallery.propTypes = {
+  styles: PropTypes.array,
+  currentStyle: PropTypes.object,
+  imageView: PropTypes.bool,
+};
 
 export default connect(mapStateToProps)(ImageGallery);

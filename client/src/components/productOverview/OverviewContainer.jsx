@@ -7,27 +7,18 @@ import ProductInfo from './Info/ProductInfo.jsx';
 import ProductSummary from './Info/ProductSummary.jsx';
 import './styles.css';
 
-const OverviewContainer = ({ imageView }) => (
-  (!imageView)
-    ? <div className='product-container' id='product-overview'>
-      <figure className='gallery-container'>
-        <ImageGallery />
-      </figure>
-      <figure className='product-info-container'>
-        <ProductInfo />
-      </figure>
-      <figure className='product-summary-container'>
-        <ProductSummary />
-      </figure>
-    </div>
-    : <div className='product-container' id='product-overview'>
-      <figure className='gallery-expanded-container'>
-        <ImageGallery />
-      </figure>
-      <figure className='product-summary-container'>
-        <ProductSummary />
-      </figure>
-    </div>
+const OverviewContainer = () => (
+  <div className='product-container' id='product-overview'>
+    <figure className='gallery-container'>
+      <ImageGallery />
+    </figure>
+    <figure className='product-info-container'>
+      <ProductInfo />
+    </figure>
+    <figure className='product-summary-container'>
+      <ProductSummary />
+    </figure>
+  </div>
 );
 
 const mapStateToProps = (state) => ({

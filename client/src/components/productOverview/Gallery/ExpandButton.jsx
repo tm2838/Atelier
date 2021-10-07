@@ -5,13 +5,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import changeImage from '../../../actions/productOverview/imageView';
 
-const ExpandButton = (props) => (
-  <figure className='gallery-expand-button'>
+const ExpandButton = ({ imageView, handleExpand }) => (
+  <figure className='gallery-modal-open'>
     <FontAwesomeIcon
       className='gallery-nav'
       data-testid='gallery-expand-button'
       icon={'expand'}
-      onClick={() => props.handleExpand(!props.imageView)}
+      onClick={() => handleExpand(!imageView)}
     />
   </figure>
 );
