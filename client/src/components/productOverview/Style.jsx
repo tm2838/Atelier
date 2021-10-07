@@ -10,7 +10,7 @@ const Style = ({
 }) => (
 
   <div className={`style-selector style-selector-${index}`}>
-    <img className='style-img' onClick={() => onClick(index)} src={photo} alt='styles...' />
+    <img className='style-img' onClick={() => onClick(index)} src={photo} alt='styles...' width='70'/>
     { selected && <FontAwesomeIcon icon='check-circle' className='style-check'/>}
   </div>
 
