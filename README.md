@@ -1,9 +1,9 @@
 # Atelier
-Project Atelier comprises a complete redesign of a client-facing retail portal to save sales numbers. Or rather that's the narrative fueling this Front End Capstone Project. 
+Project Atelier comprises a complete redesign of a client-facing retail portal to save sales numbers. Or rather that's the narrative fueling this Front End Capstone Project.
 
 ## Demo
-Here is a recorded demo of our app :
-
+Here is a visual representation of our app :
+![Atelier](Atelier.png)
 
 ## Usage
 
