@@ -1,8 +1,9 @@
 const path = require('path');
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
   entry: path.join(__dirname, 'client/src/index.jsx'),
-  mode: 'development',
+  mode: 'production',
   watch: true,
   module: {
     rules: [
@@ -21,6 +22,10 @@ module.exports = {
         use: ['style-loader', 'css-loader'],
       },
     ],
+  },
+  optimization: {
+    minimize: true,
+    minimizer: [new TerserPlugin()],
   },
   output: {
     filename: 'bundle.js',
