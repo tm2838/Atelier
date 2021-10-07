@@ -25,10 +25,13 @@
     "@fortawesome/free-regular-svg-icons": "^5.15.4",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
     "@fortawesome/react-fontawesome": "^0.1.15",
+    "aws-sdk": "^2.999.0",
     "axios": "^0.21.4",
+    "compression": "^1.7.4",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "jest-fetch-mock": "^3.0.3",
+    "multer": "^1.4.3",
     "nodemon": "^2.0.12",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
@@ -36,7 +39,9 @@
     "react-redux": "^7.2.5",
     "react-router-dom": "^5.3.0",
     "redux": "^4.1.1",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "uglify-js": "^3.14.2",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@babel/core": "^7.15.0",
@@ -55,6 +60,7 @@
     "eslint-plugin-react-hooks": "^1.7.0",
     "jest": "^27.1.0",
     "style-loader": "^3.2.1",
+    "terser-webpack-plugin": "^5.2.4",
     "webpack": "^5.51.1",
     "webpack-cli": "^4.8.0"
   },

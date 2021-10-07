@@ -64,10 +64,11 @@ class ImageGallery extends React.Component {
             </img>
           </figure>
 
-          <figure className='gallery-thumb-0' onClick={() => this.handleImageClick(0)}>
+          <figure className='gallery-thumb-0' data-testid='gallery-thumb-0' onClick={() => this.handleImageClick(0)}>
             <img
               src={this.props.currentStyle.photos[this.state.thumb].thumbnail_url}
               className='gallery-thumb'
+              data-testid='gallery-thumb-img-0'
               alt='Thumbnail'>
             </img>
           </figure>

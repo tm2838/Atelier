@@ -4,27 +4,72 @@ div {
   border: 0;
 }
 
+#related-products {
+  margin-top: 30vh;
+}
+
 .carousel {
-  width: 100%;
-  margin: 10% 0;
+  display: grid;
+  grid-template-columns: 10vw 20vw 20vw 20vw 20vw 10vw;
+  grid-template-rows: 1fr 1fr;
+  margin-top: 10vh;
+  max-height: 90vh;
 }
 
-/* .relatedProducts {
-  margin-top: 10%;
+.carouselHeading {
+  grid-column: 1 / span 2;
 }
 
-.outfit {
-  margin-top: 5%;
-} */
+.left {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  margin-left: 5%;
+}
+
+.relatedCardContainer {
+  grid-column: 2 / span 4;
+  grid-row-start: 2;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin-top: -20%;
+}
+
+.outfitCardContainer {
+  grid-column: 3 / span 3;
+  grid-row-start: 2;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: -25%;
+}
+
+.right {
+  grid-column: 6;
+  margin-right: 5%;
+}
+
+.left, .right {
+  grid-row: 2;
+  text-align: center;
+  margin: auto 0;
+}
+/* position star and circle times button */
+.icon {
+  display: inline-block;
+  position: relative;
+  z-index: 1;
+  margin-left: 84%;
+}
 
 .card {
   /* Add shadows to create the "card" effect */
   display: inline-block;
+  position: relative;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
-  width: 20%;
+  width: 95%;
   height: 30em;
-  margin: 1% 1%;
+  margin: -10% 1%;
+  grid-row-start: 2;
 }
 
 /* On mouse-over, add a deeper shadow */
@@ -36,33 +81,16 @@ div {
   height: 20em;
 }
 
-/* position button */
-.icon {
-  /* margin: 5% 0; */
-  display: inline-block;
-  position: relative;
-  z-index: 100;
-  margin: 0 0 0 50%;
-}
-
 .cardInfo {
   padding-left: 2%;;
 }
 
-.arrow {
-  position: relative;
-  margin: 17% 0;
-  z-index: 1;
-}
-
-.left {
-  position: relative;
-  margin-left: 5%;
-}
-
-.right {
-  position: relative;
-  margin-right: 5%;
+.addCard {
+  text-align: center;
+  height: 30vh;
+  grid-column: 2;
+  grid-row: 2;
+  margin-top: -15%;
 }
 
 .modal {
@@ -70,7 +98,6 @@ div {
   z-index: 2;
   max-height: 50vh;
   overflow-y: auto;
-  top: 85%;
   margin: 0% 25%;
   background-color: whitesmoke;
   border: 1px solid black;

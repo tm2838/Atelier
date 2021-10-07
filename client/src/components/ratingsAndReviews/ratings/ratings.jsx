@@ -14,11 +14,11 @@ const Ratings = ({ reviews, reviewMeta }) => (
           {reviewMeta.ratingScore && (
             <div className={CSS['rating-summary']}>
               <div className={CSS['rating-score']}>{reviewMeta.ratingScore}</div>
-              <StarRating />
+              <StarRating rating={reviewMeta.ratingScore}/>
             </div>
           )}
           {reviewMeta.recommendationRate && (
-            <div className={CSS['rating-recommendation']}>{reviewMeta.recommendationRate !== 'NaN' ? reviewMeta.recommendationRate : 0}%
+            <div className={CSS['rating-recommendation']}>{reviewMeta.recommendationRate}%
             of reviews recommend this product</div>
           )}
           <StarBreakdown />

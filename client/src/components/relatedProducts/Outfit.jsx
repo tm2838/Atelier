@@ -46,13 +46,10 @@ class Outfit extends React.Component {
   }
 
   onClickCircleX(id) {
-    // console.log('id', id);
-    // console.log('outfits', this.state.outfitProducts);
     const { outfitProducts } = this.state;
     let index;
     // eslint-disable-next-line no-plusplus
     for (let i = 0; i < outfitProducts.length; i++) {
-      // console.log('outfit array id', outfitProducts[i].product.id);
       if (outfitProducts[i].product.id === id) {
         index = i;
       }
@@ -86,25 +83,31 @@ class Outfit extends React.Component {
     const endRangeLimit = this.state.outfitProducts.length - 3;
     const productRange = this.state.outfitProducts.slice(index, index + 3);
     return (
-      <div className='outfit'>
-        <div>YOUR OUTFIT</div>
-        <div className='card'>
+      <div className='carousel' style={{ marginBottom: '20vh' }}>
+        <div className='carouselHeading'>YOUR OUTFIT</div>
+        <div className='left'>
+          { index ? <FontAwesomeIcon className='arrow left' data-testid='left-arrow'
+              icon={ faChevronLeft } onClick={this.onClickLeft}/> : ''
+          }
+        </div>
+        <div className='card addCard'>
           <h4>Add to Outfit</h4>
           <FontAwesomeIcon icon={['fas', 'plus']} onClick={ this.onClickPlus } />
         </div>
-        { index ? <FontAwesomeIcon className='arrow left' data-testid='left-arrow'
-            icon={ faChevronLeft } onClick={this.onClickLeft}/> : ''
-        }
-        {productRange.map((product) => (
-          <ProductCard type={'outfit'} key={product.product.id}
-          product={product}
-          onClickCircleX={ this.onClickCircleX }
-          onClickCard={ this.onClickCard }
-          />))
-        }
-        {index < endRangeLimit && <FontAwesomeIcon className='arrow right' data-testid='right-arrow'
-            icon={ faChevronRight } onClick={this.onClickRight} />
-        }
+        <div className='outfitCardContainer'>
+          {productRange.map((product) => (
+            <ProductCard type={'outfit'} key={product.product.id}
+            product={product}
+            onClickCircleX={ this.onClickCircleX }
+            onClickCard={ this.onClickCard }
+            />))
+          }
+        </div>
+        <div className='right'>
+          {index < endRangeLimit && <FontAwesomeIcon className='arrow right' data-testid='right-arrow'
+              icon={ faChevronRight } onClick={this.onClickRight} />
+          }
+        </div>
       </div>
     );
   }

@@ -7,6 +7,7 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from '../../../reducers/rootReducer';
 import RelatedProductsContainer from '../RelatedProductsContainer.jsx';
+import '../../common/fontAwesomeIcons';
 
 describe('relatedProducts container', () => {
   const testStore = createStore(

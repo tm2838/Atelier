@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Button from './Button.jsx';
 import StarRating from '../common/starRating.jsx';
+import './styles.css';
 
 const ProductCard = (props) => {
-  // console.log('star', props);
   const relatedProduct = props.product.product;
   const { name } = relatedProduct;
   const category = relatedProduct.category.toUpperCase();
@@ -77,21 +77,23 @@ const ProductCard = (props) => {
   }
   return (
     <div>
-      { props.type === 'related' ? <Button type={ props.type }
-        product={ props.product }
-        onClickStar={ props.onClickStar }
-        onClickCircleX={ props.onClickCircleX }
-        /> : <Button type={ props.type }
-        product={ props.product }
-        onClickCircleX={ props.onClickCircleX }
-        />
-      }
+      <div className='icon'>
+        { props.type === 'related' ? <Button type={ props.type }
+          product={ props.product }
+          onClickStar={ props.onClickStar }
+          onClickCircleX={ props.onClickCircleX }
+          /> : <Button type={ props.type }
+          product={ props.product }
+          onClickCircleX={ props.onClickCircleX }
+          />
+        }
+      </div>
       <div className='card' onClick={() => props.onClickCard(relatedProduct.id)}>
         { photo }
         <p className='cardInfo'>{ category }</p>
         <p className='cardInfo'><b>{ name }</b></p>
           { price }
-          <StarRating />
+          <StarRating rating={relatedProduct.ratingScore} />
       </div>
     </div>
   );

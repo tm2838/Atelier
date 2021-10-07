@@ -5,7 +5,6 @@ import { Provider } from 'react-redux';
 import {
   BrowserRouter as Router,
 } from 'react-router-dom';
-import fetchMock from 'jest-fetch-mock';
 import testReview from '../../../fixtures/testReview.json';
 import testStore from '../../../fixtures/testStore';
 
@@ -14,17 +13,13 @@ import '../../common/fontAwesomeIcons';
 
 describe('ratingsAndReviews', () => {
   beforeEach(() => {
-    fetchMock.mockIf('http://127.0.0.1:3000', (req) => {
-      if (req.url.endsWith('/reviews')) {
-        return testReview;
-      }
-
-      return {};
-    });
+    global.fetch = jest.fn(() => Promise.resolve({
+      json: () => Promise.resolve(testReview),
+    }));
   });
 
   afterEach(() => {
-    fetchMock.resetMocks();
+    fetch.mockClear();
   });
 
   it('should have a section review title', () => {

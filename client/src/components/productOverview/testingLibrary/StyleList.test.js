@@ -9,6 +9,7 @@ import rootReducer from '../../../reducers/rootReducer';
 import testProduct from '../../../fixtures/testProduct.json';
 
 import StyleList from '../StyleList.jsx';
+import '../../common/fontAwesomeIcons';
 
 let testStore = null;
 beforeAll(() => {

@@ -4,7 +4,6 @@ import { render, fireEvent, waitfor } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import fetchMock from 'jest-fetch-mock';
 import rootReducer from '../../../reducers/rootReducer';
 import testReview from '../../../fixtures/testReview.json';
 import testStore from '../../../fixtures/testStore';
@@ -14,17 +13,13 @@ import '../../common/fontAwesomeIcons';
 
 describe.only('reviewButtons', () => {
   beforeEach(() => {
-    fetchMock.mockIf('http://127.0.0.1:3000', (req) => {
-      if (req.url.endsWith('/reviews')) {
-        return testReview;
-      }
-
-      return {};
-    });
+    global.fetch = jest.fn(() => Promise.resolve({
+      json: () => Promise.resolve({ status: 201 }),
+    }));
   });
 
   afterEach(() => {
-    fetchMock.resetMocks();
+    fetch.mockClear();
   });
 
   it('should have a more review button when there are more than two reviews', () => {

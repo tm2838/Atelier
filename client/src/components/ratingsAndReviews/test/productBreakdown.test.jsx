@@ -3,6 +3,7 @@ import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import testStore from '../../../fixtures/testStore';
 import ProductBreakdown from '../ratings/productBreakdown.jsx';
+import '../../common/fontAwesomeIcons';
 
 describe('productBreakdown', () => {
   it('should render a list of characteristics', () => {
