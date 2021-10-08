@@ -34,7 +34,7 @@ const Modal = (props) => {
   const rows = keys.map((key) => {
     if (features[key].currentProduct === true && features[key].comparedProduct === true) {
       return (
-        <tr className='features'>
+        <tr className='features' key={key}>
           <td className='check'>
             <FontAwesomeIcon data-testid='checkMark' icon={ faCheck } />
           </td>
@@ -45,7 +45,7 @@ const Modal = (props) => {
     // eslint-disable-next-line no-else-return
     } else if (features[key].comparedProduct === true) {
       return (
-        <tr className='features'>
+        <tr className='features' key={key}>
           <td className='check'>{ features[key].currentProduct }</td>
           <td>{key}</td>
           <td className='check'>
@@ -55,7 +55,7 @@ const Modal = (props) => {
       );
     } else if (features[key].currentProduct === true) {
       return (
-        <tr className='features'>
+        <tr className='features' key={key}>
           <td className='check'>
             <FontAwesomeIcon data-testid='checkMark' icon={ faCheck } />
           </td>
@@ -66,7 +66,7 @@ const Modal = (props) => {
     } else {
       return (
         // eslint-disable-next-line react/jsx-key
-        <tr className='features'>
+        <tr className='features' key={key}>
           <td className='check'>{features[key].currentProduct}</td>
           <td>{key}</td>
           <td className='check'>{features[key].comparedProduct}</td>
