@@ -11,6 +11,7 @@ import selectedSku from './productOverview/selectedSku';
 import selectedQty from './productOverview/selectedQty';
 import inStockQty from './productOverview/inStockQty';
 import relatedProducts from './relatedProducts/relatedProductsReducer';
+import theme from './toggleColorTheme';
 
 export default combineReducers({
   currentProduct,
@@ -25,4 +26,5 @@ export default combineReducers({
   remainingReviews,
   filters,
   relatedProducts,
+  theme,
 });

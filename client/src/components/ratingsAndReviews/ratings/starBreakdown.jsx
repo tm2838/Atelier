@@ -51,7 +51,8 @@ class StarBreakdown extends React.Component {
   }
 
   render() {
-    const { reviewMeta, filters } = this.props;
+    const { reviewMeta, filters, theme } = this.props;
+    const themeClass = theme === 'LIGHT' ? CSS['star-breakdown-div'] : CSS['star-breakdown-div-dark'];
     return (
       <>
         {reviewMeta.ratings
@@ -75,31 +76,31 @@ class StarBreakdown extends React.Component {
                 </>
               )
             }
-            <div data-testid='5-star' onClick={this.onFilter} className={`${CSS['star-breakdown-div']} 5`}>
+            <div data-testid='5-star' onClick={this.onFilter} className={`${themeClass} 5`}>
               <div style={{ marginRight: '10px' }}>5 Stars</div>
               <StarBreakdownBar barStyle={{ width: `${(reviewMeta.ratings['5'] / reviewMeta.totalReviews) * 100 || 0}%` }}/>
               <div>{reviewMeta.ratings['5'] || 0}</div>
             </div>
 
-            <div data-testid='4-star' onClick={this.onFilter} className={`${CSS['star-breakdown-div']} 4`}>
+            <div data-testid='4-star' onClick={this.onFilter} className={`${themeClass} 4`}>
               <div style={{ marginRight: '10px' }}>4 Stars</div>
               <StarBreakdownBar barStyle={{ width: `${(reviewMeta.ratings['4'] / reviewMeta.totalReviews) * 100 || 0}%` }}/>
               <div>{reviewMeta.ratings['4'] || 0}</div>
             </div>
 
-            <div data-testid='3-star' onClick={this.onFilter} className={`${CSS['star-breakdown-div']} 3`}>
+            <div data-testid='3-star' onClick={this.onFilter} className={`${themeClass} 3`}>
               <div style={{ marginRight: '10px' }}>3 Stars</div>
               <StarBreakdownBar barStyle={{ width: `${(reviewMeta.ratings['3'] / reviewMeta.totalReviews) * 100 || 0}%` }}/>
               <div>{reviewMeta.ratings['3'] || 0}</div>
             </div>
 
-            <div data-testid='2-star' onClick={this.onFilter} className={`${CSS['star-breakdown-div']} 2`}>
+            <div data-testid='2-star' onClick={this.onFilter} className={`${themeClass} 2`}>
               <div style={{ marginRight: '10px' }}>2 Stars</div>
               <StarBreakdownBar barStyle={{ width: `${(reviewMeta.ratings['2'] / reviewMeta.totalReviews) * 100 || 0}%` }}/>
               <div>{reviewMeta.ratings['2'] || 0}</div>
             </div>
 
-            <div data-testid='1-star' onClick={this.onFilter} className={`${CSS['star-breakdown-div']} 1`}>
+            <div data-testid='1-star' onClick={this.onFilter} className={`${themeClass} 1`}>
               <div style={{ marginRight: '16px' }}>1 Star {' '}</div>
               <StarBreakdownBar barStyle={{ width: `${(reviewMeta.ratings['1'] / reviewMeta.totalReviews) * 100 || 0}%` }}/>
               <div>{reviewMeta.ratings['1'] || 0}</div>
@@ -118,6 +119,7 @@ const mapStateToProps = (state) => ({
   filters: state.filters,
   loadedReviews: state.loadedReviews,
   remainingReviews: state.remainingReviews,
+  theme: state.theme,
 });
 
 const mapDispatchToProps = (dispatch) => ({

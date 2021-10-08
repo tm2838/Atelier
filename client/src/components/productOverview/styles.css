@@ -211,6 +211,16 @@
   font-size: large;
   font-weight: 600;
   padding-left: 10px;
+  background-color:#dbe7f7ff;
+}
+
+.checkout-dark {
+  font-size: large;
+  font-weight: 600;
+  padding-left: 10px;
+  background-color:#454B4D;
+  color:antiquewhite;
+  box-shadow: 0 4px 8px 0 rgba(240, 238, 238, 0.815);
 }
 
 #select-sizes {
