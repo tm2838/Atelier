@@ -13,9 +13,6 @@ const ExpandedImage = ({
   main,
   handleImageClick,
   handleNavClick,
-  // thumb,
-  // onThumbClick,
-  // onNavClick,
 }) => (
   <div className="gallery-expanded-container">
     <ExpandButton className={'gallery-modal-close'} icon={'times'} />
@@ -27,6 +24,7 @@ const ExpandedImage = ({
         zoomScale={2.5}
         hideHint={true}
       />
+
       {
         main > 0
         && <NavButton
@@ -65,17 +63,12 @@ const ExpandedImage = ({
 );
 
 const mapStateToProps = (state) => ({
-  styles: state.styleList,
   currentStyle: state.currentStyle,
-  imageView: state.imageView,
 });
 
 ExpandedImage.propTypes = {
-  styles: PropTypes.array,
   currentStyle: PropTypes.object,
-  imageView: PropTypes.bool,
   main: PropTypes.number,
-  thumb: PropTypes.number,
   handleImageClick: PropTypes.func,
   handleNavClick: PropTypes.func,
 };

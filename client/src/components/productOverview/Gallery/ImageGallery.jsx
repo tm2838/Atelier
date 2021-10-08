@@ -3,12 +3,10 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import MainImage from './MainImage.jsx';
-// import ImageZoomed from './ZoomedImage.jsx';
 import ThumbList from './ThumbList.jsx';
 import NavList from './NavList.jsx';
 import ExpandButton from './ExpandButton.jsx';
 import ExpandedImage from './ExpandedImage.jsx';
-// import IconList from './IconList.jsx';
 
 class ImageGallery extends React.Component {
   constructor(props) {
@@ -16,11 +14,9 @@ class ImageGallery extends React.Component {
     this.state = {
       main: 0,
       thumb: 0,
-      isZoomed: false,
     };
     this.handleThumbClick = this.handleThumbClick.bind(this);
     this.handleNavClick = this.handleNavClick.bind(this);
-    this.handleZoom = this.handleZoom.bind(this);
   }
 
   handleThumbClick(index, expanded) {
@@ -57,13 +53,6 @@ class ImageGallery extends React.Component {
         main,
       });
     }
-  }
-
-  handleZoom() {
-    const isZoomed = !this.state.isZoomed;
-    this.setState({
-      isZoomed,
-    });
   }
 
   render() {

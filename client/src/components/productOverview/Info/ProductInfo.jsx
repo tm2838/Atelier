@@ -1,4 +1,3 @@
-/* eslint class-methods-use-this: ["error", { "exceptMethods": ["render"] }] */
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
