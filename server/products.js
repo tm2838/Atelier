@@ -15,7 +15,7 @@ const getProduct = (id, callback) => {
       callback(res.data);
     })
     .catch((err) => {
-      throw err;
+      callback(err);
     });
 };
 
@@ -27,7 +27,7 @@ const getStyles = (id, callback) => {
       callback(res.data);
     })
     .catch((err) => {
-      throw err;
+      callback(err);
     });
 };
 
@@ -39,7 +39,7 @@ const postCart = (sku, callback) => {
       callback(res);
     })
     .catch((error) => {
-      console.log(error); // eslint-disable-line
+      callback(error);
     });
 };
 

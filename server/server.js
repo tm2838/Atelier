@@ -94,6 +94,9 @@ app.get('/products/:id?', (req, res) => {
                 .then((relatedProducts) => {
                   response.relatedProducts = relatedProducts;
                   res.status(200).send(response);
+                })
+                .catch((error) => {
+                  res.status(400).send(error);
                 });
             }
           });
