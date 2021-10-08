@@ -2,18 +2,24 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const NavButton = (props) => (
-    <div>
+const NavButton = ({
+  className,
+  icon,
+  direction,
+  onClick,
+}) => (
+    <div className={className}>
       <FontAwesomeIcon
         className='gallery-nav'
-        data-testid={`gallery-nav-${props.direction}`}
-        icon={props.icon}
+        data-testid={`gallery-nav-${direction}`}
+        icon={icon}
         size='2x'
-        onClick={() => props.onClick(props.direction)} />
+        onClick={() => onClick(direction)} />
     </div>
 );
 
 NavButton.propTypes = {
+  className: PropTypes.string,
   icon: PropTypes.string,
   direction: PropTypes.string,
   onClick: PropTypes.func,

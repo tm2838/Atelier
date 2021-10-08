@@ -8,7 +8,7 @@ const NavList = (props) => (
   <>
     {props.currentStyle && props.main < props.currentStyle.photos.length - 1
       && <figure className='gallery-nav-right'>
-        <NavButton direction='right' icon={'arrow-right'} onClick={props.handleNavClick} />
+        <NavButton direction={'right'} icon={'arrow-right'} onClick={props.handleNavClick} />
       </figure>}
 
     {props.styles.length > 0 && props.main > 0

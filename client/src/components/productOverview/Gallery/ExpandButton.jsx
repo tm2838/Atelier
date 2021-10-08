@@ -15,6 +15,7 @@ const ExpandButton = ({
     <FontAwesomeIcon
       className='gallery-nav'
       data-testid='gallery-expand-button'
+      size='2x'
       icon={icon}
       onClick={() => handleExpand(!imageView)}
     />

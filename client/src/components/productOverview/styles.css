@@ -79,11 +79,6 @@
   cursor: pointer;
 }
 
-.gallery-icon:hover {
-  border: solid 2px white;
-  cursor: pointer;
-}
-
 .gallery-thumb-0 {
   grid-column-start: 4;
   grid-column-end: 8;
@@ -290,7 +285,7 @@
   background-color: black;
   margin: auto;
   padding: 0;
-  width: 70%;
+  width: 90%;
   height: 700px;
 }
 
@@ -315,6 +310,39 @@
   position: absolute;
   top: 10px;
   right: 25px;
-  font-size: 35px;
   font-weight: bold;
+}
+
+.gallery-icons {
+  display: block;
+  text-align: center;
+}
+
+.gallery-icon {
+  margin: 5px;
+}
+
+.gallery-icon:hover {
+  cursor: pointer;
+}
+
+.expanded-nav-left,
+.expanded-nav-right {
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -50px;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.expanded-nav-right {
+  right: 0;
+}
+
+.expanded-nav-left:hover,
+.expanded-nav-right:hover {
+  cursor: pointer;
 }

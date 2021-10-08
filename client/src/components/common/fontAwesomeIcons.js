@@ -16,6 +16,9 @@ import {
   faExpand,
   faImage,
   faCheckCircle,
+  faSquare,
+  faAngleRight,
+  faAngleLeft,
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
@@ -35,4 +38,7 @@ library.add(
   faExpand,
   faImage,
   faCheckCircle,
+  faSquare,
+  faAngleRight,
+  faAngleLeft,
 );
