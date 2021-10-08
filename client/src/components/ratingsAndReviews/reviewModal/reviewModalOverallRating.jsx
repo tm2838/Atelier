@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
+import { connect } from 'react-redux';
 import CSS from '../ratingsAndReviews.module.css';
 import StarRating from '../../common/starRating.jsx';
 
@@ -26,7 +27,8 @@ class ReviewOverallRating extends React.Component {
 
   render() {
     const { rating } = this.state;
-    const { violations } = this.props;
+    const { violations, theme } = this.props;
+    const themeSelectedColor = theme === 'LIGHT' ? '#92a4b3' : '#21201c';
     const starRatingOptions = {
       1: 'Poor', 2: 'Fair', 3: 'Average', 4: 'Good', 5: 'Great',
     };
@@ -38,7 +40,7 @@ class ReviewOverallRating extends React.Component {
         <div required><b>Overall rating * </b></div>
         {violated && <div style={violationStyle}>You must enter the following</div>}
         <div style={{
-          display: 'flex', color: '#92a4b3', fontStyle: 'italic',
+          display: 'flex', color: themeSelectedColor, fontStyle: 'italic',
         }}>
           <StarRating rating={rating} onClick={this.onStarRating} />
           {starRatingOptions[rating]}
@@ -47,5 +49,8 @@ class ReviewOverallRating extends React.Component {
     );
   }
 }
+const mapStateToProps = (state) => ({
+  theme: state.theme,
+});
 
-export default ReviewOverallRating;
+export default connect(mapStateToProps)(ReviewOverallRating);

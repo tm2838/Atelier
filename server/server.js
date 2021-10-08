@@ -2,6 +2,7 @@ const path = require('path');
 const express = require('express'); // npm installed
 const multer = require('multer');
 const compression = require('compression');
+require('dotenv').config();
 
 const upload = multer({ dest: 'uploads/' });
 const { getProduct, getStyles, postCart } = require('./products'); // Atelier api call to get product/product styles data
@@ -38,6 +39,7 @@ app.use((req, res, next) => {
   next();
 });
 
+const bucket = process.env.PROJECT_ATELIER_BUCKET;
 app.get('/products/:id?', (req, res) => {
   const id = req.params.id || 47421;
   const response = {};
@@ -49,6 +51,14 @@ app.get('/products/:id?', (req, res) => {
         .then((data) => {
           let reviews = addNewestTag(data.data.results);
           reviews = addRelevanceTag(reviews);
+          reviews.forEach((review) => {
+            review.photos.forEach((photo) => {
+              if (photo.url.includes('http://localhost:3000') && bucket) {
+                // eslint-disable-next-line no-param-reassign
+                photo.url = `https://${bucket}.s3.amazonaws.com/no-image-available.png`;
+              }
+            });
+          });
           response.reviews = reviews;
         })
         .then(() => getReviewMeta(id))
@@ -99,6 +109,14 @@ app.get('/reviews/:id', (req, res) => {
     .then((data) => {
       let reviews = addNewestTag(data.data.results);
       reviews = addRelevanceTag(reviews);
+      reviews.forEach((review) => {
+        review.photos.forEach((photo) => {
+          if (photo.url.includes('http://localhost:3000') && bucket) {
+            // eslint-disable-next-line no-param-reassign
+            photo.url = `https://${bucket}.s3.amazonaws.com/no-image-available.png`;
+          }
+        });
+      });
       response.reviews = reviews;
     })
     .then(() => getReviewMeta(id))

@@ -1,12 +1,18 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
+import { Provider } from 'react-redux';
 import Review from '../reviews/review.jsx';
 import testReview from '../../../fixtures/testReview.json';
 import '../../common/fontAwesomeIcons';
+import testStore from '../../../fixtures/testStore';
 
 describe('Review', () => {
   it('should render the individual review without crashing', () => {
-    const { getByText } = render(<Review review={testReview.reviews[0]}/>);
+    const { getByText } = render(
+    <Provider store={testStore}>
+      <Review review={testReview.reviews[0]}/>
+      </Provider>,
+    );
 
     expect(getByText(/This is a review body 1/)).toBeTruthy();
     expect(getByText(/2021-01-11/)).toBeTruthy();
@@ -26,7 +32,11 @@ describe('Review', () => {
     standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32
     and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied`;
 
-    const { getByText, queryByText } = render(<Review review={testReview.reviews[0]}/>);
+    const { getByText, queryByText } = render(
+      <Provider store={testStore}>
+        <Review review={testReview.reviews[0]}/>
+        </Provider>,
+    );
 
     expect(getByText(/Show More/)).toBeTruthy();
     expect(queryByText(/reproduced/)).toBeFalsy();
@@ -36,13 +46,21 @@ describe('Review', () => {
   });
 
   it('should render the review photo if any', () => {
-    const { getByRole } = render(<Review review={testReview.reviews[2]}/>);
+    const { getByRole } = render(
+      <Provider store={testStore}>
+        <Review review={testReview.reviews[2]}/>
+        </Provider>,
+    );
 
     expect(getByRole('img')).toBeTruthy();
   });
 
   it('should open up a modal when click on a review photo', () => {
-    const { getByRole, getByTestId } = render(<Review review={testReview.reviews[2]}/>);
+    const { getByRole, getByTestId } = render(
+      <Provider store={testStore}>
+        <Review review={testReview.reviews[2]}/>
+        </Provider>,
+    );
 
     fireEvent.click(getByRole('img'));
     expect(getByTestId('review-photo-modal')).toBeTruthy();
@@ -50,7 +68,9 @@ describe('Review', () => {
 
   it('should close the photo modal when click on the x icon', () => {
     const { getByRole, getByTestId, queryByTestId } = render(
-      <Review review={testReview.reviews[2]}/>,
+      <Provider store={testStore}>
+        <Review review={testReview.reviews[2]}/>
+        </Provider>,
     );
 
     fireEvent.click(getByRole('img'));
@@ -62,7 +82,11 @@ describe('Review', () => {
     global.fetch = jest.fn(() => Promise.resolve({
       json: () => Promise.resolve({ status: 201 }),
     }));
-    const { getByText } = render(<Review review={testReview.reviews[0]}/>);
+    const { getByText } = render(
+      <Provider store={testStore}>
+        <Review review={testReview.reviews[0]}/>
+        </Provider>,
+    );
     fireEvent.click(getByText(/Yes/));
     expect(getByText(/\(1\)/)).toBeTruthy();
     expect(fetch).toHaveBeenCalledTimes(1);
@@ -76,7 +100,11 @@ describe('Review', () => {
     global.fetch = jest.fn(() => Promise.resolve({
       json: () => Promise.resolve({ status: 201 }),
     }));
-    const { getByText } = render(<Review review={testReview.reviews[0]}/>);
+    const { getByText } = render(
+      <Provider store={testStore}>
+        <Review review={testReview.reviews[0]}/>
+        </Provider>,
+    );
     fireEvent.click(getByText(/Report/));
     expect(getByText(/Reported/)).toBeTruthy();
     expect(fetch).toHaveBeenCalledTimes(1);

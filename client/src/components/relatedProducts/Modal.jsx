@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
@@ -6,7 +7,8 @@ import './styles.css';
 
 // shows onClick star icon
 const Modal = (props) => {
-  const { comparedProduct, currentProduct } = props;
+  const { comparedProduct, currentProduct, theme } = props;
+  const themeModalClass = theme === 'LIGHT' ? 'modal' : 'modal-dark';
   const features = {};
   if (comparedProduct.product !== undefined && comparedProduct.product.features !== undefined) {
     for (let i = 0; i < currentProduct.features.length; i += 1) {
@@ -77,7 +79,7 @@ const Modal = (props) => {
     return null;
   }
   return (
-    <div className='modal' onClick={ () => props.onClickCloseModal() }>
+    <div className={themeModalClass} onClick={ () => props.onClickCloseModal() }>
       <p style={{ fontSize: '0.8em' }}>COMPARING</p>
       <table>
         <thead>
@@ -95,12 +97,17 @@ const Modal = (props) => {
   );
 };
 
+const mapStateToProps = (state) => ({
+  theme: state.theme,
+});
+
 Modal.propTypes = {
   showModal: PropTypes.bool,
   comparedProduct: PropTypes.object,
   onClickCloseModal: PropTypes.func,
   currentProduct: PropTypes.object,
   name: PropTypes.string,
+  theme: PropTypes.string,
 };
 
-export default Modal;
+export default connect(mapStateToProps)(Modal);

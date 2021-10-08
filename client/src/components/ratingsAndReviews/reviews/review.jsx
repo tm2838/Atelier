@@ -1,16 +1,21 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
+import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import CSS from '../ratingsAndReviews.module.css';
 import StarRating from '../../common/starRating.jsx';
 import { rateReviewHelpful, reportReview } from '../../../helpers/rateReviewHelpful';
 
-const PhotoModal = ({ imgUrl, closePhoto }) => (
-  <div className={CSS['review-photo-modal']} data-testid='review-photo-modal' >
-    <img src={imgUrl} alt='review-photo' className={CSS['review-photo-expanded']}/>
-    <FontAwesomeIcon icon='times' onClick={closePhoto} style={{ color: '#b1d2b0ff', cursor: 'pointer' }} data-testid='review-photo-close-modal'/>
-  </div>
-);
+const PhotoModal = ({ imgUrl, closePhoto, theme }) => {
+  const themeClass = theme === 'LIGHT' ? CSS['review-photo-modal'] : CSS['review-photo-modal-dark'];
+  const themeIconColor = theme === 'LIGHT' ? '#b1d2b0ff' : '#5D6D58';
+  return (
+    <div className={themeClass} data-testid='review-photo-modal' >
+      <img src={imgUrl} alt='review-photo' className={CSS['review-photo-expanded']}/>
+      <FontAwesomeIcon icon='times' onClick={closePhoto} style={{ color: themeIconColor, cursor: 'pointer' }} data-testid='review-photo-close-modal'/>
+    </div>
+  );
+};
 
 class Review extends React.Component {
   constructor(props) {
@@ -57,7 +62,9 @@ class Review extends React.Component {
   }
 
   render() {
-    const { review } = this.props;
+    const { review, theme } = this.props;
+    const themeColor = theme === 'LIGHT' ? 'black' : 'antiquewhite';
+    const themeReview = theme === 'LIGHT' ? CSS.review : CSS['review-dark'];
     const {
       bodyShown, reviewBody, expandedPhoto, reported, rated,
     } = this.state;
@@ -65,7 +72,7 @@ class Review extends React.Component {
     const reportStyle = reported ? { textDecoration: 'underline', color: 'grey' } : { textDecoration: 'underline', cursor: 'pointer' };
     return (
       <>
-      <div className={CSS.review}>
+      <div className={themeReview}>
         <div className={CSS['review-header']}>
           <StarRating rating={review.rating} />
           <div>{`${review.reviewer_name}, ${review.date.split('T')[0]}`}</div>
@@ -79,7 +86,7 @@ class Review extends React.Component {
           <div>{review.body.length > 250 ? reviewBody : review.body}
           {review.body.length > 250 && !bodyShown
             && <div style={{
-              fontStyle: 'italic', color: 'black', textDecoration: 'underline', cursor: 'pointer',
+              fontStyle: 'italic', color: themeColor, textDecoration: 'underline', cursor: 'pointer',
             }} onClick={this.loadBody}>Show More</div>}
           </div>
         </div>
@@ -111,10 +118,17 @@ class Review extends React.Component {
       </div>
 
       {expandedPhoto
-        && <PhotoModal imgUrl={expandedPhoto.toString()} closePhoto={this.closePhoto} />}
+        && <PhotoModal
+        imgUrl={expandedPhoto.toString()}
+        closePhoto={this.closePhoto}
+        theme={theme}/>}
       </>
     );
   }
 }
 
-export default Review;
+const mapStateToProps = (state) => ({
+  theme: state.theme,
+});
+
+export default connect(mapStateToProps)(Review);
