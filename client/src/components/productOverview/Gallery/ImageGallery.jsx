@@ -79,7 +79,7 @@ class ImageGallery extends React.Component {
               main={this.state.main}
               thumb={this.state.thumb}
               handleNavClick={this.handleNavClick} />
-            <ExpandButton className={'gallery-modal-open'}/>
+            <ExpandButton className={'gallery-modal-open'} icon={'expand'}/>
             {
               this.props.imageView
               && <ExpandedImage

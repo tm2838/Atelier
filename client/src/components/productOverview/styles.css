@@ -46,7 +46,7 @@
 }
 
 .gallery-img {
-  width: 100%;
+  width: 95%;
   height: 100%;
   object-fit: cover;
 }
@@ -287,9 +287,34 @@
 
 .gallery-modal {
   position: relative;
-  background-color: #fefefe;
+  background-color: black;
   margin: auto;
   padding: 0;
-  width: 90%;
-  max-width: 1200px;
+  width: 70%;
+  height: 700px;
+}
+
+.gallery-modal-image {
+  height: 100%;
+  width: 100%;
+}
+
+.gallery-modal-image div {
+  height: 100%;
+  width: 100%;
+}
+
+.gallery-modal-image div img {
+  object-fit: contain;
+  height: 100%;
+  width: 100%;
+}
+
+.gallery-modal-close {
+  color: white;
+  position: absolute;
+  top: 10px;
+  right: 25px;
+  font-size: 35px;
+  font-weight: bold;
 }
