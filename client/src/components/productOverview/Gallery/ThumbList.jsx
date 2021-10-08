@@ -4,7 +4,25 @@ import PropTypes from 'prop-types';
 
 const ThumbList = (props) => (
   <>
-    <figure className='gallery-thumb-0' data-testid='gallery-thumb-0' onClick={() => props.handleImageClick(0)}>
+    {
+      props.currentStyle.photos.map((photo, index) => {
+        const style = props.thumb + index === props.main ? { filter: 'blur(0)' } : { filter: 'blur(1px)' };
+        const photoIndex = index + props.thumb;
+        return (!!index < 5) && <figure
+        key={index * 9}
+        className={`gallery-thumb-${index}`}
+        data-testid={`gallery-thumb-${index}`}
+        onClick={() => props.handleImageClick(index)}>
+          <img
+            src={props.currentStyle.photos[photoIndex].thumbnail_url}
+            className='gallery-thumb'
+            style={style}
+            alt='Thumbnail'>
+          </img>
+        </figure>;
+      })
+    }
+    {/* <figure className='gallery-thumb-0' data-testid='gallery-thumb-0' onClick={() => props.handleImageClick(0)}>
       <img
         src={props.currentStyle.photos[props.thumb].thumbnail_url}
         className='gallery-thumb'
@@ -54,7 +72,7 @@ const ThumbList = (props) => (
           alt='Thumbnail'>
         </img>
       </figure>
-    }
+    } */}
   </>
 );
 
@@ -64,6 +82,7 @@ const mapStateToProps = (state) => ({
 
 ThumbList.propTypes = {
   currentStyle: PropTypes.object,
+  main: PropTypes.number,
   thumb: PropTypes.number,
   handleImageClick: PropTypes.func,
 };
