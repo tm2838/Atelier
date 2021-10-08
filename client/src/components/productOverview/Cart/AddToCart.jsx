@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 
 import SelectSize from './SelectSize.jsx';
 import SelectQty from './SelectQty.jsx';
-import postToCart from '../../actions/productOverview/postToCart';
-import changeSku from '../../actions/productOverview/selectedSku';
-import changeQty from '../../actions/productOverview/selectedQty';
-import changeQtyInStock from '../../actions/productOverview/inStockQty';
+import postToCart from '../../../actions/productOverview/postToCart';
+import changeSku from '../../../actions/productOverview/selectedSku';
+import changeQty from '../../../actions/productOverview/selectedQty';
+import changeQtyInStock from '../../../actions/productOverview/inStockQty';
 
 class AddToCart extends React.Component {
   constructor(props) {

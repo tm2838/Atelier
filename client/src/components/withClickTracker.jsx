@@ -13,7 +13,7 @@ function withClickTracker(WrappedComponent, widget) {
         const body = {
           element: event.target.tagName,
           widget,
-          time: event.timeStamp.toString(),
+          time: new Date().toString(),
         };
         postInteractions(body);
       });

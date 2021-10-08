@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import Style from './Style.jsx';
-import changeStyle from '../../actions/productOverview/currentStyle';
-import resetSelected from '../../actions/productOverview/resetSelected';
+import changeStyle from '../../../actions/productOverview/currentStyle';
+import resetSelected from '../../../actions/productOverview/resetSelected';
 
 class StyleList extends React.Component {
   handleClick(index) {
