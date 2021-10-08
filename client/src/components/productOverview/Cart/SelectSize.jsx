@@ -1,12 +1,17 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-const SelectSize = ({ skus, inStock, handleSizeChange }) => (
-  (inStock)
-    ? <select
+const SelectSize = ({
+  skus, inStock, handleSizeChange, theme,
+}) => {
+  const themeBtnClass = theme === 'LIGHT' ? 'checkout' : 'checkout-dark';
+  return (
+    (inStock)
+      ? <select
     name='sizes'
     id='select-sizes'
-    className='checkout'
+    className={themeBtnClass}
     data-testid='select-sizes'
     defaultValue='SELECT SIZE'
     onChange={handleSizeChange}
@@ -19,15 +24,21 @@ const SelectSize = ({ skus, inStock, handleSizeChange }) => (
         })
       }
     </select>
-    : <select name='sizes' id='select-sizes' className='checkout' defaultValue='OUT OF STOCK' disabled>
+      : <select name='sizes' id='select-sizes' className={themeBtnClass} defaultValue='OUT OF STOCK' disabled>
       <option value='OUT OF STOCK'>OUT OF STOCK</option>
     </select>
-);
+  );
+};
+
+const mapStateToProps = (state) => ({
+  theme: state.theme,
+});
 
 SelectSize.propTypes = {
   skus: PropTypes.object,
   inStock: PropTypes.number,
   handleSizeChange: PropTypes.func,
+  theme: PropTypes.string,
 };
 
-export default SelectSize;
+export default connect(mapStateToProps)(SelectSize);

@@ -33,12 +33,13 @@ class SortingDropdown extends React.Component {
   }
 
   render() {
-    const { loadedReviews } = this.props;
+    const { loadedReviews, theme } = this.props;
+    const themeClass = theme === 'LIGHT' ? CSS['sort-dropdown'] : CSS['sort-dropdown-dark'];
     return (
       <div className='sort-container' >
         {loadedReviews.length > 0
         && <div><b>{this.props.reviews.length} reviews, sorted by</b>
-          <select data-testid='select' className={CSS['sort-dropdown']} onChange={this.onSortChange} defaultValue={this.state.sortedBy}>
+          <select data-testid='select' className={themeClass} onChange={this.onSortChange} defaultValue={this.state.sortedBy}>
             {this.sortingOptions.map(
               (opt) => <option key={opt} value={opt}>
                 {opt}
@@ -55,6 +56,7 @@ const mapStateToProps = (state) => ({
   reviews: state.reviews,
   loadedReviews: state.loadedReviews,
   remainingReviews: state.remainingReviews,
+  theme: state.theme,
 });
 
 const mapDispatchToProps = (dispatch) => ({
