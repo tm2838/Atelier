@@ -10,6 +10,11 @@ const getRelatedProducts = (id, callback) => {
   })
     .then((res) => {
       const ids = [...new Set(res.data)];
+      for (let i = 0; i < ids.length; i += 1) {
+        if (parseInt(id, 10) === ids[i]) {
+          ids.splice(i, 1);
+        }
+      }
       callback(null, ids);
     })
     .catch((err) => {
