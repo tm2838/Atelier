@@ -104,6 +104,17 @@ div {
   padding: 1.5% 2% 2.5%;
 }
 
+.modal-dark {
+  position: absolute;
+  z-index: 2;
+  max-height: 50vh;
+  overflow-y: auto;
+  margin: 0% 25%;
+  background-color: #454B4D;
+  border: 1px solid black;
+  padding: 1.5% 2% 2.5%;
+}
+
 .features {
   text-align: center;
 }

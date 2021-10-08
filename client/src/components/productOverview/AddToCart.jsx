@@ -44,9 +44,10 @@ class AddToCart extends React.Component {
   }
 
   render() {
-    const { currentStyle } = this.props;
+    const { currentStyle, theme } = this.props;
     const inStock = Object.keys(currentStyle.skus)
       .reduce((init, sku) => init + currentStyle.skus[sku].quantity, 0);
+    const themeBtnClass = theme === 'LIGHT' ? 'checkout' : 'checkout-dark';
     return (
       <>
         <SelectSize
@@ -54,7 +55,7 @@ class AddToCart extends React.Component {
         inStock={inStock}
         handleSizeChange={this.handleSizeChange}/>
         <SelectQty handleQtyChange={this.handleQtyChange}/>
-        {!!inStock && <button id='add-item' className='checkout' onClick={this.handleSubmit}>ADD TO CART</button>}
+        {!!inStock && <button id='add-item' className={themeBtnClass} onClick={this.handleSubmit}>ADD TO CART</button>}
       </>
     );
   }
@@ -64,6 +65,7 @@ const mapStateToProps = (state) => ({
   productId: state.currentProduct.id,
   currentStyle: state.currentStyle,
   selectedSku: state.selectedSku,
+  theme: state.theme,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -86,6 +88,7 @@ AddToCart.propTypes = {
   changeSku: PropTypes.func,
   changeQty: PropTypes.func,
   changeQtyInStock: PropTypes.func,
+  theme: PropTypes.string,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddToCart);

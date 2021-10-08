@@ -1,7 +1,9 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
+import { Provider } from 'react-redux';
 import { render, fireEvent } from '@testing-library/react';
 import Modal from '../Modal.jsx';
+import testStore from '../../../fixtures/testStore';
 
 describe('modal', () => {
   const currentProduct = {
@@ -33,28 +35,36 @@ describe('modal', () => {
 
   it('should render Modal component without crashing', () => {
     const { getByText } = render(
-      <Modal comparedProduct={ relatedProduct } currentProduct={ currentProduct } />,
+      <Provider store={testStore}>
+        <Modal comparedProduct={ relatedProduct } currentProduct={ currentProduct } />
+      </Provider>,
     );
     expect(getByText('COMPARING')).toBeTruthy();
   });
 
   it('should render current product name', () => {
     const { getByText } = render(
-      <Modal comparedProduct={ relatedProduct } currentProduct={ currentProduct } />,
+      <Provider store={testStore}>
+        <Modal comparedProduct={ relatedProduct } currentProduct={ currentProduct } />
+      </Provider>,
     );
     expect(getByText('Camo Onesie')).toBeTruthy();
   });
 
   it('should render related product name', () => {
     const { getByText } = render(
-      <Modal comparedProduct={ relatedProduct } currentProduct={ currentProduct } />,
+      <Provider store={testStore}>
+        <Modal comparedProduct={ relatedProduct } currentProduct={ currentProduct } />
+      </Provider>,
     );
     expect(getByText('Bright Future Sunglasses')).toBeTruthy();
   });
 
   it('should render unique current product feature', () => {
     const { getByText } = render(
-      <Modal comparedProduct={ relatedProduct } currentProduct={ currentProduct } />,
+      <Provider store={testStore}>
+        <Modal comparedProduct={ relatedProduct } currentProduct={ currentProduct } />
+      </Provider>,
     );
     expect(getByText('Fabric')).toBeTruthy();
     expect(getByText('Canvas')).toBeTruthy();
@@ -62,7 +72,9 @@ describe('modal', () => {
 
   it('should render unique related product feature', () => {
     const { getByText } = render(
-      <Modal comparedProduct={ relatedProduct } currentProduct={ currentProduct } />,
+      <Provider store={testStore}>
+        <Modal comparedProduct={ relatedProduct } currentProduct={ currentProduct } />
+      </Provider>,
     );
     expect(getByText('Lenses')).toBeTruthy();
     expect(getByText('Ultrasheen')).toBeTruthy();
@@ -79,7 +91,9 @@ describe('modal', () => {
     };
 
     const { queryAllByText } = render(
-      <Modal comparedProduct={ relatedProduct } currentProduct={ currentProduct } />,
+      <Provider store={testStore}>
+        <Modal comparedProduct={ relatedProduct } currentProduct={ currentProduct } />
+      </Provider>,
     );
     expect(queryAllByText('green')).toHaveLength(2);
   });
@@ -90,7 +104,9 @@ describe('modal', () => {
       value: true,
     };
     const { getByTestId } = render(
-      <Modal comparedProduct={ relatedProduct } currentProduct={ currentProduct } />,
+      <Provider store={testStore}>
+        <Modal comparedProduct={ relatedProduct } currentProduct={ currentProduct } />
+      </Provider>,
     );
     expect(getByTestId('checkMark')).toBeTruthy();
   });
@@ -101,7 +117,9 @@ describe('modal', () => {
       value: true,
     };
     const { getAllByTestId } = render(
-      <Modal comparedProduct={ relatedProduct } currentProduct={ currentProduct } />,
+      <Provider store={testStore}>
+        <Modal comparedProduct={ relatedProduct } currentProduct={ currentProduct } />
+      </Provider>,
     );
     expect(getAllByTestId('checkMark')).toHaveLength(2);
   });
@@ -112,7 +130,9 @@ describe('modal', () => {
       value: false,
     };
     const { getByTestId } = render(
-      <Modal comparedProduct={ relatedProduct } currentProduct={ currentProduct } />,
+      <Provider store={testStore}>
+        <Modal comparedProduct={ relatedProduct } currentProduct={ currentProduct } />
+      </Provider>,
     );
     expect(getByTestId('checkMark')).toBeTruthy();
   });
@@ -121,8 +141,9 @@ describe('modal', () => {
     const onClickCloseModal = jest.fn();
     // const onClickCloseModal = jest.fn;
     const { getByText } = render(
-      <Modal comparedProduct={ relatedProduct }
+      <Provider store={testStore}><Modal comparedProduct={ relatedProduct }
         currentProduct={ currentProduct } onClickCloseModal={onClickCloseModal} />,
+      </Provider>,
     );
     fireEvent.click(getByText('COMPARING'));
     expect(onClickCloseModal).toHaveBeenCalled();

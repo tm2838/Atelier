@@ -130,10 +130,14 @@ class ReviewModal extends React.Component {
 
   render() {
     const { violations } = this.state;
-    const { product, onModalClose, reviewMeta: { characteristics } } = this.props;
+    const {
+      product, onModalClose, reviewMeta: { characteristics }, theme,
+    } = this.props;
+    const themeModalClass = theme === 'LIGHT' ? CSS['review-modal'] : CSS['review-modal-dark'];
+    const themeBtnClass = theme === 'LIGHT' ? CSS['review-btn'] : CSS['review-btn-dark'];
 
     return (
-      <div className={CSS['review-modal']}>
+      <div className={themeModalClass}>
         <div className={CSS['review-modal-content']}>
           <h2 className={CSS['review-modal-title']}> Write Your Review</h2>
           <h4 className={CSS['review-modal-subtitle']}> About the {`${product.name}`}</h4>
@@ -170,8 +174,13 @@ class ReviewModal extends React.Component {
             </>
 
             <div className={CSS['add-review-btns']}>
-              <button className={CSS['review-btn']} onClick={this.handlePostReview}>Submit Review</button>
-              <button className={CSS['review-btn']} onClick={onModalClose}>Cancel</button>
+              <button
+                className={themeBtnClass}
+                onClick={this.handlePostReview}
+              >
+                Submit Review
+              </button>
+              <button className={themeBtnClass} onClick={onModalClose}>Cancel</button>
             </div>
           </form>
         </div>
@@ -183,6 +192,7 @@ class ReviewModal extends React.Component {
 const mapStateToProps = (state) => ({
   product: state.currentProduct,
   reviewMeta: state.reviewMeta,
+  theme: state.theme,
 });
 
 const mapDispatchToProps = (dispatch) => ({

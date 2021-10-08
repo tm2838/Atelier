@@ -1,8 +1,10 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
+import { Provider } from 'react-redux';
 import { render, fireEvent } from '@testing-library/react';
 import ProductCard from '../ProductCard.jsx';
 import '../../common/fontAwesomeIcons';
+import testStore from '../../../fixtures/testStore';
 
 describe('productCard', () => {
   const relatedProduct = {
@@ -45,29 +47,29 @@ describe('productCard', () => {
   };
 
   it('should render related product ProductCard component without crashing', () => {
-    const { getAllByText } = render(<ProductCard type='related' product={ relatedProduct } />);
+    const { getAllByText } = render(<Provider store={testStore}><ProductCard type='related' product={ relatedProduct } /></Provider>);
     expect(getAllByText(/Bright Future Sunglasses/i)).toBeTruthy();
   });
 
   it('should render sale price when default style is on sale', () => {
-    const { getByText } = render(<ProductCard type='related' product={ relatedProduct } />);
+    const { getByText } = render(<Provider store={testStore}><ProductCard type='related' product={ relatedProduct } /></Provider>);
     expect(getByText(/30.00/)).toBeTruthy();
   });
 
   it('should also render default price when default style is on sale', () => {
-    const { getByText } = render(<ProductCard type='related' product={ relatedProduct } />);
+    const { getByText } = render(<Provider store={testStore}><ProductCard type='related' product={ relatedProduct } /></Provider>);
     expect(getByText(/69.00/)).toBeTruthy();
   });
 
   it('should render default price when default style is not on sale', () => {
     relatedProduct.styles.results[1].sale_price = null;
-    const { getByText } = render(<ProductCard type='related' product={ relatedProduct } />);
+    const { getByText } = render(<Provider store={testStore}><ProductCard type='related' product={ relatedProduct } /></Provider>);
     expect(getByText(/69.00/)).toBeTruthy();
   });
 
   it('should not render sale price when default style is not on sale', () => {
     relatedProduct.styles.results[1].sale_price = null;
-    const { queryAllByText } = render(<ProductCard type='related' product={ relatedProduct } />);
+    const { queryAllByText } = render(<Provider store={testStore}><ProductCard type='related' product={ relatedProduct } /></Provider>);
     expect(queryAllByText(/30.00/)).toHaveLength(0);
   });
 });

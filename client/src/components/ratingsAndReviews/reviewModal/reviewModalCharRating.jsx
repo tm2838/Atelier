@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
+import { connect } from 'react-redux';
 import CSS from '../ratingsAndReviews.module.css';
 
 class CharRating extends React.Component {
@@ -21,11 +22,12 @@ class CharRating extends React.Component {
   }
 
   render() {
-    const { characteristic, options } = this.props;
+    const { characteristic, options, theme } = this.props;
     const { selected } = this.state;
+    const themeSelected = theme === 'LIGHT' ? CSS['char-option-chosen'] : CSS['char-option-chosen-dark'];
     return (
       <>
-        <div className={CSS['char-option-chosen']}>Current selection: {selected || 'None selected'}</div>
+        <div className={themeSelected}>Current selection: {selected || 'None selected'}</div>
         <div className={CSS['char-rating-container']}>
           <div className={CSS['char-rating-title']}>{characteristic}:</div>
           {options.map((option) => <input
@@ -46,4 +48,8 @@ class CharRating extends React.Component {
   }
 }
 
-export default CharRating;
+const mapStateToProps = (state) => ({
+  theme: state.theme,
+});
+
+export default connect(mapStateToProps)(CharRating);
