@@ -1,6 +1,7 @@
 .ratings-and-reviews {
   display: grid;
-  grid-template-columns: 0.45fr 1.3fr 2fr 0.5fr
+  grid-template-columns: 0.45fr 1.3fr 2fr 0.5fr;
+  margin-bottom: 5%;
 }
 
 .ratings-and-reviews-title {
@@ -21,7 +22,7 @@
 
 .reviews-list {
   margin-top: 40px;
-  height: 450px;
+  height: 500px !important;
   overflow-y: auto;
 }
 
