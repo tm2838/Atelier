@@ -29,7 +29,7 @@ class RatingsAndReviews extends React.Component {
     return (
       <div id='ratings-and-reviews'>
         <div className={CSS['ratings-and-reviews']}>
-          <a name='ratings-and-reviews'><h3 className={CSS['ratings-and-reviews-title']}>{'RATINGS & REVIEWS'}</h3></a>
+          <h3 className={CSS['ratings-and-reviews-title']}>{'RATINGS & REVIEWS'}</h3>
           <Ratings />
 
           <div className={CSS['reviews-container']}>
