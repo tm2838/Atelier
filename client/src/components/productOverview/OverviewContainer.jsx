@@ -6,17 +6,20 @@ import ImageGallery from './Gallery/ImageGallery.jsx';
 import ProductInfo from './Info/ProductInfo.jsx';
 import ProductSummary from './Info/ProductSummary.jsx';
 import './styles.css';
+import ErrorBoundary from '../common/ErrorBoundary.jsx';
 
 const OverviewContainer = () => (
   <div className='product-container' id='product-overview'>
     <figure className='gallery-container'>
-      <ImageGallery />
+      <ErrorBoundary>
+        <ImageGallery />
+      </ErrorBoundary>
     </figure>
     <figure className='product-info-container'>
-      <ProductInfo />
+        <ProductInfo />
     </figure>
     <figure className='product-summary-container'>
-      <ProductSummary />
+        <ProductSummary />
     </figure>
   </div>
 );
