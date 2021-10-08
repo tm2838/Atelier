@@ -9,7 +9,7 @@ const ProductBreakdownBar = ({
 }) => {
   const marginLeft = parseInt(point - 1, 10).toFixed(2) * 23;
   const optionsToDisplay = [options[0], options[2], options[4]];
-  const themeBackgroundColor = theme === 'LIGHT' ? '#dcdcdc' : '#AAAAAA';
+  const themeBackgroundColor = theme === 'LIGHT' ? '#dcdcdc' : '#454B4D';
   const themeCaretClass = theme === 'LIGHT' ? CSS['product-breakdown-caret-down'] : CSS['product-breakdown-caret-down-dark'];
   return (
     <>

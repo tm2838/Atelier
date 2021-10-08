@@ -1,13 +1,12 @@
-/* eslint-disable react/prop-types */
-/* eslint class-methods-use-this: ["error", { "exceptMethods": ["render"] }] */
 import React from 'react';
 import { connect } from 'react-redux';
-import ImageGallery from './ImageGallery.jsx';
-import ProductInfo from './ProductInfo.jsx';
-import ProductSummary from './ProductSummary.jsx';
+import PropTypes from 'prop-types';
+
+import ImageGallery from './Gallery/ImageGallery.jsx';
+import ProductInfo from './Info/ProductInfo.jsx';
+import ProductSummary from './Info/ProductSummary.jsx';
 import './styles.css';
 
-// eslint-disable-next-line arrow-body-style
 const OverviewContainer = () => (
   <div className='product-container' id='product-overview'>
     <figure className='gallery-container'>
@@ -24,6 +23,12 @@ const OverviewContainer = () => (
 
 const mapStateToProps = (state) => ({
   currentProduct: state.currentProduct,
+  imageView: state.imageView,
 });
+
+OverviewContainer.propTypes = {
+  currentProduct: PropTypes.object,
+  imageView: PropTypes.bool,
+};
 
 export default connect(mapStateToProps)(OverviewContainer);

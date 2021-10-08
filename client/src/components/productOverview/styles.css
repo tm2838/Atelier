@@ -11,9 +11,23 @@
   grid-row-end: 6;
 }
 
+.gallery-expanded-container {
+  grid-column-start: 1;
+  grid-column-end: 9;
+  grid-row-start: 1;
+  grid-row-end: 6;
+}
+
 .product-info-container {
   grid-column-start: 6;
   grid-column-end: 8;
+  grid-row-start: 1;
+  grid-row-end: 6;
+}
+
+.gallery-expanded {
+  grid-column-start: 1;
+  grid-column-end: 9;
   grid-row-start: 1;
   grid-row-end: 6;
 }
@@ -32,9 +46,9 @@
 }
 
 .gallery-img {
-  width: 100%;
+  width: 95%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
 }
 
 .gallery-main {
@@ -42,6 +56,15 @@
   grid-column-end: 30;
   grid-row-start: 1;
   grid-row-end: 32;
+  overflow: hidden;
+}
+
+.gallery-zoomed {
+  grid-column-start: 1;
+  grid-column-end: 30;
+  grid-row-start: 1;
+  grid-row-end: 32;
+  background-repeat: no-repeat;
 }
 
 .gallery-thumb {
@@ -124,6 +147,18 @@
   grid-column-end: 25;
   grid-row-start: 17;
   grid-row-end: 18;
+}
+
+.gallery-modal-open {
+  grid-column-start: 27;
+  grid-column-end: 28;
+  grid-row-start: 2;
+  grid-row-end: 3;
+}
+
+.gallery-modal-open:hover {
+  color: lightgray;
+  cursor: pointer;
 }
 
 .product-info {
@@ -211,7 +246,6 @@
   font-size: large;
   font-weight: 600;
   padding-left: 10px;
-  background-color:#dbe7f7ff;
 }
 
 .checkout-dark {
@@ -238,4 +272,86 @@
   margin-top: 15px;
   width: 80%;
   height: 3vw;
+}
+
+/* Expanded Gallery Modal */
+.gallery-expanded-container {
+  display: block;
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: black;
+  opacity: 1;
+}
+
+.gallery-modal {
+  position: relative;
+  background-color: black;
+  margin: auto;
+  padding: 0;
+  width: 90%;
+  height: 700px;
+}
+
+.gallery-modal-image {
+  height: 100%;
+  width: 100%;
+}
+
+.gallery-modal-image div {
+  height: 100%;
+  width: 100%;
+}
+
+.gallery-modal-image div img {
+  object-fit: contain;
+  height: 100%;
+  width: 100%;
+}
+
+.gallery-modal-close {
+  color: white;
+  position: absolute;
+  top: 10px;
+  right: 25px;
+  font-weight: bold;
+}
+
+.gallery-icons {
+  display: block;
+  text-align: center;
+}
+
+.gallery-icon {
+  margin: 5px;
+}
+
+.gallery-icon:hover {
+  cursor: pointer;
+}
+
+.expanded-nav-left,
+.expanded-nav-right {
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -50px;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.expanded-nav-right {
+  right: 0;
+}
+
+.expanded-nav-left:hover,
+.expanded-nav-right:hover {
+  cursor: pointer;
 }

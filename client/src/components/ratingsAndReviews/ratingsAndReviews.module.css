@@ -1,6 +1,6 @@
 .ratings-and-reviews {
   display: grid;
-  grid-template-columns: 0.5fr 1fr 2fr 0.5fr
+  grid-template-columns: 0.45fr 1.3fr 2fr 0.5fr
 }
 
 .ratings-and-reviews-title {
@@ -194,7 +194,7 @@
 }
 
 .star-breakdown-div-dark:hover {
-  background: linear-gradient(to right, #454B4D 80%, #21201c 20%);
+  background: linear-gradient(to right, #AAAAAA 80%, #21201c 20%);
   cursor: pointer;
 }
 
@@ -211,7 +211,7 @@
 }
 
 .star-breakdown-bar-container-dark {
-  background-color: #AAAAAA;
+  background-color: #454B4D;
   width: 50%;
   height: 10px;
   z-index: 100;

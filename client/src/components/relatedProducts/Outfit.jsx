@@ -84,7 +84,7 @@ class Outfit extends React.Component {
     const productRange = this.state.outfitProducts.slice(index, index + 3);
     return (
       <div className='carousel' style={{ marginBottom: '20vh' }}>
-        <div className='carouselHeading'>YOUR OUTFIT</div>
+        <h3 className='carouselHeading'>YOUR OUTFIT</h3>
         <div className='left'>
           { index ? <FontAwesomeIcon className='arrow left' data-testid='left-arrow'
               icon={ faChevronLeft } onClick={this.onClickLeft}/> : ''

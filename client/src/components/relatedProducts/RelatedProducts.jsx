@@ -72,7 +72,7 @@ class RelatedProducts extends React.Component {
     const productRange = this.props.relatedProducts.slice(index, index + 4);
     return (
       <div className='carousel'>
-        <div className='carouselHeading'>RELATED PRODUCTS</div>
+        <h3 className='carouselHeading'>RELATED PRODUCTS</h3>
         <div className='left'>
           { index ? <FontAwesomeIcon data-testid='left-arrow'
               icon={ faChevronLeft } onClick={this.onClickLeft}/> : ''
