@@ -229,17 +229,41 @@
   left: 0;
 }
 
+.product-text {
+  display: grid;
+  grid-template-columns: repeat(8, 0.5fr);
+  grid-template-rows: repeat(8, 1vw);
+}
+
 .product-summary {
-  margin-top: 50px;
-  padding-top: 20px;
+  grid-column-start: 1;
+  grid-column-end: 6;
+  grid-row-start: 2;
+  grid-row-end: 9;
 }
 
 .product-slogan {
-  font-size: large;
+  font-size: 1.2vw;
 }
 
 .product-features {
-  justify-self: end;
+  grid-column-start: 6;
+  grid-column-end: 9;
+  grid-row-start: 3;
+  grid-row-end: 9;
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  border-left: solid 2px black;
+}
+
+.feature {
+  margin-top: 10px;
+  margin-left: 20px;
+}
+
+.feature span {
+  margin-left: 10px;
 }
 
 .checkout {
