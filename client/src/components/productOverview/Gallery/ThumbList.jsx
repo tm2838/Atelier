@@ -4,20 +4,25 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-const ThumbList = (props) => (
+const ThumbList = ({
+  currentStyle,
+  main,
+  thumb,
+  handleImageClick,
+}) => (
   <>
     {
-      props.currentStyle.photos.map((photo, index) => {
+      currentStyle.photos.map((photo, index) => {
         if (index < 5) {
-          const style = props.thumb + index === props.main ? { filter: 'grayscale(0)' } : { filter: 'grayscale(1)' };
-          const photoIndex = index + props.thumb;
+          const style = thumb + index === main ? { filter: 'grayscale(0)' } : { filter: 'grayscale(1)' };
+          const photoIndex = index + thumb;
           return <figure
             key={index * 9}
             className={`gallery-thumb-${index}`}
             data-testid={`gallery-thumb-${index}`}
-            onClick={() => props.handleImageClick(index)}>
+            onClick={() => handleImageClick(index)}>
             <img
-              src={props.currentStyle.photos[photoIndex].thumbnail_url}
+              src={currentStyle.photos[photoIndex].thumbnail_url}
               className='gallery-thumb'
               style={style}
               alt='Thumbnail'>

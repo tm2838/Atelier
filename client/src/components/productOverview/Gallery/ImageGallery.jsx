@@ -39,8 +39,13 @@ class ImageGallery extends React.Component {
       });
     } else if (direction === 'right') {
       const main = this.state.main + 1;
+      let { thumb } = this.state;
+      if (main > this.state.thumb + 4) {
+        thumb += 1;
+      }
       this.setState({
         main,
+        thumb,
       });
     } else if (direction === 'down') {
       const thumb = this.state.thumb + 1;
@@ -49,8 +54,13 @@ class ImageGallery extends React.Component {
       });
     } else if (direction === 'left') {
       const main = this.state.main - 1;
+      let { thumb } = this.state;
+      if (main < thumb) {
+        thumb -= 1;
+      }
       this.setState({
         main,
+        thumb,
       });
     }
   }
