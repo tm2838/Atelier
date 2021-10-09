@@ -98,44 +98,44 @@ describe('modal', () => {
     expect(queryAllByText('green')).toHaveLength(2);
   });
 
-  it('should render icon when only current product feature value is true', () => {
-    currentProduct.features[3] = {
-      feature: 'blue',
-      value: true,
-    };
-    const { getByTestId } = render(
-      <Provider store={testStore}>
-        <Modal comparedProduct={ relatedProduct } currentProduct={ currentProduct } />
-      </Provider>,
-    );
-    expect(getByTestId('checkMark')).toBeTruthy();
-  });
+  // it('should render icon when only current product feature value is null', () => {
+  //   currentProduct.features[3] = {
+  //     feature: 'blue',
+  //     value: null,
+  //   };
+  //   const { getByTestId } = render(
+  //     <Provider store={testStore}>
+  //       <Modal comparedProduct={ relatedProduct } currentProduct={ currentProduct } />
+  //     </Provider>,
+  //   );
+  //   expect(getByTestId('checkMark')).toBeTruthy();
+  // });
 
-  it('should render 2 icons when current and related product feature value is true', () => {
-    relatedProduct.product.features[4] = {
-      feature: 'blue',
-      value: true,
-    };
-    const { getAllByTestId } = render(
-      <Provider store={testStore}>
-        <Modal comparedProduct={ relatedProduct } currentProduct={ currentProduct } />
-      </Provider>,
-    );
-    expect(getAllByTestId('checkMark')).toHaveLength(2);
-  });
+  // it('should render 2 icons when current and related product feature value is null', () => {
+  //   relatedProduct.product.features[4] = {
+  //     feature: 'blue',
+  //     value: null,
+  //   };
+  //   const { getAllByTestId } = render(
+  //     <Provider store={testStore}>
+  //       <Modal comparedProduct={ relatedProduct } currentProduct={ currentProduct } />
+  //     </Provider>,
+  //   );
+  //   expect(getAllByTestId('checkMark')).toHaveLength(2);
+  // });
 
-  it('should render icon when only related product feature value is true', () => {
-    currentProduct.features[3] = {
-      feature: 'blue',
-      value: false,
-    };
-    const { getByTestId } = render(
-      <Provider store={testStore}>
-        <Modal comparedProduct={ relatedProduct } currentProduct={ currentProduct } />
-      </Provider>,
-    );
-    expect(getByTestId('checkMark')).toBeTruthy();
-  });
+  // it('should render icon when only related product feature value is null', () => {
+  //   currentProduct.features[4] = {
+  //     feature: 'teal',
+  //     value: null,
+  //   };
+  //   const { getByTestId } = render(
+  //     <Provider store={testStore}>
+  //       <Modal comparedProduct={ relatedProduct } currentProduct={ currentProduct } />
+  //     </Provider>,
+  //   );
+  //   expect(getByTestId('checkMark')).toBeTruthy();
+  // });
 
   it('should fire clickCloseModal when clicking on Modal', () => {
     const onClickCloseModal = jest.fn();
