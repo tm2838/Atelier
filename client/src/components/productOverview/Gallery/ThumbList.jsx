@@ -1,64 +1,35 @@
+/* eslint-disable consistent-return */
+/* eslint-disable array-callback-return */
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-const ThumbList = (props) => (
+const ThumbList = ({
+  currentStyle,
+  main,
+  thumb,
+  handleImageClick,
+}) => (
   <>
-    <figure className='gallery-thumb-0' data-testid='gallery-thumb-0' onClick={() => props.handleImageClick(0)}>
-      <img
-        data-testid='gallery-thumb-img-0'
-        src={props.currentStyle.photos[props.thumb].thumbnail_url}
-        className='gallery-thumb'
-        alt='Thumbnail'>
-      </img>
-    </figure>
-
     {
-      props.currentStyle.photos[1] && <figure className='gallery-thumb-1' data-testid='gallery-thumb-1'
-        onClick={() => props.handleImageClick(1)}>
-        <img
-          data-testid='gallery-thumb-img-1'
-          src={props.currentStyle.photos[props.thumb + 1].thumbnail_url}
-          className='gallery-thumb'
-          alt='Thumbnail'>
-        </img>
-      </figure>
-    }
-
-    {
-      props.currentStyle.photos[2] && <figure className='gallery-thumb-2' data-testid='gallery-thumb-2'
-        onClick={() => props.handleImageClick(2)}>
-        <img
-          data-testid='gallery-thumb-img-2'
-          src={props.currentStyle.photos[props.thumb + 2].thumbnail_url}
-          className='gallery-thumb'
-          alt='Thumbnail'>
-        </img>
-      </figure>
-    }
-
-    {
-      props.currentStyle.photos[3] && <figure className='gallery-thumb-3' data-testid='gallery-thumb-3'
-        onClick={() => props.handleImageClick(3)}>
-        <img
-          data-testid='gallery-thumb-img-3'
-          src={props.currentStyle.photos[props.thumb + 3].thumbnail_url}
-          className='gallery-thumb'
-          alt='Thumbnail'>
-        </img>
-      </figure>
-    }
-
-    {
-      props.currentStyle.photos[4] && <figure className='gallery-thumb-4' data-testid='gallery-thumb-4'
-        onClick={() => props.handleImageClick(4)}>
-        <img
-          data-testid='gallery-thumb-img-4'
-          src={props.currentStyle.photos[props.thumb + 4].thumbnail_url}
-          className='gallery-thumb'
-          alt='Thumbnail'>
-        </img>
-      </figure>
+      currentStyle.photos.map((photo, index) => {
+        if (index < 5) {
+          const style = thumb + index === main ? { filter: 'grayscale(0)' } : { filter: 'grayscale(1)' };
+          const photoIndex = index + thumb;
+          return <figure
+            key={index * 9}
+            className={`gallery-thumb-${index}`}
+            data-testid={`gallery-thumb-${index}`}
+            onClick={() => handleImageClick(index)}>
+            <img
+              src={currentStyle.photos[photoIndex].thumbnail_url}
+              className='gallery-thumb'
+              style={style}
+              alt='Thumbnail'>
+            </img>
+          </figure>;
+        }
+      })
     }
   </>
 );
@@ -69,6 +40,7 @@ const mapStateToProps = (state) => ({
 
 ThumbList.propTypes = {
   currentStyle: PropTypes.object,
+  main: PropTypes.number,
   thumb: PropTypes.number,
   handleImageClick: PropTypes.func,
 };

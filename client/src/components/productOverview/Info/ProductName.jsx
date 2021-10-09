@@ -13,7 +13,7 @@ const ProductName = ({
     {
       (sale)
         ? <><span className='product-price' style={{ textDecorationLine: 'line-through', textDecorationStyle: 'solid' }}>${price}</span>
-        <span className='product-sale' style={{ color: 'red' }}>{sale}</span></>
+        <span className='product-sale' style={{ color: 'red' }}>${sale}</span></>
         : <span className='product-price'>${price}</span>
     }
   </div>
