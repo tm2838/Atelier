@@ -8,7 +8,7 @@ import fetchMock from 'jest-fetch-mock';
 import rootReducer from '../../../reducers/rootReducer';
 import testProduct from '../../../fixtures/testProduct.json';
 
-import StyleList from '../StyleList.jsx';
+import StyleList from '../Info/StyleList.jsx';
 import '../../common/fontAwesomeIcons';
 
 let testStore = null;
