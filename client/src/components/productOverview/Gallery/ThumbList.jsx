@@ -24,6 +24,7 @@ const ThumbList = ({
             <img
               src={currentStyle.photos[photoIndex].thumbnail_url}
               className='gallery-thumb'
+              data-testid={`gallery-thumb-img-${index}`}
               style={style}
               alt='Thumbnail'>
             </img>
