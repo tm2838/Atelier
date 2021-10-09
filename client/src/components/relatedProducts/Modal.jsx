@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
 import './styles.css';
@@ -32,32 +31,32 @@ const Modal = (props) => {
   const keys = Object.keys(features);
   // eslint-disable-next-line react/jsx-key
   const rows = keys.map((key) => {
-    if (features[key].currentProduct === true && features[key].comparedProduct === true) {
+    if (features[key].currentProduct === null && features[key].comparedProduct === null) {
       return (
-        <tr className='features' key={key}>
+        <tr className='features'>
           <td className='check'>
-            <FontAwesomeIcon data-testid='checkMark' icon={ faCheck } />
+            <FontAwesomeIcon data-testid='checkMark' icon='check' />
           </td>
           <td>{key}</td>
-          <td className='check'><FontAwesomeIcon data-testid='checkMark' icon={ faCheck } /></td>
+          <td className='check'><FontAwesomeIcon data-testid='checkMark' icon='check' /></td>
         </tr>
       );
     // eslint-disable-next-line no-else-return
-    } else if (features[key].comparedProduct === true) {
+    } else if (features[key].comparedProduct === null) {
       return (
-        <tr className='features' key={key}>
+        <tr className='features'>
           <td className='check'>{ features[key].currentProduct }</td>
           <td>{key}</td>
           <td className='check'>
-            <FontAwesomeIcon data-testid='checkMark' icon={ faCheck } />
+            <FontAwesomeIcon data-testid='checkMark' icon='check' />
           </td>
         </tr>
       );
-    } else if (features[key].currentProduct === true) {
+    } else if (features[key].currentProduct === null) {
       return (
-        <tr className='features' key={key}>
+        <tr className='features'>
           <td className='check'>
-            <FontAwesomeIcon data-testid='checkMark' icon={ faCheck } />
+            <FontAwesomeIcon data-testid='checkMark' icon='check' />
           </td>
           <td>{key}</td>
           <td className='check'>{ features[key].comparedProduct }</td>
@@ -66,7 +65,7 @@ const Modal = (props) => {
     } else {
       return (
         // eslint-disable-next-line react/jsx-key
-        <tr className='features' key={key}>
+        <tr className='features'>
           <td className='check'>{features[key].currentProduct}</td>
           <td>{key}</td>
           <td className='check'>{features[key].comparedProduct}</td>

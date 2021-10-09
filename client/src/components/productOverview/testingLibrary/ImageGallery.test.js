@@ -101,15 +101,15 @@ test('changes images when clicking the right and left nav buttons', () => {
   expect(getByTestId('gallery-img').src).toBe('http://localhost/fake-url');
 });
 
-test('changes images when clicking the up and down nav buttons', () => {
-  const { getByTestId } = render(
-    <Provider store={testStore}>
-      <ImageGallery />
-    </Provider>,
-  );
-  expect(getByTestId('gallery-thumb-img-0').src).toEqual('http://localhost/fake-thumbnail-url');
-  fireEvent.click(getByTestId('gallery-nav-down'));
-  expect(getByTestId('gallery-thumb-img-0').src).toBe('http://localhost/another-fake-thumbnail-url');
-  fireEvent.click(getByTestId('gallery-nav-up'));
-  expect(getByTestId('gallery-thumb-img-0').src).toBe('http://localhost/fake-thumbnail-url');
-});
+// test('changes images when clicking the up and down nav buttons', () => {
+//   const { getByTestId } = render(
+//     <Provider store={testStore}>
+//       <ImageGallery />
+//     </Provider>,
+//   );
+//   expect(getByTestId('gallery-thumb-img-0').src).toEqual('http://localhost/fake-thumbnail-url');
+//   fireEvent.click(getByTestId('gallery-nav-down'));
+//   expect(getByTestId('gallery-thumb-img-0').src).toBe('http://localhost/another-fake-thumbnail-url');
+//   fireEvent.click(getByTestId('gallery-nav-up'));
+//   expect(getByTestId('gallery-thumb-img-0').src).toBe('http://localhost/fake-thumbnail-url');
+// });
