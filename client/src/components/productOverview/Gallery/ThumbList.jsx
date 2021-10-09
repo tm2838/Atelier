@@ -14,7 +14,7 @@ const ThumbList = ({
     {
       currentStyle.photos.map((photo, index) => {
         if (index < 5) {
-          const style = thumb + index === main ? { filter: 'grayscale(0)' } : { filter: 'grayscale(1)' };
+          const style = thumb + index === main ? { filter: 'contrast(150%)' } : { filter: 'grayscale(1)' };
           const photoIndex = index + thumb;
           return <figure
             key={index * 9}
@@ -24,6 +24,7 @@ const ThumbList = ({
             <img
               src={currentStyle.photos[photoIndex].thumbnail_url}
               className='gallery-thumb'
+              data-testid={`gallery-thumb-img-${index}`}
               style={style}
               alt='Thumbnail'>
             </img>

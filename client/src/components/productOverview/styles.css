@@ -116,6 +116,20 @@
   grid-row-end: 29;
 }
 
+.gallery-nav-down {
+  height: 40px;
+  width: 40px;
+  padding-left: 10px;
+  padding-top: 10px;
+}
+
+.gallery-nav-up {
+  height: 40px;
+  width: 40px;
+  padding-left: 10px;
+  padding-bottom: 10px;
+}
+
 .gallery-nav:hover {
   color: lightgray;
   cursor: pointer;
@@ -216,7 +230,7 @@
 .style-selector {
   position: relative;
   display: inline-block;
-  margin-right: 20px;
+  margin-right: 10px;
 }
 
 .style-selector img {
