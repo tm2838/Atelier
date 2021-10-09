@@ -4,10 +4,6 @@ div {
   border: 0;
 }
 
-#related-products {
-  margin-top: 30vh;
-}
-
 .carousel {
   display: grid;
   grid-template-columns: 10vw 20vw 20vw 20vw 20vw 10vw;
@@ -99,7 +95,7 @@ div {
   z-index: 2;
   max-height: 50vh;
   overflow-y: auto;
-  margin: 0% 25%;
+  margin: auto;
   background-color: whitesmoke;
   border: 1px solid black;
   padding: 1.5% 2% 2.5%;
@@ -110,7 +106,7 @@ div {
   z-index: 2;
   max-height: 50vh;
   overflow-y: auto;
-  margin: 0% 25%;
+  margin: auto;
   background-color: #454B4D;
   border: 1px solid black;
   padding: 1.5% 2% 2.5%;

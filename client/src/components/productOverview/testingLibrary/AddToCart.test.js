@@ -8,7 +8,7 @@ import fetchMock from 'jest-fetch-mock';
 import rootReducer from '../../../reducers/rootReducer';
 import testProduct from '../../../fixtures/testProduct.json';
 
-import AddToCart from '../AddToCart.jsx';
+import AddToCart from '../Cart/AddToCart.jsx';
 
 let testStore = null;
 

@@ -8,7 +8,7 @@ import fetchMock from 'jest-fetch-mock';
 import rootReducer from '../../../reducers/rootReducer';
 import testProduct from '../../../fixtures/testProduct.json';
 
-import ProductSummary from '../ProductSummary.jsx';
+import ProductSummary from '../Info/ProductSummary.jsx';
 
 let testStore = null;
 beforeAll(() => {

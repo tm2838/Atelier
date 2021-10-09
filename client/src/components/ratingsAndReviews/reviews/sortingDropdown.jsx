@@ -2,7 +2,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import CSS from '../ratingsAndReviews.module.css';
-import { changeLoadedReviews, changeRemainingReviews } from '../../../actions/ratingsAndReviews/changeReviews';
+import { changeLoadedReviews, changeRemainingReviews, changeReviews } from '../../../actions/ratingsAndReviews/changeReviews';
 import { sortHelpful, sortNewest, sortRelevant } from '../../../helpers/sortReviews';
 
 class SortingDropdown extends React.Component {
@@ -29,7 +29,7 @@ class SortingDropdown extends React.Component {
     }
     const loadedReviews = reviews.slice(0, this.props.loadedReviews.length || 2);
     const remainingReviews = reviews.filter((review) => !loadedReviews.includes(review));
-    this.props.handleSortChange(loadedReviews, remainingReviews);
+    this.props.handleSortChange(loadedReviews, remainingReviews, reviews);
   }
 
   render() {
@@ -60,9 +60,10 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  handleSortChange: (loadedReviews, remainingReviews) => {
+  handleSortChange: (loadedReviews, remainingReviews, reviews) => {
     dispatch(changeLoadedReviews(loadedReviews));
     dispatch(changeRemainingReviews(remainingReviews));
+    dispatch(changeReviews(reviews));
   },
 });
 
