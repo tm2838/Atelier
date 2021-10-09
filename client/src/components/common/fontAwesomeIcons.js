@@ -19,6 +19,10 @@ import {
   faSquare,
   faAngleRight,
   faAngleLeft,
+  faArrowCircleRight,
+  faArrowCircleLeft,
+  faChevronCircleUp,
+  faChevronCircleDown,
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
@@ -41,4 +45,8 @@ library.add(
   faSquare,
   faAngleRight,
   faAngleLeft,
+  faArrowCircleRight,
+  faArrowCircleLeft,
+  faChevronCircleUp,
+  faChevronCircleDown,
 );

@@ -123,35 +123,35 @@
 
 .gallery-nav-up {
   grid-column-start: 5;
-  grid-column-end: 9;
+  grid-column-end: 7;
   grid-row-start: 2;
-  grid-row-end: 3;
+  grid-row-end: 4;
 }
 
 .gallery-nav-down {
   grid-column-start: 5;
-  grid-column-end: 9;
-  grid-row-start: 29;
+  grid-column-end: 7;
+  grid-row-start: 28;
   grid-row-end: 30;
 }
 
 .gallery-nav-left {
   grid-column-start: 7;
-  grid-column-end: 10;
-  grid-row-start: 17;
-  grid-row-end: 18;
+  grid-column-end: 19;
+  grid-row-start: 15;
+  grid-row-end: 17;
 }
 
 .gallery-nav-right {
-  grid-column-start: 23;
-  grid-column-end: 25;
-  grid-row-start: 17;
-  grid-row-end: 18;
+  grid-column-start: 25;
+  grid-column-end: 27;
+  grid-row-start: 15;
+  grid-row-end: 17;
 }
 
 .gallery-modal-open {
-  grid-column-start: 27;
-  grid-column-end: 28;
+  grid-column-start: 25;
+  grid-column-end: 27;
   grid-row-start: 2;
   grid-row-end: 3;
 }

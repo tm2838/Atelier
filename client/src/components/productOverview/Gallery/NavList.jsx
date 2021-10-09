@@ -8,23 +8,23 @@ const NavList = (props) => (
   <>
     {props.currentStyle && props.main < props.currentStyle.photos.length - 1
       && <figure className='gallery-nav-right'>
-        <NavButton direction={'right'} icon={'arrow-right'} onClick={props.handleNavClick} />
+        <NavButton direction={'right'} icon={'arrow-circle-right'} onClick={props.handleNavClick} />
       </figure>}
 
     {props.styles.length > 0 && props.main > 0
       && <figure className='gallery-nav-left'>
-        <NavButton direction={'left'} icon={'arrow-left'} onClick={props.handleNavClick} />
+        <NavButton direction={'left'} icon={'arrow-circle-left'} onClick={props.handleNavClick} />
       </figure>}
 
     {props.styles.length > 0 && props.thumb > 0
       && <figure className='gallery-nav-up'>
-        <NavButton direction={'up'} icon={'angle-up'} onClick={props.handleNavClick} />
+        <NavButton className={'nav-up'} direction={'up'} icon={'chevron-circle-up'} onClick={props.handleNavClick} />
       </figure>}
 
     {props.currentStyle
       && props.thumb + 4 < props.currentStyle.photos.length - 1
       && <figure className='gallery-nav-down'>
-        <NavButton direction={'down'} icon={'angle-down'} onClick={props.handleNavClick} />
+        <NavButton className={'nav-down'} direction={'down'} icon={'chevron-circle-down'} onClick={props.handleNavClick} />
       </figure>}
   </>
 );
