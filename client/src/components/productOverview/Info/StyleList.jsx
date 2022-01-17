@@ -18,6 +18,7 @@ class StyleList extends React.Component {
     return (
       <div>
         <p className='style-name' data-testid='style-name'><b>STYLE &gt;</b> {currentStyle.name}</p>
+        <div className='style-list'>
         {
           styles.map((style, index) => {
             const photo = style.photos[0].thumbnail_url;
@@ -30,6 +31,7 @@ class StyleList extends React.Component {
               onClick={this.handleClick.bind(this)} />;
           })
         }
+        </div>
       </div>
     );
   }

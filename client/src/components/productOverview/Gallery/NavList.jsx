@@ -7,25 +7,25 @@ import NavButton from './NavButton.jsx';
 const NavList = (props) => (
   <>
     {props.currentStyle && props.main < props.currentStyle.photos.length - 1
-      && <figure className='gallery-nav-right'>
+      && <div className='gallery-nav-right'>
         <NavButton direction={'right'} icon={'arrow-circle-right'} onClick={props.handleNavClick} />
-      </figure>}
+      </div>}
 
     {props.styles.length > 0 && props.main > 0
-      && <figure className='gallery-nav-left'>
+      && <div className='gallery-nav-left'>
         <NavButton direction={'left'} icon={'arrow-circle-left'} onClick={props.handleNavClick} />
-      </figure>}
+      </div>}
 
     {props.styles.length > 0 && props.thumb > 0
-      && <figure className='gallery-nav-up'>
+      && <div className='gallery-nav-up'>
         <NavButton className={'nav-up'} direction={'up'} icon={'chevron-circle-up'} onClick={props.handleNavClick} />
-      </figure>}
+      </div>}
 
     {props.currentStyle
       && props.thumb + 4 < props.currentStyle.photos.length - 1
-      && <figure className='gallery-nav-down'>
+      && <div className='gallery-nav-down'>
         <NavButton className={'nav-down'} direction={'down'} icon={'chevron-circle-down'} onClick={props.handleNavClick} />
-      </figure>}
+      </div>}
   </>
 );
 

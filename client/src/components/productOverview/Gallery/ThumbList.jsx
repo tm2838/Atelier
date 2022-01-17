@@ -16,7 +16,7 @@ const ThumbList = ({
         if (index < 5) {
           const style = thumb + index === main ? { filter: 'contrast(150%)' } : { filter: 'grayscale(1)' };
           const photoIndex = index + thumb;
-          return <figure
+          return <div
             key={index * 9}
             className={`gallery-thumb-${index}`}
             data-testid={`gallery-thumb-${index}`}
@@ -28,7 +28,7 @@ const ThumbList = ({
               style={style}
               alt='Thumbnail'>
             </img>
-          </figure>;
+          </div>;
         }
       })
     }
