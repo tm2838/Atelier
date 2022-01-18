@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Button from './Button.jsx';
 import StarRating from '../common/starRating.jsx';
@@ -6,8 +7,10 @@ import './styles.css';
 import noImageFound from '../../../../assets/noImageFound.png';
 
 const ProductCard = (props) => {
+  const { theme } = props;
+  const themeCardClass = theme === 'LIGHT' ? 'card' : 'card-dark';
   const relatedProduct = props.product.product;
-  const { name } = relatedProduct;
+  const { name, id, ratingScore } = relatedProduct;
   const category = relatedProduct.category.toUpperCase();
   let defaultStyle = false;
   let photo = '';
@@ -82,16 +85,20 @@ const ProductCard = (props) => {
           />
         }
       </div>
-      <div className='card' onClick={() => props.onClickCard(relatedProduct.id)}>
+      <div className={themeCardClass} onClick={() => props.onClickCard(id)}>
         { photo }
         <p className='cardInfo'>{ category }</p>
         <p className='cardInfo'><b>{ name }</b></p>
           { price }
-          <StarRating rating={relatedProduct.ratingScore} />
+          <StarRating rating={ratingScore} />
       </div>
     </div>
   );
 };
+
+const mapStateToProps = (state) => ({
+  theme: state.theme,
+});
 
 ProductCard.propTypes = {
   product: PropTypes.object,
@@ -104,6 +111,7 @@ ProductCard.propTypes = {
   onClickStar: PropTypes.func,
   onClickCloseModal: PropTypes.func,
   onClickCircleX: PropTypes.func,
+  theme: PropTypes.string,
 };
 
-export default ProductCard;
+export default connect(mapStateToProps)(ProductCard);

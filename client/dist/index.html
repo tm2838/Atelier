@@ -9,9 +9,6 @@
       color: antiquewhite;
       background-color: #21201c;
     }
-    .darkCard {
-      box-shadow: 0 4px 8px 0 rgba(240, 238, 238, 0.815) !important;
-    }
   </style>
 </head>
 <body>
@@ -23,9 +20,6 @@
       const logo = document.getElementById('logo');
       $(logo).on('click', (e) => {
         $('body').toggleClass('darkTheme');
-        $('.card').each(function() {
-          $(this).toggleClass('darkCard');
-        });
       });
     });
   </script>

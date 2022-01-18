@@ -77,6 +77,8 @@ class Outfit extends React.Component {
 
   // eslint-disable-next-line class-methods-use-this
   render() {
+    const { theme } = this.props;
+    const themeCardClass = theme === 'LIGHT' ? 'card addCard' : 'card-dark addCard';
     const { index } = this.state;
     const endRangeLimit = this.state.outfitProducts.length - 3;
     const productRange = this.state.outfitProducts.slice(index, index + 3);
@@ -90,7 +92,7 @@ class Outfit extends React.Component {
         </div>
         <div style={{ gridRowStart: 2, gridRowEnd: 3 }}>
           <div className='icon'></div>
-          <div className='card addCard'>
+          <div className={themeCardClass}>
               <p><b>Add to Outfit</b></p>
               <FontAwesomeIcon icon={['fas', 'plus']} onClick={ this.onClickPlus } />
           </div>
@@ -117,12 +119,14 @@ class Outfit extends React.Component {
 const mapStateToProps = (state) => ({
   currentProduct: state.currentProduct,
   currentStyle: state.currentStyle,
+  theme: state.theme,
 });
 
 Outfit.propTypes = {
   currentProduct: PropTypes.object,
   currentStyle: PropTypes.object,
   history: PropTypes.object,
+  theme: PropTypes.string,
 };
 
 export default connect(mapStateToProps)(Outfit);

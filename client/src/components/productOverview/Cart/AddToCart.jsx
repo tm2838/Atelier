@@ -49,7 +49,7 @@ class AddToCart extends React.Component {
       .reduce((init, sku) => init + currentStyle.skus[sku].quantity, 0);
     const themeBtnClass = theme === 'LIGHT' ? 'checkout' : 'checkout-dark';
     return (
-      <div style={{ width: '70%' }}>
+      <div style={{ width: '100%' }}>
         <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
           <SelectSize
           skus={currentStyle.skus}

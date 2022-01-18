@@ -74,7 +74,6 @@ app.get('/products/:id?', (req, res) => {
             if (err) {
               throw err;
             } else {
-              console.log(data);
               return Promise.all(data.map((productId) => (
                 new Promise((resolve) => {
                   const relatedProduct = {};

@@ -9,11 +9,12 @@ import {
 import './common/fontAwesomeIcons';
 
 import NavBar from './common/navBar.jsx';
+import Banner from './common/banner.jsx';
 // import ErrorBoundary from './common/ErrorBoundary.jsx';
 import Wrapper from './Wrapper.jsx';
 
 const appStyle = {
-  width: '80%',
+  width: '75%',
   alignItems: 'center',
   marginLeft: 'auto',
   marginRight: 'auto',
@@ -30,6 +31,7 @@ class App extends React.Component {
       <div style={appStyle}>
         <Router>
           <NavBar />
+          <Banner />
           {/* <ErrorBoundary> */}
             <Switch>
               <Route exact={false} path='/product/:productId' component={Wrapper} {...this.props}>
