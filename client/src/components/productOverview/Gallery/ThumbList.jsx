@@ -22,7 +22,7 @@ const ThumbList = ({
             data-testid={`gallery-thumb-${index}`}
             onClick={() => handleImageClick(index)}>
             <img
-              src={currentStyle.photos[photoIndex].thumbnail_url}
+              src={currentStyle?.photos[photoIndex]?.thumbnail_url}
               className='gallery-thumb'
               data-testid={`gallery-thumb-img-${index}`}
               style={style}

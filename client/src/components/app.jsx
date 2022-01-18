@@ -9,7 +9,7 @@ import {
 import './common/fontAwesomeIcons';
 
 import NavBar from './common/navBar.jsx';
-import ErrorBoundary from './common/ErrorBoundary.jsx';
+// import ErrorBoundary from './common/ErrorBoundary.jsx';
 import Wrapper from './Wrapper.jsx';
 
 const appStyle = {
@@ -30,12 +30,12 @@ class App extends React.Component {
       <div style={appStyle}>
         <Router>
           <NavBar />
-          <ErrorBoundary>
+          {/* <ErrorBoundary> */}
             <Switch>
               <Route exact={false} path='/product/:productId' component={Wrapper} {...this.props}>
               </Route>
             </Switch>
-          </ErrorBoundary>
+          {/* </ErrorBoundary> */}
         </Router>
       </div>
     );

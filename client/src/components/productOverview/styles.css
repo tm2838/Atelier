@@ -172,9 +172,10 @@
 .gallery-modal-open {
   grid-column-start: 7;
   grid-column-end: 8;
-  grid-row-start: 2;
-  grid-row-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 2;
   margin-right: 5%;
+  margin-top: 5%;
 }
 
 .gallery-modal-open:hover {
@@ -284,6 +285,7 @@
   flex-direction: column;
   margin-top: 10px;
   border-left: solid 2px black;
+  font-size: 90%;
 }
 
 .feature {

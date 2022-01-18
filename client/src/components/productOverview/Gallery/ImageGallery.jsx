@@ -75,7 +75,7 @@ class ImageGallery extends React.Component {
 
         : <div className='gallery'>
           <>
-            <MainImage photo={this.props.currentStyle.photos[this.state.main].url} />
+            <MainImage photo={this.props.currentStyle?.photos[this.state.main]?.url} />
             <ThumbList
               main={this.state.main}
               thumb={this.state.thumb}

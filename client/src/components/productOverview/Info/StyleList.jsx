@@ -21,7 +21,7 @@ class StyleList extends React.Component {
         <div className='style-list'>
         {
           styles.map((style, index) => {
-            const photo = style.photos[0].thumbnail_url;
+            const photo = style?.photos[0]?.thumbnail_url;
             const selected = style.style_id === currentStyle.style_id;
             return <Style
               key={style.style_id}

@@ -21,12 +21,10 @@ class Outfit extends React.Component {
   }
 
   onClickCard(id) {
-    // console.log('id', id);
     this.props.history.push(`/product/${id}`);
   }
 
   onClickPlus() {
-    // console.log(this.props);
     const { outfitProducts } = this.state;
     for (let i = 0; i < outfitProducts.length; i += 1) {
       if (outfitProducts[i].product.id === this.props.currentProduct.id) {
@@ -83,16 +81,19 @@ class Outfit extends React.Component {
     const endRangeLimit = this.state.outfitProducts.length - 3;
     const productRange = this.state.outfitProducts.slice(index, index + 3);
     return (
-      <div className='carousel' style={{ marginBottom: '20vh' }}>
+      <div className='carousel'>
         <h3 className='carouselHeading'>YOUR OUTFIT</h3>
         <div className='left'>
           { index ? <FontAwesomeIcon className='arrow left' data-testid='left-arrow'
               icon={ faChevronLeft } onClick={this.onClickLeft}/> : ''
           }
         </div>
-        <div className='card addCard'>
-          <h4>Add to Outfit</h4>
-          <FontAwesomeIcon icon={['fas', 'plus']} onClick={ this.onClickPlus } />
+        <div style={{ gridRowStart: 2, gridRowEnd: 3 }}>
+          <div className='icon'></div>
+          <div className='card addCard'>
+              <p><b>Add to Outfit</b></p>
+              <FontAwesomeIcon icon={['fas', 'plus']} onClick={ this.onClickPlus } />
+          </div>
         </div>
         <div className='outfitCardContainer'>
           {productRange.map((product) => (
