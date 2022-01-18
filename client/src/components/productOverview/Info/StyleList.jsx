@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import Style from './Style.jsx';
 import changeStyle from '../../../actions/productOverview/currentStyle';
 import resetSelected from '../../../actions/productOverview/resetSelected';
+import noImageFound from '../../../../../assets/noImageFound.png';
 
 class StyleList extends React.Component {
   handleClick(index) {
@@ -21,7 +22,7 @@ class StyleList extends React.Component {
         <div className='style-list'>
         {
           styles.map((style, index) => {
-            const photo = style?.photos[0]?.thumbnail_url;
+            const photo = style?.photos[0]?.thumbnail_url || noImageFound;
             const selected = style.style_id === currentStyle.style_id;
             return <Style
               key={style.style_id}

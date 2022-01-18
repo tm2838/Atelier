@@ -7,6 +7,7 @@ import ThumbList from './ThumbList.jsx';
 import NavList from './NavList.jsx';
 import ExpandButton from './ExpandButton.jsx';
 import ExpandedImage from './ExpandedImage.jsx';
+import noImageFound from '../../../../../assets/noImageFound.png';
 
 class ImageGallery extends React.Component {
   constructor(props) {
@@ -75,7 +76,9 @@ class ImageGallery extends React.Component {
 
         : <div className='gallery'>
           <>
-            <MainImage photo={this.props.currentStyle?.photos[this.state.main]?.url} />
+            <MainImage
+              photo={this.props.currentStyle?.photos[this.state.main]?.url || noImageFound}
+            />
             <ThumbList
               main={this.state.main}
               thumb={this.state.thumb}
@@ -84,7 +87,7 @@ class ImageGallery extends React.Component {
               main={this.state.main}
               thumb={this.state.thumb}
               handleNavClick={this.handleNavClick} />
-            <ExpandButton className={'gallery-modal-open'} icon={'expand'}/>
+            {this.props.currentStyle?.photos[this.state.main]?.url && <ExpandButton className={'gallery-modal-open'} icon={'expand'}/>}
             {
               this.props.imageView
               && <ExpandedImage
