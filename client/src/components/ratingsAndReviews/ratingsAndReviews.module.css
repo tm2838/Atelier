@@ -323,6 +323,7 @@
   background-color: #454B4D;
   overflow-y: auto;
   color: antiquewhite !important;
+  box-shadow: 0 4px 8px 0 rgba(240, 238, 238, 0.815) !important;
 }
 
 .review-modal-content {

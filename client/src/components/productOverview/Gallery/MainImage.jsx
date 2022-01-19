@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const MainImage = (props) => (
-  <figure className='gallery-main'>
+  <div className='gallery-main'>
     <img
       src={props.photo}
       className='gallery-img'
@@ -10,7 +10,7 @@ const MainImage = (props) => (
       alt='Main image'
     >
     </img>
-  </figure>
+  </div>
 );
 
 MainImage.propTypes = {

@@ -11,7 +11,7 @@ const ExpandButton = ({
   className,
   icon,
 }) => (
-  <figure className={className}>
+  <div className={className}>
     <FontAwesomeIcon
       className='gallery-nav'
       data-testid='gallery-expand-button'
@@ -19,7 +19,7 @@ const ExpandButton = ({
       icon={icon}
       onClick={() => handleExpand(!imageView)}
     />
-  </figure>
+  </div>
 );
 
 const mapStateToProps = (state) => ({

@@ -79,19 +79,21 @@ const Modal = (props) => {
   }
   return (
     <div className={themeModalClass} onClick={ () => props.onClickCloseModal() }>
-      <p style={{ fontSize: '0.8em' }}>COMPARING</p>
-      <table>
-        <thead>
-          <tr>
-            <th><b>{ currentProduct.name }</b></th>
-            <th></th>
-            <th><b>{ comparedProduct.product.name }</b></th>
-          </tr>
-        </thead>
-        <tbody>
-          { rows }
-        </tbody>
-      </table>
+      <div className='modal-content'>
+        <p style={{ fontSize: '100%' }}>COMPARING</p>
+        <table>
+          <thead>
+            <tr>
+              <th><b>{ currentProduct.name }</b></th>
+              <th></th>
+              <th><b>{ comparedProduct.product.name }</b></th>
+            </tr>
+          </thead>
+          <tbody>
+            { rows }
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
