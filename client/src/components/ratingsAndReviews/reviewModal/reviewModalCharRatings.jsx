@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import CSS from '../ratingsAndReviews.module.css';
+import '../ratingsAndReviews.css';
 import CharRating from './reviewModalCharRating.jsx';
 
 class ReviewModalCharRatings extends React.Component {
@@ -36,7 +36,7 @@ class ReviewModalCharRatings extends React.Component {
     const violationStyle = violated ? { color: 'red' } : {};
     return (
       <>
-      <div className={CSS['review-modal-input']}>
+      <div className='review-modal-input'>
         <div required><b>Characteristics * </b></div>
         {violated && <div style={violationStyle}>You must enter the following</div>}
         {Object.keys(characteristics).map(

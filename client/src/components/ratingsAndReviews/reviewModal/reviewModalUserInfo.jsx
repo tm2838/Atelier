@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import CSS from '../ratingsAndReviews.module.css';
+import '../ratingsAndReviews.css';
 
 const ReviewUserInfo = ({ handleName, handleEmail, violations }) => {
   const onNameChange = (e) => {
@@ -14,7 +14,7 @@ const ReviewUserInfo = ({ handleName, handleEmail, violations }) => {
   const violationStyle = { border: '1px solid red' };
   return (
     <>
-      <div className={CSS['review-modal-input']}>
+      <div className='review-modal-input'>
         <label htmlFor='username'><b>What is your nick name * </b></label>
         { violations.includes('name') && <div style={{ color: 'red' }}>You must enter the following</div> }
         <textarea
@@ -23,14 +23,14 @@ const ReviewUserInfo = ({ handleName, handleEmail, violations }) => {
           placeholder='Example: jackson11'
           maxLength='60'
           required
-          className={CSS['review-modal-textbox']}
+          className='review-modal-textbox'
           onChange={onNameChange}
           style={ violations.includes('name') ? { ...violationStyle } : {}}
         />
         <div><i>For privacy reasons, do not use your full name or email address</i></div>
       </div>
 
-      <div className={CSS['review-modal-input']}>
+      <div className='review-modal-input'>
         <label htmlFor='email'><b>Your email * </b></label>
           { violations.includes('body') && <div style={{ color: 'red' }}>You must enter the following</div> }
           <textarea
@@ -39,7 +39,7 @@ const ReviewUserInfo = ({ handleName, handleEmail, violations }) => {
             placeholder='Example: jackson11@email.com'
             maxLength='60'
             required
-            className={CSS['review-modal-textbox']}
+            className='review-modal-textbox'
             onChange={onEmailChange}
             style={ violations.includes('body') ? { ...violationStyle } : {}}
           />

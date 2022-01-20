@@ -49,7 +49,7 @@ app.get('/products/:id?', (req, res) => {
       response.styles = styles;
       getReviews(id)
         .then((data) => {
-          let reviews = addNewestTag(data.data.results);
+          let reviews = addNewestTag(data.data.reviews);
           reviews = addRelevanceTag(reviews);
           reviews.forEach((review) => {
             review.photos.forEach((photo) => {
@@ -63,7 +63,7 @@ app.get('/products/:id?', (req, res) => {
         })
         .then(() => getReviewMeta(id))
         .then((data) => {
-          const reviewMeta = data.data;
+          const { reviewMeta } = data.data;
           reviewMeta.ratingScore = getRatingScore(reviewMeta.ratings);
           reviewMeta.recommendationRate = getRecommendationMetric(reviewMeta.recommended);
           reviewMeta.totalReviews = getTotalReviews(reviewMeta.ratings);
@@ -83,7 +83,7 @@ app.get('/products/:id?', (req, res) => {
                       relatedProduct.styles = relStyles;
                       getReviewMeta(productId)
                         .then((meta) => {
-                          const reviewMeta = meta.data;
+                          const { reviewMeta } = meta.data;
                           relatedProduct.product.ratingScore = getRatingScore(reviewMeta.ratings);
                           resolve(relatedProduct);
                         });

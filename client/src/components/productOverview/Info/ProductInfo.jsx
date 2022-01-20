@@ -20,8 +20,8 @@ const ProductInfo = ({
       <ProductName
         category={product.category.toUpperCase()}
         name={product.name}
-        price={currentStyle.original_price}
-        sale={currentStyle.sale_price}
+        price={currentStyle?.original_price}
+        sale={currentStyle?.sale_price}
       />
       <StyleList />
       <AddToCart />

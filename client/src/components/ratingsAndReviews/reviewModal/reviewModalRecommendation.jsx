@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import CSS from '../ratingsAndReviews.module.css';
+import '../ratingsAndReviews.css';
 
 class ReviewRecommendation extends React.Component {
   constructor(props) {
@@ -26,7 +26,7 @@ class ReviewRecommendation extends React.Component {
     const violationStyle = violated ? { color: 'red' } : {};
 
     return (
-      <div className={CSS['review-modal-input']}>
+      <div className='review-modal-input'>
         <div required><b>Do you recommend this product? * </b></div>
         {violated && <div style={violationStyle}>You must enter the following</div>}
         <input type='radio' value='yes' name='recommend' id='recommend-yes' onChange={this.onRecommendation} />  Yes

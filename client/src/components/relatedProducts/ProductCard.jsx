@@ -25,7 +25,7 @@ const ProductCard = (props) => {
         } else {
           photo = <div className='image' style={{ backgroundImage: `url(${noImageFound})`, backgroundSize: 'cover', repeat: 'no-repeat' }}></div>;
         }
-        if (styles[i].sale_price !== null && styles[i].sale_price !== 'null') {
+        if (styles[i] && styles[i].sale_price !== null && styles[i].sale_price !== 'null') {
           price = (
             <p className='cardInfo'>
               <span style={{ color: 'red' }}>${styles[i].sale_price}</span>
@@ -43,7 +43,7 @@ const ProductCard = (props) => {
       } else {
         photo = <div className='image' style={{ backgroundImage: `url(${noImageFound})`, backgroundSize: 'cover', repeat: 'no-repeat' }}></div>;
       }
-      if (styles[0].sale_price !== null && styles[0].sale_price !== 'null') {
+      if (styles[0] && styles[0].sale_price !== null && styles[0].sale_price !== 'null') {
         price = (
           <p className='cardInfo'>
             <span style={{ color: 'red' }}>${styles[0].sale_price}</span>
@@ -62,7 +62,7 @@ const ProductCard = (props) => {
       photo = <div className='image' style={{ backgroundImage: `url(${noImageFound})`, backgroundSize: 'cover', repeat: 'no-repeat' }}></div>;
     }
     // price
-    if (styles.sale_price !== null && styles.sale_price !== 'null') {
+    if (styles && styles.sale_price !== null && styles.sale_price !== 'null') {
       price = (
         <p className='cardInfo'>
           <span style={{ color: 'red' }}>${styles.sale_price}</span>

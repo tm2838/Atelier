@@ -4,7 +4,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import changeColorTheme from '../../actions/toggleColorTheme';
-import CSS from './commonUI.module.css';
+import './commonUI.css';
 
 class NavBar extends React.Component {
   constructor(props) {
@@ -21,8 +21,8 @@ class NavBar extends React.Component {
 
   render() {
     const { theme } = this.props;
-    const themeClassNavBar = theme === 'LIGHT' ? CSS['nav-bar'] : CSS['nav-bar-dark'];
-    const themeClassLogo = theme === 'LIGHT' ? CSS.logo : CSS['logo-dark'];
+    const themeClassNavBar = theme === 'LIGHT' ? 'nav-bar' : 'nav-bar-dark';
+    const themeClassLogo = theme === 'LIGHT' ? 'logo' : 'logo-dark';
     return (
       <div className={themeClassNavBar} id='nav-bar'>
         <FontAwesomeIcon id='logo' className={themeClassLogo} icon='paw' size='4x' data-testid="logo" onClick={this.handleClick} />

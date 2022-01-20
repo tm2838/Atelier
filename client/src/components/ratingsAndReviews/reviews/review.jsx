@@ -2,16 +2,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import CSS from '../ratingsAndReviews.module.css';
+import '../ratingsAndReviews.css';
 import StarRating from '../../common/starRating.jsx';
 import { rateReviewHelpful, reportReview } from '../../../helpers/rateReviewHelpful';
 
 const PhotoModal = ({ imgUrl, closePhoto, theme }) => {
-  const themeClass = theme === 'LIGHT' ? CSS['review-photo-modal'] : CSS['review-photo-modal-dark'];
+  const themeClass = theme === 'LIGHT' ? 'review-photo-modal' : 'review-photo-modal-dark';
   const themeIconColor = theme === 'LIGHT' ? '#b1d2b0ff' : '#5D6D58';
   return (
     <div className={themeClass} data-testid='review-photo-modal' >
-      <img src={imgUrl} alt='review-photo' className={CSS['review-photo-expanded']}/>
+      <img src={imgUrl} alt='review-photo' className='review-photo-expanded'/>
       <FontAwesomeIcon icon='times' onClick={closePhoto} style={{ color: themeIconColor, cursor: 'pointer' }} data-testid='review-photo-close-modal'/>
     </div>
   );
@@ -64,7 +64,7 @@ class Review extends React.Component {
   render() {
     const { review, theme } = this.props;
     const themeColor = theme === 'LIGHT' ? 'black' : 'antiquewhite';
-    const themeReview = theme === 'LIGHT' ? CSS.review : CSS['review-dark'];
+    const themeReview = theme === 'LIGHT' ? 'review' : 'review-dark';
     const {
       bodyShown, reviewBody, expandedPhoto, reported, rated,
     } = this.state;
@@ -73,16 +73,16 @@ class Review extends React.Component {
     return (
       <>
       <div className={themeReview}>
-        <div className={CSS['review-header']}>
+        <div className='review-header'>
           <StarRating rating={review.rating} />
           <div>{`${review.reviewer_name}, ${review.date.split('T')[0]}`}</div>
         </div>
 
-        <div className={CSS['review-summary']}>
+        <div className='review-summary'>
           {review.summary}
         </div>
 
-        <div className={CSS['review-body']}>
+        <div className='review-body'>
           <div>{review.body.length > 250 ? reviewBody : review.body}
           {review.body.length > 250 && !bodyShown
             && <div style={{
@@ -92,27 +92,27 @@ class Review extends React.Component {
         </div>
 
         {review.recommend
-          && <div className={CSS['review-recommendation']}>
+          && <div className='review-recommendation'>
               <FontAwesomeIcon icon='check' style={{ color: '#b1d2b0ff', marginRight: '10px' }}/>
               I recommend this product!
           </div>}
 
-        {review.response
-          && <div className={CSS['review-response']}><b>Response from seller: </b><div style={{ marginTop: '10px' }}>{review.response}</div></div>}
+        {review.response !== 'null'
+          && <div className='review-response'><b>Response from seller: </b><div style={{ marginTop: '10px' }}>{review.response}</div></div>}
 
-        <div className={CSS['review-photo-container']}>
+        <div className='review-photo-container'>
           {review.photos.map(
-            (photo) => <img src={photo.url} alt='review-photo' key={photo.id} className={CSS['review-photo']} onClick={this.expandPhoto} width='160' height='90'/>,
+            (photo) => <img src={photo.url} alt='review-photo' key={photo.id} className='review-photo' onClick={this.expandPhoto} width='160' height='90'/>,
           )}
         </div>
 
-        <div className={CSS['review-helpful-rating']}>
-          <div className={CSS['review-helpful-rating-sub']}>
+        <div className='review-helpful-rating'>
+          <div className='review-helpful-rating-sub'>
             Helpful?
             <div style={rateHelpfulStyle} onClick={this.handleRateHelpful}>Yes</div>
             <div>{`(${this.state.helpfulness})`}</div>
           </div>
-          <div className={`${CSS['review-helpful-rating-sub']} ${CSS['review-division']}`}>{'|'}</div>
+          <div className='review-helpful-rating-sub review-division'>{'|'}</div>
           <div style={reportStyle} onClick={this.handleReportReview}>{ reported ? 'Reported' : 'Report'}</div>
         </div>
       </div>

@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { connect } from 'react-redux';
-import CSS from '../ratingsAndReviews.module.css';
+import '../ratingsAndReviews.css';
 import ProductBreakdownBar from './productBreakdownBar.jsx';
 
 const ProductBreakdown = ({ reviewMeta }) => {
@@ -14,7 +14,7 @@ const ProductBreakdown = ({ reviewMeta }) => {
     Fit: ['Runs Tight', 'Runs slightly tight', 'Perfect', 'Runs slightly long', 'Runs long'],
   };
   return (
-    <div className={CSS['product-breakdown']}>
+    <div className={'product-breakdown'}>
       {reviewMeta.characteristics && Object.keys(reviewMeta.characteristics)
         .map(
           (key) => <ProductBreakdownBar

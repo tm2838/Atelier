@@ -32,13 +32,21 @@ const addRelevanceTag = (reviews) => {
   return updatedReviews;
 };
 
-const getReviews = (id) => axios.get(reviewUrl, {
-  headers: { Authorization: apiKey },
-  params: { product_id: id, count: 100, page: 1 },
+// const getReviews = (id) => axios.get(reviewUrl, {
+//   headers: { Authorization: apiKey },
+//   params: { product_id: id, count: 100, page: 1 },
+// });
+
+const getReviews = (id) => axios.get('http://localhost:8000/reviews', {
+  params: { product_id: id },
 });
 
-const getReviewMeta = (id) => axios.get(`${reviewUrl}/meta`, {
-  headers: { Authorization: apiKey },
+// const getReviewMeta = (id) => axios.get(`${reviewUrl}/meta`, {
+//   headers: { Authorization: apiKey },
+//   params: { product_id: id },
+// });
+
+const getReviewMeta = (id) => axios.get('http://localhost:8000/reviews/meta', {
   params: { product_id: id },
 });
 
@@ -55,6 +63,9 @@ const reportReview = (id) => axios({
 });
 
 const getRatingScore = (ratings) => {
+  if (!Object.keys(ratings).length) {
+    return 0;
+  }
   let ratingScore = 0;
   let totalReviews = 0;
   Object.keys(ratings).forEach(

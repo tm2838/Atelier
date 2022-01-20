@@ -2,7 +2,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import CSS from './commonUI.module.css';
+import './commonUI.css';
 
 const StarRating = ({ rating, onClick = () => {}, theme }) => {
   const ratingInt = parseInt(rating, 10);
@@ -14,7 +14,7 @@ const StarRating = ({ rating, onClick = () => {}, theme }) => {
   }
 
   const ratingToRender = ratingInt + ratingFloat;
-  const themeClass = theme === 'LIGHT' ? CSS['star-rating'] : CSS['star-rating-dark'];
+  const themeClass = theme === 'LIGHT' ? 'star-rating' : 'star-rating-dark';
 
   return (
   <div style={{ position: 'relative', width: '100px' }} onClick={onClick}>

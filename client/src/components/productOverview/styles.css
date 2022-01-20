@@ -258,7 +258,6 @@
 .product-text {
   display: grid;
   grid-template-columns: 5fr 10fr 10fr 10fr 10fr 5fr;
-  /* grid-template-columns: repeat(8, 0.5fr); */
   grid-template-rows: repeat(8, 1vw);
 }
 
@@ -275,7 +274,7 @@
 
 .product-features {
   grid-column-start: 5;
-  grid-column-end: 6;
+  grid-column-end: 7;
   grid-row-start: 3;
   grid-row-end: 9;
   display: flex;

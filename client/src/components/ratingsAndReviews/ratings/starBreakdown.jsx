@@ -2,7 +2,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { connect } from 'react-redux';
-import CSS from '../ratingsAndReviews.module.css';
+import '../ratingsAndReviews.css';
 
 import StarBreakdownBar from './starBreakdownBar.jsx';
 import changeFilters from '../../../actions/ratingsAndReviews/changeFilters';
@@ -52,12 +52,12 @@ class StarBreakdown extends React.Component {
 
   render() {
     const { reviewMeta, filters, theme } = this.props;
-    const themeClass = theme === 'LIGHT' ? CSS['star-breakdown-div'] : CSS['star-breakdown-div-dark'];
+    const themeClass = theme === 'LIGHT' ? 'star-breakdown-div' : 'star-breakdown-div-dark';
     return (
       <>
         {reviewMeta.ratings
           && <>
-          <div className={CSS['star-breakdown']}>
+          <div className={'star-breakdown'}>
             <div><b>Ratings Breakdown</b></div>
             {filters.length > 0
               && (

@@ -5,8 +5,7 @@ import Outfit from './Outfit.jsx';
 
 const RelatedProductsContainer = (props) => (
   <div id='related-products' data-testid='related-products'>
-    <RelatedProducts productId={props.productId} history={props.history}
-      key={props.productId} />
+    <RelatedProducts productId={props.productId} history={props.history} key={props.productId} />
     <Outfit history={props.history} />
   </div>
 );

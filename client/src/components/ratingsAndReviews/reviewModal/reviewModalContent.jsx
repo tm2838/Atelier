@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import CSS from '../ratingsAndReviews.module.css';
+import '../ratingsAndReviews.css';
 
 class ReviewContent extends React.Component {
   constructor(props) {
@@ -50,19 +50,19 @@ class ReviewContent extends React.Component {
     const violationStyle = violated ? { border: '1px solid red' } : {};
     return (
       <>
-        <div className={CSS['review-modal-input']}>
+        <div className={'review-modal-input'}>
           <label htmlFor='review-summary'><b>Review Summary: </b></label>
           <textarea
             id='review-summary'
             data-testid='review-summary'
             placeholder='Example: Best purchase ever!'
             maxLength='60'
-            className={CSS['review-modal-textbox']}
+            className={'review-modal-textbox'}
             onChange={this.onReviewSummary}
           />
         </div>
 
-        <div className={CSS['review-modal-input']}>
+        <div className={'review-modal-input'}>
           <label htmlFor='review-body'><b>Review Body * </b></label>
           { violated && <div style={{ color: 'red' }}>You must enter the following</div> }
           <textarea
@@ -72,7 +72,7 @@ class ReviewContent extends React.Component {
             maxLength='1000'
             minLength='50'
             required
-            className={CSS['review-modal-textbox-body']}
+            className={'review-modal-textbox-body'}
             onChange={this.onBodyChange}
             style={violationStyle}
           />
@@ -93,7 +93,7 @@ class ReviewContent extends React.Component {
         </div>
 
         {this.state.photos.map(
-          (url) => <img src={url} alt='uploaded photo' key={url} className={CSS['review-photo']} onClick={this.onDeletePhoto} />,
+          (url) => <img src={url} alt='uploaded photo' key={url} className={'review-photo'} onClick={this.onDeletePhoto} />,
         )}
       </>
     );
