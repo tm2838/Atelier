@@ -6,7 +6,7 @@ import Review from './review.jsx';
 import '../ratingsAndReviews.css';
 
 const ReviewsList = ({ loadedReviews }) => {
-  const reviewListLength = loadedReviews.length === 0 ? 0 : '450px';
+  const reviewListLength = loadedReviews.length === 0 ? 0 : '500px';
   return (
   <div className='reviews-list' style={{ height: reviewListLength }}>
     {loadedReviews.map(

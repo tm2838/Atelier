@@ -8,7 +8,7 @@ import { rateReviewHelpful, reportReview } from '../../../helpers/rateReviewHelp
 
 const PhotoModal = ({ imgUrl, closePhoto, theme }) => {
   const themeClass = theme === 'LIGHT' ? 'review-photo-modal' : 'review-photo-modal-dark';
-  const themeIconColor = theme === 'LIGHT' ? '#b1d2b0ff' : '#5D6D58';
+  const themeIconColor = theme === 'LIGHT' ? '#b1d2b0ff' : 'antiquewhite';
   return (
     <div className={themeClass} data-testid='review-photo-modal' >
       <img src={imgUrl} alt='review-photo' className='review-photo-expanded'/>
@@ -65,6 +65,7 @@ class Review extends React.Component {
     const { review, theme } = this.props;
     const themeColor = theme === 'LIGHT' ? 'black' : 'antiquewhite';
     const themeReview = theme === 'LIGHT' ? 'review' : 'review-dark';
+    const themeResponse = theme === 'LIGHT' ? 'review-response' : 'review-response-dark';
     const {
       bodyShown, reviewBody, expandedPhoto, reported, rated,
     } = this.state;
@@ -98,7 +99,7 @@ class Review extends React.Component {
           </div>}
 
         {review.response !== 'null'
-          && <div className='review-response'><b>Response from seller: </b><div style={{ marginTop: '10px' }}>{review.response}</div></div>}
+          && <div className={themeResponse}><b>Response from seller: </b><div style={{ marginTop: '10px' }}>{review.response}</div></div>}
 
         <div className='review-photo-container'>
           {review.photos.map(

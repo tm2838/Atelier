@@ -17,9 +17,9 @@ class RatingsAndReviews extends React.Component {
   render() {
     return (
       <div id='ratings-and-reviews'>
-        <h3 className={'ratings-and-reviews-title'}>{'RATINGS & REVIEWS'}</h3>
+        <h3 className='ratings-and-reviews-title'>{'RATINGS & REVIEWS'}</h3>
 
-        <div className={'ratings-and-reviews'}>
+        <div className='ratings-and-reviews'>
           <Ratings />
           <Reviews onAddReview={() => { this.setState({ isAddReviewModalOpen: true }); }}/>
         </div>

@@ -2,7 +2,9 @@
 import React from 'react';
 import '../ratingsAndReviews.css';
 
-const ReviewUserInfo = ({ handleName, handleEmail, violations }) => {
+const ReviewUserInfo = ({
+  handleName, handleEmail, violations, theme,
+}) => {
   const onNameChange = (e) => {
     handleName(e.target.value);
   };
@@ -12,6 +14,7 @@ const ReviewUserInfo = ({ handleName, handleEmail, violations }) => {
   };
 
   const violationStyle = { border: '1px solid red' };
+  const themeInputClass = theme === 'LIGHT' ? 'review-modal-textbox' : 'review-modal-textbox-dark';
   return (
     <>
       <div className='review-modal-input'>
@@ -23,7 +26,7 @@ const ReviewUserInfo = ({ handleName, handleEmail, violations }) => {
           placeholder='Example: jackson11'
           maxLength='60'
           required
-          className='review-modal-textbox'
+          className={themeInputClass}
           onChange={onNameChange}
           style={ violations.includes('name') ? { ...violationStyle } : {}}
         />
@@ -39,7 +42,7 @@ const ReviewUserInfo = ({ handleName, handleEmail, violations }) => {
             placeholder='Example: jackson11@email.com'
             maxLength='60'
             required
-            className='review-modal-textbox'
+            className={themeInputClass}
             onChange={onEmailChange}
             style={ violations.includes('body') ? { ...violationStyle } : {}}
           />

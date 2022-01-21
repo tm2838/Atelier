@@ -164,12 +164,14 @@ class ReviewModal extends React.Component {
                 handleBodyChange={this.handleBodyChange}
                 handleUpdatePhotos={this.handleUpdatePhotos}
                 violations={violations}
+                theme={theme}
               />
 
               <ReviewUserInfo
                 handleName={this.handleName}
                 handleEmail={this.handleEmail}
                 violations={violations}
+                theme={theme}
               />
             </>
 
