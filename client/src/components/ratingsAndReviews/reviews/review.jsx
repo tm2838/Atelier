@@ -49,14 +49,14 @@ class Review extends React.Component {
 
   handleRateHelpful() {
     if (!this.state.rated) {
-      rateReviewHelpful(this.props.review.review_id);
+      rateReviewHelpful(this.props.review.id);
       this.setState({ rated: true, helpfulness: this.state.helpfulness + 1 });
     }
   }
 
   handleReportReview() {
     if (!this.state.reported) {
-      reportReview(this.props.review.review_id);
+      reportReview(this.props.review.id);
       this.setState({ reported: true });
     }
   }

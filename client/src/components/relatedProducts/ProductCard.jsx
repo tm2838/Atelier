@@ -76,12 +76,14 @@ const ProductCard = (props) => {
   return (
     <div>
       <div className='icon'>
-        { props.type === 'related' ? <Button type={ props.type }
-          product={ props.product }
-          onClickStar={ props.onClickStar }
-          /> : <Button type={ props.type }
-          product={ props.product }
-          onClickCircleX={ props.onClickCircleX }
+        {props.type === 'related'
+          ? <Button type={ props.type }
+            product={ props.product }
+            onClickStar={ props.onClickStar }
+          />
+          : <Button type={ props.type }
+            product={ props.product }
+            onClickCircleX={ props.onClickCircleX }
           />
         }
       </div>

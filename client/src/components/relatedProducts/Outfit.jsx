@@ -99,10 +99,12 @@ class Outfit extends React.Component {
         </div>
         <div className='outfitCardContainer'>
           {productRange.map((product) => (
-            <ProductCard type={'outfit'} key={product.product.id}
-            product={product}
-            onClickCircleX={ this.onClickCircleX }
-            onClickCard={ this.onClickCard }
+            <ProductCard
+              type={'outfit'}
+              key={product.product.id}
+              product={product}
+              onClickCircleX={this.onClickCircleX}
+              onClickCard={this.onClickCard}
             />))
           }
         </div>

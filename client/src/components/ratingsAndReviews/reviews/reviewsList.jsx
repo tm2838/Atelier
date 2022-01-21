@@ -10,7 +10,7 @@ const ReviewsList = ({ loadedReviews }) => {
   return (
   <div className='reviews-list' style={{ height: reviewListLength }}>
     {loadedReviews.map(
-      (review) => <Review key={review.review_id} review={review}/>,
+      (review) => <Review key={review.id} review={review}/>,
     )}
   </div>
   );

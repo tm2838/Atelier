@@ -5,8 +5,8 @@ const fs = require('fs');
 const AWS = require('aws-sdk');
 const { v4: uuidv4 } = require('uuid');
 
-const reviewUrl = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews';
-const apiKey = process.env.API_KEY;
+// const reviewUrl = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews';
+// const apiKey = process.env.API_KEY;
 const bucket = process.env.PROJECT_ATELIER_BUCKET;
 const accessKey = process.env.PROJECT_ATELIER_ACCESS_KEY;
 const secretAccessKey = process.env.PROJECT_ATELIER_SECRET_ACCESS_KEY;
@@ -50,16 +50,26 @@ const getReviewMeta = (id) => axios.get('http://localhost:8000/reviews/meta', {
   params: { product_id: id },
 });
 
+// const markReviewHelpful = (id) => axios({
+//   method: 'put',
+//   url: `${reviewUrl}/${id}/helpful`,
+//   headers: { Authorization: apiKey },
+// });
+
+// const reportReview = (id) => axios({
+//   method: 'put',
+//   url: `${reviewUrl}/${id}/report`,
+//   headers: { Authorization: apiKey },
+// });
+
 const markReviewHelpful = (id) => axios({
   method: 'put',
-  url: `${reviewUrl}/${id}/helpful`,
-  headers: { Authorization: apiKey },
+  url: `http://localhost:8000/reviews/${id}/helpful`,
 });
 
 const reportReview = (id) => axios({
   method: 'put',
-  url: `${reviewUrl}/${id}/report`,
-  headers: { Authorization: apiKey },
+  url: `http://localhost:8000/reviews/${id}/report`,
 });
 
 const getRatingScore = (ratings) => {
@@ -145,9 +155,10 @@ const postNewReview = (review, files) => {
         newReview.characteristics[key] = parseInt(review[key], 10);
         delete newReview[key];
       });
-      return axios.post(reviewUrl, newReview, {
-        headers: { Authorization: apiKey },
-      });
+      // return axios.post(reviewUrl, newReview, {
+      //   headers: { Authorization: apiKey },
+      // });
+      return axios.post('http://localhost:8000/reviews', newReview);
     });
 };
 

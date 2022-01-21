@@ -110,7 +110,7 @@ app.get('/reviews/:id', (req, res) => {
   const response = {};
   getReviews(id)
     .then((data) => {
-      let reviews = addNewestTag(data.data.results);
+      let reviews = addNewestTag(data.data.reviews);
       reviews = addRelevanceTag(reviews);
       reviews.forEach((review) => {
         review.photos.forEach((photo) => {
