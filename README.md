@@ -2,8 +2,23 @@
 Project Atelier comprises a complete redesign of a client-facing retail portal to save sales numbers. Or rather that's the narrative fueling this Front End Capstone Project.
 
 ## Demo
-Here is a visual representation of our app :
-![Atelier](Atelier.png)
+Here is a visual representation of our app:
+- Product overview:  
+![ezgif com-gif-maker](https://user-images.githubusercontent.com/43324065/150608694-e8c911ff-867a-4fd9-bab5-836bbb182ac9.gif)
+
+- Related products & Outfits:  
+![ezgif com-gif-maker (1)](https://user-images.githubusercontent.com/43324065/150609251-d21021d1-ab5d-4624-b2e3-cf3c9e007ece.gif)
+
+- Browsing Reviews:  
+![ezgif com-gif-maker (3)](https://user-images.githubusercontent.com/43324065/150609618-ac71beb3-587c-4358-9e77-106dd585f598.gif)
+
+- Posting reviews:  
+![ezgif com-gif-maker (4)](https://user-images.githubusercontent.com/43324065/150609778-f062b5ec-b66b-4cef-b7ee-d2b173c95269.gif)
+
+- Ratings:  
+![ezgif com-gif-maker (2)](https://user-images.githubusercontent.com/43324065/150609525-559bb9f4-bb39-445d-aaa7-8446f88e9d8e.gif)
+
+
 
 ## Usage
 
