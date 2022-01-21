@@ -18,6 +18,8 @@ Here is a visual representation of our app:
 - Ratings:  
 ![ezgif com-gif-maker (2)](https://user-images.githubusercontent.com/43324065/150609525-559bb9f4-bb39-445d-aaa7-8446f88e9d8e.gif)
 
+- Dark theme:  
+![ezgif com-gif-maker (5)](https://user-images.githubusercontent.com/43324065/150610198-79dd9b31-69b5-4bca-ad49-e90729adf350.gif)
 
 
 ## Usage
