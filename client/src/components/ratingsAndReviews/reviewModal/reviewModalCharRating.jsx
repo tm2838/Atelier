@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { connect } from 'react-redux';
-import CSS from '../ratingsAndReviews.module.css';
+import '../ratingsAndReviews.css';
 
 class CharRating extends React.Component {
   constructor(props) {
@@ -24,12 +24,12 @@ class CharRating extends React.Component {
   render() {
     const { characteristic, options, theme } = this.props;
     const { selected } = this.state;
-    const themeSelected = theme === 'LIGHT' ? CSS['char-option-chosen'] : CSS['char-option-chosen-dark'];
+    const themeSelected = theme === 'LIGHT' ? 'char-option-chosen' : 'char-option-chosen-dark';
     return (
       <>
         <div className={themeSelected}>Current selection: {selected || 'None selected'}</div>
-        <div className={CSS['char-rating-container']}>
-          <div className={CSS['char-rating-title']}>{characteristic}:</div>
+        <div className='char-rating-container'>
+          <div className='char-rating-title'>{characteristic}:</div>
           {options.map((option) => <input
               data-testid={`option-${options.indexOf(option) + 1}`}
               key={option}
@@ -37,11 +37,11 @@ class CharRating extends React.Component {
               value={option}
               name={characteristic}
               checked={selected === option}
-              className={`${CSS[`char-rating-option-${options.indexOf(option)}`]} ${options.indexOf(option)}`}
+              className={`${`char-rating-option-${options.indexOf(option)}`} ${options.indexOf(option)}`}
               onChange={this.onSelectOption}
             />)}
-          <div className={CSS['char-option-indicator-0']}>{options[0]}</div>
-          <div className={CSS['char-option-indicator-1']}>{options[4]}</div>
+          <div className='char-option-indicator-0'>{options[0]}</div>
+          <div className='char-option-indicator-1'>{options[4]}</div>
         </div>
       </>
     );

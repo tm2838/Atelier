@@ -2,7 +2,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { connect } from 'react-redux';
-import CSS from '../ratingsAndReviews.module.css';
+import '../ratingsAndReviews.css';
 import validateNewReview from '../../../helpers/validateNewReview';
 import submitReview from '../../../helpers/submitReview';
 import fetchReviews from '../../../actions/fetchReviews';
@@ -133,14 +133,14 @@ class ReviewModal extends React.Component {
     const {
       product, onModalClose, reviewMeta: { characteristics }, theme,
     } = this.props;
-    const themeModalClass = theme === 'LIGHT' ? CSS['review-modal'] : CSS['review-modal-dark'];
-    const themeBtnClass = theme === 'LIGHT' ? CSS['review-btn'] : CSS['review-btn-dark'];
+    const themeModalClass = theme === 'LIGHT' ? 'review-modal' : 'review-modal-dark';
+    const themeBtnClass = theme === 'LIGHT' ? 'review-btn' : 'review-btn-dark';
 
     return (
       <div className={themeModalClass}>
-        <div className={CSS['review-modal-content']}>
-          <h2 className={CSS['review-modal-title']}> Write Your Review</h2>
-          <h4 className={CSS['review-modal-subtitle']}> About the {`${product.name}`}</h4>
+        <div className={'review-modal-content'}>
+          <h2 className={'review-modal-title'}> Write Your Review</h2>
+          <h4 className={'review-modal-subtitle'}> About the {`${product.name}`}</h4>
           <form onSubmit={this.handlePostReview}>
             <>
               <ReviewOverallRating
@@ -164,16 +164,18 @@ class ReviewModal extends React.Component {
                 handleBodyChange={this.handleBodyChange}
                 handleUpdatePhotos={this.handleUpdatePhotos}
                 violations={violations}
+                theme={theme}
               />
 
               <ReviewUserInfo
                 handleName={this.handleName}
                 handleEmail={this.handleEmail}
                 violations={violations}
+                theme={theme}
               />
             </>
 
-            <div className={CSS['add-review-btns']}>
+            <div className='add-review-btns'>
               <button
                 className={themeBtnClass}
                 onClick={this.handlePostReview}

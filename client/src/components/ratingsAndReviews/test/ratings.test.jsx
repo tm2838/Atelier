@@ -3,7 +3,7 @@ import { render } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { Provider } from 'react-redux';
 import testStore from '../../../fixtures/testStore';
-import Ratings from '../ratings/ratings.jsx';
+import Ratings from '../ratings/ratingsContainer.jsx';
 import '../../common/fontAwesomeIcons';
 
 describe('Ratings', () => {

@@ -1,8 +1,10 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import CSS from '../ratingsAndReviews.module.css';
+import '../ratingsAndReviews.css';
 
-const ReviewUserInfo = ({ handleName, handleEmail, violations }) => {
+const ReviewUserInfo = ({
+  handleName, handleEmail, violations, theme,
+}) => {
   const onNameChange = (e) => {
     handleName(e.target.value);
   };
@@ -12,9 +14,10 @@ const ReviewUserInfo = ({ handleName, handleEmail, violations }) => {
   };
 
   const violationStyle = { border: '1px solid red' };
+  const themeInputClass = theme === 'LIGHT' ? 'review-modal-textbox' : 'review-modal-textbox-dark';
   return (
     <>
-      <div className={CSS['review-modal-input']}>
+      <div className='review-modal-input'>
         <label htmlFor='username'><b>What is your nick name * </b></label>
         { violations.includes('name') && <div style={{ color: 'red' }}>You must enter the following</div> }
         <textarea
@@ -23,14 +26,14 @@ const ReviewUserInfo = ({ handleName, handleEmail, violations }) => {
           placeholder='Example: jackson11'
           maxLength='60'
           required
-          className={CSS['review-modal-textbox']}
+          className={themeInputClass}
           onChange={onNameChange}
           style={ violations.includes('name') ? { ...violationStyle } : {}}
         />
         <div><i>For privacy reasons, do not use your full name or email address</i></div>
       </div>
 
-      <div className={CSS['review-modal-input']}>
+      <div className='review-modal-input'>
         <label htmlFor='email'><b>Your email * </b></label>
           { violations.includes('body') && <div style={{ color: 'red' }}>You must enter the following</div> }
           <textarea
@@ -39,7 +42,7 @@ const ReviewUserInfo = ({ handleName, handleEmail, violations }) => {
             placeholder='Example: jackson11@email.com'
             maxLength='60'
             required
-            className={CSS['review-modal-textbox']}
+            className={themeInputClass}
             onChange={onEmailChange}
             style={ violations.includes('body') ? { ...violationStyle } : {}}
           />

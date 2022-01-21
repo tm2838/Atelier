@@ -8,7 +8,7 @@ import {
 import testReview from '../../../fixtures/testReview.json';
 import testStore from '../../../fixtures/testStore';
 
-import RatingsAndReviews from '../ratingsAndReviews.jsx';
+import RatingsAndReviews from '../ratingsAndReviewsContainer.jsx';
 import '../../common/fontAwesomeIcons';
 
 describe('ratingsAndReviews', () => {

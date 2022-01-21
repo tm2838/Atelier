@@ -1,28 +1,40 @@
-.ratings-and-reviews {
+#ratings-and-reviews {
   display: grid;
-  grid-template-columns: 0.45fr 1.3fr 2fr 0.5fr;
   margin-bottom: 5%;
+  grid-template-columns: 5fr 40fr 5fr;
+  grid-template-rows: 1fr min-content;
 }
 
 .ratings-and-reviews-title {
   grid-column-start: 2;
   grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 2;
 }
 
-.ratings-container {
+.ratings-and-reviews {
+  display: grid;
+  grid-template-columns: 13fr 27fr;
   grid-column-start: 2;
   grid-column-end: 3;
+  grid-row-start: 2;
+  grid-row-end: 3;
+}
+
+
+.ratings-container {
+  grid-column-start: 1;
+  grid-column-end: 2;
 }
 
 .reviews-container {
-  grid-column-start: 3;
-  grid-column-end: 4;
+  grid-column-start: 2;
+  grid-column-end: 3;
   height: 95%;
 }
 
 .reviews-list {
-  margin-top: 40px;
-  height: 500px !important;
+  margin-top: 5%;
   overflow-y: auto;
 }
 
@@ -60,6 +72,14 @@
 
 .review-response {
   background-color: #dbe7f7ff;
+  margin-bottom: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+}
+
+.review-response-dark {
+  background-color: #454B4D;
   margin-bottom: 20px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -105,7 +125,7 @@
   display: block;
   top: 2%;
   left: 2%;
-  background-color: #AAAAAA;
+  background-color: #454B4D;
   overflow-y: auto;
   display: flex;
 }
@@ -359,9 +379,22 @@
   width: 99%;
 }
 
+.review-modal-textbox-dark {
+  width: 99%;
+  background-color: #454B4D;
+  border-color: antiquewhite;
+}
+
 .review-modal-textbox-body {
   width: 99%;
   height: 100px;
+}
+
+.review-modal-textbox-body-dark {
+  width: 99%;
+  height: 100px;
+  background-color: #454B4D;
+  border-color: antiquewhite;
 }
 
 .char-rating-container {
@@ -441,6 +474,7 @@
 }
 
 .add-review-btns {
+  margin-top: 5%;
   display: flex;
   justify-content: space-between;
 }

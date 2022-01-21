@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { withRouter, useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import RatingsAndReviews from './ratingsAndReviews/ratingsAndReviews.jsx';
+import RatingsAndReviews from './ratingsAndReviews/ratingsAndReviewsContainer.jsx';
 import RelatedProductsContainer from './relatedProducts/RelatedProductsContainer.jsx';
 import OverviewContainer from './productOverview/OverviewContainer.jsx';
 import withClickTracker from './withClickTracker.jsx';

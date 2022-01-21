@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { connect } from 'react-redux';
-import CSS from '../ratingsAndReviews.module.css';
+import '../ratingsAndReviews.css';
 import { changeLoadedReviews, changeRemainingReviews, changeReviews } from '../../../actions/ratingsAndReviews/changeReviews';
 import { sortHelpful, sortNewest, sortRelevant } from '../../../helpers/sortReviews';
 
@@ -34,7 +34,7 @@ class SortingDropdown extends React.Component {
 
   render() {
     const { loadedReviews, theme } = this.props;
-    const themeClass = theme === 'LIGHT' ? CSS['sort-dropdown'] : CSS['sort-dropdown-dark'];
+    const themeClass = theme === 'LIGHT' ? 'sort-dropdown' : 'sort-dropdown-dark';
     return (
       <div className='sort-container' >
         {loadedReviews.length > 0
