@@ -28,16 +28,12 @@ Here is a visual representation of our app:
   ![ezgif com-gif-maker (3)](https://user-images.githubusercontent.com/43324065/150609618-ac71beb3-587c-4358-9e77-106dd585f598.gif)
 
   - Posting reviews:
-- Posting reviews:
-  - Posting reviews:
     - The 'ADD A REVIEW' button allows customers to write new reviews for the product
     - Certain fields on the form are required for submission
     - Customers can also upload up to five photos for their review
 
   ![ezgif com-gif-maker (4)](https://user-images.githubusercontent.com/43324065/150609778-f062b5ec-b66b-4cef-b7ee-d2b173c95269.gif)
 
-  - Ratings:
-- Ratings:
   - Ratings:
     - A summary of the ratings for the product is displayed at the top. The average rating is displayed both as a number and as represented by the star icons
     - A breakdown of star ratings is displayed below. Each bar is clickable and acts as a filter for the displayed reviews. Filters can be removed by clicking on the same bar again or on the 'Remove all filters' button
