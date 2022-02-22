@@ -1,33 +1,30 @@
 const path = require('path');
-const express = require('express'); // npm installed
+const express = require('express');
 const multer = require('multer');
 const compression = require('compression');
-require('dotenv').config();
 
-const upload = multer({ dest: 'uploads/' });
-const { getProduct, getStyles, postCart } = require('./products'); // Atelier api call to get product/product styles data
+const { getProduct, getStyles, postCart } = require('./products'); // util functions to get product/product styles data
 const {
-  getReviews,
   getReviewMeta,
   getRatingScore,
-  getRecommendationMetric,
-  addNewestTag,
-  addRelevanceTag,
-  getTotalReviews,
+  getFullReviews,
   markReviewHelpful,
   reportReview,
   postNewReview,
-} = require('./reviews');
-const { getRelatedProducts } = require('./relatedProducts');
+} = require('./reviews'); // util functions to get reviews data
+const { getRelatedProducts } = require('./relatedProducts'); // util functions to get related products data
 const postInteractions = require('./interactions');
 
 const app = express();
 app.use(compression());
 
 app.use('/product/:id', express.static(path.join(__dirname, '/../client/dist')));
+
 app.use(express.json());
-// middleware that helps the client pass CORS policy and request resources from server
+
 app.use((req, res, next) => {
+  // middleware that helps the client pass CORS policy and request resources from server
+  // an npm middleware to use: cors
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.header(
     'Access-Control-Allow-Headers',
@@ -39,7 +36,8 @@ app.use((req, res, next) => {
   next();
 });
 
-const bucket = process.env.PROJECT_ATELIER_BUCKET;
+const upload = multer({ dest: 'uploads/' });
+
 app.get('/products/:id?', (req, res) => {
   const id = req.params.id || 47421;
   const response = {};
@@ -47,28 +45,7 @@ app.get('/products/:id?', (req, res) => {
     response.product = product;
     getStyles(id, (styles) => {
       response.styles = styles;
-      getReviews(id)
-        .then((data) => {
-          let reviews = addNewestTag(data.data.reviews);
-          reviews = addRelevanceTag(reviews);
-          reviews.forEach((review) => {
-            review.photos.forEach((photo) => {
-              if (photo.url.includes('http://localhost:3000') && bucket) {
-                // eslint-disable-next-line no-param-reassign
-                photo.url = `https://${bucket}.s3.amazonaws.com/no-image-available.png`;
-              }
-            });
-          });
-          response.reviews = reviews;
-        })
-        .then(() => getReviewMeta(id))
-        .then((data) => {
-          const { reviewMeta } = data.data;
-          reviewMeta.ratingScore = getRatingScore(reviewMeta.ratings);
-          reviewMeta.recommendationRate = getRecommendationMetric(reviewMeta.recommended);
-          reviewMeta.totalReviews = getTotalReviews(reviewMeta.ratings);
-          response.reviewMeta = reviewMeta;
-        })
+      getFullReviews(id, response)
         .then(() => {
           getRelatedProducts(id, (err, data) => {
             if (err) {
@@ -108,28 +85,7 @@ app.get('/products/:id?', (req, res) => {
 app.get('/reviews/:id', (req, res) => {
   const id = req.params.id || 47421;
   const response = {};
-  getReviews(id)
-    .then((data) => {
-      let reviews = addNewestTag(data.data.reviews);
-      reviews = addRelevanceTag(reviews);
-      reviews.forEach((review) => {
-        review.photos.forEach((photo) => {
-          if (photo.url.includes('http://localhost:3000') && bucket) {
-            // eslint-disable-next-line no-param-reassign
-            photo.url = `https://${bucket}.s3.amazonaws.com/no-image-available.png`;
-          }
-        });
-      });
-      response.reviews = reviews;
-    })
-    .then(() => getReviewMeta(id))
-    .then((data) => {
-      const reviewMeta = data.data;
-      reviewMeta.ratingScore = getRatingScore(reviewMeta.ratings);
-      reviewMeta.recommendationRate = getRecommendationMetric(reviewMeta.recommended);
-      reviewMeta.totalReviews = getTotalReviews(reviewMeta.ratings);
-      response.reviewMeta = reviewMeta;
-    })
+  getFullReviews(id, response)
     .then(() => {
       res.status(200).send(response);
     });

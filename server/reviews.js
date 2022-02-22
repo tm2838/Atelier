@@ -1,17 +1,21 @@
 /* eslint-disable no-param-reassign */
 const axios = require('axios');
-require('dotenv').config(); // allow server to read .env for environmental variables
 const fs = require('fs');
 const AWS = require('aws-sdk');
 const { v4: uuidv4 } = require('uuid');
+require('dotenv').config(); // allow server to read .env for environmental variables
 
-// const reviewUrl = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews';
-// const apiKey = process.env.API_KEY;
+const environment = process.env.ENVIRONMENT;
 const bucket = process.env.PROJECT_ATELIER_BUCKET;
 const accessKey = process.env.PROJECT_ATELIER_ACCESS_KEY;
 const secretAccessKey = process.env.PROJECT_ATELIER_SECRET_ACCESS_KEY;
-
 const s3 = new AWS.S3({ region: 'us-east-1', secretAccessKey, accessKeyId: accessKey });
+const imgPlaceHolder = 'no-image-available.png';
+
+const reviewUrl = environment === 'production' ? 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp' : 'http://localhost:8000';
+const apiKey = process.env.API_KEY;
+const params = environment === 'production' ? { count: 100, page: 1 } : {};
+const requestBody = environment === 'production' ? { headers: { Authorization: apiKey } } : {};
 
 const addNewestTag = (reviews) => {
   // higher number indicates more recent
@@ -32,44 +36,26 @@ const addRelevanceTag = (reviews) => {
   return updatedReviews;
 };
 
-// const getReviews = (id) => axios.get(reviewUrl, {
-//   headers: { Authorization: apiKey },
-//   params: { product_id: id, count: 100, page: 1 },
-// });
-
-const getReviews = (id) => axios.get('http://localhost:8000/reviews', {
-  params: { product_id: id },
+const getReviews = (id) => axios.get(`${reviewUrl}/reviews`, {
+  ...requestBody,
+  params: { product_id: id, ...params },
 });
 
-// const getReviewMeta = (id) => axios.get(`${reviewUrl}/meta`, {
-//   headers: { Authorization: apiKey },
-//   params: { product_id: id },
-// });
-
-const getReviewMeta = (id) => axios.get('http://localhost:8000/reviews/meta', {
+const getReviewMeta = (id) => axios.get(`${reviewUrl}/reviews/meta`, {
+  ...requestBody,
   params: { product_id: id },
 });
-
-// const markReviewHelpful = (id) => axios({
-//   method: 'put',
-//   url: `${reviewUrl}/${id}/helpful`,
-//   headers: { Authorization: apiKey },
-// });
-
-// const reportReview = (id) => axios({
-//   method: 'put',
-//   url: `${reviewUrl}/${id}/report`,
-//   headers: { Authorization: apiKey },
-// });
 
 const markReviewHelpful = (id) => axios({
   method: 'put',
-  url: `http://localhost:8000/reviews/${id}/helpful`,
+  url: `${reviewUrl}/reviews/${id}/helpful`,
+  ...requestBody,
 });
 
 const reportReview = (id) => axios({
   method: 'put',
-  url: `http://localhost:8000/reviews/${id}/report`,
+  url: `${reviewUrl}/reviews/${id}/report`,
+  ...requestBody,
 });
 
 const getRatingScore = (ratings) => {
@@ -110,6 +96,31 @@ const getRecommendationMetric = (recommended) => {
 const getTotalReviews = (ratings) => Object.values(ratings).reduce(
   (p, c) => parseInt(p, 10) + parseInt(c, 10), 0,
 );
+
+const getFullReviews = (id, res) => getReviews(id)
+  .then((data) => {
+    let reviews = addNewestTag(data.data.reviews);
+    reviews = addRelevanceTag(reviews);
+    reviews.forEach((review) => {
+      review.photos.forEach((photo) => {
+        if (photo.url.includes('http://localhost:3000') && bucket) {
+          photo.url = `https://${bucket}.s3.amazonaws.com/${imgPlaceHolder}`;
+        }
+      });
+    });
+    res.reviews = reviews;
+  })
+  .then(() => getReviewMeta(id))
+  .then((data) => {
+    const { reviewMeta } = data.data;
+    reviewMeta.ratingScore = getRatingScore(reviewMeta.ratings);
+    reviewMeta.recommendationRate = getRecommendationMetric(reviewMeta.recommended);
+    reviewMeta.totalReviews = getTotalReviews(reviewMeta.ratings);
+    res.reviewMeta = reviewMeta;
+  })
+  .catch((e) => {
+    console.log(e); // eslint-disable-line
+  });
 
 const postNewReview = (review, files) => {
   const photoURLs = [];
@@ -155,21 +166,14 @@ const postNewReview = (review, files) => {
         newReview.characteristics[key] = parseInt(review[key], 10);
         delete newReview[key];
       });
-      // return axios.post(reviewUrl, newReview, {
-      //   headers: { Authorization: apiKey },
-      // });
-      return axios.post('http://localhost:8000/reviews', newReview);
+      return axios.post(`${reviewUrl}/reviews`, newReview, { ...requestBody });
     });
 };
 
 module.exports = {
-  getReviews,
   getReviewMeta,
   getRatingScore,
-  getRecommendationMetric,
-  addNewestTag,
-  addRelevanceTag,
-  getTotalReviews,
+  getFullReviews,
   markReviewHelpful,
   reportReview,
   postNewReview,
