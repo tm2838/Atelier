@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { connect } from 'react-redux';
-import CSS from '../ratingsAndReviews.module.css';
+import '../ratingsAndReviews.css';
 import StarRating from '../../common/starRating.jsx';
 
 class ReviewOverallRating extends React.Component {
@@ -36,7 +36,7 @@ class ReviewOverallRating extends React.Component {
     const violated = violations.includes('rating');
     const violationStyle = violated ? { color: 'red' } : {};
     return (
-      <div className={CSS['review-modal-star-rating']}>
+      <div className='review-modal-star-rating'>
         <div required><b>Overall rating * </b></div>
         {violated && <div style={violationStyle}>You must enter the following</div>}
         <div style={{

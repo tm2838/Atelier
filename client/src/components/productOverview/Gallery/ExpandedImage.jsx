@@ -20,7 +20,7 @@ const ExpandedImage = ({
 
       <InnerImageZoom
         className='gallery-modal-image'
-        src={currentStyle.photos[main].url}
+        src={currentStyle?.photos[main]?.url}
         zoomScale={2.5}
         hideHint={true}
       />

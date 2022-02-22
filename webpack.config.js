@@ -21,6 +21,12 @@ module.exports = {
         test: [/\.css$/],
         use: ['style-loader', 'css-loader'],
       },
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        use: {
+          loader: 'file-loader',
+        },
+      },
     ],
   },
   optimization: {
@@ -31,17 +37,4 @@ module.exports = {
     filename: 'bundle.js',
     path: path.join(__dirname, 'client/dist'),
   },
-  // resolve: {
-  //   alias: {
-  //     config$: './configs/app-config.js',
-  //     react: './vendor/react-master',
-  //   },
-  //   extensions: ['', 'js', 'jsx'],
-  //   modules: [
-  //     'node_modules',
-  //     'bower_components',
-  //     'shared',
-  //     '/shared/vendor/modules',
-  //   ],
-  // }
 };

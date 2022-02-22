@@ -11,7 +11,7 @@ const ProductName = ({
     <span className='product product-category'>{category}</span>
     <span className='product product-name'>{name}</span>
     {
-      (sale)
+      (sale !== null && sale !== 'null')
         ? <><span className='product-price' style={{ textDecorationLine: 'line-through', textDecorationStyle: 'solid' }}>${price}</span>
         <span className='product-sale' style={{ color: 'red' }}>${sale}</span></>
         : <span className='product-price'>${price}</span>

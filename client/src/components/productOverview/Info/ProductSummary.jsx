@@ -7,11 +7,11 @@ const ProductSummary = ({ product }) => {
   const { slogan, description, features } = product;
   return (
     <div className='product-text'>
-      <figure className='product-summary'>
+      <div className='product-summary'>
         <p className='product-slogan' data-testid='product-slogan'><b>{slogan}</b></p>
         <p className='product-description' data-testid='product-description'>{description}</p>
-      </figure>
-      <figure className='product-features'>
+      </div>
+      <div className='product-features'>
 
         {
           slogan
@@ -27,7 +27,7 @@ const ProductSummary = ({ product }) => {
             </div>
           ))
         }
-      </figure>
+      </div>
     </div>
   );
 };

@@ -3,14 +3,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import Review from './review.jsx';
-import CSS from '../ratingsAndReviews.module.css';
+import '../ratingsAndReviews.css';
 
 const ReviewsList = ({ loadedReviews }) => {
-  const reviewListLength = loadedReviews.length === 0 ? 0 : '450px';
+  const reviewListLength = loadedReviews.length === 0 ? 0 : '500px';
   return (
-  <div className={CSS['reviews-list']} style={{ height: reviewListLength }}>
+  <div className='reviews-list' style={{ height: reviewListLength }}>
     {loadedReviews.map(
-      (review) => <Review key={review.review_id} review={review}/>,
+      (review) => <Review key={review.id} review={review}/>,
     )}
   </div>
   );

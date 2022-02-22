@@ -1,3 +1,8 @@
+#related-products {
+  margin-top: 8%;
+  margin-bottom: 5%;
+}
+
 div {
   margin: 0;
   padding: 0;
@@ -6,15 +11,16 @@ div {
 
 .carousel {
   display: grid;
-  grid-template-columns: 10vw 20vw 20vw 20vw 20vw 10vw;
-  grid-template-rows: 1fr 1fr;
-  margin-top: 10vh;
+  grid-template-columns: 5fr 10fr 10fr 10fr 10fr 5fr;
+  grid-template-rows: 0.3fr 1fr;
+  margin-top: 3%;
   max-height: 90vh;
 }
 
 .carouselHeading {
   grid-column: 2 / span 4;
   grid-row-start: 1;
+  grid-row-end: 2;
 }
 
 .left {
@@ -28,7 +34,6 @@ div {
   grid-row-start: 2;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  margin-top: -10%;
 }
 
 .outfitCardContainer {
@@ -36,7 +41,6 @@ div {
   grid-row-start: 2;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  margin-top: -10%;
 }
 
 .right {
@@ -54,7 +58,7 @@ div {
   display: inline-block;
   position: relative;
   z-index: 1;
-  margin-left: 84%;
+  margin-left: 80%;
 }
 
 .card {
@@ -63,10 +67,28 @@ div {
   position: relative;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
-  width: 95%;
-  height: 30em;
-  margin: -10% 1%;
+  width: 80%;
+  height: 20em;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: -10%;
   grid-row-start: 2;
+  padding-left: 5%;
+}
+
+.card-dark {
+  /* Add shadows to create the "card" effect */
+  display: inline-block;
+  position: relative;
+  box-shadow: 0 4px 8px 0 rgba(240, 238, 238, 0.815) !important;
+  transition: 0.3s;
+  width: 80%;
+  height: 20em;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: -10%;
+  grid-row-start: 2;
+  padding-left: 5%;
 }
 
 /* On mouse-over, add a deeper shadow */
@@ -75,41 +97,62 @@ div {
 }
 
 .image {
-  height: 20em;
-}
-
-.cardInfo {
-  padding-left: 2%;;
+  width: 100%;
+  height: 10em;
+  margin-left: -2.5%;
 }
 
 .addCard {
+  align-items: center;
   text-align: center;
-  height: 30vh;
-  grid-column: 2;
-  grid-row: 2;
-  margin-top: -15%;
 }
 
 .modal {
-  position: absolute;
+  position: fixed;
   z-index: 2;
-  max-height: 50vh;
   overflow-y: auto;
-  margin: auto;
+  margin-left: auto;
+  margin-right: auto;
   background-color: whitesmoke;
-  border: 1px solid black;
+  border: 1px solid #dbe7f7ff;
   padding: 1.5% 2% 2.5%;
+  display: block;
+  width: 50%;
+  height: 25%;
+  top: 25%;
+  left: 22%;
 }
 
 .modal-dark {
-  position: absolute;
+  position: fixed;
   z-index: 2;
-  max-height: 50vh;
   overflow-y: auto;
-  margin: auto;
+  margin-left: auto;
+  margin-right: auto;
   background-color: #454B4D;
-  border: 1px solid black;
   padding: 1.5% 2% 2.5%;
+  display: block;
+  width: 50%;
+  height: 25%;
+  top: 25%;
+  left: 22%;
+  box-shadow: 0 4px 8px 0 rgba(240, 238, 238, 0.815) !important;
+}
+
+.modal-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  height: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  flex-direction: column;
+}
+
+.modal-content > table {
+  table-layout: fixed;
+  width: 100%;
 }
 
 .features {

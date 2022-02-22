@@ -1,15 +1,17 @@
 const axios = require('axios');
 require('dotenv').config();
 
-const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
+const environment = process.env.ENVIRONMENT;
+const url = environment === 'production' ? 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products' : 'http://localhost:5000/product';
+const apiKey = process.env.API_KEY;
+const requestBody = environment === 'production' ? { headers: { Authorization: apiKey } } : {};
 
 // http://example.com/page?parameter=value&also=another
 // routes: /products /products/:product_id /products/:product_id/styles
-const apiKey = process.env.API_KEY;
 
 const getProduct = (id, callback) => {
-  axios.get(`${url}/products/${id}`, {
-    headers: { Authorization: apiKey },
+  axios.get(`${url}/${id}`, {
+    ...requestBody,
   })
     .then((res) => {
       callback(res.data);
@@ -20,7 +22,7 @@ const getProduct = (id, callback) => {
 };
 
 const getStyles = (id, callback) => {
-  axios.get(`${url}/products/${id}/styles`, {
+  axios.get(`http://localhost:5000/product/${id}/styles`, {
     headers: { Authorization: apiKey },
   })
     .then((res) => {
